@@ -17,7 +17,9 @@ export default async function Otc() {
   const [o, r, h] = await Promise.all([api('rage/otc'), api('rage/buying-protocol'), api('home/overview')]);
   const fmv = n(r?.rbpView?.fmv);
   const active = !!o?.active;
-  const next = n(o?.dateNext);
+  const raw = n(o?.dateNext);
+  // Never show a drop date that already passed.
+  const next = isFinite(raw) && raw * 1000 > Date.now() ? raw : NaN;
   const nextDate = isFinite(next) ? new Date(next * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
   return (
     <div className="page" data-theme="rage">
@@ -39,7 +41,7 @@ export default async function Otc() {
               <div className="cream glass" style={{ marginTop: 24, padding: 28 }}>
                 <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>THIS ROUND IS EMPTY</b>
                 <h2 className="h3" style={{ marginTop: 8 }}>All sold out.{nextDate ? ` Next drop ${nextDate}.` : ''}</h2>
-                <p className="muted" style={{ margin: '8px 0 0' }}>Next drop in <b style={{ color: 'var(--ink)' }}><Countdown to={next} done="any moment now" /></b>. Drops get announced on X first.</p>
+                <p className="muted" style={{ margin: '8px 0 0' }}>{nextDate ? <>Next drop in <b style={{ color: 'var(--ink)' }}><Countdown to={next} done="any moment now" /></b>. </> : 'Next drop is coming soon. '}Drops get announced on X first.</p>
                 <a className="btn btn-ink" style={{ marginTop: 16 }} href="https://x.com/therageprotocol">Follow @therageprotocol</a>
               </div>
             )}
