@@ -1065,3 +1065,13 @@ button.dtree-h span{flex:1}
 .uc[data-in] .uc-line{stroke-dashoffset:0}
 .uc-plot>path:not(.uc-line){opacity:0;transition:opacity .8s}
 .uc[data-in] .uc-plot>path{opacity:1}
+/* RAGE chart switcher */
+.rc{padding:var(--s-6);display:flex;flex-direction:column;gap:var(--s-4)}
+.rc-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px;margin:-4px;scrollbar-width:none}
+.rc-tabs::-webkit-scrollbar{display:none}
+.rc-tabs button{flex:none;min-height:40px;padding:0 var(--s-4);border:0;border-radius:var(--r-pill);background:var(--bg);color:var(--sub);font:inherit;font-size:var(--fs-subhead);font-weight:700;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line);transition:background .25s,color .25s}
+.rc-tabs button[aria-selected=true]{background:var(--accent);color:var(--onAccent);box-shadow:none}
+.rc-head{display:flex;flex-direction:column;gap:4px}
+.rc-head b{font-size:var(--fs-title3)}
+.rc-head span{color:var(--sub);font-size:var(--fs-subhead);line-height:1.45;max-width:70ch}
+.rc .uc{padding:0}

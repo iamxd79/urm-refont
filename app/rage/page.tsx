@@ -3,7 +3,7 @@ import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
-import Sparkline from '@/components/Sparkline';
+import RageCharts from '@/components/RageCharts';
 import BackingFlow from '@/components/BackingFlow';
 import { YourPosition } from '@/components/Panels';
 import { Hero, Stats } from '@/components/ui';
@@ -19,8 +19,6 @@ export default async function Rage() {
   const [r, cdp, o] = await Promise.all([api('rage/buying-protocol'), api('urm/cdp'), api('urm/fortress')]);
   const v = r?.rbpView || {}, cfg = r?.config || {};
   const prem = (n(v.price) / n(v.fmv) - 1) * 100;
-  const rows: any[] = [...(r?.charts || [])].sort((a, b) => n(a[11]) - n(b[11]));
-  const bps30 = rows.map((x) => n(x[3]));
   const days = (s: any) => Math.round(n(s) / 86400);
   const contracts = [
     ['RAGE token', C.rage, `${num(v.activeSupply)} active RAGE`, `https://basescan.org/token/${C.rage}`, 'Basescan'],
@@ -72,10 +70,12 @@ export default async function Rage() {
             <li><span>4</span><b>Exits</b> {num(cfg.claimFee)}% of every claim stays for the holders</li>
           </ol>
         </div>
-        <div className="card glass-rim" style={{ marginTop: 'var(--s-6)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 'var(--s-2)' }}><b>Backing per share</b><span className="muted">since launch · now {num(v.backingPerShare, 4)}</span></div>
-          <div style={{ marginTop: 'var(--s-3)' }}><Sparkline values={bps30} label="RAGE backing per share over time" height={220} /></div>
-        </div>
+      </section>
+
+      <section className="wrap sec" id="chart">
+        <h2 className="h2">Charts.</h2>
+        <p className="punch">The Buying Protocol, day by day. Refreshed daily.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}><RageCharts rows={r?.charts || []} /></div>
       </section>
 
       <section className="wrap sec" id="invest">
