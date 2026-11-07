@@ -1,6 +1,5 @@
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
@@ -35,7 +34,6 @@ export default async function Urm() {
     <div className="page has-bg">
       <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
       <AutoRefresh />
-      <Nav active="urm" tabs={URM_TABS} current="/urm" />
       <Hero img="/hero/statue-wide.jpg" bg="#022596" pos="100% 50%" mpos="84% 50%" row>
         <div className="split">
           <div className="main">

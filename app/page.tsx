@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import { api } from '@/lib/api';
@@ -32,7 +31,6 @@ export default async function Home() {
   return (
     <div className="page has-bg">
       <AutoRefresh />
-      <Nav />
       <PageBg img="/hero/statue-wide.jpg" color="#022596" wide>
         <OrbPulse price={price} checkedAt={checkedAt} defense={usd(ov.totalDefense)} />
         <DataRain words={words} />

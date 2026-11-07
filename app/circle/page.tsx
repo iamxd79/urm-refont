@@ -1,6 +1,5 @@
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
@@ -22,8 +21,7 @@ export default async function Circle() {
     <div className="page has-bg" data-theme="circle">
       <PageBg img="/hero/circle.jpg" color="#030303" pos="70% 50%" mpos="80% 40%" />
       <AutoRefresh />
-      <Nav active="circle" tabs={CIRCLE_TABS} current="/circle" />
-      <Hero img="/hero/circle.jpg" bg="#030303" pos="70% 50%" mpos="80% 60%">
+      <Hero img="/hero/circle.jpg" bg="#030303" pos="70% 50%" mpos="80% 60%" row>
         <div className="split">
           <div className="main">
             <h1 className="h1">Burns on<br /><span className="acc">every sell.</span></h1>

@@ -1,5 +1,4 @@
 import PageBg from '@/components/PageBg';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
@@ -22,7 +21,6 @@ export default async function Cdp() {
     <div className="page has-bg">
       <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
       <AutoRefresh />
-      <Nav active="urm" tabs={URM_TABS} current="/urm/cdp" />
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">

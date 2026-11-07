@@ -3,6 +3,9 @@ import localFont from 'next/font/local';
 import './globals.css';
 import Providers from '@/components/Providers';
 import { api } from '@/lib/api';
+import SmartNav from '@/components/SmartNav';
+import { num, pct } from '@/lib/fmt';
+import type { Stats } from '@/lib/nav';
 
 const inter = localFont({ src: './fonts/Inter.woff2', variable: '--font-inter', weight: '100 900', display: 'swap' });
 const grotesk = localFont({ src: './fonts/SpaceGrotesk.woff2', variable: '--font-grotesk', weight: '300 700', display: 'swap' });
@@ -22,13 +25,23 @@ export const revalidate = 60;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const preview = process.env.NEXT_PUBLIC_PREVIEW_BANNER !== '0';
-  const live = await api('home/overview');
+  const [live, f, rb, h, c] = await Promise.all([api('home/overview'), api('urm/fortress'), api('rage/buying-protocol'), api('hestia/overview'), api('circle/overview')]);
+  const ok = (v: any) => v !== null && v !== undefined && Number.isFinite(Number(v));
+  const stats: Stats = {
+    urm: ok(f?.urmPrice) ? { label: 'Peg', value: '$' + num(f.urmPrice, 3) } : null,
+    rage: ok(rb?.rbpView?.price) ? { label: 'Price', value: '$' + num(rb.rbpView.price, 2) } : null,
+    hestia: ok(h?.supply?.burnedPercent) ? { label: 'Burned', value: pct(h.supply.burnedPercent) } : null,
+    circle: ok(c?.supply?.burnedPercent) ? { label: 'Burned', value: pct(c.supply.burnedPercent) } : null,
+  };
   return (
     <html lang="en" className={`${inter.variable} ${grotesk.variable}`}>
       <body>
         {preview && <div className="preview" role="note">Preview of the new ultraroundmoney.com · live data from the contracts</div>}
         {!live && <div className="datawarn" role="status">Live data is catching up. Numbers will fill in on the next refresh, usually within a minute.</div>}
-        <Providers>{children}</Providers>
+        <Providers>
+          <SmartNav stats={stats} />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 
 export default function NotFound() {
   return (
     <div className="page">
-      <Nav />
       <section className="wrap" style={{ padding: '120px 24px', textAlign: 'center' }}>
         <img src="/assets/urm_fortress.svg" alt="" width={200} height={200} style={{ borderRadius: 'var(--r-xl)' }} />
         <h1 className="h1" style={{ marginTop: 32 }}>This page <span className="acc">isn&apos;t here.</span></h1>

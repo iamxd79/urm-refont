@@ -1,6 +1,5 @@
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import BurnFire from '@/components/BurnFire';
@@ -24,7 +23,6 @@ export default async function Hestia() {
     <div className="page has-bg" data-theme="hestia">
       <PageBg img="/hero/hestia.jpg" color="#2a0527" pos="85% 40%" mpos="70% 30%" />
       <AutoRefresh />
-      <Nav active="hestia" tabs={HESTIA_TABS} current="/hestia" />
       <Hero img="/hero/hestia.jpg" bg="#2a0527" pos="100% 40%" mpos="68% 35%">
         <div className="split">
           <div className="main">
@@ -35,18 +33,19 @@ export default async function Hestia() {
               <Link className="btn btn-outline btn-lg" href="/hestia/mine">Start mining</Link>
             </div>
           </div>
-          <div className="side card glass-rim">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}><b className="eyebrow">BURNED FOREVER</b><span className="pill" style={{ background: 'var(--accent)', color: 'var(--onAccent)' }}>Live</span></div>
-            <p style={{ margin: '10px 0 0', fontSize: 'var(--fs-display)', fontWeight: 800 }} className="acc">{num(s.burnedPercent, 2)}%</p>
-            <p className="muted" style={{ margin: 0 }}>{num(s.burned)} of 1,000,000 HESTIA</p>
-            <ul className="list" style={{ marginTop: 16, background: 'var(--bg)' }}>
-              <li><span className="k">Next Smoke Fees</span><strong><Countdown to={ch.nextSmokeTime} /></strong></li>
-              <li><span className="k">Next Hestia&apos;s rage</span><strong><Countdown to={ch.nextRageTime} /></strong></li>
-            </ul>
-            <a href="#fire" className="btn btn-primary btn-block" style={{ marginTop: 16 }}>Watch her burn</a>
-          </div>
         </div>
       </Hero>
+      <section className="wrap livestrip">
+        <div className="card glass-rim livecard">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><b className="eyebrow">Burned forever</b><span className="pill" style={{ background: 'var(--accent)', color: 'var(--onAccent)' }}>Live</span></div>
+          <div className="livegrid">
+            <div className="hero-num"><b className="acc">{num(s.burnedPercent, 2)}%</b><span>{num(s.burned)} of 1,000,000 HESTIA</span></div>
+            <div><span>Next Smoke Fees</span><b><Countdown to={ch.nextSmokeTime} /></b></div>
+            <div><span>Next Hestia&apos;s rage</span><b><Countdown to={ch.nextRageTime} /></b></div>
+            <div className="cta"><a href="#fire" className="btn btn-primary btn-block">Watch her burn</a></div>
+          </div>
+        </div>
+      </section>
       <Stats items={[{ v: '$' + num(h?.price, 2), l: 'price' }, { v: usd(h?.marketCap), l: 'market cap' }, { v: usd(h?.liquidity?.value), l: 'total liquidity' }, { v: num(h?.holders), l: 'holders' }]} />
 
       <section className="wrap sec" id="fire">

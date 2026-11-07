@@ -1,5 +1,4 @@
 import PageBg from '@/components/PageBg';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import { RefLink } from '@/components/Panels';
@@ -19,7 +18,6 @@ export default async function Referral() {
     <div className="page has-bg" data-theme="rage">
       <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
-      <Nav active="rage" tabs={RAGE_TABS} current="/rage/referral" />
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">

@@ -1,5 +1,4 @@
 import PageBg from '@/components/PageBg';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
@@ -23,7 +22,6 @@ export default async function Fountain() {
     <div className="page has-bg">
       <PageBg img="/hero/fountain.jpg" color="#0a1a8a" pos="50% 50%" mpos="50% 50%" />
       <AutoRefresh />
-      <Nav active="urm" tabs={URM_TABS} current="/urm/fountain" />
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">

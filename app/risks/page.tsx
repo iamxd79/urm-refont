@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { api } from '@/lib/api';
 import { bps, num } from '@/lib/fmt';
@@ -23,7 +22,6 @@ export default async function Risks() {
   ];
   return (
     <div className="page">
-      <Nav />
       <section className="wrap" style={{ paddingTop: 72 }}>
         <h1 className="h1">Read this<br /><span className="acc">before you deposit.</span></h1>
         <p className="lead">Plain English, no small print. If something here doesn&apos;t sit right with you, don&apos;t deposit. Nothing on this site is financial advice.</p>

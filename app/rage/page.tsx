@@ -1,6 +1,5 @@
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Sparkline from '@/components/Sparkline';
@@ -34,7 +33,6 @@ export default async function Rage() {
     <div className="page has-bg" data-theme="rage">
       <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
-      <Nav active="rage" tabs={RAGE_TABS} current="/rage" />
       <Hero img="/hero/rage.jpg" bg="#270630" pos="100% 40%" mpos="70% 30%">
         <div className="split">
           <div className="main">
@@ -45,21 +43,20 @@ export default async function Rage() {
               <a className="btn btn-outline btn-lg" href="#how">How it works</a>
             </div>
           </div>
-          <div className="side card glass-rim" style={{ background: 'var(--panel)' }}>
-            <b className="eyebrow">TREASURY CHECK</b>
-            <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 14 }}>
-              <div className="tile" style={{ background: 'var(--bg)' }}><span>Fair market value</span><b>${num(v.fmv, 2)}</b></div>
-              <div className="tile" style={{ background: 'var(--bg)' }}><span>Market price</span><b>${num(v.price, 2)}</b></div>
-            </div>
-            <ul className="list" style={{ marginTop: 10, background: 'var(--bg)' }}>
-              <li><span className="k">Premium over FMV</span><strong style={{ color: 'var(--accent2)' }}>{prem >= 0 ? '+' : ''}{num(prem, 2)}%</strong></li>
-              <li><span className="k">Inside every RAGE</span><strong>{num(v.underlyingHestia, 2)} HESTIA · {num(v.underlyingCircle, 2)} ULTRAROUND</strong></li>
-              <li><span className="k">Split</span><strong>{bps(v.underlyingHestiaPercent)} / {bps(v.underlyingCirclePercent)}</strong></li>
-              <li><span className="k">Backing per share</span><strong>{num(v.backingPerShare, 3)}</strong></li>
-            </ul>
-          </div>
         </div>
       </Hero>
+      <section className="wrap livestrip">
+        <div className="card glass-rim livecard">
+          <b className="eyebrow">Treasury check · live</b>
+          <div className="livegrid">
+            <div><span>Fair market value</span><b>${num(v.fmv, 2)}</b></div>
+            <div><span>Market price</span><b>${num(v.price, 2)}</b></div>
+            <div><span>Premium over FMV</span><b style={{ color: 'var(--accent2)' }}>{prem >= 0 ? '+' : ''}{num(prem, 2)}%</b></div>
+            <div><span>Backing per share</span><b>{num(v.backingPerShare, 3)}</b></div>
+            <div className="wide"><span>Inside every RAGE</span><b>{num(v.underlyingHestia, 2)} HESTIA · {num(v.underlyingCircle, 2)} ULTRAROUND</b><em>{bps(v.underlyingHestiaPercent)} / {bps(v.underlyingCirclePercent)}</em></div>
+          </div>
+        </div>
+      </section>
       <Stats items={[{ v: usd(v.activeAssetsUsdcValue), l: 'in the treasury' }, { v: num(v.activeSupply), l: 'active RAGE' }, { v: usd(r?.state?.totalInvest), l: 'invested through the protocol' }, { v: num(cfg.claimFee) + '%', l: 'of every claim stays for holders' }]} />
 
       <section className="wrap sec" id="how">

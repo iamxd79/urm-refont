@@ -6,7 +6,9 @@ import { createPortal } from 'react-dom';
 import ConnectButton from './ConnectButton';
 import ProductLogo from './ProductLogo';
 
-export default function MobileMenu({ items, active, docs }: { items: { href: string; label: string; key: string }[]; active?: string; docs: string }) {
+import type { Product } from '@/lib/nav';
+
+export default function MobileMenu({ items, active, docs, product, theme }: { items: { href: string; label: string; key: string }[]; active?: string; docs: string; product?: Product; theme?: string }) {
   const [open, setOpen] = useState(false);
   const [top, setTop] = useState(84);
   const btn = useRef<HTMLButtonElement>(null);
@@ -28,12 +30,13 @@ export default function MobileMenu({ items, active, docs }: { items: { href: str
         </svg>
       </button>
       {open && createPortal(
-        <div id="mm-panel" className="mm-panel glass-solid" style={{ top }} data-theme={typeof document !== 'undefined' ? document.querySelector('.page')?.getAttribute('data-theme') ?? undefined : undefined}>
+        <div id="mm-panel" className="mm-panel glass-solid" style={{ top }} data-theme={theme}>
           <nav aria-label="Mobile">
             {items.map((i) => <Link key={i.key} href={i.href} aria-current={active === i.key ? 'page' : undefined}>{i.key !== 'earn' && <ProductLogo id={i.key} size={28} />}{i.label}</Link>)}
             <a href={docs}>Docs</a>
             <Link href="/risks">Risks</Link>
           </nav>
+          {product && <Link href={product.cta.href} className="btn btn-outline btn-lg btn-block">{product.cta.label}</Link>}
           <ConnectButton block className="btn btn-primary btn-lg" />
           <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: 0 }}>All contracts on Base. Connecting never moves funds.</p>
         </div>,

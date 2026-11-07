@@ -1,7 +1,6 @@
 import ProductLogo from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
-import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import ConnectButton from '@/components/ConnectButton';
@@ -22,7 +21,6 @@ export default async function Earn() {
     <div className="page has-bg">
       <PageBg img="/hero/earn.jpg" color="#030518" pos="50% 70%" mpos="50% 40%" />
       <AutoRefresh />
-      <Nav active="earn" />
       <Hero img="/hero/earn.jpg" bg="#030518" pos="50% 70%" mpos="50% 55%">
         <div className="split"><div className="main">
         <h1 className="h1">From your card<br />to <span className="acc">onchain yield.</span></h1>
