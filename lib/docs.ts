@@ -5,7 +5,7 @@ import path from 'path';
  * Docs live as Markdown in /content/docs (one file per page, nested folders = nested URLs).
  * Frontmatter: title, description, section, order. Live numbers: {{key}} placeholders, filled from the API.
  */
-export type Doc = { slug: string[]; href: string; title: string; description: string; section: string; order: number; product: string; body: string };
+type Doc = { slug: string[]; href: string; title: string; description: string; section: string; order: number; product: string; body: string };
 
 const ROOT = path.join(process.cwd(), 'content/docs');
 export const SECTIONS = ['Start here', 'Earn', 'Borrow', 'Invest', 'Under the hood', 'Reference'];
@@ -35,7 +35,6 @@ export const getDoc = (slug: string[] = []) => allDocs().find((d) => d.slug.join
 
 export type Heading = { id: string; text: string; level: 2 | 3 };
 import { slugify } from './slug';
-export { slugify };
 export function headings(body: string): Heading[] {
   return body.split('\n').flatMap((l) => {
     const m = l.match(/^(##|###) (.+)$/);

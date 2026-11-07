@@ -99,14 +99,3 @@ export function OrbPulse({ price, checkedAt, defense }: { price: number; checked
     </div>
   );
 }
-
-export function HeroVideo({ src, poster }: { src?: string; poster: string }) {
-  const [ok, setOk] = useState(false);
-  useEffect(() => {
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const save = (navigator as any).connection?.saveData;
-    setOk(!!src && !still && !save && window.innerWidth >= 700);
-  }, [src]);
-  if (!ok || !src) return null;
-  return <video className="hero-media" src={src} poster={poster} autoPlay muted loop playsInline preload="none" aria-hidden="true" />;
-}
