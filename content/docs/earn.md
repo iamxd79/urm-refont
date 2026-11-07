@@ -1,10 +1,13 @@
 ---
-title: Earn
+title: Get started with Earn
 description: From your card to onchain yield. No seed phrase, no gas.
-section: Use it
-order: 1
+section: Start here
+order: 3
+product: urm
 ---
 ## Four taps
+
+::diagram phone
 
 1. **Create a passkey wallet.** Face ID or a fingerprint. No seed phrase to write down.
 2. **Buy USDC on Base.** With a bank card or Apple Pay. A 0.2% gateway fee shows before you confirm.

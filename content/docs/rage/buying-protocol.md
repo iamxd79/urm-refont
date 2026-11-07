@@ -1,8 +1,9 @@
 ---
 title: The Buying Protocol
 description: Invest USDC, mint RAGE at fair value, claim when you want out. The ones who leave pay the ones who stay.
-section: RAGE
+section: Invest
 order: 2
+product: rage
 ---
 ## Investing
 

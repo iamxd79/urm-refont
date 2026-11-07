@@ -1,10 +1,13 @@
 ---
 title: Rage OTC
 description: Trade HESTIA, ULTRAROUND or $URM for RAGE from ecosystem supply, at fair value plus a bonus. The bonus grows. The supply doesn't.
-section: RAGE
+section: Invest
 order: 3
+product: rage
 ---
 ## A reverse Dutch auction
+
+::diagram otc
 
 1. The ecosystem puts a round of RAGE up for sale at fair value.
 2. A bonus sits on top, between {{otc.min}} and {{otc.max}}. It grows the longer nobody buys.

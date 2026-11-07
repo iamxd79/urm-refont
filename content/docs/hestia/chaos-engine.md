@@ -1,8 +1,9 @@
 ---
 title: The Hestia Chaos Engine
 description: Two ways to burn, one USDC reserve, and an Automator that tunes it all.
-section: HESTIA
-order: 2
+section: Under the hood
+order: 7
+product: hestia
 ---
 ## Two ways to shrink the supply
 
@@ -20,6 +21,8 @@ From time to time, the engine pulls a small slice of HESTIA and USDC out of the 
 Repeated over time, this shrinks the tradable supply and grows the reserve.
 
 ## Smoke Fees and Hestia's rage
+
+::diagram hestia-engine
 
 These are the engine's two moves:
 

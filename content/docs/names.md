@@ -3,6 +3,7 @@ title: Names and tickers
 description: Who's who. The ecosystem changed names along the way, and older docs and data sites still use the old ones.
 section: Start here
 order: 2
+product: eco
 ---
 ## The short version
 

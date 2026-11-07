@@ -5,10 +5,10 @@ import path from 'path';
  * Docs live as Markdown in /content/docs (one file per page, nested folders = nested URLs).
  * Frontmatter: title, description, section, order. Live numbers: {{key}} placeholders, filled from the API.
  */
-export type Doc = { slug: string[]; href: string; title: string; description: string; section: string; order: number; body: string };
+export type Doc = { slug: string[]; href: string; title: string; description: string; section: string; order: number; product: string; body: string };
 
 const ROOT = path.join(process.cwd(), 'content/docs');
-export const SECTIONS = ['Start here', '$URM', 'ULTRAROUND', 'HESTIA', 'RAGE', 'Use it', 'Reference'];
+export const SECTIONS = ['Start here', 'Earn', 'Borrow', 'Invest', 'Under the hood', 'Reference'];
 
 function walk(dir: string, base: string[] = []): Doc[] {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
@@ -20,7 +20,7 @@ function walk(dir: string, base: string[] = []): Doc[] {
     (m?.[1] || '').split('\n').forEach((l) => { const i = l.indexOf(':'); if (i > 0) meta[l.slice(0, i).trim()] = l.slice(i + 1).trim(); });
     const name = e.name.replace(/\.md$/, '');
     const slug = name === 'index' ? base : [...base, name];
-    return [{ slug, href: '/docs' + (slug.length ? '/' + slug.join('/') : ''), title: meta.title || name, description: meta.description || '', section: meta.section || 'Start here', order: Number(meta.order || 99), body: m ? raw.slice(m[0].length) : raw }];
+    return [{ slug, href: '/docs' + (slug.length ? '/' + slug.join('/') : ''), title: meta.title || name, description: meta.description || '', section: meta.section || 'Start here', order: Number(meta.order || 99), product: meta.product || 'eco', body: m ? raw.slice(m[0].length) : raw }];
   });
 }
 
@@ -44,3 +44,6 @@ export function headings(body: string): Heading[] {
 }
 /** Plain text for search. */
 export const plain = (body: string) => body.replace(/\{\{[^}]+\}\}/g, '').replace(/^\s*(-|\d+\.)\s+/gm, '').replace(/[*`]/g, '').replace(/^\|[\s:|-]+\|$/gm, '').replace(/[#>|]/g, ' ').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\s+/g, ' ').trim();
+
+/** Diagram names a doc asks for with `::diagram name`. */
+export const diagramsIn = (body: string) => [...body.matchAll(/^::diagram ([\w-]+)\s*$/gm)].map((m) => m[1]);

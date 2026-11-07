@@ -1,8 +1,9 @@
 ---
 title: Mine and Temple
 description: Stake HESTIA in the Mine or ULTRAROUND in the Temple, hire a crew, then compound or sell your rewards.
-section: Use it
+section: Earn
 order: 2
+product: hestia
 ---
 ## Two contracts, one design
 
@@ -14,6 +15,8 @@ order: 2
 | Sell limit right now | {{mine.sellLimit}} HESTIA | {{temple.sellLimit}} ULTRAROUND |
 
 ## How it works
+
+::diagram mine
 
 1. Deposit HESTIA or ULTRAROUND to hire miners or templars. **Your deposit is locked for good. It can't be withdrawn.**
 2. Your crew produces rewards every second, as a share of the contract's balance.

@@ -1,8 +1,9 @@
 ---
 title: ULTRAROUND
 description: Burns on every sell. An autonomous, deflationary ETH proxy on Base, with no transaction tax.
-section: ULTRAROUND
-order: 1
+section: Under the hood
+order: 4
+product: circle
 ---
 ## What it is
 

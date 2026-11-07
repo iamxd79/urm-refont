@@ -3,6 +3,7 @@ title: Links and papers
 description: Socials, data, listings, whitepapers and audits, in one place.
 section: Reference
 order: 2
+product: eco
 ---
 ## Follow
 

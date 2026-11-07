@@ -1,8 +1,9 @@
 ---
 title: $URM, the stablecoin
 description: A dollar built like a fortress. $URM holds its peg with automatic onchain defense, backed by RAGE, HESTIA and ULTRAROUND.
-section: $URM
-order: 1
+section: Under the hood
+order: 2
+product: urm
 ---
 ## What it is
 

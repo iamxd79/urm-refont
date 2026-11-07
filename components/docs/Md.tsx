@@ -28,7 +28,7 @@ function inline(s: string, vars: Vars, k = 'i'): ReactNode[] {
   return out;
 }
 
-export default function Md({ body, vars }: { body: string; vars: Vars }) {
+export default function Md({ body, vars, diagrams = {} }: { body: string; vars: Vars; diagrams?: Record<string, ReactNode> }) {
   const lines = body.replace(/\r/g, '').split('\n');
   const out: ReactNode[] = [];
   let i = 0, k = 0;
@@ -37,6 +37,7 @@ export default function Md({ body, vars }: { body: string; vars: Vars }) {
     const l = lines[i];
     if (!l.trim()) { i++; continue; }
     let m;
+    if ((m = l.match(/^::diagram ([\w-]+)\s*$/))) { if (diagrams[m[1]]) out.push(<div key={key()} className="doc-diagram">{diagrams[m[1]]}</div>); i++; continue; }
     if ((m = l.match(/^(##|###) (.+)$/))) {
       const id = slugify(m[2]); const H = m[1] === '##' ? 'h2' : 'h3';
       out.push(<H key={key()} id={id} className="doc-h"><a href={`#${id}`} aria-hidden="true" tabIndex={-1} className="doc-anchor">#</a>{inline(m[2], vars)}</H>);
@@ -72,7 +73,7 @@ export default function Md({ body, vars }: { body: string; vars: Vars }) {
       out.push(<L key={key()} className="doc-list">{items.map((t, j) => <li key={j}>{inline(t, vars)}</li>)}</L>); continue;
     }
     const buf: string[] = [];
-    while (i < lines.length && lines[i].trim() && !/^(#|>|\||```|\d+\. |- )/.test(lines[i])) buf.push(lines[i++]);
+    while (i < lines.length && lines[i].trim() && !/^(#|>|\||```|\d+\. |- |::)/.test(lines[i])) buf.push(lines[i++]);
     out.push(<p key={key()}>{inline(buf.join(' '), vars)}</p>);
   }
   return <>{out}</>;

@@ -1,10 +1,13 @@
 ---
 title: CDP
 description: Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it. Liquidity without selling.
-section: $URM
-order: 4
+section: Borrow
+order: 1
+product: urm
 ---
 ## Two ways to use it
+
+::diagram cdp
 
 - **Borrow:** lock your tokens, mint $URM, keep your upside. Repay to get your collateral back.
 - **Leverage:** the $URM you mint buys more of your collateral in the same transaction. Bigger upside, bigger downside.

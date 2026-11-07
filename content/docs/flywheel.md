@@ -1,8 +1,9 @@
 ---
 title: How it fits together
 description: Four tokens, one loop. Each one covers a weakness of the others so the system keeps working in any market.
-section: Start here
-order: 3
+section: Under the hood
+order: 1
+product: eco
 ---
 ## The problems it's built to avoid
 

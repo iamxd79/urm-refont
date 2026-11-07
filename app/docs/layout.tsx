@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { allDocs, headings, plain } from '@/lib/docs';
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
-  const items = allDocs().map((d) => ({ href: d.href, title: d.title, section: d.section, text: plain(d.body).slice(0, 4000), heads: headings(d.body).map((h) => h.text) }));
+  const items = allDocs().map((d) => ({ href: d.href, title: d.title, section: d.section, product: d.product, text: plain(d.body).slice(0, 4000), heads: headings(d.body).map((h) => h.text) }));
   return (
     <div className="page docs">
       <div className="wrap dgrid">

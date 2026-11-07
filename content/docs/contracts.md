@@ -3,6 +3,7 @@ title: Contracts
 description: Every contract in the ecosystem, all on Base. Compare the address before you buy or approve anything.
 section: Reference
 order: 1
+product: eco
 ---
 All contracts live on **Base**. Click an address to open it on Basescan.
 

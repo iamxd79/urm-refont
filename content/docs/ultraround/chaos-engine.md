@@ -1,10 +1,13 @@
 ---
-title: The Chaos Engine
+title: The ULTRAROUND Chaos Engine
 description: The Circular Burn Loop. Pool fees in, ULTRAROUND burned, with a burn rate that speeds up when the market turns.
-section: ULTRAROUND
-order: 2
+section: Under the hood
+order: 5
+product: circle
 ---
 ## The Circular Burn Loop
+
+::diagram burn-loop
 
 1. The protocol provides ULTRAROUND and WETH liquidity in a Uniswap v3 pool on Base. The position is held as an NFT.
 2. Every trade in that pool pays a normal swap fee, part of which goes to the protocol's position.

@@ -1,14 +1,17 @@
 ---
 title: The Fortress
 description: How the peg holds. One contract owns the liquidity and defends both sides.
-section: $URM
-order: 2
+section: Under the hood
+order: 3
+product: urm
 ---
 ## The idea
 
 Most stablecoins rely on a company holding dollars. $URM relies on a contract. The Fortress owns $URM's liquidity, so it can act directly on the pool when the price moves away from $1.
 
 ## Defending both sides
+
+::diagram fortress
 
 - **Below $1:** the Fortress uses USDC to buy $URM back toward the peg. The room it has left right now: {{urm.usdcRoom}}.
 - **Above $1:** the Fortress sells $URM into the pool to bring the price down. Room left right now: {{urm.urmRoom}} $URM.

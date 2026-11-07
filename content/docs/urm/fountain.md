@@ -1,10 +1,13 @@
 ---
 title: Fountain
 description: Deposit $URM, get fURM. Your fURM count stays the same while each one is worth more $URM every day.
-section: $URM
-order: 3
+section: Earn
+order: 1
+product: urm
 ---
 ## How it works
+
+::diagram yield
 
 1. Deposit $URM into Fountain.
 2. You receive fURM, a share of the vault.

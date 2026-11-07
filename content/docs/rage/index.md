@@ -1,8 +1,9 @@
 ---
 title: RAGE
 description: A token backed by a treasury of HESTIA and ULTRAROUND. When RAGE trades above fair value, the premium goes back into the backing.
-section: RAGE
+section: Invest
 order: 1
+product: rage
 ---
 ## What it is
 
@@ -11,6 +12,8 @@ RAGE takes the treasury model made famous by MicroStrategy and ETH Strategy and 
 Right now: market price {{rage.price}}, fair value {{rage.fmv}}, treasury {{rage.treasury}}.
 
 ## What backs it
+
+::diagram backing
 
 Every investment splits into {{rage.hestiaPct}} HESTIA and {{rage.circlePct}} ULTRAROUND. Both are wrapped on Peapods Finance as Peapods pods, where they earn yield from market volatility, and locked in the treasury.
 
