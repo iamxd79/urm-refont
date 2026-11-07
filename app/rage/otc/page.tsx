@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -29,6 +30,7 @@ export default async function Otc() {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
+            <Brand id="rage" ticker="$RAGE" sub="OTC auction" />
             <h1 className="h1">Rage OTC</h1>
             <p className="lead">Trade HESTIA, ULTRAROUND or URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
             <p className="punch">The bonus grows. The supply doesn&apos;t.</p>

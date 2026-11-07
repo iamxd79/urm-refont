@@ -1,3 +1,4 @@
+import ProductLogo from './ProductLogo';
 import Link from 'next/link';
 import Logo from './Logo';
 import ConnectButton from './ConnectButton';
@@ -22,7 +23,7 @@ export default function Nav({ active, tabs, current, overlay }: { active?: strin
         </Link>
         <div className="navlinks">
           {ITEMS.map((i) => (
-            <Link key={i.key} href={i.href} aria-current={active === i.key ? 'page' : undefined}>{i.label}</Link>
+            <Link key={i.key} href={i.href} aria-current={active === i.key ? 'page' : undefined}>{i.key !== 'earn' && <ProductLogo id={i.key} size={20} />}{i.label}</Link>
           ))}
           <a href={DOCS}>Docs</a>
         </div>

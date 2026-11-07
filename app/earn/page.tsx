@@ -1,3 +1,4 @@
+import ProductLogo from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
@@ -63,7 +64,7 @@ export default async function Earn() {
         <div className="grid" style={{ marginTop: 32, gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
           {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on URM. Withdraw anytime.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/circle/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
             <Link key={t} href={href!} data-theme={th} className="card glass" style={{ background: 'var(--panel)', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <span className="acc" style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1.5 }}>{k}</span><b style={{ fontSize: 22 }}>{t}</b><span className="muted">{d}</span>
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}><span className="acc" style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1.5 }}>{k}</span><ProductLogo id={th || 'urm'} size={36} /></span><b style={{ fontSize: 22 }}>{t}</b><span className="muted">{d}</span>
             </Link>
           ))}
           <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 8, boxShadow: 'inset 0 0 0 2px var(--line)', background: 'transparent' }}>

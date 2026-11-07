@@ -1,3 +1,4 @@
+import ProductLogo from './ProductLogo';
 import Link from 'next/link';
 import { legacy } from '@/lib/fmt';
 
@@ -5,27 +6,21 @@ const X: Record<string, string> = { URMdollar: 'URM', therageprotocol: 'RAGE', H
 
 export default function Footer({ name = 'URM', x = 'URMdollar' }: { name?: string; x?: string }) {
   const follow = name === 'URM' ? Object.keys(X) : [x, ...(x !== 'URMdollar' ? ['URMdollar'] : [])];
-  const col = (title: string, links: [string, string][]) => (
+  const col = (title: string, links: ([string, string] | [string, string, string])[]) => (
     <div className="fcol">
       <b>{title}</b>
-      {links.map(([l, h]) => (h.startsWith('/') && !h.endsWith('.pdf') ? <Link key={l} href={h}>{l}</Link> : <a key={l} href={h}>{l}</a>))}
+      {links.map(([l, h, logo]) => (h.startsWith('/') && !h.endsWith('.pdf') ? <Link key={l} href={h} className="flogo">{logo && <ProductLogo id={logo} size={18} />}{l}</Link> : <a key={l} href={h}>{l}</a>))}
     </div>
   );
   return (
     <>
-      <div className="strip" style={{ marginTop: 112 }}>
-        <Link href="/urm"><img src="/assets/urm_fortress.svg" alt="URM" /></Link>
-        <Link href="/rage"><img src="/assets/rage_stack.svg" alt="RAGE" /></Link>
-        <Link href="/hestia"><img src="/assets/hestia_fire.svg" alt="HESTIA" /></Link>
-        <Link href="/circle"><img src="/assets/ultraround_temple.svg" alt="ULTRAROUND" /></Link>
-      </div>
-      <footer className="foot">
+      <footer className="foot" style={{ marginTop: 112 }}>
         <div className="wrap fgrid">
           <div style={{ flex: '1 1 240px' }}>
-            <b style={{ fontSize: 18 }}>{name}</b>
+            <b className="flogo" style={{ fontSize: 18 }}><ProductLogo id={({ RAGE: 'rage', HESTIA: 'hestia', ULTRAROUND: 'circle' } as Record<string, string>)[name] ?? 'urm'} size={36} />{name}</b>
             <p className="muted" style={{ margin: '10px 0 0', maxWidth: 300 }}>Onchain money that works while you sleep. Part of the URM ecosystem, built on Base.</p>
           </div>
-          {col('PRODUCTS', [['URM', '/urm'], ['Fountain', '/urm/fountain'], ['CDP', '/urm/cdp'], ['RAGE', '/rage'], ['HESTIA', '/hestia'], ['ULTRAROUND', '/circle'], ['Earn', '/earn']])}
+          {col('PRODUCTS', [['URM', '/urm', 'urm'], ['Fountain', '/urm/fountain'], ['CDP', '/urm/cdp'], ['RAGE', '/rage', 'rage'], ['HESTIA', '/hestia', 'hestia'], ['ULTRAROUND', '/circle', 'circle'], ['Earn', '/earn']])}
           {col('SECURITY', [['Risks', '/risks'], ['URM audit', legacy('/urm/audit.pdf')], ['Contracts', '/#trust'], ['Docs', 'https://ultraroundmoney.gitbook.io/ultraroundmoney/']])}
           {col('FOLLOW', follow.map((h) => [`@${h}`, `https://x.com/${h}`] as [string, string]))}
           {col('COMMUNITY', [['Telegram', 'https://t.me/urm_ecosystem'], ['Discord', 'https://discord.gg/J3U8wNmKQa'], ['GitHub', 'https://github.com/ultraroundMoney']])}

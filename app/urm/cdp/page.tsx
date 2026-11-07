@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -26,6 +27,7 @@ export default async function Cdp() {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
+            <Brand id="urm" ticker="$URM" sub="Borrow against collateral" />
             <h1 className="h1">URM CDP</h1>
             <p className="lead">Lock RAGE, HESTIA or ULTRAROUND and mint URM against it. Borrow at a fixed collateral ratio, or leverage in one transaction. Your position is an NFT you can settle, unwind or transfer anytime.</p>
             <div style={{ marginTop: 32 }}>

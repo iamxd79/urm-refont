@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
@@ -37,6 +38,7 @@ export default async function Urm() {
       <Hero img="/hero/statue-wide.jpg" bg="#022596" pos="100% 50%" mpos="84% 50%">
         <div className="split">
           <div className="main">
+            <Brand id="urm" ticker="$URM" sub="Stablecoin on Base" />
             <h1 className="h1">A stablecoin built like <span className="acc">a fortress.</span></h1>
             <p className="lead">URM holds its dollar peg with automatic onchain defense, backed by RAGE, HESTIA and ULTRAROUND. Only on Base.</p>
             <div className="row" style={{ marginTop: 32 }}>

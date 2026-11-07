@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -22,6 +23,7 @@ export default async function Referral() {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
+            <Brand id="rage" ticker="$RAGE" sub="Referral program" />
             <h1 className="h1">Bring investors.<br /><span className="acc">Earn {pc}%.</span></h1>
             <p className="lead">Share your link. When someone invests USDC in RAGE through it, you earn {pc}% of what they invest, paid every month in RAGE.</p>
             <ul className="list" style={{ marginTop: 32 }}>
@@ -39,7 +41,7 @@ export default async function Referral() {
         <div className="tbl glass" style={{ marginTop: 24 }}>
           <table>
             <thead><tr><th>Referrer</th><th>Invested through them</th><th>Unpaid</th><th>Paid</th><th>Last</th></tr></thead>
-            <tbody>{rows.map((x) => <tr key={x.addr}><td><b>{x.name || 'anon'}</b> <span className="mono muted" style={{ fontSize: 13 }}>{short(x.addr)}</span></td><td>${x.invested} · {x.count} invest{x.count === 1 ? '' : 's'}</td><td>${x.unpaid}</td><td>${x.paid}</td><td className="muted">{x.inv > 0 ? ago(x.last) : '—'}</td></tr>)}</tbody>
+            <tbody>{rows.map((x) => <tr key={x.addr}><td className="tcell-title"><b>{x.name || 'anon'}</b> <span className="mono muted" style={{ fontSize: 13 }}>{short(x.addr)}</span></td><td data-label="Invested through them">${x.invested} · {x.count} invest{x.count === 1 ? '' : 's'}</td><td data-label="Unpaid">${x.unpaid}</td><td data-label="Paid">${x.paid}</td><td data-label="Last" className="muted">{x.inv > 0 ? ago(x.last) : '—'}</td></tr>)}</tbody>
           </table>
         </div>
       </section>

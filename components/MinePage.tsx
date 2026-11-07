@@ -1,3 +1,4 @@
+import { Brand } from './ProductLogo';
 import Nav from './Nav';
 import PageBg from './PageBg';
 import Footer from './Footer';
@@ -27,6 +28,7 @@ export default function MinePage(c: Cfg) {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
+            <Brand id={c.theme} ticker={c.theme === 'hestia' ? '$HESTIA' : '$CIRCLE'} sub={c.title} />
             <h1 className="h1">{c.title}</h1>
             <p className="lead">{c.lead}</p>
             <p className="punch">{c.punch}</p>
@@ -51,7 +53,7 @@ export default function MinePage(c: Cfg) {
         <div className="tbl glass" style={{ marginTop: 24 }}>
           <table>
             <thead><tr><th>{c.leader}</th><th>Share of {c.unit}</th><th>Daily rewards</th><th>Sold so far</th><th>Last move</th></tr></thead>
-            <tbody>{rows.slice(0, 25).map((r) => <tr key={r.wallet}><td className="mono">{short(r.wallet)}</td><td><b>{r[c.shareKey]}</b></td><td>{num(r.estimatedDailyValue, 2)}</td><td>{num(r.sellTotal, 2)}</td><td className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>
+            <tbody>{rows.slice(0, 25).map((r) => <tr key={r.wallet}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>
           </table>
           {rows.length === 0 && <p className="muted" style={{ padding: 18, margin: 0 }}>No {c.leaders} yet.</p>}
         </div>

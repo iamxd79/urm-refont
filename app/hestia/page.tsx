@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
@@ -28,6 +29,7 @@ export default async function Hestia() {
       <Hero img="/hero/hestia.jpg" bg="#2a0527" pos="100% 40%" mpos="68% 35%">
         <div className="split">
           <div className="main">
+            <Brand id="hestia" ticker="$HESTIA" sub="Deflationary store of value" />
             <h1 className="h1">Become<br /><span className="acc">ultra rare.</span></h1>
             <p className="lead">A highly deflationary store of value, paired to USDC on Base. The Hestia Chaos Engine burns supply and acts as the buyer of last resort.</p>
             <div className="row" style={{ marginTop: 32 }}>

@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -26,6 +27,7 @@ export default async function Fountain() {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
+            <Brand id="urm" ticker="fURM" sub="Fountain vault" />
             <h1 className="h1">Fountain URM</h1>
             <p className="lead">Deposit URM, get fURM. Your fURM count stays the same while each one is worth more URM every day.</p>
             <div style={{ marginTop: 32 }}>

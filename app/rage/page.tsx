@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
@@ -37,6 +38,7 @@ export default async function Rage() {
       <Hero img="/hero/rage.jpg" bg="#270630" pos="100% 40%" mpos="70% 30%">
         <div className="split">
           <div className="main">
+            <Brand id="rage" ticker="$RAGE" sub="Volatility harvesting" />
             <h1 className="h1">Volatility in.<br /><span className="acc">Backing up.</span></h1>
             <p className="lead">A token backed by a treasury of HESTIA and ULTRAROUND. When RAGE trades above fair value, the premium goes back into the backing.</p>
             <div className="row" style={{ marginTop: 32 }}>
@@ -146,7 +148,7 @@ export default async function Rage() {
           <p className="muted" style={{ margin: 0, padding: '16px 18px 0', fontSize: 13, letterSpacing: 1.5, fontWeight: 700 }}>RAGE CONTRACTS ON BASE</p>
           <table aria-label="RAGE contracts on Base">
             <thead><tr><th>Contract</th><th>Address</th><th>Role</th><th><span className="sr">Link</span></th></tr></thead>
-            <tbody>{contracts.map(([a, b, c, d, e]) => <tr key={a}><td><b>{a}</b></td><td className="mono">{short(b)}</td><td className="muted">{c}</td><td><a href={d}>{e}</a></td></tr>)}</tbody>
+            <tbody>{contracts.map(([a, b, c, d, e]) => <tr key={a}><td className="tcell-title"><b>{a}</b></td><td data-label="Address" className="mono">{short(b)}</td><td data-label="Role" className="muted">{c}</td><td className="tcell-link"><a href={d}>{e}</a></td></tr>)}</tbody>
           </table>
         </div>
         <div className="row" style={{ marginTop: 20 }}><a className="chip chip-ink" style={{ background: 'var(--cream)', color: 'var(--ink)' }} href={legacy('/rage/audit.pdf')}>RAGE audit</a><a className="chip" style={{ boxShadow: 'inset 0 0 0 2px var(--text)', color: 'var(--text)' }} href={legacy('/rage/whitepaper.pdf')}>Whitepaper</a></div>

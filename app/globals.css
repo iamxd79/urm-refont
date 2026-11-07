@@ -103,7 +103,7 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .step .n{display:inline-flex;width:40px;height:40px;border-radius:999px;background:var(--accent);color:var(--onAccent);align-items:center;justify-content:center;font-weight:800}
 .step h3{margin:16px 0 0;font-size:21px;font-weight:800}
 .step p{margin:8px 0 0;color:var(--sub);line-height:1.5}
-.tbl{position:relative;background:var(--panel);border-radius:24px;overflow-x:auto}
+.tbl{position:relative;background:var(--panel);border-radius:24px}
 .tbl th{text-align:left;font-size:13px;letter-spacing:1px;color:var(--sub);font-weight:700;padding:14px 18px;white-space:nowrap}
 .tbl td{padding:14px 18px;border-top:1px solid var(--line);white-space:nowrap}
 .badge{display:inline-flex;padding:5px 12px;border-radius:999px;background:var(--accent2);color:#000;font-size:13px;font-weight:700}
@@ -123,7 +123,7 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .basechip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;border-radius:999px;background:var(--panel);font-size:13px;font-weight:700;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
 .mm{display:none}
 .mm-btn{width:48px;height:48px;border-radius:999px;border:0;background:var(--panel);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.18),inset 0 1px 0 rgba(255,255,255,.3)}
-.mm-panel{position:absolute;top:calc(100% + 8px);left:12px;right:12px;z-index:80;background:var(--panel);border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 0 6px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.4),0 24px 60px #000}
+.mm-panel{position:fixed;top:calc(env(safe-area-inset-top) + 84px);left:12px;right:12px;z-index:80;background:var(--panel);border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 0 6px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.4),0 24px 60px #000}
 .mm-panel nav{display:flex;flex-direction:column}
 .mm-panel nav a{min-height:52px;display:flex;align-items:center;padding:0 10px;font-size:20px;font-weight:700;color:var(--text);border-radius:14px}
 .mm-panel nav a+a{border-top:1px solid var(--line)}
@@ -186,7 +186,7 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 [data-theme=rage] .lg{background:rgba(58,8,56,.58)}[data-theme=hestia] .lg{background:rgba(44,1,43,.58)}[data-theme=circle] .lg{background:rgba(15,28,51,.58)}
 /* card rim: a 7px band of glass outside the solid surface */
 .glass{position:relative;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
-.glass::before{content:'';position:absolute;inset:-7px;padding:7px;border-radius:calc(var(--r) + 7px);pointer-events:none;
+.glass::before{content:'';position:absolute;inset:-3px;padding:3px;border-radius:calc(var(--r) + 3px);pointer-events:none;
   border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);
   -webkit-backdrop-filter:blur(10px) saturate(170%) brightness(1.15);backdrop-filter:blur(10px) saturate(170%) brightness(1.15);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.14);
@@ -200,7 +200,7 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .navtabs .seg{padding:5px}
 .nav + .phero{margin-top:-88px}
 .nav + .phero .phero-copy{padding-top:96px}
-.mm-panel{background:rgba(23,42,74,.86);-webkit-backdrop-filter:blur(26px) saturate(190%);backdrop-filter:blur(26px) saturate(190%)}
+.mm-panel{background:rgba(23,42,74,.92);-webkit-backdrop-filter:blur(26px) saturate(190%);backdrop-filter:blur(26px) saturate(190%)}
 .scrim{background:rgba(7,16,31,.55);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);animation:fadein .25s ease-out}
 .sheet{animation:sheetin .45s cubic-bezier(.34,1.4,.64,1)}
 @keyframes fadein{from{background:rgba(7,16,31,0)}}
@@ -276,3 +276,29 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .has-bg .phero{display:flex;flex-direction:column}.has-bg .phero .phero-copy{flex:1;height:auto}
 .pbg .rain{left:60%;width:40%}
 .has-bg .phero .phero-copy{width:100%}
+/* tables: never scroll. Desktop fits; phones get one stacked card per row. */
+.tbl table{table-layout:auto}
+@media (max-width:720px){
+ .tbl{background:transparent;box-shadow:none}.tbl::before{display:none}
+ .tbl table,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+ .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+ .tbl tr{background:var(--panel);border-radius:20px;padding:14px 16px;margin-top:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 0 0 1px rgba(255,255,255,.12)}
+ .tbl td{border:0;padding:5px 0;white-space:normal;display:flex;justify-content:space-between;gap:16px;text-align:right}
+ .tbl td[data-label]::before{content:attr(data-label);color:var(--sub);font-family:var(--font-inter),sans-serif;font-size:14px;text-align:left}
+ .tbl td.tcell-title{font-size:17px;padding-bottom:8px;text-align:left}
+ .tbl td.tcell-link{padding-top:8px}
+}
+/* project logos */
+.plogo{display:block;flex:none;border-radius:999px}
+.navlinks a{gap:8px}
+.mm-panel nav a{gap:12px}
+.brand-badge{display:inline-flex;align-items:center;gap:14px;margin-bottom:22px;padding:6px 18px 6px 6px;border-radius:999px;background:rgba(13,27,51,.45);-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.16)}
+[data-theme=rage] .brand-badge{background:rgba(58,8,56,.5)}[data-theme=hestia] .brand-badge{background:rgba(44,1,43,.5)}
+.brand-badge b{display:block;font-size:18px;font-weight:800;letter-spacing:.5px;color:#fff}
+.brand-badge span{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--sub)}
+.brand-badge em{font-style:normal;font-weight:700;color:var(--accent)}
+.flogo{display:flex;align-items:center;gap:10px}
+@media (max-width:1100px){.navlinks .plogo{display:none}}
+
+[data-theme=rage].mm-panel{background:rgba(58,8,56,.92)}[data-theme=hestia].mm-panel{background:rgba(44,1,43,.92)}[data-theme=circle].mm-panel{background:rgba(15,28,51,.92)}
+.mm-scrim{position:fixed;inset:0;z-index:79}
