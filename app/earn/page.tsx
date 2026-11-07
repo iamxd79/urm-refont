@@ -1,3 +1,4 @@
+import { seo } from '@/lib/seo';
 import ProductLogo from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
@@ -10,13 +11,13 @@ import { api } from '@/lib/api';
 import { usd, bps, n, legacy } from '@/lib/fmt';
 
 export const revalidate = 60;
-export const metadata = { title: 'Earn' };
+export const metadata = seo({ title: 'Earn', description: 'From your card to onchain yield. No seed phrase, no gas. Buy USDC, swap, invest or deposit in one place.', handle: '@URMdollar' });
 
 
 export default async function Earn() {
   const [h, r, f] = await Promise.all([api('home/overview'), api('rage/buying-protocol'), api('urm/fortress')]);
   const prices = { URM: n(h?.urm), RAGE: n(h?.rage), HESTIA: n(h?.hestia), ULTRAROUND: n(h?.circle) };
-  const step = (i: number, title: string) => <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}><span className="n" style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--accent)', color: 'var(--onAccent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--fs-body)' }}>{i}</span><h2 className="h3">{title}</h2></div>;
+  const step = (i: number, title: string) => <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}><span className="n" style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--accent)', color: 'var(--onAccent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--fs-body)' }}>{i}</span><h2 className="h3">{title}</h2></div>;
   return (
     <div className="page has-bg">
       <PageBg img="/hero/earn.jpg" color="#030518" pos="50% 70%" mpos="50% 40%" />
@@ -28,30 +29,31 @@ export default async function Earn() {
         <p className="lead">No seed phrase, no hardware wallet, no address to copy. Buy USDC with a card, then swap, invest or deposit in one place.</p>
         </div></div>
       </Hero>
-      <section className="wrap sec grid2" style={{ alignItems: 'start' }}>
-        <div className="card glass-rim">
-          {step(1, 'Fund your wallet')}
-          <ol style={{ margin: '20px 0 0', paddingLeft: 22, lineHeight: 1.9, fontSize: 'var(--fs-body)' }}>
-            <li>Create a passkey wallet in seconds, with Face ID or a fingerprint</li>
-            <li>Buy USDC on Base with a bank card or Apple Pay</li>
-            <li>Deposit. Gas is covered for you</li>
-          </ol>
-          <p className="muted" style={{ fontSize: 'var(--fs-subhead)' }}>0.2% gateway fee, shown in full before you confirm.</p>
-          <div className="row" style={{ marginTop: 12 }}>
-            <ConnectButton label="Create a passkey wallet" />
-            <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Buy USDC with a card</a>
-            <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Pay with your Coinbase account</a>
+      <section className="wrap sec grid2">
+        <div className="vstack swapcol">
+          <div style={{ marginBottom: 'var(--s-4)' }}>{step(1, 'Fund your wallet')}</div>
+          <div className="card glass-rim vstack fundcard">
+            <ol className="fundsteps">
+              <li><b>Create a passkey wallet</b><span>In seconds, with Face ID or a fingerprint. No seed phrase.</span></li>
+              <li><b>Buy USDC on Base</b><span>With a bank card or Apple Pay. 0.2% gateway fee, shown before you confirm.</span></li>
+              <li><b>Deposit</b><span>Gas is covered for you.</span></li>
+            </ol>
+            <div className="row" style={{ marginTop: 'auto', paddingTop: 'var(--s-6)' }}>
+              <ConnectButton label="Create a passkey wallet" />
+              <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Buy USDC with a card</a>
+              <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Pay with Coinbase</a>
+            </div>
           </div>
         </div>
-        <div>
-          <div style={{ marginBottom: 16 }}>{step(2, 'Swap')}</div>
+        <div className="vstack swapcol">
+          <div style={{ marginBottom: 'var(--s-4)' }}>{step(2, 'Swap')}</div>
           <SwapPanel prices={prices} fee={0.2} app={legacy('/earn')} />
         </div>
       </section>
       <section className="wrap sec">
-        <div className="cream glass-rim" style={{ padding: 32, display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="cream glass-rim" style={{ padding: 'var(--s-8)', display: 'flex', flexWrap: 'wrap', gap: 'var(--s-6)', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ flex: '1 1 420px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}><span style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--ink)', color: 'var(--accent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--fs-body)' }}>3</span><h2 className="h3">Invest: RAGE Options</h2></div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}><span style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--ink)', color: 'var(--accent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--fs-body)' }}>3</span><h2 className="h3">Invest: RAGE Options</h2></div>
             <p style={{ lineHeight: 1.5, margin: '14px 0 0' }}>Buy with USDC anytime. Your gateway to locked products, with a {r?.config?.investorBonus ?? 3}% bonus on the underlying tokens.</p>
           </div>
           <a className="btn btn-ink btn-lg" href={legacy('/rage')} target="_blank" rel="noreferrer">Invest with USDC</a>
@@ -59,13 +61,13 @@ export default async function Earn() {
       </section>
       <section className="wrap sec">
         <h2 className="h2">Then put it to work.</h2>
-        <div className="grid" style={{ marginTop: 32, gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
+        <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
           {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on URM. Withdraw anytime.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/circle/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
-            <Link key={t} href={href!} data-theme={th} className="card glass-rim" style={{ background: 'var(--panel)', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <Link key={t} href={href!} data-theme={th} className="card glass-rim" style={{ background: 'var(--panel)', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}><span className="acc" style={{ fontSize: 'var(--fs-footnote)', fontWeight: 700, letterSpacing: 1.5 }}>{k}</span><ProductLogo id={th || 'urm'} size={36} /></span><b style={{ fontSize: 'var(--fs-title3)' }}>{t}</b><span className="muted">{d}</span>
             </Link>
           ))}
-          <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 8, boxShadow: 'inset 0 0 0 2px var(--line)', background: 'transparent' }}>
+          <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s-2)', boxShadow: 'inset 0 0 0 2px var(--line)', background: 'transparent' }}>
             <span className="muted" style={{ fontSize: 'var(--fs-footnote)', fontWeight: 700, letterSpacing: 1.5 }}>COMING NEXT</span><b style={{ fontSize: 'var(--fs-title3)' }}>Chainubi</b><span className="muted">Sponsor distributions, same gateway, same wallet.</span><a className="tap" href="https://chainubi.com">chainubi.com</a>
           </div>
         </div>

@@ -1,10 +1,11 @@
+import { seo } from '@/lib/seo';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import { api } from '@/lib/api';
 import { bps, num } from '@/lib/fmt';
 
 export const revalidate = 60;
-export const metadata = { title: 'Risks' };
+export const metadata = seo({ title: 'Risks', description: 'Read this before you deposit. Plain-English risks for URM, Fountain, the CDP, RAGE, HESTIA and ULTRAROUND.', handle: '@URMdollar' });
 
 export default async function Risks() {
   const [f, cdp, r] = await Promise.all([api('urm/fortress'), api('urm/cdp'), api('rage/buying-protocol')]);
@@ -22,7 +23,7 @@ export default async function Risks() {
   ];
   return (
     <div className="page">
-      <section className="wrap" style={{ paddingTop: 72 }}>
+      <section className="wrap" style={{ paddingTop: 'var(--s-22)' }}>
         <h1 className="h1">Read this<br /><span className="acc">before you deposit.</span></h1>
         <p className="lead">Plain English, no small print. If something here doesn&apos;t sit right with you, don&apos;t deposit. Nothing on this site is financial advice.</p>
       </section>
@@ -31,21 +32,21 @@ export default async function Risks() {
           {items.map(([tag, t, d]) => (
             <article key={t} className="card glass-rim">
               <span className="acc" style={{ fontSize: 'var(--fs-footnote)', fontWeight: 700, letterSpacing: 1.5 }}>{tag.toUpperCase()}</span>
-              <h2 className="h3" style={{ marginTop: 8 }}>{t}</h2>
+              <h2 className="h3" style={{ marginTop: 'var(--s-2)' }}>{t}</h2>
               <p className="muted" style={{ lineHeight: 1.6, marginBottom: 0 }}>{d}</p>
             </article>
           ))}
         </div>
       </section>
       <section className="wrap sec">
-        <div className="cream glass-rim" style={{ padding: 36 }}>
+        <div className="cream glass-rim" style={{ padding: 'var(--s-8)' }}>
           <h2 className="h3">What we do about it</h2>
           <ul style={{ lineHeight: 1.9, fontSize: 'var(--fs-body)', paddingLeft: 22 }}>
             <li>Audits for URM, Fountain, the CDP, RAGE, HESTIA and the Hestia Mine</li>
             <li>Every contract verified on Basescan, every number on this site read live from the chain</li>
             <li>Connecting a wallet only reads balances. It never moves funds.</li>
           </ul>
-          <div className="row" style={{ marginTop: 8 }}><Link className="chip chip-ink" href="/#trust">Audits and contracts</Link><a className="chip chip-line" href="https://ultraroundmoney.gitbook.io/ultraroundmoney/">Read the docs</a></div>
+          <div className="row" style={{ marginTop: 'var(--s-2)' }}><Link className="chip chip-ink" href="/#trust">Audits and contracts</Link><a className="chip chip-line" href="https://ultraroundmoney.gitbook.io/ultraroundmoney/">Read the docs</a></div>
         </div>
       </section>
       <Footer />

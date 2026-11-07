@@ -14,8 +14,8 @@ const site = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRO
 
 export const metadata: Metadata = {
   metadataBase: new URL(site),
-  openGraph: { siteName: 'URM ecosystem', type: 'website' },
-  twitter: { card: 'summary_large_image', site: '@URMdollar' },
+  openGraph: { title: 'URM ecosystem', description: 'URM (Ultra Round Money) is a community-driven ecosystem that builds stores of value on Base.', siteName: 'URM ecosystem', type: 'website', locale: 'en_US' },
+  twitter: { card: 'summary_large_image', title: 'URM ecosystem', description: 'Community-driven stores of value on Base: $URM, RAGE, HESTIA, ULTRAROUND.', site: '@URMdollar', creator: '@URMdollar' },
   title: { default: 'URM ecosystem', template: '%s | URM ecosystem' },
   description: 'URM (Ultra Round Money) is a community-driven ecosystem that builds stores of value on Base: the $URM stablecoin, RAGE, HESTIA and ULTRAROUND.',
   robots: process.env.NEXT_PUBLIC_PREVIEW_BANNER === '0' ? undefined : { index: false, follow: false },

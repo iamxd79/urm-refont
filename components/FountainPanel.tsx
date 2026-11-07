@@ -15,7 +15,7 @@ export default function FountainPanel(p: P) {
   const a = Number(amt.replace(/,/g, '')) || 0;
   const bal = wd ? balances.fURM : balances.URM;
   return (
-    <div className="cream glass-rim" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 'var(--s-6)' }}>
       <div className="seg" role="tablist" aria-label="Fountain action">
         <button role="tab" aria-selected={!wd} onClick={() => setWd(false)}>Deposit</button>
         <button role="tab" aria-selected={wd} onClick={() => setWd(true)}>Withdraw</button>
@@ -29,7 +29,7 @@ export default function FountainPanel(p: P) {
         {isConnected && bal !== undefined && <button type="button" onClick={() => setAmt(String(Math.floor(bal * 100) / 100))} style={{ minHeight: 36, padding: '0 12px', border: 0, borderRadius: 999, background: 'var(--soft)', font: '700 13px var(--font-inter)', cursor: 'pointer' }}>MAX</button>}
         <span className="unit">{wd ? 'fURM' : 'URM'}</span>
       </div>
-      <ul className="list" style={{ marginTop: 16 }}>
+      <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
         {!wd ? (
           <>
             <li><span className="k">You receive</span><strong>about {f(a * p.depositShares)} fURM</strong></li>
@@ -46,7 +46,7 @@ export default function FountainPanel(p: P) {
         )}
       </ul>
       {isConnected && balances.fURM !== undefined && (
-        <ul className="list" style={{ marginTop: 12 }}>
+        <ul className="list" style={{ marginTop: 'var(--s-3)' }}>
           <li><span className="k">Your fURM</span><strong>{f(balances.fURM, 2)}</strong></li>
           <li><span className="k">Worth today</span><strong>{f((balances.fURM || 0) * p.toAssets, 2)} URM</strong></li>
         </ul>
@@ -54,7 +54,7 @@ export default function FountainPanel(p: P) {
       <p style={{ margin: '14px 0 0', fontSize: 'var(--fs-subhead)', lineHeight: 1.5, background: 'var(--soft)', borderRadius: 'var(--r-sm)', padding: '12px 14px' }}>
         <b>What you sign:</b> {wd ? 'one withdraw. URM or USDC comes back to your wallet.' : 'one approval for URM, then one deposit. fURM comes back to your wallet.'} Nothing else.
       </p>
-      <div style={{ marginTop: 14 }}>
+      <div style={{ marginTop: 'var(--s-3)' }}>
         {isConnected
           ? <a className="btn btn-ink btn-lg btn-block" href={p.app} target="_blank" rel="noreferrer">{wd ? 'Withdraw' : 'Deposit'} in the current app</a>
           : <ConnectButton block className="btn btn-ink btn-lg" label={wd ? 'Connect wallet to withdraw' : 'Connect wallet to deposit'} />}

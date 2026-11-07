@@ -1,3 +1,4 @@
+import { seo } from '@/lib/seo';
 import PageBg from '@/components/PageBg';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -10,7 +11,7 @@ import { C } from '@/lib/tokens';
 import { URM_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = { title: 'URM CDP' };
+export const metadata = seo({ title: 'URM CDP', description: 'Lock RAGE, HESTIA or ULTRAROUND and mint URM against it. Liquidity without selling.', handle: '@URMdollar' });
 
 export default async function Cdp() {
   const [c, h] = await Promise.all([api('urm/cdp'), api('home/overview')]);
@@ -21,17 +22,17 @@ export default async function Cdp() {
     <div className="page has-bg">
       <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
       <AutoRefresh />
-      <section className="wrap" style={{ paddingTop: 56 }}>
+      <section className="wrap" style={{ paddingTop: 'var(--s-16)' }}>
         <div className="split">
           <div className="main">
             <h1 className="h1">URM CDP</h1>
             <p className="lead">Lock RAGE, HESTIA or ULTRAROUND and mint URM against it. Borrow at a fixed collateral ratio, or leverage in one transaction. Your position is an NFT you can settle, unwind or transfer anytime.</p>
-            <div style={{ marginTop: 32 }}>
+            <div style={{ marginTop: 'var(--s-8)' }}>
               <Tiles items={[{ v: bps(c?.currentInterestRate), l: 'yearly interest' }, { v: num(c?.urmBorrowable), l: 'URM available' }, { v: bps(c?.utilization, 0), l: 'utilization' }, { v: num(c?.urmDebt), l: 'URM borrowed' }, { v: num(c?.borrowCapacity), l: 'max capacity' }, { v: num(c?.positionCount), l: 'open positions' }]} />
             </div>
-            <div className="bar" style={{ marginTop: 20, background: 'var(--panel)' }} role="img" aria-label={`${num(util)}% of borrow capacity in use`}><div style={{ width: `${Math.min(100, util)}%`, background: 'var(--accent)' }} /></div>
-            <p className="muted" style={{ fontSize: 'var(--fs-subhead)', marginTop: 8 }}>{num(util)}% of the borrow capacity is in use.</p>
-            <div style={{ marginTop: 28 }}>
+            <div className="bar" style={{ marginTop: 'var(--s-5)', background: 'var(--panel)' }} role="img" aria-label={`${num(util)}% of borrow capacity in use`}><div style={{ width: `${Math.min(100, util)}%`, background: 'var(--accent)' }} /></div>
+            <p className="muted" style={{ fontSize: 'var(--fs-subhead)', marginTop: 'var(--s-2)' }}>{num(util)}% of the borrow capacity is in use.</p>
+            <div style={{ marginTop: 'var(--s-8)' }}>
               <YourPosition items={[{ label: 'Position NFTs', key: 'CDP' }, { label: 'RAGE', key: 'RAGE' }, { label: 'HESTIA', key: 'HESTIA' }, { label: 'ULTRAROUND', key: 'ULTRAROUND' }]} />
             </div>
           </div>

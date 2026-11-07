@@ -1,3 +1,4 @@
+import { seo } from '@/lib/seo';
 import PageBg from '@/components/PageBg';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -11,7 +12,7 @@ import { C } from '@/lib/tokens';
 import { RAGE_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = { title: 'Rage OTC' };
+export const metadata = seo({ title: 'Rage OTC', description: "Trade HESTIA, ULTRAROUND or URM for RAGE at a fair price plus a bonus. The bonus grows. The supply doesn't.", handle: '@therageprotocol' });
 
 export default async function Otc() {
   const [o, r, h] = await Promise.all([api('rage/otc'), api('rage/buying-protocol'), api('home/overview')]);
@@ -24,27 +25,27 @@ export default async function Otc() {
     <div className="page has-bg" data-theme="rage">
       <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
-      <section className="wrap" style={{ paddingTop: 56 }}>
+      <section className="wrap" style={{ paddingTop: 'var(--s-16)' }}>
         <div className="split">
           <div className="main">
             <h1 className="h1">Rage OTC</h1>
             <p className="lead">Trade HESTIA, ULTRAROUND or URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
             <p className="punch">The bonus grows. The supply doesn&apos;t.</p>
-            <div className="grid" style={{ marginTop: 32, gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))', gap: 12 }}>
+            <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))', gap: 'var(--s-3)' }}>
               <div className="tile"><span>Bonus right now</span><b className="acc">{active ? num(o?.bonusCurrent, 2) + '%' : '—'}</b></div>
               <div className="tile"><span>{active ? 'RAGE left in this round' : 'Round status'}</span><b>{active ? num(o?.rageBalance) : 'Sold out'}</b></div>
               <div className="tile"><span>Fair market value</span><b>${num(fmv, 2)}</b></div>
               <div className="tile"><span>Bonus range</span><b>{num(o?.config?.bonusMin)}% to {num(o?.config?.bonusMax)}%</b></div>
             </div>
             {!active && (
-              <div className="cream glass-rim" style={{ marginTop: 24, padding: 28 }}>
+              <div className="cream glass-rim" style={{ marginTop: 'var(--s-6)', padding: 'var(--s-8)' }}>
                 <b className="eyebrow">THIS ROUND IS EMPTY</b>
-                <h2 className="h3" style={{ marginTop: 8 }}>All sold out.{nextDate ? ` Next drop ${nextDate}.` : ''}</h2>
+                <h2 className="h3" style={{ marginTop: 'var(--s-2)' }}>All sold out.{nextDate ? ` Next drop ${nextDate}.` : ''}</h2>
                 <p className="muted" style={{ margin: '8px 0 0' }}>{nextDate ? <>Next drop in <b style={{ color: 'var(--ink)' }}><Countdown to={next} done="any moment now" /></b>. </> : 'Next drop is coming soon. '}Drops get announced on X first.</p>
-                <a className="btn btn-ink" style={{ marginTop: 16 }} href="https://x.com/therageprotocol">Follow @therageprotocol</a>
+                <a className="btn btn-ink" style={{ marginTop: 'var(--s-4)' }} href="https://x.com/therageprotocol">Follow @therageprotocol</a>
               </div>
             )}
-            <ul className="list" style={{ marginTop: 24 }}>
+            <ul className="list" style={{ marginTop: 'var(--s-6)' }}>
               <li><span className="k">Trades so far</span><strong>{num(o?.state?.txCount)}</strong></li>
               <li><span className="k">RAGE sold through OTC</span><strong>{num(o?.state?.rageOutputAmount)} + {num(o?.state?.rageOutputBonus, 1)} bonus</strong></li>
               <li><span className="k">Value paid in</span><strong>${num(o?.state?.inputValue)}</strong></li>

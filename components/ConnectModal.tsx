@@ -33,10 +33,10 @@ export default function ConnectModal({ onClose }: { onClose: () => void }) {
   const label = (id: string, name: string) => (id === 'coinbaseWalletSDK' ? 'Coinbase Wallet or passkey' : id === 'injected' ? 'Browser wallet (MetaMask, Rabby…)' : id === 'mock' ? 'Demo wallet (review only)' : name);
 
   return (
-    <div onClick={onClose} className="scrim" style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', padding: 16, overflowY: 'auto' }}>
+    <div onClick={onClose} className="scrim" style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', padding: 'var(--s-4)', overflowY: 'auto' }}>
       <div className="glass-rim sheet" style={{ ['--r' as any]: '32px', borderRadius: 'var(--r-xl)', width: 'min(860px,100%)', margin: 'auto' }} onClick={(e) => e.stopPropagation()}>
       <div ref={box} role="dialog" aria-modal="true" aria-labelledby="ct" style={{ width: 'min(860px,100%)', background: '#f3f0e7', color: '#0d1b33', borderRadius: 'var(--r-xl)', display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}>
-        <div style={{ flex: '1 1 380px', padding: 32 }}>
+        <div style={{ flex: '1 1 380px', padding: 'var(--s-8)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 id="ct" style={{ margin: 0, fontSize: 'var(--fs-title2)', fontWeight: 800 }}>{isConnected ? 'Your wallet' : 'Connect to URM'}</h2>
             <button aria-label="Close" onClick={onClose} style={{ width: 44, height: 44, border: 0, borderRadius: 999, background: '#e6dfd0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -46,42 +46,42 @@ export default function ConnectModal({ onClose }: { onClose: () => void }) {
           {!isConnected ? (
             <>
               <p style={{ margin: '8px 0 0', color: '#4c6892', fontSize: 'var(--fs-subhead)' }}>Pick how you want to sign in.</p>
-              <div style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ marginTop: 'var(--s-5)', display: 'flex', flexDirection: 'column', gap: 'var(--s-3)' }}>
                 {connectors.map((c, i) => (
                   <button key={c.uid} disabled={isPending} onClick={() => connect({ connector: c })}
-                    style={{ display: 'flex', alignItems: 'center', gap: 14, minHeight: 62, padding: '0 16px', border: `2px solid ${i === 0 ? '#0d1b33' : '#dcd4c6'}`, borderRadius: 'var(--r-md)', background: '#fff', font: '700 16px var(--font-inter),sans-serif', color: '#0d1b33', cursor: 'pointer', textAlign: 'left' }}>
+                    style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)', minHeight: 62, padding: '0 16px', border: `2px solid ${i === 0 ? '#0d1b33' : '#dcd4c6'}`, borderRadius: 'var(--r-md)', background: '#fff', font: '700 16px var(--font-inter),sans-serif', color: '#0d1b33', cursor: 'pointer', textAlign: 'left' }}>
                     <img src={ICON[c.id] || c.icon || '/assets/walletconnect.png'} alt="" width={36} height={36} style={{ borderRadius: 'var(--r-xs)', border: c.id === 'injected' ? '1px solid #dcd4c6' : 0 }} />
                     <span style={{ flex: 1 }}>{label(c.id, c.name)}</span>
                     {i === 0 && <span className="pill" style={{ background: '#d7b067' }}>Best</span>}
                   </button>
                 ))}
               </div>
-              {error && <p role="alert" style={{ marginTop: 12, color: '#b3202a', fontSize: 'var(--fs-subhead)' }}>{error.message.split('\n')[0]}</p>}
+              {error && <p role="alert" style={{ marginTop: 'var(--s-3)', color: '#b3202a', fontSize: 'var(--fs-subhead)' }}>{error.message.split('\n')[0]}</p>}
             </>
           ) : (
             <>
-              <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ marginTop: 'var(--s-4)', display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}>
                 <span style={{ width: 44, height: 44, borderRadius: 999, background: '#2e7d50', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>
                 </span>
                 <div><b style={{ fontSize: 'var(--fs-title3)' }}>Connected</b><div className="mono" style={{ fontSize: 'var(--fs-subhead)', color: '#4c6892' }}>{address?.slice(0, 6)}...{address?.slice(-4)} · Base</div></div>
               </div>
-              <ul className="list" style={{ marginTop: 18, background: '#fff' }}>
+              <ul className="list" style={{ marginTop: 'var(--s-4)', background: '#fff' }}>
                 {['URM', 'fURM', 'RAGE', 'HESTIA', 'ULTRAROUND', 'USDC'].map((s) => (
                   <li key={s} style={{ borderTopColor: '#ece6da' }}><span style={{ color: '#4c6892' }}>{s}</span><strong>{fmt(balances[s])}</strong></li>
                 ))}
                 <li style={{ borderTopColor: '#ece6da' }}><span style={{ color: '#4c6892' }}>CDP positions</span><strong>{fmt(balances.CDP, 0)}</strong></li>
               </ul>
-              <button onClick={() => disconnect()} className="btn btn-outline btn-block" style={{ marginTop: 14, color: '#0d1b33' }}>Disconnect</button>
+              <button onClick={() => disconnect()} className="btn btn-outline btn-block" style={{ marginTop: 'var(--s-3)', color: '#0d1b33' }}>Disconnect</button>
             </>
           )}
         </div>
-        <div style={{ flex: '1 1 300px', background: '#0d1b33', color: '#f3f0e7', padding: 32, display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <div style={{ flex: '1 1 300px', background: '#0d1b33', color: '#f3f0e7', padding: 'var(--s-8)', display: 'flex', flexDirection: 'column', gap: 'var(--s-4)' }}>
           <p className="punch" style={{ margin: 0, color: '#d7b067', fontSize: 'var(--fs-title2)' }}>What connecting does, and doesn&apos;t.</p>
           <p style={{ margin: 0, fontSize: 'var(--fs-subhead)', lineHeight: 1.5 }}>✓ Reads your address and balances so we can show your positions.</p>
           <p style={{ margin: 0, fontSize: 'var(--fs-subhead)', lineHeight: 1.5 }}>✕ Never moves funds. Never asks for your seed phrase.</p>
           <p style={{ margin: 0, fontSize: 'var(--fs-subhead)', lineHeight: 1.5 }}>✓ For now, deposit, invest and borrow open the current URM app, where you sign as usual.</p>
-          <div style={{ marginTop: 'auto', padding: 16, background: '#172a4a', borderRadius: 'var(--r-md)', display: 'flex', gap: 12, alignItems: 'center' }}>
+          <div style={{ marginTop: 'auto', padding: 'var(--s-4)', background: '#172a4a', borderRadius: 'var(--r-md)', display: 'flex', gap: 'var(--s-3)', alignItems: 'center' }}>
             <img src="/assets/base.png" alt="" width={26} height={26} /><div><b>Network: Base</b><div style={{ fontSize: 'var(--fs-footnote)', color: '#b0bfd6' }}>Your wallet will switch if needed.</div></div>
           </div>
         </div>

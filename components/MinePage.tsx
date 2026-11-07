@@ -21,15 +21,15 @@ export default function MinePage(c: Cfg) {
   const opened = s.launchTimestamp ? new Date(s.launchTimestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '—';
   return (
     <div className="page has-bg" data-theme={c.theme}>
-      <PageBg img={c.theme === 'hestia' ? '/hero/hestia.jpg' : '/hero/circle.jpg'} color={c.theme === 'hestia' ? '#2a0527' : '#030303'} pos={c.theme === 'hestia' ? '85% 40%' : '70% 50%'} mpos={c.theme === 'hestia' ? '70% 30%' : '80% 40%'} />
+      <PageBg img={c.theme === 'hestia' ? '/hero/hestia-v2.jpg' : '/hero/circle.jpg'} color={c.theme === 'hestia' ? '#2a0527' : '#030303'} pos={c.theme === 'hestia' ? '85% 40%' : '70% 50%'} mpos={c.theme === 'hestia' ? '70% 30%' : '80% 40%'} />
       <AutoRefresh />
-      <section className="wrap" style={{ paddingTop: 56 }}>
+      <section className="wrap" style={{ paddingTop: 'var(--s-16)' }}>
         <div className="split">
           <div className="main">
             <h1 className="h1">{c.title}</h1>
             <p className="lead">{c.lead}</p>
             <p className="punch">{c.punch}</p>
-            <div style={{ marginTop: 32 }}>
+            <div style={{ marginTop: 'var(--s-8)' }}>
               <Tiles items={[
                 { v: num(s[c.token === 'HESTIA' ? 'hestiaPodsBalance' : 'circlePodsBalance']), l: `${c.token} in the ${c.token === 'HESTIA' ? 'mine' : 'temple'}` },
                 { v: num(s.dailyValueOnePercent, 2), l: `daily ${c.token} per 1% of ${c.unit}` },
@@ -46,14 +46,14 @@ export default function MinePage(c: Cfg) {
         </div>
       </section>
       <section className="wrap sec">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}><h2 className="h2">Leaderboard</h2><span className="muted">Live, refreshed every minute</span></div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 'var(--s-2)' }}><h2 className="h2">Leaderboard</h2><span className="muted">Live, refreshed every minute</span></div>
         <ShowAll total={rows.length} label={c.leaders}>
-        <div className="tbl glass-rim" style={{ marginTop: 24 }}>
+        <div className="tbl glass-rim" style={{ marginTop: 'var(--s-6)' }}>
           <table>
             <thead><tr><th>{c.leader}</th><th>Share of {c.unit}</th><th>Daily rewards</th><th>Sold so far</th><th>Last move</th></tr></thead>
             <tbody>{rows.map((r, i) => <tr key={r.wallet} className={i >= 10 ? 'more' : undefined}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>
           </table>
-          {rows.length === 0 && <p className="muted" style={{ padding: 18, margin: 0 }}>No {c.leaders} yet.</p>}
+          {rows.length === 0 && <p className="muted" style={{ padding: 'var(--s-4)', margin: 0 }}>No {c.leaders} yet.</p>}
         </div>
         </ShowAll>
       </section>

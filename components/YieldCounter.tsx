@@ -88,7 +88,7 @@ export default function YieldCounter({ toAssets, interestPerDay, totalShares, yi
       </div>
       <div className="yc-copy">
         <span className="eyebrow">If you hold</span>
-        <div className="row" style={{ marginTop: 10, gap: 8 }} role="group" aria-label="Amount of fURM">
+        <div className="row" style={{ marginTop: 'var(--s-3)', gap: 'var(--s-2)' }} role="group" aria-label="Amount of fURM">
           {CHIPS.map((c) => (
             <button key={c} type="button" className="ycchip" aria-pressed={!useMine && amt === c} onClick={() => { setUseMine(false); setAmt(c); }}>{c.toLocaleString('en-US')} fURM</button>
           ))}
@@ -107,7 +107,7 @@ export default function YieldCounter({ toAssets, interestPerDay, totalShares, yi
           </b>
           <span className="muted yc-note">ticking up, live</span>
         </div>
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: 10, marginTop: 16 }}>
+        <div className="grid" style={{ gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: 'var(--s-3)', marginTop: 'var(--s-4)' }}>
           <div className="tile"><span>Earned today, so far</span><b className="acc" ref={today}>—</b></div>
           <div className="tile"><span>At today&apos;s pace, a year</span><b>{live ? '+' + f(yearPace, 2) : '—'}</b></div>
         </div>

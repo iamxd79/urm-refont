@@ -1,3 +1,4 @@
+import { seo } from '@/lib/seo';
 import MinePage from '@/components/MinePage';
 import { addr } from '@/components/Check';
 import { api } from '@/lib/api';
@@ -7,7 +8,7 @@ import { C } from '@/lib/tokens';
 import { CIRCLE_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = { title: 'Ultraround Temple' };
+export const metadata = seo({ title: 'Ultraround Temple', description: 'Become a cult leader. Summon templars with ULTRAROUND, compound or claim your rewards.', handle: '@UltraRoundMoney' });
 
 export default async function Temple() {
   const [t, leaders] = await Promise.all([api('circle/temple'), api('circle/cult-leaders')]);

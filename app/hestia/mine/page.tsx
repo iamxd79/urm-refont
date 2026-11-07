@@ -1,3 +1,4 @@
+import { seo } from '@/lib/seo';
 import MinePage from '@/components/MinePage';
 import { addr } from '@/components/Check';
 import { api } from '@/lib/api';
@@ -6,7 +7,7 @@ import { C } from '@/lib/tokens';
 import { HESTIA_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = { title: 'Hestia Mine' };
+export const metadata = seo({ title: 'Hestia Mine', description: 'Become a mining chief. Buy miners with HESTIA, compound or sell your rewards.', handle: '@HestiaOnBase' });
 
 export default async function Mine() {
   const [m, chiefs] = await Promise.all([api('hestia/mine'), api('hestia/mining-chiefs')]);

@@ -498,3 +498,38 @@ td{padding:16px 24px;border-top:1px solid var(--line)}
  .nav[data-compact=true] .navtabs-m{display:none}
 }
 @media (max-width:420px){.crumb{display:none}}
+/* HESTIA live flame (pinned to the wallpaper, in her gaze) */
+.hflame{position:absolute;transform:translate(-50%,-58%);z-index:2;pointer-events:none;animation:hfloat 6s ease-in-out infinite}
+@keyframes hfloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.hflame-body{position:relative;width:100%;height:100%}
+.hflame-body.flare{animation:hflare 1.2s var(--spring)}
+@keyframes hflare{0%{transform:scale(1)}25%{transform:scale(1.28,1.5)}100%{transform:scale(1)}}
+.hflame-body svg{overflow:visible}
+.hf{transform-box:fill-box;transform-origin:50% 100%}
+.hf1{animation:hflick 1.9s ease-in-out infinite}
+.hf2{animation:hflick 1.3s ease-in-out infinite reverse}
+.hf3{animation:hflick .9s ease-in-out infinite}
+@keyframes hflick{0%,100%{transform:scale(1,1) skewX(0)}30%{transform:scale(1.04,1.09) skewX(-3deg)}65%{transform:scale(.97,1.03) skewX(3deg)}}
+.hf-glow{transform-box:fill-box;transform-origin:center;animation:hglow 1.9s ease-in-out infinite}
+@keyframes hglow{50%{transform:scale(1.25,1.1)}}
+.hf-spark{position:absolute;left:50%;top:22%;width:6px;height:6px;border-radius:99px;background:#ffb627;animation:hspark 2.8s linear infinite}
+.hf-spark.s2{left:38%;width:5px;height:5px;animation-delay:-.9s;animation-duration:3.3s;background:#ff7a2e}
+.hf-spark.s3{left:62%;width:4px;height:4px;animation-delay:-1.8s;animation-duration:2.4s}
+@keyframes hspark{0%{transform:translate(0,0);visibility:visible}60%{transform:translate(10px,-70px)}61%,100%{transform:translate(10px,-70px);visibility:hidden}}
+.hf-embers i{position:absolute;left:50%;top:40%;width:7px;height:7px;border-radius:99px;background:#ffb627;animation:hember 1.2s ease-out forwards;--dx:calc((var(--i) - 2) * 26px)}
+@keyframes hember{0%{transform:translate(0,0)}100%{transform:translate(var(--dx),-110px) scale(.3);visibility:hidden}}
+/* auto layout helpers: cards are vertical stacks, actions pinned to the bottom so rows line up */
+.vstack{display:flex;flex-direction:column}
+.vstack > .grid{margin-bottom:var(--s-5)}
+.vstack > p{margin:var(--s-3) 0 var(--s-4)}
+.swapcol > .cream{flex:1}
+.swapcol > .fundcard{flex:1}
+.fundsteps{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-3);counter-reset:fs}
+.fundsteps li{counter-increment:fs;display:grid;grid-template-columns:40px 1fr;column-gap:var(--s-4);row-gap:2px;padding:var(--s-4);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.fundsteps li::before{content:counter(fs);grid-row:span 2;width:40px;height:40px;border-radius:var(--r-pill);display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--accent);font-weight:800}
+.fundsteps b{font-size:var(--fs-body)}
+.fundsteps span{color:var(--sub);font-size:var(--fs-subhead);line-height:1.45}
+.fundcard{padding:var(--s-6)}
+.fundcard .row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3)}
+.fundcard .row>:first-child{grid-column:1 / -1;width:100%}
+.fundcard .row .btn{width:100%;padding:0 12px}

@@ -36,7 +36,7 @@ function Cta({ href, label, connectLabel }: { href: string; label: string; conne
   const [m, setM] = useState(false);
   useEffect(() => setM(true), []);
   return (
-    <div style={{ marginTop: 18 }}>
+    <div style={{ marginTop: 'var(--s-4)' }}>
       {m && isConnected
         ? <a className="btn btn-ink btn-lg btn-block" href={href} target="_blank" rel="noreferrer">{label}</a>
         : <ConnectButton block className="btn btn-ink btn-lg" label={connectLabel} />}
@@ -53,11 +53,11 @@ export function OtcPanel({ prices, fmv, bonus, app }: { prices: Record<string, n
   const fair = value / fmv;
   const extra = fair * (bonus / 100);
   return (
-    <div className="cream glass-rim" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 'var(--s-6)' }}>
       <p className="muted" style={{ margin: '0 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>Pay with</p>
       <Tabs items={['HESTIA', 'ULTRAROUND', 'URM'] as const as any} value={tok} set={setTok as any} label="Pay with" />
       <Amount id="otc" label="You pay" value={amt} set={setAmt} unit={tok} bal={balances[tok]} />
-      <ul className="list" style={{ marginTop: 16 }}>
+      <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
         <li><span className="k">Value</span><strong>${f(value, 2)}</strong></li>
         <li><span className="k">Fair price</span><strong>{f(fair, 2)} RAGE</strong></li>
         <li><span className="k">Bonus right now</span><strong>+{f(extra, 2)} RAGE ({f(bonus, 2)}%)</strong></li>
@@ -79,12 +79,12 @@ export function CdpPanel({ cols, rate, app }: { cols: Col[]; rate: number; app: 
   const value = parse(amt) * (c?.price || 0);
   const key = sym === 'CIRCLE' || sym === 'ULTRAROUND' ? 'ULTRAROUND' : sym;
   return (
-    <div className="cream glass-rim" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 'var(--s-6)' }}>
       <Tabs items={['Borrow', 'Leverage'] as any} value={mode} set={setMode as any} label="CDP mode" />
       <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>Collateral</p>
       <Tabs items={cols.map((x) => x.symbol) as any} value={sym} set={setSym as any} label="Collateral" />
       <Amount id="cdp" label="You lock" value={amt} set={setAmt} unit={sym} bal={balances[key]} />
-      <ul className="list" style={{ marginTop: 16 }}>
+      <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
         <li><span className="k">Collateral value</span><strong>${f(value, 2)}</strong></li>
         <li><span className="k">Collateral ratio</span><strong>{c ? `${c.min}x to ${c.max}x` : '—'}</strong></li>
         <li><span className="k">Interest</span><strong>{f(rate, 2)}% a year</strong></li>
@@ -106,19 +106,19 @@ export function MinerPanel({ token, balKey, unit, verbs, perOne, dailyPerOne, se
   const { balances } = useBalances();
   const share = parse(amt) / perOne;
   return (
-    <div className="cream glass-rim" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 'var(--s-6)' }}>
       <Tabs items={verbs as any} value={tab} set={setTab as any} label={`${token} action`} />
       {tab === verbs[0] ? (
         <>
           <Amount id="mine" label="You spend" value={amt} set={setAmt} unit={token} bal={balances[balKey]} />
-          <ul className="list" style={{ marginTop: 16 }}>
+          <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
             <li><span className="k">Your share of {unit}</span><strong>about {f(share, 2)}%</strong></li>
             <li><span className="k">Daily rewards today</span><strong>about {f(share * dailyPerOne, 2)} {token}</strong></li>
             <li><span className="k">Sell limit</span><strong>{f(sellLimit, 0)} {token}</strong></li>
           </ul>
         </>
       ) : (
-        <ul className="list" style={{ marginTop: 16 }}>
+        <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
           {tab === verbs[1]
             ? <><li><span className="k">What it does</span><strong>Turns rewards into more {unit}</strong></li><li><span className="k">Why</span><strong>Active players take share</strong></li></>
             : <><li><span className="k">What it does</span><strong>Cashes out rewards</strong></li><li><span className="k">Sell limit right now</span><strong>{f(sellLimit, 0)} {token}</strong></li></>}
@@ -137,11 +137,11 @@ export function SwapPanel({ prices, fee, app }: { prices: Record<string, number>
   const { balances } = useBalances();
   const out = (parse(amt) * (1 - fee / 100)) / (prices[to] || NaN);
   return (
-    <div className="cream glass-rim" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 'var(--s-6)' }}>
       <Amount id="swap" label="You pay" value={amt} set={setAmt} unit="USDC" bal={balances.USDC} />
       <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>You receive</p>
       <Tabs items={['URM', 'RAGE', 'HESTIA', 'ULTRAROUND'] as any} value={to} set={setTo as any} label="Receive token" />
-      <ul className="list" style={{ marginTop: 16 }}>
+      <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
         <li><span className="k">Estimated output</span><strong>about {f(out, 2)} {to}</strong></li>
         <li><span className="k">Route</span><strong>USDC → Gateway → {to}</strong></li>
         <li><span className="k">Gateway fee</span><strong>{fee}%</strong></li>
@@ -162,19 +162,19 @@ export function RefLink({ rows }: { rows: { addr: string; invested: string; unpa
   const link = on ? `ultraroundmoney.com/rage?ref=${address}` : 'ultraroundmoney.com/rage?ref=0x…';
   const me = on ? rows.find((r) => r.addr.toLowerCase() === address!.toLowerCase()) : undefined;
   return (
-    <div className="cream glass-rim" style={{ padding: 28 }}>
+    <div className="cream glass-rim" style={{ padding: 'var(--s-8)' }}>
       <h2 className="h3">Your referral link</h2>
       <p className="muted" style={{ margin: '6px 0 0' }}>{on ? 'Share it anywhere. Investments through it count for you.' : 'Connect to get your link, then share it anywhere.'}</p>
-      <div className="field" style={{ marginTop: 16 }}>
+      <div className="field" style={{ marginTop: 'var(--s-4)' }}>
         <span className="mono" style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 'var(--fs-subhead)' }}>{link}</span>
         <button type="button" className="max" disabled={!on} onClick={() => { navigator.clipboard?.writeText('https://' + link); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>{copied ? 'Copied' : 'Copy'}</button>
       </div>
-      <div className="grid" style={{ marginTop: 16, gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 10 }}>
+      <div className="grid" style={{ marginTop: 'var(--s-4)', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 'var(--s-3)' }}>
         <div className="tile"><span>Invested through you</span><b>{me ? '$' + me.invested : '—'}</b></div>
         <div className="tile"><span>Unpaid commission</span><b>{me ? '$' + me.unpaid : '—'}</b></div>
         <div className="tile"><span>Paid so far</span><b>{me ? '$' + me.paid : '—'}</b></div>
       </div>
-      {!on && <div style={{ marginTop: 18 }}><ConnectButton block className="btn btn-ink btn-lg" label="Connect and become a referrer" /></div>}
+      {!on && <div style={{ marginTop: 'var(--s-4)' }}><ConnectButton block className="btn btn-ink btn-lg" label="Connect and become a referrer" /></div>}
     </div>
   );
 }
@@ -190,13 +190,13 @@ export function YourPosition({ items }: { items: { label: string; key: string; u
     <div className="card glass-rim">
       <b className="eyebrow">YOUR POSITION</b>
       {!on && <p className="muted" style={{ margin: '8px 0 0' }}>Connect your wallet to see your balances here. Read only, nothing moves.</p>}
-      <div className="grid" style={{ marginTop: 14, gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 10 }}>
+      <div className="grid" style={{ marginTop: 'var(--s-3)', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 'var(--s-3)' }}>
         {items.map((i) => {
           const v = balances[i.key];
           return <div key={i.label} className="tile" style={{ background: 'var(--bg)' }}><span>{i.label}</span><b>{on && v !== undefined ? f(v * (i.mult ?? 1), 2) : on && isLoading ? '…' : '—'}{i.unit ? <small style={{ fontSize: 'var(--fs-subhead)', marginLeft: 6 }}>{i.unit}</small> : null}</b></div>;
         })}
       </div>
-      {!on && <div style={{ marginTop: 14 }}><ConnectButton /></div>}
+      {!on && <div style={{ marginTop: 'var(--s-3)' }}><ConnectButton /></div>}
     </div>
   );
 }

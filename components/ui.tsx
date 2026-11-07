@@ -15,7 +15,7 @@ export function Steps({ items }: { items: { t?: string; d: string }[] }) {
   return (
     <div className="steps">
       {items.map((s, i) => (
-        <div key={i} className="step"><span className="n">{i + 1}</span>{s.t && <h3>{s.t}</h3>}<p style={s.t ? undefined : { color: 'var(--text)', marginTop: 14, fontSize: 'var(--fs-body)' }}>{s.d}</p></div>
+        <div key={i} className="step"><span className="n">{i + 1}</span>{s.t && <h3>{s.t}</h3>}<p style={s.t ? undefined : { color: 'var(--text)', marginTop: 'var(--s-3)', fontSize: 'var(--fs-body)' }}>{s.d}</p></div>
       ))}
     </div>
   );
@@ -29,7 +29,7 @@ export function Stats({ items }: { items: { v: ReactNode; l: string; c?: string 
 }
 export function Tiles({ items }: { items: { v: ReactNode; l: string }[] }) {
   return (
-    <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(170px,100%),1fr))', gap: 12 }}>
+    <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(170px,100%),1fr))', gap: 'var(--s-3)' }}>
       {items.map((s) => <div key={s.l} className="tile"><b>{s.v}</b><span>{s.l}</span></div>)}
     </div>
   );
@@ -48,7 +48,7 @@ export function SupplyBar({ parts }: { parts: { label: string; value: number; co
 }
 export function Faq({ items }: { items: [string, string][] }) {
   return (
-    <div className="faq card" style={{ padding: 0, marginTop: 32 }}>
+    <div className="faq card" style={{ padding: 0, marginTop: 'var(--s-8)' }}>
       {items.map(([q, a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}
     </div>
   );
