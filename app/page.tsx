@@ -18,10 +18,10 @@ export default async function Home() {
   const ov = f?.fortressState?.overview || {};
   const price = n(f?.urmPrice ?? u?.price);
   const words = [
-    `$${num(price, 3)}`, 'PEG OK', `DEFENSE ${usd(ov.totalDefense)}`, `fURM ${num(fs.toAssets, 4)}`, `APY ${pct(yieldPct, 0)}`,
+    `$${num(price, 3)}`, Math.abs(price - 1) <= 0.01 ? 'PEG OK' : '', `DEFENSE ${usd(ov.totalDefense)}`, `fURM ${num(fs.toAssets, 4)}`, `APY ${pct(yieldPct, 0)}`,
     `RAGE FMV $${num(rb?.rbpView?.fmv, 2)}`, `BACKING ${num(rb?.rbpView?.backingPerShare, 3)}`, `TREASURY ${usd(rb?.rbpView?.activeAssetsUsdcValue)}`,
-    `HESTIA BURNED ${pct(h?.supply?.burnedPercent)}`, `CIRCLE BURNED ${pct(c?.supply?.burnedPercent)}`, `MCAP ${usd(u?.marketCap)}`, 'BASE', '$1.00',
-  ];
+    `HESTIA BURNED ${pct(h?.supply?.burnedPercent)}`, `CIRCLE BURNED ${pct(c?.supply?.burnedPercent)}`, `MCAP ${usd(u?.marketCap)}`, 'BASE',
+  ].filter((w) => w && !w.includes('—'));
   const checkedAt = Date.now();
   const cards = [
     { id: 'urm', href: '/urm/fountain', theme: 'cream', name: 'URM Fountain', tag: 'Stablecoin yield', text: 'Deposit URM, get fURM. Your fURM count stays the same while each one is worth more URM every day.', big: pct(yieldPct, 0), small: 'target APY', cta: 'Open Fountain', logo: null },
@@ -45,7 +45,7 @@ export default async function Home() {
             <Link className="btn btn-sun btn-lg" href="/urm/fountain">Start with Fountain</Link>
             <a className="btn btn-outline btn-lg" href="#trust">Read the audit</a>
           </div>
-          <p className="readout peg-m glass-clear"><span><b>PEG CHECK</b> ${num(price, 3)} · {Math.abs(price - 1) <= 0.01 ? 'on peg' : 'off peg'}</span></p>
+          <p className="readout peg-m glass-clear"><span><b>PEG CHECK</b> {Number.isFinite(price) ? `$${num(price, 3)} · ${Math.abs(price - 1) <= 0.01 ? 'on peg' : 'off peg'}` : 'checking…'}</span></p>
           <p className="sr">URM peg check: ${num(price, 3)}. Total defense {usd(ov.totalDefense)}.</p>
         </div>
       </section>

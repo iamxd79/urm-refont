@@ -181,7 +181,7 @@ export function RefLink({ rows }: { rows: { addr: string; invested: string; unpa
 
 /* ---------- Your position strip (any page) ---------- */
 export function YourPosition({ items }: { items: { label: string; key: string; unit?: string; mult?: number }[] }) {
-  const { balances } = useBalances();
+  const { balances, isLoading } = useBalances();
   const { isConnected } = useAccount();
   const [m, setM] = useState(false);
   useEffect(() => setM(true), []);
@@ -193,7 +193,7 @@ export function YourPosition({ items }: { items: { label: string; key: string; u
       <div className="grid" style={{ marginTop: 14, gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 10 }}>
         {items.map((i) => {
           const v = balances[i.key];
-          return <div key={i.label} className="tile" style={{ background: 'var(--bg)' }}><span>{i.label}</span><b>{on && v !== undefined ? f(v * (i.mult ?? 1), 2) : '—'}{i.unit ? <small style={{ fontSize: 'var(--fs-subhead)', marginLeft: 6 }}>{i.unit}</small> : null}</b></div>;
+          return <div key={i.label} className="tile" style={{ background: 'var(--bg)' }}><span>{i.label}</span><b>{on && v !== undefined ? f(v * (i.mult ?? 1), 2) : on && isLoading ? '…' : '—'}{i.unit ? <small style={{ fontSize: 'var(--fs-subhead)', marginLeft: 6 }}>{i.unit}</small> : null}</b></div>;
         })}
       </div>
       {!on && <div style={{ marginTop: 14 }}><ConnectButton /></div>}

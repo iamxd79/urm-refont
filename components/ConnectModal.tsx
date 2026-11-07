@@ -1,9 +1,9 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { useBalances } from './useBalances';
 
-const ICON: Record<string, string> = { coinbaseWalletSDK: '/assets/coinbase.png', injected: '/assets/metamask.png', metaMask: '/assets/metamask.png', walletConnect: '/assets/walletconnect.png' };
+const ICON: Record<string, string> = { coinbaseWalletSDK: '/assets/coinbase.png', injected: '/assets/metamask.png', metaMask: '/assets/metamask.png', walletConnect: '/assets/walletconnect.png', mock: '/icon.svg' };
 const fmt = (v?: number, d = 2) => (v === undefined ? '…' : v.toLocaleString('en-US', { maximumFractionDigits: d }));
 
 export default function ConnectModal({ onClose }: { onClose: () => void }) {
@@ -11,14 +11,31 @@ export default function ConnectModal({ onClose }: { onClose: () => void }) {
   const { isConnected, address } = useAccount();
   const { disconnect } = useDisconnect();
   const { balances } = useBalances();
-  useEffect(() => { const k = (e: KeyboardEvent) => e.key === 'Escape' && onClose(); window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, [onClose]);
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    const focusables = () => [...(box.current?.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],input') ?? [])];
+    focusables()[0]?.focus();
+    document.body.style.overflow = 'hidden';
+    const k = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'Tab') {
+        const f = focusables(); if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    window.addEventListener('keydown', k);
+    return () => { window.removeEventListener('keydown', k); document.body.style.overflow = ''; prev?.focus?.(); };
+  }, [onClose]);
 
-  const label = (id: string, name: string) => (id === 'coinbaseWalletSDK' ? 'Coinbase Wallet or passkey' : id === 'injected' ? 'Browser wallet (MetaMask, Rabby…)' : name);
+  const label = (id: string, name: string) => (id === 'coinbaseWalletSDK' ? 'Coinbase Wallet or passkey' : id === 'injected' ? 'Browser wallet (MetaMask, Rabby…)' : id === 'mock' ? 'Demo wallet (review only)' : name);
 
   return (
-    <div onClick={onClose} className="scrim" style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, overflowY: 'auto' }}>
-      <div className="glass-rim sheet" style={{ ['--r' as any]: '32px', borderRadius: 'var(--r-xl)', width: 'min(860px,100%)' }} onClick={(e) => e.stopPropagation()}>
-      <div role="dialog" aria-modal="true" aria-labelledby="ct" style={{ width: 'min(860px,100%)', background: '#f3f0e7', color: '#0d1b33', borderRadius: 'var(--r-xl)', display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}>
+    <div onClick={onClose} className="scrim" style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', padding: 16, overflowY: 'auto' }}>
+      <div className="glass-rim sheet" style={{ ['--r' as any]: '32px', borderRadius: 'var(--r-xl)', width: 'min(860px,100%)', margin: 'auto' }} onClick={(e) => e.stopPropagation()}>
+      <div ref={box} role="dialog" aria-modal="true" aria-labelledby="ct" style={{ width: 'min(860px,100%)', background: '#f3f0e7', color: '#0d1b33', borderRadius: 'var(--r-xl)', display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}>
         <div style={{ flex: '1 1 380px', padding: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 id="ct" style={{ margin: 0, fontSize: 'var(--fs-title2)', fontWeight: 800 }}>{isConnected ? 'Your wallet' : 'Connect to URM'}</h2>

@@ -2,6 +2,7 @@
 import { erc20Abi } from 'viem';
 import { useAccount, useReadContracts } from 'wagmi';
 import { TOKENS, CDP_NFT } from '@/lib/tokens';
+import { DEMO } from '@/lib/wagmi';
 
 const erc721 = [{ type: 'function', name: 'balanceOf', stateMutability: 'view', inputs: [{ name: 'owner', type: 'address' }], outputs: [{ type: 'uint256' }] }] as const;
 const SYMS = Object.keys(TOKENS) as (keyof typeof TOKENS)[];
@@ -24,5 +25,6 @@ export function useBalances() {
   });
   const nft = data?.[SYMS.length * 2]?.result as bigint | undefined;
   out.CDP = nft === undefined ? undefined : Number(nft);
-  return { balances: out, isLoading, address };
+  if (DEMO && address) return { balances: { URM: 2450.12, fURM: 1832.4, RAGE: 41.2, HESTIA: 310.5, ULTRAROUND: 1204.9, USDC: 980, CDP: 2 } as Record<string, number | undefined>, isLoading: false, address };
+  return { balances: out, isLoading: !!address && isLoading, address };
 }

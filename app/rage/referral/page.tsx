@@ -4,6 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import { RefLink } from '@/components/Panels';
+import ShowAll from '@/components/ShowAll';
 import { api } from '@/lib/api';
 import { num, ago, short } from '@/lib/fmt';
 import { RAGE_TABS } from '@/lib/tabs';
@@ -38,12 +39,14 @@ export default async function Referral() {
       </section>
       <section className="wrap sec">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}><h2 className="h2">Referrers</h2><span className="muted">{rows.length} registered</span></div>
+        <ShowAll total={rows.length} label="referrers">
         <div className="tbl glass-rim" style={{ marginTop: 24 }}>
           <table>
             <thead><tr><th>Referrer</th><th>Invested through them</th><th>Unpaid</th><th>Paid</th><th>Last</th></tr></thead>
-            <tbody>{rows.map((x) => <tr key={x.addr}><td className="tcell-title"><b>{x.name || 'anon'}</b> <span className="mono muted" style={{ fontSize: 'var(--fs-footnote)' }}>{short(x.addr)}</span></td><td data-label="Invested through them">${x.invested} · {x.count} invest{x.count === 1 ? '' : 's'}</td><td data-label="Unpaid">${x.unpaid}</td><td data-label="Paid">${x.paid}</td><td data-label="Last" className="muted">{x.inv > 0 ? ago(x.last) : '—'}</td></tr>)}</tbody>
+            <tbody>{rows.map((x, i) => <tr key={x.addr} className={i >= 10 ? 'more' : undefined}><td className="tcell-title"><b>{x.name || 'anon'}</b> <span className="mono muted" style={{ fontSize: 'var(--fs-footnote)' }}>{short(x.addr)}</span></td><td data-label="Invested through them">${x.invested} · {x.count} invest{x.count === 1 ? '' : 's'}</td><td data-label="Unpaid">${x.unpaid}</td><td data-label="Paid">${x.paid}</td><td data-label="Last" className="muted">{x.inv > 0 ? ago(x.last) : '—'}</td></tr>)}</tbody>
           </table>
         </div>
+        </ShowAll>
       </section>
       <Footer name="RAGE" x="therageprotocol" />
     </div>

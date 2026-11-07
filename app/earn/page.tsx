@@ -30,7 +30,7 @@ export default async function Earn() {
         <p className="lead">No seed phrase, no hardware wallet, no address to copy. Buy USDC with a card, then swap, invest or deposit in one place.</p>
         </div></div>
       </Hero>
-      <section className="wrap sec grid2">
+      <section className="wrap sec grid2" style={{ alignItems: 'start' }}>
         <div className="card glass-rim">
           {step(1, 'Fund your wallet')}
           <ol style={{ margin: '20px 0 0', paddingLeft: 22, lineHeight: 1.9, fontSize: 'var(--fs-body)' }}>

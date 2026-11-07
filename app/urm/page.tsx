@@ -20,7 +20,8 @@ export default async function Urm() {
   const [o, f, cdp, home] = await Promise.all([api('urm/overview'), api('urm/fortress'), api('urm/cdp'), api('home/overview')]);
   const fs = f?.fortressState || {}, ov = fs.overview || {}, fo = f?.fountainState || {};
   const price = n(f?.urmPrice ?? o?.price);
-  const onPeg = Math.abs(price - 1) <= 0.01;
+  const known = Number.isFinite(price);
+  const onPeg = known && Math.abs(price - 1) <= 0.01;
   const hestiaDef = n(fs.hestiaBalance) * n(home?.hestia), circleDef = n(fs.circleBalance) * n(home?.circle);
   const defense = [
     { label: 'USDC', value: n(fs.nftUsdc), color: '#5fd39a' },
@@ -50,7 +51,7 @@ export default async function Urm() {
           <div className="side cream glass-rim" style={{ padding: 28 }}>
             <b className="eyebrow">PEG CHECK</b>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14 }}>
-              <span className="pill" style={{ background: onPeg ? '#2e7d50' : '#b3261e', color: '#fff' }}>{onPeg ? 'On peg' : 'Off peg'}</span>
+              <span className="pill" style={{ background: !known ? '#4c6892' : onPeg ? '#2e7d50' : '#b3261e', color: '#fff' }}>{!known ? 'Checking' : onPeg ? 'On peg' : 'Off peg'}</span>
               <b style={{ fontSize: 'var(--fs-title1)' }}>${num(price, 3)}</b><span className="muted">URM price</span>
             </div>
             <p className="muted" style={{ margin: '20px 0 0', fontWeight: 600 }}>Total defense</p>
