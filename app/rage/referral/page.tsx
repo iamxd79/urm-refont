@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -14,7 +15,8 @@ export default async function Referral() {
   const pc = r?.percent ?? 5;
   const rows = ((r?.referral || []) as any[]).map((x) => ({ addr: x[0], name: x[1], last: x[2], count: x[3], invested: num(x[4], 2), unpaid: num(x[5], 2), paid: num(x[6], 2), inv: Number(x[4]) || 0 })).sort((a, b) => b.inv - a.inv);
   return (
-    <div className="page" data-theme="rage">
+    <div className="page has-bg" data-theme="rage">
+      <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
       <Nav active="rage" tabs={RAGE_TABS} current="/rage/referral" />
       <section className="wrap" style={{ paddingTop: 56 }}>

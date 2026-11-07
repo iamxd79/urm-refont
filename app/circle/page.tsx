@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -18,10 +19,11 @@ export default async function Circle() {
   const s = c?.supply || {}, ch = c?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.temple) + n(s.ecosystem);
   return (
-    <div className="page" data-theme="circle">
+    <div className="page has-bg" data-theme="circle">
+      <PageBg img="/hero/circle.jpg" color="#030303" pos="70% 50%" mpos="80% 40%" />
       <AutoRefresh />
       <Nav active="circle" tabs={CIRCLE_TABS} current="/circle" />
-      <Hero img="/assets/ultraround_temple_wide.svg" alt="A temple under a night sky">
+      <Hero img="/hero/circle.jpg" bg="#030303" pos="70% 50%" mpos="80% 60%">
         <div className="split">
           <div className="main">
             <h1 className="h1">Burns on<br /><span className="acc">every sell.</span></h1>
@@ -42,7 +44,6 @@ export default async function Circle() {
           </div>
         </div>
       </Hero>
-      <div style={{ height: 48 }} />
       <Stats items={[{ v: '$' + num(c?.price, 2), l: 'price' }, { v: usd(c?.marketCap), l: 'market cap' }, { v: num(c?.liquidity?.marketCapRatio, 2) + '%', l: 'liquidity to market cap' }, { v: num(c?.holders), l: 'holders' }]} />
       <section className="wrap sec">
         <h2 className="h2">The fire and the tech.</h2>

@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -20,10 +21,11 @@ export default async function Hestia() {
   const s = h?.supply || {}, ch = h?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.mine) + n(s.ecosystem);
   return (
-    <div className="page" data-theme="hestia">
+    <div className="page has-bg" data-theme="hestia">
+      <PageBg img="/hero/hestia.jpg" color="#2a0527" pos="85% 40%" mpos="70% 30%" />
       <AutoRefresh />
       <Nav active="hestia" tabs={HESTIA_TABS} current="/hestia" />
-      <Hero img="/assets/hestia_fire_wide.svg" alt="A fire burning on a dark hill">
+      <Hero img="/hero/hestia.jpg" bg="#2a0527" pos="100% 40%" mpos="68% 35%">
         <div className="split">
           <div className="main">
             <h1 className="h1">Become<br /><span className="acc">ultra rare.</span></h1>
@@ -45,7 +47,6 @@ export default async function Hestia() {
           </div>
         </div>
       </Hero>
-      <div style={{ height: 48 }} />
       <Stats items={[{ v: '$' + num(h?.price, 2), l: 'price' }, { v: usd(h?.marketCap), l: 'market cap' }, { v: usd(h?.liquidity?.value), l: 'total liquidity' }, { v: num(h?.holders), l: 'holders' }]} />
 
       <section className="wrap sec" id="fire">

@@ -4,8 +4,8 @@ import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import { api } from '@/lib/api';
 import { C, TOKENS } from '@/lib/tokens';
-import Image from 'next/image';
 import { DataRain, OrbPulse } from '@/components/HeroLive';
+import PageBg from '@/components/PageBg';
 import { num, usd, pct, bps, short, n, legacy } from '@/lib/fmt';
 
 export const revalidate = 60;
@@ -30,15 +30,14 @@ export default async function Home() {
     { id: 'circle', href: '/circle', theme: 'circle', name: 'ULTRAROUND', tag: '$CIRCLE, burns on every sell', text: 'No transaction tax. Pool fees fuel the burn, so supply only goes one way.', big: num(c?.supply?.burned), small: 'CIRCLE burned', cta: 'Open ULTRAROUND', logo: '/assets/ultraround.png' },
   ];
   return (
-    <div className="page">
+    <div className="page has-bg">
       <AutoRefresh />
       <Nav />
-      <section className="phero" aria-labelledby="hero-h">
-        <div className="phero-art">
-          <Image src="/hero/statue-wide.jpg" alt="" fill priority sizes="(max-width: 900px) 1px, 300vw" />
-          <OrbPulse price={price} checkedAt={checkedAt} defense={usd(ov.totalDefense)} />
-        </div>
+      <PageBg img="/hero/statue-wide.jpg" color="#022596" wide>
+        <OrbPulse price={price} checkedAt={checkedAt} defense={usd(ov.totalDefense)} />
         <DataRain words={words} />
+      </PageBg>
+      <section className="phero" aria-labelledby="hero-h">
         <div className="wrap phero-copy">
           <h1 id="hero-h" className="h1">Onchain money that works while <span className="acc">you sleep.</span></h1>
           <p className="lead">A stablecoin built like a fortress, a treasury that harvests volatility, and two tokens that only get scarcer. All on Base.</p>
@@ -46,10 +45,8 @@ export default async function Home() {
             <Link className="btn btn-sun btn-lg" href="/urm/fountain">Start with Fountain</Link>
             <a className="btn btn-outline btn-lg" href="#trust">Read the audit</a>
           </div>
-        </div>
-        <div className="phero-m">
-          <Image src="/hero/statue.jpg" alt="" fill sizes="100vw" />
-          <OrbPulse price={price} checkedAt={checkedAt} defense={usd(ov.totalDefense)} />
+          <p className="readout peg-m"><span><b>PEG CHECK</b> ${num(price, 3)} · {Math.abs(price - 1) <= 0.01 ? 'on peg' : 'off peg'}</span></p>
+          <p className="sr">URM peg check: ${num(price, 3)}. Total defense {usd(ov.totalDefense)}.</p>
         </div>
       </section>
       <section className="band"><div className="wrap stats">

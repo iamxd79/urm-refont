@@ -1,4 +1,5 @@
 import Nav from './Nav';
+import PageBg from './PageBg';
 import Footer from './Footer';
 import AutoRefresh from './AutoRefresh';
 import Check, { type Link as L } from './Check';
@@ -19,7 +20,8 @@ export default function MinePage(c: Cfg) {
   const rows = [...c.rows].sort((a, b) => parseFloat(b[c.shareKey]) - parseFloat(a[c.shareKey]));
   const opened = s.launchTimestamp ? new Date(s.launchTimestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '—';
   return (
-    <div className="page" data-theme={c.theme}>
+    <div className="page has-bg" data-theme={c.theme}>
+      <PageBg img={c.theme === 'hestia' ? '/hero/hestia.jpg' : '/hero/circle.jpg'} color={c.theme === 'hestia' ? '#2a0527' : '#030303'} pos={c.theme === 'hestia' ? '85% 40%' : '70% 50%'} mpos={c.theme === 'hestia' ? '70% 30%' : '80% 40%'} />
       <AutoRefresh />
       <Nav active={c.active} tabs={c.tabs} current={c.current} />
       <section className="wrap" style={{ paddingTop: 56 }}>

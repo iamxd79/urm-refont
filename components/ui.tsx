@@ -1,11 +1,14 @@
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 
-export function Hero({ img, alt, children }: { img: string; alt: string; children: ReactNode }) {
+/** Photo hero: full-bleed image, copy on its empty side, iOS-style progressive blur at the bottom edge.
+ *  On phones the image sits on top and the copy follows on the page colour. */
+export function Hero({ img, alt = '', bg, pos = '70% 50%', mpos = '72% 50%', children }: { img: string; alt?: string; bg?: string; pos?: string; mpos?: string; children: ReactNode }) {
   return (
-    <>
-      <div className="scene"><img src={img} alt={alt} /></div>
-      <section className="wrap hero-over"><div className="hero-block">{children}</div></section>
-    </>
+    <section className="pho" style={{ ['--pbg' as any]: bg || 'var(--bg)', ['--pos' as any]: pos, ['--mpos' as any]: mpos }}>
+      <div className="pho-media"><Image src={img} alt={alt} fill priority sizes="100vw" /></div>
+      <div className="wrap pho-copy">{children}</div>
+    </section>
   );
 }
 export function Steps({ items }: { items: { t?: string; d: string }[] }) {

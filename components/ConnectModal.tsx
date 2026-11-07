@@ -16,8 +16,9 @@ export default function ConnectModal({ onClose }: { onClose: () => void }) {
   const label = (id: string, name: string) => (id === 'coinbaseWalletSDK' ? 'Coinbase Wallet or passkey' : id === 'injected' ? 'Browser wallet (MetaMask, Rabby…)' : name);
 
   return (
-    <div onClick={onClose} style={{ position: 'fixed', inset: 0, zIndex: 100, background: '#07101f', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, overflowY: 'auto' }}>
-      <div role="dialog" aria-modal="true" aria-labelledby="ct" onClick={(e) => e.stopPropagation()} className="glass" style={{ width: 'min(860px,100%)', background: '#f3f0e7', color: '#0d1b33', borderRadius: 32, display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}>
+    <div onClick={onClose} className="scrim" style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, overflowY: 'auto' }}>
+      <div className="glass sheet" style={{ ['--r' as any]: '32px', borderRadius: 32, width: 'min(860px,100%)' }} onClick={(e) => e.stopPropagation()}>
+      <div role="dialog" aria-modal="true" aria-labelledby="ct" style={{ width: 'min(860px,100%)', background: '#f3f0e7', color: '#0d1b33', borderRadius: 32, display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}>
         <div style={{ flex: '1 1 380px', padding: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2 id="ct" style={{ margin: 0, fontSize: 28, fontWeight: 800 }}>{isConnected ? 'Your wallet' : 'Connect to URM'}</h2>
@@ -67,6 +68,7 @@ export default function ConnectModal({ onClose }: { onClose: () => void }) {
             <img src="/assets/base.png" alt="" width={26} height={26} /><div><b>Network: Base</b><div style={{ fontSize: 13, color: '#b0bfd6' }}>Your wallet will switch if needed.</div></div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

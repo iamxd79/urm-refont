@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -29,10 +30,11 @@ export default async function Urm() {
   ];
   const sup = o?.supply || {};
   return (
-    <div className="page">
+    <div className="page has-bg">
+      <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
       <AutoRefresh />
       <Nav active="urm" tabs={URM_TABS} current="/urm" />
-      <Hero img="/assets/urm_fortress_wide.svg" alt="A fortress on a hill">
+      <Hero img="/hero/statue-wide.jpg" bg="#022596" pos="100% 50%" mpos="84% 50%">
         <div className="split">
           <div className="main">
             <h1 className="h1">A stablecoin built like <span className="acc">a fortress.</span></h1>
@@ -56,7 +58,6 @@ export default async function Urm() {
           </div>
         </div>
       </Hero>
-      <div style={{ height: 48 }} />
       <Stats items={[{ v: usd(o?.marketCap), l: 'market cap' }, { v: usd(o?.liquidity?.value), l: 'total liquidity' }, { v: num(sup.included), l: 'backed supply' }, { v: num(fs.towers?.length ?? 6), l: 'registered towers' }]} />
 
       <section className="wrap sec">

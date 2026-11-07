@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -18,7 +19,8 @@ export default async function Fountain() {
   const s = f?.fountainState || {}, cfg = s.config || {};
   const toAssets = n(s.toAssets);
   return (
-    <div className="page">
+    <div className="page has-bg">
+      <PageBg img="/hero/fountain.jpg" color="#0a1a8a" pos="50% 50%" mpos="50% 50%" />
       <AutoRefresh />
       <Nav active="urm" tabs={URM_TABS} current="/urm/fountain" />
       <section className="wrap" style={{ paddingTop: 56 }}>
@@ -45,6 +47,13 @@ export default async function Fountain() {
         <div className="stat"><b>{num(s.windowRemaining)} URM</b><span>withdrawable right now</span></div>
         <div className="stat"><b>{bps(cfg.depositFee, 0)} / {bps(cfg.withdrawFee)}</b><span>deposit / withdraw fee</span></div>
       </div></section>
+      <section className="wrap sec">
+        <div className="card glass" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 }}>
+          <h2 className="h2" style={{ fontSize: 'clamp(32px,4vw,48px)' }}>Your URM works<br /><span className="acc">the night shift.</span></h2>
+          <p className="muted" style={{ fontSize: 18, lineHeight: 1.55, margin: 0 }}>No claiming, no rebasing, nothing to babysit. The Fortress pays into the vault around the clock, so each fURM is worth a little more URM every morning.</p>
+          <p style={{ margin: 0, fontSize: 17 }}><b className="acc" style={{ fontSize: 28 }}>{num(s.interestPerDay, 2)} URM</b> <span className="muted">paid to depositors every day right now</span></p>
+        </div>
+      </section>
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>
         <Steps items={[{ t: 'Deposit URM', d: 'No deposit fee. You get fURM, a share of the vault.' }, { t: 'The Fortress pays the yield', d: 'From pool fees and protocol profit. The share price climbs. No claiming, no rebasing.' }, { t: 'Withdraw anytime', d: `To URM or USDC, with a ${bps(cfg.withdrawFee)} fee, up to what's withdrawable right now.` }]} />

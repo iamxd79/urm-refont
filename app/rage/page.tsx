@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -29,10 +30,11 @@ export default async function Rage() {
     ['pCircle pod', C.pCircle, `${num(v.activeCircle)} ULTRAROUND in backing`, `https://peapods.finance/pod/8453/${C.pCircle}`, 'Peapods'],
   ];
   return (
-    <div className="page" data-theme="rage">
+    <div className="page has-bg" data-theme="rage">
+      <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
       <Nav active="rage" tabs={RAGE_TABS} current="/rage" />
-      <Hero img="/assets/rage_stack_wide.svg" alt="A stack of coins">
+      <Hero img="/hero/rage.jpg" bg="#270630" pos="100% 40%" mpos="70% 30%">
         <div className="split">
           <div className="main">
             <h1 className="h1">Volatility in.<br /><span className="acc">Backing up.</span></h1>
@@ -57,7 +59,6 @@ export default async function Rage() {
           </div>
         </div>
       </Hero>
-      <div style={{ height: 48 }} />
       <Stats items={[{ v: usd(v.activeAssetsUsdcValue), l: 'in the treasury' }, { v: num(v.activeSupply), l: 'active RAGE' }, { v: usd(r?.state?.totalInvest), l: 'invested through the protocol' }, { v: num(cfg.claimFee) + '%', l: 'of every claim stays for holders' }]} />
 
       <section className="wrap sec" id="how">

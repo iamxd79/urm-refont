@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -21,7 +22,8 @@ export default async function Otc() {
   const next = isFinite(raw) && raw * 1000 > Date.now() ? raw : NaN;
   const nextDate = isFinite(next) ? new Date(next * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
   return (
-    <div className="page" data-theme="rage">
+    <div className="page has-bg" data-theme="rage">
+      <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
       <Nav active="rage" tabs={RAGE_TABS} current="/rage/otc" />
       <section className="wrap" style={{ paddingTop: 56 }}>

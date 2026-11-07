@@ -78,7 +78,7 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .faq details{padding:4px 22px 18px}.faq details+details{border-top:1px solid var(--line)}
 .faq summary{min-height:56px;display:flex;align-items:center;font-size:18px;font-weight:700}
 .faq p{margin:0;font-size:16px;line-height:1.55;color:var(--sub)}
-.preview{position:sticky;top:0;z-index:60;display:flex;justify-content:center;gap:12px;padding:7px 16px;background:#d7b067;color:#0d1b33;font:700 13px var(--font-inter),sans-serif;text-align:center}
+.preview{position:relative;z-index:60;display:flex;justify-content:center;gap:12px;padding:7px 16px;background:#d7b067;color:#0d1b33;font:700 13px var(--font-inter),sans-serif;text-align:center}
 .foot{background:var(--foot);border-top:1px solid var(--line)}
 .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
 .strip img{display:block;width:100%;aspect-ratio:1}
@@ -133,8 +133,9 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 /* photo hero: statue reaching for the sun. Image is anchored right, its left edge extended seamlessly. */
 .phero{position:relative;height:clamp(600px,88vh,860px);background:#022596;overflow:hidden;isolation:isolate;color:#fff}
-.phero-art{position:absolute;right:0;bottom:0;height:100%;aspect-ratio:2400/675;z-index:-2}
-.phero-art img{object-fit:cover}
+.phero-art{position:absolute;right:0;bottom:0;height:100%;aspect-ratio:2400/675}
+.phero-art img{object-fit:cover;z-index:-2}
+.phero .orb{z-index:1}
 .phero .orb{position:absolute;left:90.04%;top:14.76%;width:2.5%;aspect-ratio:1;transform:translate(-50%,-50%)}
 .orb-ring{position:absolute;inset:-22%;border-radius:999px;box-shadow:0 0 0 2px #ff5a2e;animation:breathe 4s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
@@ -142,7 +143,7 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .orb-ping.go{visibility:visible;box-shadow:0 0 0 3px #ffffff;animation:oping 1.8s ease-out forwards}
 @keyframes oping{0%{transform:scale(1)}92%{transform:scale(2.6)}100%{transform:scale(2.6);visibility:hidden}}
 .phero .readout{position:absolute;right:calc(100% + 36px);top:50%;transform:translateY(-50%);white-space:nowrap}
-.readout{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:#0d1b33;color:#f3f0e7;border-radius:16px;padding:10px 14px;font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.3)}
+.readout{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:rgba(13,27,51,.55);-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);color:#f3f0e7;border-radius:16px;padding:10px 14px;font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.3)}
 .readout b{color:#ff5a2e;margin-right:6px}.readout .sub{color:#b0bfd6;font-size:11px}
 .rain{position:absolute;left:48%;right:0;top:0;height:40%;width:52%;z-index:-1;pointer-events:none}
 .phero-copy{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1280px}
@@ -174,3 +175,104 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .fcol b{font-size:13px;letter-spacing:1.5px;color:var(--sub);margin-bottom:6px}
 .fcol a{color:var(--text);min-height:32px;display:inline-flex;align-items:center}
 .fcol a:hover{color:var(--accent)}
+
+/* ===== Liquid glass (iOS 27 language) =====
+   Content surfaces stay solid. Glass lives on the chrome that floats (nav, tabs, menus, sheets, chips over photos)
+   and on the rims of cards: a refracting band around the edge with a specular top highlight. */
+:root{--r:28px}
+.cream{--r:32px}.tbl{--r:24px}.seg,.btn,.chip,.pill{--r:999px}
+.lg{background:rgba(23,42,74,.58);-webkit-backdrop-filter:blur(22px) saturate(190%);backdrop-filter:blur(22px) saturate(190%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(255,255,255,.1),inset 0 0 0 1px rgba(255,255,255,.16),0 12px 32px rgba(0,0,0,.32),0 2px 6px rgba(0,0,0,.2)}
+[data-theme=rage] .lg{background:rgba(58,8,56,.58)}[data-theme=hestia] .lg{background:rgba(44,1,43,.58)}[data-theme=circle] .lg{background:rgba(15,28,51,.58)}
+/* card rim: a 7px band of glass outside the solid surface */
+.glass{position:relative;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.glass::before{content:'';position:absolute;inset:-7px;padding:7px;border-radius:calc(var(--r) + 7px);pointer-events:none;
+  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);
+  -webkit-backdrop-filter:blur(10px) saturate(170%) brightness(1.15);backdrop-filter:blur(10px) saturate(170%) brightness(1.15);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.14);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.cream.glass::before{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12)}
+/* floating capsule nav */
+.nav{position:sticky;top:10px;z-index:50;background:transparent;border-bottom:0;padding:10px 12px 0;pointer-events:none}
+.nav>*{pointer-events:auto}
+.navbar{max-width:1256px;margin:0 auto;border-radius:999px;padding:8px 10px 8px 20px;gap:12px 24px}
+.navtabs{padding-top:10px;padding-bottom:4px}
+.navtabs .seg{padding:5px}
+.nav + .phero{margin-top:-88px}
+.nav + .phero .phero-copy{padding-top:96px}
+.mm-panel{background:rgba(23,42,74,.86);-webkit-backdrop-filter:blur(26px) saturate(190%);backdrop-filter:blur(26px) saturate(190%)}
+.scrim{background:rgba(7,16,31,.55);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);animation:fadein .25s ease-out}
+.sheet{animation:sheetin .45s cubic-bezier(.34,1.4,.64,1)}
+@keyframes fadein{from{background:rgba(7,16,31,0)}}
+@keyframes sheetin{from{transform:translateY(24px) scale(.96)}}
+/* springy press, like iOS controls */
+.btn,.chip,.seg a,.seg button,.mm-btn,.max,.news a{transition:transform .45s cubic-bezier(.34,1.56,.64,1),filter .2s,box-shadow .2s,background-color .25s,color .25s}
+.btn:hover,.chip:hover{transform:translateY(-1px)}
+.btn:active,.chip:active,.seg a:active,.seg button:active,.mm-btn:active,.max:active{transform:scale(.95)}
+.news a:active{transform:scale(.985)}
+.card.glass,.cream.glass{transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+@media (hover:hover){a.card.glass:hover{transform:translateY(-3px)}}
+@media (max-width:900px){.nav{top:8px;padding:8px 8px 0}.navbar{padding:6px 6px 6px 16px}.nav + .phero{margin-top:-74px}.nav + .phero .phero-copy{padding-top:120px}}
+@media (prefers-reduced-transparency:reduce){.lg,.mm-panel,.readout{background:var(--panel);-webkit-backdrop-filter:none;backdrop-filter:none}.glass::before{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.1)}.scrim{background:#07101f;-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-reduced-motion:reduce){.btn,.chip,.seg a,.seg button,.sheet,.scrim{transition:none;animation:none}}
+
+/* ===== photo heroes (product pages) ===== */
+.pho{position:relative;min-height:clamp(620px,86vh,900px);background:var(--pbg);isolation:isolate;overflow:hidden;display:flex}
+.nav + .pho{margin-top:-88px}
+.pho-media{position:absolute;inset:0;z-index:-1}
+.pho-media img{object-fit:cover;object-position:var(--pos)}
+.pho::after{content:'';position:absolute;left:0;right:0;bottom:0;height:18%;pointer-events:none;z-index:0;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  -webkit-mask:linear-gradient(to bottom,transparent,#000);mask:linear-gradient(to bottom,transparent,#000)}
+.pho-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding-top:132px;padding-bottom:64px;width:100%}
+.pho .split{flex-direction:column;align-items:stretch;gap:28px;max-width:600px}
+.pho .split>.main,.pho .split>.side{flex:none}
+.pho .h1{color:#fff;max-width:12ch}
+.pho .lead,.pho .punch{color:#efe8f2;max-width:440px}
+.pho .punch{color:var(--accent2)}
+.pho .side{max-width:520px}
+@media (max-width:900px){
+ .pho{display:block;min-height:0}
+ .nav + .pho{margin-top:-74px}
+ .pho-media{position:relative;inset:auto;aspect-ratio:4/5;z-index:0}
+ .pho-media img{object-position:var(--mpos)}
+ .pho::after{display:none}
+ .pho-copy{padding-top:24px;padding-bottom:16px}
+ .pho .split{max-width:none}.pho .side{max-width:none}
+}
+/* image card (Fountain band) */
+.imgcard{position:relative;border-radius:var(--r);overflow:hidden;min-height:320px}
+.imgcard img{object-fit:cover}
+
+/* ===== wallpaper backgrounds ===== */
+.page.has-bg{background:transparent}
+.pbg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--pbgc)}
+.pbg-layer,.pbg-blur{position:absolute;inset:0}
+.pbg-blur{opacity:0}
+.pbg img{object-fit:cover;object-position:var(--pos)}
+.pbg-art{position:absolute;right:0;bottom:0;height:100%;aspect-ratio:2400/675}
+.pbg-art img{object-position:50% 50%}
+.pbg-m{display:none;position:absolute;inset:0}
+.pbg .rain{left:48%;width:52%;top:0;height:40%;z-index:1}
+.pbg .orb{position:absolute;left:90.04%;top:14.76%;width:2.5%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:2}
+.pbg .orb .readout{position:absolute;right:calc(100% + 36px);top:50%;transform:translateY(-50%);white-space:nowrap}
+.has-bg .pho,.has-bg .phero{background:transparent;min-height:clamp(620px,92vh,940px);height:auto}
+.has-bg .pho-media,.has-bg .pho::after{display:none}
+.has-bg .band{background:rgba(13,27,51,.5);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(255,255,255,.1)}
+[data-theme=rage].has-bg .band{background:rgba(58,8,56,.5)}[data-theme=hestia].has-bg .band{background:rgba(44,1,43,.5)}[data-theme=circle].has-bg .band{background:rgba(15,28,51,.5)}
+.has-bg .strip{margin-top:112px}
+.peg-m{display:none}
+@media (max-width:900px){
+ .pbg img{object-position:var(--mpos)}
+ .pbg-wide .pbg-art{display:none}
+ .pbg-wide .pbg-m{display:block}
+ .pbg-wide .pbg-m img{object-position:76% 0}
+ .has-bg .pho,.has-bg .phero{min-height:100svh;display:flex}
+ .has-bg .pho .pho-copy,.has-bg .phero .phero-copy{justify-content:flex-end;padding-bottom:28px}
+ .peg-m{display:inline-flex;margin-top:18px}
+}
+.has-bg .pho{flex-direction:column}.has-bg .pho .pho-copy{flex:1}
+.has-bg .pho .h1,.has-bg .phero .h1,.has-bg .pho .lead,.has-bg .phero .lead{text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.has-bg .phero{display:flex;flex-direction:column}.has-bg .phero .phero-copy{flex:1;height:auto}
+.pbg .rain{left:60%;width:40%}
+.has-bg .phero .phero-copy{width:100%}

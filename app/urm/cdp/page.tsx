@@ -1,3 +1,4 @@
+import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -18,7 +19,8 @@ export default async function Cdp() {
   const cols = (c?.tokens || []).map((t: any) => ({ symbol: t.symbol === 'CIRCLE' ? 'ULTRAROUND' : t.symbol, price: price[t.symbol] ?? n(t.collateralValue) / n(t.collateralBalance), min: n(t.minCollateralRatio), max: n(t.maxCollateralRatio) }));
   const util = n(c?.utilization) / 100;
   return (
-    <div className="page">
+    <div className="page has-bg">
+      <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
       <AutoRefresh />
       <Nav active="urm" tabs={URM_TABS} current="/urm/cdp" />
       <section className="wrap" style={{ paddingTop: 56 }}>

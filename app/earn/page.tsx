@@ -1,9 +1,11 @@
+import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import ConnectButton from '@/components/ConnectButton';
 import { SwapPanel } from '@/components/Panels';
+import { Hero } from '@/components/ui';
 import { api } from '@/lib/api';
 import { usd, bps, n, legacy } from '@/lib/fmt';
 
@@ -16,14 +18,17 @@ export default async function Earn() {
   const prices = { URM: n(h?.urm), RAGE: n(h?.rage), HESTIA: n(h?.hestia), ULTRAROUND: n(h?.circle) };
   const step = (i: number, title: string) => <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}><span className="n" style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--accent)', color: 'var(--onAccent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 18 }}>{i}</span><h2 className="h3">{title}</h2></div>;
   return (
-    <div className="page">
+    <div className="page has-bg">
+      <PageBg img="/hero/earn.jpg" color="#030518" pos="50% 70%" mpos="50% 40%" />
       <AutoRefresh />
       <Nav active="earn" />
-      <section className="wrap" style={{ paddingTop: 72 }}>
+      <Hero img="/hero/earn.jpg" bg="#030518" pos="50% 70%" mpos="50% 55%">
+        <div className="split"><div className="main">
         <h1 className="h1">From your card<br />to <span className="acc">onchain yield.</span></h1>
         <p className="punch">No keys. No gas. Just tap and go.</p>
         <p className="lead">No seed phrase, no hardware wallet, no address to copy. Buy USDC with a card, then swap, invest or deposit in one place.</p>
-      </section>
+        </div></div>
+      </Hero>
       <section className="wrap sec grid2">
         <div className="card glass">
           {step(1, 'Fund your wallet')}
