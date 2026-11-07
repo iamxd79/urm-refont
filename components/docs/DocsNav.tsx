@@ -46,12 +46,18 @@ export default function DocsNav({ items }: { items: Item[] }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const cur = items.find((i) => i.href === path);
+  // keep the current page visible in the sidebar list
+  useEffect(() => {
+    const box = document.querySelector('.dside-scroll') as HTMLElement | null;
+    const cur = box?.querySelector('a[aria-current=page]') as HTMLElement | null;
+    if (box && cur) { const b = box.getBoundingClientRect(), c = cur.getBoundingClientRect(); if (c.top < b.top + 8 || c.bottom > b.bottom - 8) box.scrollTop += c.top - b.top - b.height / 2 + c.height / 2; }
+  }, [path]);
   useEffect(() => { document.body.style.overflow = open ? 'hidden' : ''; return () => { document.body.style.overflow = ''; }; }, [open]);
   useEffect(() => { const k = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false); window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, []);
   return (
     <>
       <CommandK items={items} />
-      <aside className="dside glass-regular glass-rim"><SearchPill /><Tree items={items} path={path} /></aside>
+      <aside className="dside glass-regular glass-rim"><div className="dside-top"><SearchPill /></div><div className="dside-scroll"><Tree items={items} path={path} /></div></aside>
       <div className="dbar glass-regular">
         <button type="button" className="dbar-btn" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="dsheet">
           <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>

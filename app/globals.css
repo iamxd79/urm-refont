@@ -990,3 +990,12 @@ details.more>.list{margin-top:var(--s-4)!important}
 .skip{position:fixed;left:16px;top:-80px;z-index:200;padding:12px 18px;border-radius:var(--r-pill);background:var(--accent);color:var(--onAccent);font-weight:800;text-decoration:none;transition:top .2s}
 .skip:focus{top:12px}
 main:focus{outline:none}
+/* docs sidebar: the glass frame stays put, only the list scrolls inside it */
+.dside{overflow:visible;padding:0;display:flex;flex-direction:column;max-height:calc(100vh - 116px)}
+.dside-top{flex:none;padding:var(--s-4) var(--s-4) 0}
+.dside-top .dpill{margin-bottom:var(--s-3)}
+.dside-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--s-2) var(--s-3) var(--s-4) var(--s-4);border-radius:0 0 var(--r-lg) var(--r-lg);scrollbar-color:transparent transparent}
+.dside:hover .dside-scroll{scrollbar-color:rgba(255,255,255,.22) transparent}
+.dside-scroll::-webkit-scrollbar-thumb{background:transparent}
+.dside:hover .dside-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);background-clip:padding-box}
+.dside{max-height:calc(100dvh - 180px)}
