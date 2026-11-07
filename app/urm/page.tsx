@@ -34,9 +34,9 @@ export default async function Urm() {
   const sup = o?.supply || {};
   return (
     <div className="page has-bg">
-      <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
+      <PageBg img="/hero/statue-wide.jpg" color="#041857" wide />
       <AutoRefresh />
-      <Hero img="/hero/statue-wide.jpg" bg="#022596" pos="100% 50%" mpos="84% 50%" row>
+      <Hero img="/hero/statue-wide.jpg" bg="#041857" pos="100% 50%" mpos="84% 50%" row>
         <div className="split">
           <div className="main">
             <h1 className="h1">A stablecoin built like <span className="acc">a fortress.</span></h1>

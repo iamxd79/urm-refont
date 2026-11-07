@@ -29,10 +29,10 @@ export default function PageBg({ img, color, pos = '70% 50%', mpos = '70% 50%', 
       {wide ? (
         <>
           <div className="pbg-art">
-            <Image src={img} alt="" fill priority sizes="300vw" />
+            <Image src={img} alt="" fill priority quality={90} sizes="300vw" />
             {children}
           </div>
-          <div className="pbg-m"><Image src={img.replace('-wide', '')} alt="" fill sizes="100vw" /></div>
+          <div className="pbg-m"><Image src={img.replace('-wide', '')} alt="" fill quality={90} sizes="100vw" /></div>
           <div className="pbg-blur" ref={blur}>
             <div className="pbg-art"><Image src={blurSrc} alt="" fill sizes="300vw" /></div>
             <div className="pbg-m"><Image src={blurSrc.replace('-wide', '')} alt="" fill sizes="100vw" /></div>
@@ -40,11 +40,12 @@ export default function PageBg({ img, color, pos = '70% 50%', mpos = '70% 50%', 
         </>
       ) : (
         <>
-          <div className="pbg-layer"><Image src={img} alt="" fill priority sizes="100vw" /></div>
+          <div className="pbg-layer"><Image src={img} alt="" fill priority quality={90} sizes="100vw" /></div>
           {children}
           <div className="pbg-blur" ref={blur}><Image src={blurSrc} alt="" fill sizes="100vw" /></div>
         </>
       )}
+      <div className="pbg-grain" />
     </div>
   );
 }

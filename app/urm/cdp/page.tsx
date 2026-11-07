@@ -21,7 +21,7 @@ export default async function Cdp() {
   const util = n(c?.utilization) / 100;
   return (
     <div className="page has-bg">
-      <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
+      <PageBg img="/hero/statue-wide.jpg" color="#041857" wide />
       <AutoRefresh />
       <section className="wrap" style={{ paddingTop: 'var(--s-16)' }}>
         <div className="split">

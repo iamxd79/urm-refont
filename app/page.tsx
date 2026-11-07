@@ -33,7 +33,7 @@ export default async function Home() {
   return (
     <div className="page has-bg">
       <AutoRefresh />
-      <PageBg img="/hero/statue-wide.jpg" color="#022596" wide>
+      <PageBg img="/hero/statue-wide.jpg" color="#041857" wide>
         <OrbPulse price={price} checkedAt={checkedAt} defense={usd(ov.totalDefense)} />
         <DataRain words={words} />
       </PageBg>

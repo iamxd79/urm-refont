@@ -824,3 +824,7 @@ h3.doc-h{margin:var(--s-8) 0 var(--s-3);font-size:var(--fs-title3)}
 .ml[data-in] .ml-pea.p2{animation-delay:.2s}.ml[data-in] .ml-pea.p3{animation-delay:.4s}
 @keyframes mlPea{50%{transform:translateY(-4px)}}
 .steps .step>.n.sm{width:28px;height:28px;font-size:var(--fs-footnote);margin-bottom:var(--s-3)}
+/* film grain over every wallpaper: hides upscaling softness and banding, gives the photo a printed texture */
+.pbg-grain{position:absolute;inset:0;z-index:4;pointer-events:none;background:url(/assets/grain.png) repeat;background-size:256px 256px;mix-blend-mode:overlay;opacity:.16}
+@media (max-width:900px){.pbg-grain{opacity:.12}}
+@media (prefers-reduced-transparency:reduce){.pbg-grain{display:none}}
