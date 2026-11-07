@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { slugify } from '@/lib/slug';
 
 /** ⌘K search for the docs. Opens with ⌘K / Ctrl+K, "/", or any element that calls openSearch(). */
-export type Item = { href: string; title: string; section: string; product: string; text: string; heads: string[] };
+export type Item = { href: string; title: string; nav?: string; section: string; product: string; text: string; heads: string[] };
 export const openSearch = () => window.dispatchEvent(new Event('docs:search'));
 export const DOT: Record<string, string> = { urm: '#d7b067', rage: '#ff3d3d', hestia: '#ff7a2e', circle: '#5d93f0', eco: '#b0bfd6' };
 

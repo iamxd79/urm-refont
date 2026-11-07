@@ -1,4 +1,5 @@
 ---
+nav: Welcome
 title: Welcome to the URM ecosystem
 description: A community-run family of onchain money on Base. One stablecoin, three deflationary engines, and everything in between.
 section: Start here

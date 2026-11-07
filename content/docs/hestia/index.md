@@ -1,4 +1,5 @@
 ---
+nav: HESTIA
 title: HESTIA
 description: Become ultra rare. A deflationary store of value paired to USDC, with a Chaos Engine that burns supply and acts as the buyer of last resort.
 section: Under the hood

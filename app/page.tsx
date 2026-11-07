@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import FountainPreview from '@/components/FountainPreview';
+import ProductLogo from '@/components/ProductLogo';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import { api } from '@/lib/api';
@@ -58,35 +60,36 @@ export default async function Home() {
       <section className="wrap sec">
         <div className="split">
           <div className="main">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 'var(--s-2)' }}>
+            <div className="latest-head">
               <h2 className="h2" id="news">Latest</h2>
-              <a className="tap" href="https://x.com/URMdollar" style={{ fontWeight: 700 }}>All updates on X</a>
+              <a className="latest-x" href="https://x.com/URMdollar"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" /></svg>All updates on X</a>
             </div>
-            <div className="news" style={{ marginTop: 'var(--s-6)' }}>
-              <Link href="/urm/fountain"><time>Oct 12</time><span><strong>Fountain URM is live.</strong> <span className="muted">Deposit $URM, get fURM, earn a yield paid by the Fortress.</span></span></Link>
-              <Link href="/urm/cdp"><time>Aug 27</time><span><strong>The URM CDP is live.</strong> <span className="muted">Lock collateral and mint $URM against it.</span></span></Link>
-              <Link href="/rage#next"><time>Soon</time><span><strong>Black Card is in review.</strong> <span className="muted">Lock an option, harvest the premium. Details on the RAGE page.</span></span></Link>
+            <ol className="latest">
+              {[
+                { href: '/urm/fountain', when: 'Oct 12', status: 'Live', logo: 'urm', t: 'Fountain URM is live', d: 'Deposit $URM, get fURM, earn a yield paid by the Fortress.' },
+                { href: '/urm/cdp', when: 'Aug 27', status: 'Live', logo: 'urm', t: 'The URM CDP is live', d: 'Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it.' },
+                { href: '/rage#next', when: 'Next', status: 'Soon', logo: 'rage', t: 'Black Card is in review', d: 'Lock an option, harvest the premium. Details on the RAGE page.' },
+              ].map((n) => (
+                <li key={n.t}>
+                  <Link href={n.href} className="latest-row">
+                    <span className="latest-when"><time>{n.when}</time><em data-s={n.status}>{n.status}</em></span>
+                    <span className="latest-logo"><ProductLogo id={n.logo} size={36} /></span>
+                    <span className="latest-txt"><strong>{n.t}</strong><span>{n.d}</span></span>
+                    <svg className="latest-go" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2.6" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+            <div className="latest-follow">
+              <span className="eyebrow">Follow the engines</span>
+              <div className="latest-handles">
+                {[['urm', 'URMdollar'], ['rage', 'therageprotocol'], ['hestia', 'HestiaOnBase'], ['circle', 'UltraRoundMoney']].map(([id, h]) => (
+                  <a key={h} href={`https://x.com/${h}`} className="latest-handle"><ProductLogo id={id} size={24} />@{h}</a>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="side cream glass-rim" style={{ padding: 'var(--s-8)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--s-2)' }}>
-              <b className="eyebrow">FOUNTAIN PREVIEW</b>
-              <span className="pill" style={{ background: 'var(--ink)', color: 'var(--accent)' }}>{pct(yieldPct, 0)} target APY</span>
-            </div>
-            <p className="muted" style={{ margin: '20px 0 0', fontWeight: 600 }}>If you deposit</p>
-            <p style={{ margin: '4px 0 0', fontSize: 'var(--fs-title1)', fontWeight: 800 }}>{num(ex)} $URM</p>
-            <div className="grid" style={{ marginTop: 'var(--s-3)', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: 'var(--s-3)' }}>
-              <div className="tile"><span>In 6 months</span><b>{num(ex * (1 + yieldPct / 200))} $URM</b></div>
-              <div className="tile"><span>In 12 months</span><b>{num(ex * (1 + yieldPct / 100))} $URM</b></div>
-            </div>
-            <ul className="list" style={{ marginTop: 'var(--s-3)' }}>
-              <li><span className="k">You receive</span><strong>about {num(ex * Number(fs.depositShares), 1)} fURM</strong></li>
-              <li><span className="k">Deposit / withdraw fee</span><strong>{bps(fs.config?.depositFee, 0)} / {bps(fs.config?.withdrawFee)}</strong></li>
-              <li><span className="k">Withdraw</span><strong>anytime, to $URM or USDC</strong></li>
-            </ul>
-            <Link href="/urm/fountain" className="btn btn-ink btn-lg btn-block" style={{ marginTop: 'var(--s-4)' }}>Go to Fountain</Link>
-            <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: '10px 0 0' }}>Target rate, not a promise. <Link href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</Link></p>
-          </div>
+          <div className="side"><FountainPreview apy={yieldPct} shareRate={Number(fs.depositShares)} depositFee={bps(fs.config?.depositFee, 0)} withdrawFee={bps(fs.config?.withdrawFee)} /></div>
         </div>
       </section>
       <section className="wrap sec">

@@ -1,4 +1,5 @@
 ---
+nav: HESTIA engine
 title: The Hestia Chaos Engine
 description: Two ways to burn, one USDC reserve, and an Automator that tunes it all.
 section: Under the hood

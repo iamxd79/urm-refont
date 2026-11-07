@@ -1,4 +1,5 @@
 import { seo } from '@/lib/seo';
+import UrmCharts from '@/components/UrmCharts';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
@@ -95,6 +96,11 @@ export default async function Urm() {
         </article>
       </section>
 
+      <section className="wrap sec" id="chart">
+        <h2 className="h2">Charts.</h2>
+        <p className="punch">The defenses behind the peg, over time. Refreshed daily.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}><UrmCharts rows={f?.charts || []} /></div>
+      </section>
       <section className="wrap sec">
         <h2 className="h2">Dashboard.</h2>
         <p className="punch">Every number, live from the contracts.</p>

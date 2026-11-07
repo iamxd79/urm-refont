@@ -1,4 +1,5 @@
 ---
+nav: Get started
 title: Get started with Earn
 description: From your card to onchain yield. No seed phrase, no gas.
 section: Start here

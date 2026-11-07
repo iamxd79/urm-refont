@@ -1,4 +1,5 @@
 ---
+nav: HESTIA × ULTRAROUND
 title: HESTIA and ULTRAROUND
 description: Two burn models that cover each other. HESTIA's dollar reserve keeps ULTRAROUND burning when volume is low.
 section: Under the hood
