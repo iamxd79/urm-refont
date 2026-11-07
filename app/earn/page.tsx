@@ -1,4 +1,5 @@
 import { seo } from '@/lib/seo';
+import ActionBar from '@/components/ActionBar';
 import ProductLogo from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
@@ -20,7 +21,7 @@ export default async function Earn() {
   const prices = { URM: n(h?.urm), RAGE: n(h?.rage), HESTIA: n(h?.hestia), ULTRAROUND: n(h?.circle) };
   const step = (i: number, title: string) => <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}><span className="n" style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--accent)', color: 'var(--onAccent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--fs-body)' }}>{i}</span><h2 className="h3">{title}</h2></div>;
   return (
-    <div className="page has-bg">
+    <div data-dim="1" className="page has-bg">
       <PageBg img="/hero/earn.jpg" color="#030518" pos="50% 70%" mpos="50% 40%" />
       <AutoRefresh />
       <Hero img="/hero/earn.jpg" bg="#030518" pos="50% 70%" mpos="50% 55%">
@@ -33,9 +34,9 @@ export default async function Earn() {
       <section className="wrap sec">
         <h2 className="h2">Four taps.</h2>
         <p className="punch">Here&apos;s how it feels on your phone.</p>
-        <PhoneDemo apy={bps(f?.fountainState?.config?.yieldRate, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: 'Into Fountain. Withdraw anytime.' }]} />
+        <PhoneDemo apy={bps(f?.fountainState?.config?.yieldRate, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to $URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: 'Into Fountain. Withdraw anytime.' }]} />
       </section>
-      <section className="wrap sec grid2">
+      <section className="wrap sec grid2" id="act">
         <div className="vstack swapcol">
           <div style={{ marginBottom: 'var(--s-4)' }}>{step(1, 'Fund your wallet')}</div>
           <div className="card glass-rim vstack fundcard">
@@ -68,7 +69,7 @@ export default async function Earn() {
       <section className="wrap sec">
         <h2 className="h2">Then put it to work.</h2>
         <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
-          {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on URM. Withdraw anytime.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/ultraround/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
+          {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on $URM. Withdraw anytime.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/ultraround/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow $URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
             <Link key={t} href={href!} data-theme={th} className="card glass-rim" style={{ background: 'var(--panel)', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}><span className="acc" style={{ fontSize: 'var(--fs-footnote)', fontWeight: 700, letterSpacing: 1.5 }}>{k}</span><ProductLogo id={th || 'urm'} size={36} /></span><b style={{ fontSize: 'var(--fs-title3)' }}>{t}</b><span className="muted">{d}</span>
             </Link>
@@ -83,6 +84,7 @@ export default async function Earn() {
         <p style={{ fontSize: 'clamp(48px,7vw,88px)', fontWeight: 800, margin: '8px 0 24px', letterSpacing: '-.03em' }}>{usd(r?.state?.totalInvest)}</p>
         <ConnectButton label="Start now" className="btn btn-primary btn-lg" />
       </section>
+      <ActionBar label="Start with a passkey" note="Card to yield in four taps" />
       <Footer />
     </div>
   );

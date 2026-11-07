@@ -29,7 +29,7 @@ export async function docsDiagrams(names: string[]): Promise<Record<string, Reac
   const out: Record<string, ReactNode> = {};
   const fs = fort?.fortressState || {}, fo = fort?.fountainState || {}, ov = fs.overview || {};
   const pegDate = (d: any) => { const t = Date.parse(d); return isFinite(t) ? new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) : '—'; };
-  if (need('fortress')) out.fortress = <PegFortress price={n(fort?.urmPrice)} towers={n(fs.towers?.length ?? 6)} usdcRoom={usd(fs.pegDefenseRoom?.usdcLeft)} urmRoom={num(fs.pegDefenseRoom?.urmLeft) + ' URM'} defense={usd(ov.totalDefense)} lastStep={pegDate(fs.state?.lastPegDefense)} />;
+  if (need('fortress')) out.fortress = <PegFortress price={n(fort?.urmPrice)} towers={n(fs.towers?.length ?? 6)} usdcRoom={usd(fs.pegDefenseRoom?.usdcLeft)} urmRoom={num(fs.pegDefenseRoom?.urmLeft) + ' $URM'} defense={usd(ov.totalDefense)} lastStep={pegDate(fs.state?.lastPegDefense)} />;
   if (need('yield')) out.yield = <YieldCounter toAssets={n(fo.toAssets)} interestPerDay={n(fo.interestPerDay)} totalShares={n(fo.totalShares)} yieldRate={n(fo.config?.yieldRate) / 100} />;
   if (need('cdp')) {
     const price: Record<string, number> = { RAGE: n(home?.rage), HESTIA: n(home?.hestia), CIRCLE: n(home?.circle) };

@@ -20,7 +20,7 @@ export default async function Circle() {
   const s = c?.supply || {}, ch = c?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.temple) + n(s.ecosystem);
   return (
-    <div className="page has-bg" data-theme="circle">
+    <div data-dim="1" className="page has-bg" data-theme="circle">
       <PageBg img="/hero/circle.jpg" color="#030303" pos="70% 50%" mpos="80% 40%" />
       <AutoRefresh />
       <Hero img="/hero/circle.jpg" bg="#030303" pos="70% 50%" mpos="80% 60%" row>
@@ -55,13 +55,13 @@ export default async function Circle() {
       <section className="wrap sec">
         <h2 className="h2">Where the supply sits.</h2>
         <div className="card glass-rim" style={{ marginTop: 'var(--s-8)' }}>
-          <SupplyBar parts={[{ label: 'Holders', value: n(s.holders), color: '#dfe9fb' }, { label: 'Liquidity pools', value: n(s.pools), color: '#5d93f0' }, { label: 'Burned', value: n(s.burned), color: '#ff7a2e' }, { label: 'Locked in RAGE', value: n(s.rage), color: '#ff3d3d' }, { label: 'URM, CDP, Temple and ecosystem', value: other, color: '#d7b067' }]} />
+          <SupplyBar parts={[{ label: 'Holders', value: n(s.holders), color: '#dfe9fb' }, { label: 'Liquidity pools', value: n(s.pools), color: '#5d93f0' }, { label: 'Burned', value: n(s.burned), color: '#ff7a2e' }, { label: 'Locked in RAGE', value: n(s.rage), color: '#ff3d3d' }, { label: '$URM, CDP, Temple and ecosystem', value: other, color: '#d7b067' }]} />
         </div>
         <div className="grid2" style={{ marginTop: 'var(--s-5)' }}>
           <article className="cream glass-rim vstack"><h3 className="h3">Ultraround Temple</h3><p style={{ lineHeight: 1.5 }}>Become a cult leader. Stake ULTRAROUND, summon templars, compound or claim your rewards.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile"><b>{num(t?.state?.circlePodsBalance)}</b><span>ULTRAROUND in the temple</span></div><div className="tile"><b>{num(t?.state?.walletCount)}</b><span>cult leaders</span></div></div>
             <Link className="btn btn-ink btn-block" style={{ marginTop: 'auto' }} href="/ultraround/temple">Start praying</Link></article>
-          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint URM against it. Liquidity without selling.</p>
+          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint $URM against it. Liquidity without selling.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile" style={{ background: 'var(--bg)' }}><b>{num(s.urmCdp)}</b><span>ULTRAROUND in CDP</span></div><div className="tile" style={{ background: 'var(--bg)' }}><b>{bps(cdp?.currentInterestRate)}</b><span>yearly rate</span></div></div>
             <Link className="btn btn-primary btn-block" style={{ marginTop: 'auto' }} href="/urm/cdp">Open a position</Link></article>
         </div>
@@ -71,12 +71,12 @@ export default async function Circle() {
         <h2 className="h2">The engine.</h2>
         <p className="punch">Every turn of the engine feeds the fire.</p>
         <div style={{ marginTop: 'var(--s-8)' }}><CircleBurnLoop burnedPct={n(s.burnedPercent)} burned={num(s.burned)} weth={num(c?.cctp?.weth, 4)} perDay={num(ch.burnPerDay)} last={ago(ch.lastBurn)} /></div>
-        <ul className="list" style={{ marginTop: 'var(--s-5)' }}>
+        <details className="more"><summary>More engine numbers</summary><ul className="list" style={{ marginTop: 'var(--s-5)' }}>
           <li><span className="k">Main pool liquidity</span><strong>{usd(c?.liquidity?.mainValue)}</strong></li>
           <li><span className="k">Total liquidity</span><strong>{usd(c?.liquidity?.value)}</strong></li>
           <li><span className="k">Main liquidity to market cap</span><strong>{num(c?.liquidity?.mainMarketCapRatio, 2)}%</strong></li>
-          <li><span className="k">Owned by RAGE / URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
-        </ul>
+          <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
+        </ul></details>
       </section>
       <section className="wrap sec">
         <h2 className="h2">Questions.</h2>

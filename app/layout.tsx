@@ -39,9 +39,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         {preview && <div className="preview" role="note">Preview of the new ultraroundmoney.com · live data from the contracts</div>}
         {!live && <div className="datawarn" role="status">Live data is catching up. Numbers will fill in on the next refresh, usually within a minute.</div>}
-        <Providers><MotionGovernor />
+        <a className="skip" href="#main">Skip to content</a><Providers><MotionGovernor />
           <SmartNav stats={stats} />
-          {children}
+          <main id="main" tabIndex={-1}>{children}</main>
         </Providers>
       </body>
     </html>

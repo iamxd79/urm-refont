@@ -50,7 +50,7 @@ export default function PhoneDemo({ steps, apy }: { steps: Step[]; apy: string }
               <p className="pd-h">Swap</p>
               <div className="pd-row"><span className="pd-dot" style={{ background: '#2775ca' }}>$</span><span>USDC</span><b>99.80</b></div>
               <div className="pd-swap">⇅</div>
-              <div className="pd-row"><span className="pd-dot ring" /><span>URM</span><b>99.6</b></div>
+              <div className="pd-row"><span className="pd-dot ring" /><span>$URM</span><b>99.6</b></div>
               <p className="pd-m">Gas covered</p>
               <span className="pd-btn">Swap</span>
             </section>

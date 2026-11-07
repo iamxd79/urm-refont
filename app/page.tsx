@@ -46,7 +46,7 @@ export default async function Home() {
             <a className="btn btn-outline btn-lg" href="#trust">Read the audit</a>
           </div>
           <p className="readout peg-m glass-clear"><span><b>PEG CHECK</b> {Number.isFinite(price) ? `$${num(price, 3)} · ${Math.abs(price - 1) <= 0.01 ? 'on peg' : 'off peg'}` : 'checking…'}</span><span className="sub">Defense {usd(ov.totalDefense)} · re-checked every minute</span></p>
-          <p className="sr">URM peg check: ${num(price, 3)}. Total defense {usd(ov.totalDefense)}.</p>
+          <p className="sr">$URM peg check: ${num(price, 3)}. Total defense {usd(ov.totalDefense)}.</p>
         </div>
       </section>
       <section className="band"><div className="wrap stats">
@@ -63,8 +63,8 @@ export default async function Home() {
               <a className="tap" href="https://x.com/URMdollar" style={{ fontWeight: 700 }}>All updates on X</a>
             </div>
             <div className="news" style={{ marginTop: 'var(--s-6)' }}>
-              <Link href="/urm/fountain"><time>Oct 12</time><span><strong>Fountain URM is live.</strong> <span className="muted">Deposit URM, get fURM, earn a yield paid by the Fortress.</span></span></Link>
-              <Link href="/urm/cdp"><time>Aug 27</time><span><strong>The URM CDP is live.</strong> <span className="muted">Lock collateral and mint URM against it.</span></span></Link>
+              <Link href="/urm/fountain"><time>Oct 12</time><span><strong>Fountain URM is live.</strong> <span className="muted">Deposit $URM, get fURM, earn a yield paid by the Fortress.</span></span></Link>
+              <Link href="/urm/cdp"><time>Aug 27</time><span><strong>The URM CDP is live.</strong> <span className="muted">Lock collateral and mint $URM against it.</span></span></Link>
               <Link href="/rage#next"><time>Soon</time><span><strong>Black Card is in review.</strong> <span className="muted">Lock an option, harvest the premium. Details on the RAGE page.</span></span></Link>
             </div>
           </div>
@@ -74,15 +74,15 @@ export default async function Home() {
               <span className="pill" style={{ background: 'var(--ink)', color: 'var(--accent)' }}>{pct(yieldPct, 0)} target APY</span>
             </div>
             <p className="muted" style={{ margin: '20px 0 0', fontWeight: 600 }}>If you deposit</p>
-            <p style={{ margin: '4px 0 0', fontSize: 'var(--fs-title1)', fontWeight: 800 }}>{num(ex)} URM</p>
+            <p style={{ margin: '4px 0 0', fontSize: 'var(--fs-title1)', fontWeight: 800 }}>{num(ex)} $URM</p>
             <div className="grid" style={{ marginTop: 'var(--s-3)', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: 'var(--s-3)' }}>
-              <div className="tile"><span>In 6 months</span><b>{num(ex * (1 + yieldPct / 200))} URM</b></div>
-              <div className="tile"><span>In 12 months</span><b>{num(ex * (1 + yieldPct / 100))} URM</b></div>
+              <div className="tile"><span>In 6 months</span><b>{num(ex * (1 + yieldPct / 200))} $URM</b></div>
+              <div className="tile"><span>In 12 months</span><b>{num(ex * (1 + yieldPct / 100))} $URM</b></div>
             </div>
             <ul className="list" style={{ marginTop: 'var(--s-3)' }}>
               <li><span className="k">You receive</span><strong>about {num(ex * Number(fs.depositShares), 1)} fURM</strong></li>
               <li><span className="k">Deposit / withdraw fee</span><strong>{bps(fs.config?.depositFee, 0)} / {bps(fs.config?.withdrawFee)}</strong></li>
-              <li><span className="k">Withdraw</span><strong>anytime, to URM or USDC</strong></li>
+              <li><span className="k">Withdraw</span><strong>anytime, to $URM or USDC</strong></li>
             </ul>
             <Link href="/urm/fountain" className="btn btn-ink btn-lg btn-block" style={{ marginTop: 'var(--s-4)' }}>Go to Fountain</Link>
             <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: '10px 0 0' }}>Target rate, not a promise. <Link href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</Link></p>
@@ -113,20 +113,20 @@ export default async function Home() {
           <div className="grid" style={{ marginTop: 'var(--s-8)', gap: 'var(--s-8)' }}>
             <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Read before you sign</h3><p className="muted" style={{ lineHeight: 1.5 }}>Connecting only reads your address and balances. It never moves funds.</p></div>
             <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Audited and verified</h3><p className="muted" style={{ lineHeight: 1.5 }}>Audit reports, verified code on Basescan, Fountain listed on DefiLlama.</p></div>
-            <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Leave anytime</h3><p className="muted" style={{ lineHeight: 1.5 }}>Withdraw from Fountain whenever you want, to URM or USDC. {bps(fs.config?.withdrawFee)} withdraw fee.</p></div>
+            <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Leave anytime</h3><p className="muted" style={{ lineHeight: 1.5 }}>Withdraw from Fountain whenever you want, to $URM or USDC. {bps(fs.config?.withdrawFee)} withdraw fee.</p></div>
           </div>
           <div className="grid2" style={{ marginTop: 'var(--s-8)' }}>
             <div className="white" style={{ overflowX: 'auto' }}>
               <p className="muted" style={{ margin: 0, padding: '14px 14px 4px', fontSize: 'var(--fs-footnote)', letterSpacing: 1.5, fontWeight: 700 }}>CONTRACTS ON BASE</p>
               <table className="ctable" aria-label="Contracts on Base"><tbody>
-                {[['URM token', TOKENS.URM, true], ['URM Fortress', C.fortress, false], ['Fountain', C.fountain, false], ['URM CDP', C.cdp, false], ['RAGE', C.rage, true], ['HESTIA', C.hestia, true], ['ULTRAROUND', C.circle, true]].map(([l, a, t]) => (
+                {[['$URM token', TOKENS.URM, true], ['URM Fortress', C.fortress, false], ['Fountain', C.fountain, false], ['URM CDP', C.cdp, false], ['RAGE', C.rage, true], ['HESTIA', C.hestia, true], ['ULTRAROUND', C.circle, true]].map(([l, a, t]) => (
                   <tr key={l as string}><td><b>{l as string}</b></td><td className="mono">{short(a as string)}</td><td><a href={`https://basescan.org/${t ? 'token' : 'address'}/${a}`} style={{ color: 'var(--ink)', textDecoration: 'underline', fontWeight: 700 }}>Basescan</a></td></tr>
                 ))}
               </tbody></table>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s-3)' }}>
               <p className="eyebrow" style={{ margin: 0 }}>AUDITS AND PAPERS</p>
-              {[['URM audit', '/urm/audit.pdf'], ['Fountain audit', '/urm/fountain-audit.pdf'], ['CDP audit', '/urm/cdp-audit.pdf'], ['RAGE audit', '/rage/audit.pdf'], ['HESTIA audit', '/hestia/audit.pdf'], ['Hestia Mine audit', '/hestia/mine-audit.pdf']].map(([l, p]) => <a key={l} className="chip chip-line" href={legacy(p)}>{l}</a>)}
+              {[['$URM audit', '/urm/audit.pdf'], ['Fountain audit', '/urm/fountain-audit.pdf'], ['CDP audit', '/urm/cdp-audit.pdf'], ['RAGE audit', '/rage/audit.pdf'], ['HESTIA audit', '/hestia/audit.pdf'], ['Hestia Mine audit', '/hestia/mine-audit.pdf']].map(([l, p]) => <a key={l} className="chip chip-line" href={legacy(p)}>{l}</a>)}
               <Link className="chip chip-ink" href="/risks">Read the risks</Link>
             </div>
           </div>
@@ -137,7 +137,7 @@ export default async function Home() {
           <div><h2 className="h2">New to crypto?</h2><p className="punch">From your card to onchain yield in four taps.</p></div>
           <Link className="btn btn-primary btn-lg" href="/earn">Start with Earn</Link>
         </div>
-        <PhoneDemo apy={pct(yieldPct, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: `Into Fountain, at a ${pct(yieldPct, 0)} target APY. Withdraw anytime.` }]} />
+        <PhoneDemo apy={pct(yieldPct, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to $URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: `Into Fountain, at a ${pct(yieldPct, 0)} target APY. Withdraw anytime.` }]} />
       </section>
       <Footer />
     </div>

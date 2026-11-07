@@ -26,7 +26,7 @@ function Amount({ id, label, value, set, unit, bal }: { id: string; label: strin
 function Tabs<T extends string>({ items, value, set, label }: { items: T[]; value: T; set: (v: T) => void; label: string }) {
   return (
     <div className="seg" role="tablist" aria-label={label}>
-      {items.map((i) => <button key={i} role="tab" aria-selected={value === i} onClick={() => set(i)}>{i}</button>)}
+      {items.map((i) => <button key={i} role="tab" aria-selected={value === i} onClick={() => set(i)}>{i === 'URM' ? '$URM' : i}</button>)}
     </div>
   );
 }
@@ -56,7 +56,7 @@ export function OtcPanel({ prices, fmv, bonus, app }: { prices: Record<string, n
     <div className="cream glass-rim" style={{ padding: 'var(--s-6)' }}>
       <p className="muted" style={{ margin: '0 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>Pay with</p>
       <Tabs items={['HESTIA', 'ULTRAROUND', 'URM'] as const as any} value={tok} set={setTok as any} label="Pay with" />
-      <Amount id="otc" label="You pay" value={amt} set={setAmt} unit={tok} bal={balances[tok]} />
+      <Amount id="otc" label="You pay" value={amt} set={setAmt} unit={tok === 'URM' ? '$URM' : tok} bal={balances[tok]} />
       <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
         <li><span className="k">Value</span><strong>${f(value, 2)}</strong></li>
         <li><span className="k">Fair price</span><strong>{f(fair, 2)} RAGE</strong></li>
@@ -91,7 +91,7 @@ export function CdpPanel({ cols, rate, app }: { cols: Col[]; rate: number; app: 
         <li><span className="k">You receive</span><strong>{mode === 'Borrow' ? 'URM + a position NFT' : `more ${sym} + a position NFT`}</strong></li>
       </ul>
       <p style={{ margin: '14px 0 0', fontSize: 'var(--fs-subhead)', lineHeight: 1.5, background: 'var(--soft)', borderRadius: 'var(--r-sm)', padding: '12px 14px' }}>
-        <b>Know the cost.</b> Use the CDP for liquidity without selling, not as a yield loop. The exact URM you mint shows in the app before you sign.
+        <b>Know the cost.</b> Use the CDP for liquidity without selling, not as a yield loop. The exact $URM you mint shows in the app before you sign.
       </p>
       <Cta href={app} label={`${mode} in the current app`} connectLabel={`Connect wallet to ${mode.toLowerCase()}`} />
       <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: '12px 0 0' }}><a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a> before you borrow.</p>
@@ -166,8 +166,8 @@ export function RefLink({ rows }: { rows: { addr: string; invested: string; unpa
       <h2 className="h3">Your referral link</h2>
       <p className="muted" style={{ margin: '6px 0 0' }}>{on ? 'Share it anywhere. Investments through it count for you.' : 'Connect to get your link, then share it anywhere.'}</p>
       <div className="field" style={{ marginTop: 'var(--s-4)' }}>
-        <span className="mono" style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 'var(--fs-subhead)' }}>{link}</span>
-        <button type="button" className="max" disabled={!on} onClick={() => { navigator.clipboard?.writeText('https://' + link); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>{copied ? 'Copied' : 'Copy'}</button>
+        <span className="mono" style={{ flex: 1, minWidth: 0, wordBreak: 'break-all', lineHeight: 1.4, fontSize: 'var(--fs-subhead)' }}>{link}</span>
+        <button type="button" className="max" style={{ minHeight: 44, flex: 'none' }} disabled={!on} onClick={() => { navigator.clipboard?.writeText('https://' + link); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>{copied ? 'Copied' : 'Copy'}</button>
       </div>
       <div className="grid" style={{ marginTop: 'var(--s-4)', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 'var(--s-3)' }}>
         <div className="tile"><span>Invested through you</span><b>{me ? '$' + me.invested : '—'}</b></div>

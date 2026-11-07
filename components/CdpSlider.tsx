@@ -18,7 +18,7 @@ export default function CdpSlider({ cols }: { cols: Col[] }) {
   if (!c) return null;
   const value = STOPS[i];
   const lo = value / Math.max(c.max, 1), hi = value / Math.max(c.min, 1);
-  const extra = lev ? hi : 0; // minted URM buys more collateral (best case, before fees)
+  const extra = lev ? hi : 0; // minted $URM buys more collateral (best case, before fees)
   const tall = value + extra; // biggest column, sets the scale
   const sc = (v: number) => Math.max(0.02, v / tall);
   return (
@@ -55,11 +55,11 @@ export default function CdpSlider({ cols }: { cols: Col[] }) {
             <i className="cdps-blk range" style={{ transform: `scaleY(${sc(hi)})` }} />
             <i className="cdps-blk urm" style={{ transform: `scaleY(${sc(lo)})` }} />
           </div>
-          <b>{f(lo)} to {f(hi)}</b><span>URM you can mint</span>
+          <b>{f(lo)} to {f(hi)}</b><span>$URM you can mint</span>
           <span className="cdps-key"><span><i className="k1" />at {c.max}x</span><span><i className="k2" />up to, at {c.min}x</span></span>
         </div>
       </div>
-      <p className="muted cdps-note">{lev ? `Leverage: the minted URM buys more ${sym} in the same transaction, up to about $${f(extra)} more exposure before fees. Bigger upside, bigger downside.` : `Borrow: keep your ${sym}, take URM to use now. Repay to unlock.`} Estimate only. The app shows the exact amount before you sign.</p>
+      <p className="muted cdps-note">{lev ? `Leverage: the minted $URM buys more ${sym} in the same transaction, up to about $${f(extra)} more exposure before fees. Bigger upside, bigger downside.` : `Borrow: keep your ${sym}, take $URM to use now. Repay to unlock.`} Estimate only. The app shows the exact amount before you sign.</p>
     </div>
   );
 }

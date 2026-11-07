@@ -5,7 +5,7 @@ import { api } from '@/lib/api';
 import { bps, num } from '@/lib/fmt';
 
 export const revalidate = 60;
-export const metadata = seo({ title: 'Risks', description: 'Read this before you deposit. Plain-English risks for URM, Fountain, the CDP, RAGE, HESTIA and ULTRAROUND.', handle: '@URMdollar' });
+export const metadata = seo({ title: 'Risks', description: 'Read this before you deposit. Plain-English risks for $URM, Fountain, the CDP, RAGE, HESTIA and ULTRAROUND.', handle: '@URMdollar' });
 
 export default async function Risks() {
   const [f, cdp, r] = await Promise.all([api('urm/fortress'), api('urm/cdp'), api('rage/buying-protocol')]);
@@ -13,8 +13,8 @@ export default async function Risks() {
   const days = (s: any) => Math.round(Number(s) / 86400);
   const items: [string, string, string][] = [
     ['Everything', 'Smart contracts can fail', 'Audits lower the risk, they don’t remove it. A bug, an exploit or a problem in a protocol we depend on (Uniswap, Peapods, Base itself) can lose funds. ULTRAROUND and the Temple audit reports are still being published.'],
-    ['URM', 'The peg can break', 'URM is defended by onchain backing and an automated keeper, not by dollars in a bank. In a sharp sell-off the defense can run out of room and URM can trade below $1 for a while, or for good.'],
-    ['Fountain', 'The yield is a target', `Fountain targets ${bps(fs.config?.yieldRate, 0)} a year, paid by the Fortress from pool fees and protocol profit. When profit is low the real rate drops: it is ${bps(fs.effectiveRate)} today. Withdrawals cost ${bps(fs.config?.withdrawFee)} and are limited to what is withdrawable at that moment (${num(fs.windowRemaining)} URM right now).`],
+    ['URM', 'The peg can break', '$URM is defended by onchain backing and an automated keeper, not by dollars in a bank. In a sharp sell-off the defense can run out of room and $URM can trade below $1 for a while, or for good.'],
+    ['Fountain', 'The yield is a target', `Fountain targets ${bps(fs.config?.yieldRate, 0)} a year, paid by the Fortress from pool fees and protocol profit. When profit is low the real rate drops: it is ${bps(fs.effectiveRate)} today. Withdrawals cost ${bps(fs.config?.withdrawFee)} and are limited to what is withdrawable at that moment (${num(fs.windowRemaining)} $URM right now).`],
     ['CDP', 'Borrowing costs and collateral risk', `Borrowing costs ${bps(cdp?.currentInterestRate)} a year today and the rate moves with utilization. Your collateral is RAGE, HESTIA or ULTRAROUND, all volatile. Read how positions are settled in the CDP docs before you borrow, because you can lose collateral. Using the CDP to chase Fountain yield loses money while the borrow rate is above the yield.`],
     ['RAGE', 'Volatile, with exit delays', `RAGE is backed by HESTIA and ULTRAROUND, both volatile. Minting waits ${days(cfg.mintDelay)} days, claims wait ${days(cfg.claimDelay)} days and pay a ${num(cfg.claimFee)}% fee. Asset Decline Protection limits but does not remove losses. The market price can sit above or below fair value.`],
     ['HESTIA, ULTRAROUND', 'Small, volatile tokens', 'Burns cut supply, they don’t set a price floor. Both tokens can drop fast, and liquidity can be thin when you want out.'],
@@ -42,7 +42,7 @@ export default async function Risks() {
         <div className="cream glass-rim" style={{ padding: 'var(--s-8)' }}>
           <h2 className="h3">What we do about it</h2>
           <ul style={{ lineHeight: 1.9, fontSize: 'var(--fs-body)', paddingLeft: 22 }}>
-            <li>Audits for URM, Fountain, the CDP, RAGE, HESTIA and the Hestia Mine</li>
+            <li>Audits for $URM, Fountain, the CDP, RAGE, HESTIA and the Hestia Mine</li>
             <li>Every contract verified on Basescan, every number on this site read live from the chain</li>
             <li>Connecting a wallet only reads balances. It never moves funds.</li>
           </ul>

@@ -1,4 +1,5 @@
 import { seo } from '@/lib/seo';
+import ActionBar from '@/components/ActionBar';
 import PageBg from '@/components/PageBg';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -13,7 +14,7 @@ import { C } from '@/lib/tokens';
 import { RAGE_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = seo({ title: 'Rage OTC', description: "Trade HESTIA, ULTRAROUND or URM for RAGE at a fair price plus a bonus. The bonus grows. The supply doesn't.", handle: '@therageprotocol' });
+export const metadata = seo({ title: 'Rage OTC', description: "Trade HESTIA, ULTRAROUND or $URM for RAGE at a fair price plus a bonus. The bonus grows. The supply doesn't.", handle: '@therageprotocol' });
 
 export default async function Otc() {
   const [o, r, h] = await Promise.all([api('rage/otc'), api('rage/buying-protocol'), api('home/overview')]);
@@ -23,17 +24,17 @@ export default async function Otc() {
   const next = isFinite(raw) && raw * 1000 > Date.now() ? raw : NaN;
   const nextDate = isFinite(next) ? new Date(next * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
   return (
-    <div className="page has-bg" data-theme="rage">
+    <div data-dim="1" className="page has-bg" data-theme="rage">
       <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
       <section className="wrap" style={{ paddingTop: 'var(--s-16)' }}>
         <div className="split">
           <div className="main">
             <h1 className="h1">Rage OTC</h1>
-            <p className="lead">Trade HESTIA, ULTRAROUND or URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
+            <p className="lead">Trade HESTIA, ULTRAROUND or $URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
             <p className="punch">The bonus grows. The supply doesn&apos;t.</p>
             <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))', gap: 'var(--s-3)' }}>
-              <div className="tile"><span>Bonus right now</span><b className="acc">{active ? num(o?.bonusCurrent, 2) + '%' : '—'}</b></div>
+              {active ? <div className="tile"><span>Bonus right now</span><b className="acc">{num(o?.bonusCurrent, 2)}%</b></div> : <div className="tile"><span>Next round in</span><b className="acc">{isFinite(next) ? <Countdown to={next} done="any moment now" /> : 'soon'}</b></div>}
               <div className="tile"><span>{active ? 'RAGE left in this round' : 'Round status'}</span><b>{active ? num(o?.rageBalance) : 'Sold out'}</b></div>
               <div className="tile"><span>Fair market value</span><b>${num(fmv, 2)}</b></div>
               <div className="tile"><span>Bonus range</span><b>{num(o?.config?.bonusMin)}% to {num(o?.config?.bonusMax)}%</b></div>
@@ -53,7 +54,7 @@ export default async function Otc() {
               <li><span className="k">Last trade</span><strong>{ago(o?.lastTx?.timestamp)} · {num(o?.lastTx?.bonus)}% bonus</strong></li>
             </ul>
           </div>
-          <div className="side"><OtcPanel prices={{ HESTIA: n(h?.hestia), ULTRAROUND: n(h?.circle), URM: n(h?.urm) }} fmv={fmv} bonus={active ? n(o?.bonusCurrent) : n(o?.config?.bonusMin)} app={legacy('/rage/otc')} /></div>
+          <div className="side" id="act"><OtcPanel prices={{ HESTIA: n(h?.hestia), ULTRAROUND: n(h?.circle), URM: n(h?.urm) }} fmv={fmv} bonus={active ? n(o?.bonusCurrent) : n(o?.config?.bonusMin)} app={legacy('/rage/otc')} /></div>
         </div>
       </section>
       <section className="wrap sec">
@@ -63,6 +64,7 @@ export default async function Otc() {
         <Steps items={[{ d: 'The ecosystem puts RAGE up for sale at fair value.' }, { d: 'The bonus on top grows every moment nobody buys.' }, { d: 'Wait for a bigger bonus, or buy before someone else does.' }]} />
       </section>
       <Check links={[{ label: 'RAGE audit', href: legacy('/rage/audit.pdf'), strong: true }, addr('Rage OTC', C.rageOtc), addr('Rage Depot', C.rageDepot), addr('RAGE token', C.rage, true), { label: 'Whitepaper', href: legacy('/rage/whitepaper.pdf') }]} />
+      <ActionBar label={active ? 'Trade for RAGE' : 'See the OTC panel'} note={active ? `Bonus ${num(o?.bonusCurrent, 2)}%` : 'Sold out'} />
       <Footer name="RAGE" x="therageprotocol" />
     </div>
   );

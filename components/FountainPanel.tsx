@@ -33,26 +33,26 @@ export default function FountainPanel(p: P) {
         {!wd ? (
           <>
             <li><span className="k">You receive</span><strong>about {f(a * p.depositShares)} fURM</strong></li>
-            <li><span className="k">In 12 months, at target</span><strong>about {f(a * (1 + p.yieldRate / 100), 0)} URM</strong></li>
+            <li><span className="k">In 12 months, at target</span><strong>about {f(a * (1 + p.yieldRate / 100), 0)} $URM</strong></li>
             <li><span className="k">Deposit fee</span><strong>{f(p.depositFee, 2)}%</strong></li>
           </>
         ) : (
           <>
-            <li><span className="k">You receive</span><strong>about {f(a * p.redeemAssets)} URM</strong></li>
-            <li><span className="k">Withdraw to</span><strong>URM or USDC</strong></li>
+            <li><span className="k">You receive</span><strong>about {f(a * p.redeemAssets)} $URM</strong></li>
+            <li><span className="k">Withdraw to</span><strong>$URM or USDC</strong></li>
             <li><span className="k">Withdraw fee</span><strong>{f(p.withdrawFee, 2)}%</strong></li>
-            <li><span className="k">Withdrawable right now</span><strong>{f(p.windowRemaining, 0)} URM</strong></li>
+            <li><span className="k">Withdrawable right now</span><strong>{f(p.windowRemaining, 0)} $URM</strong></li>
           </>
         )}
       </ul>
       {isConnected && balances.fURM !== undefined && (
         <ul className="list" style={{ marginTop: 'var(--s-3)' }}>
           <li><span className="k">Your fURM</span><strong>{f(balances.fURM, 2)}</strong></li>
-          <li><span className="k">Worth today</span><strong>{f((balances.fURM || 0) * p.toAssets, 2)} URM</strong></li>
+          <li><span className="k">Worth today</span><strong>{f((balances.fURM || 0) * p.toAssets, 2)} $URM</strong></li>
         </ul>
       )}
       <p style={{ margin: '14px 0 0', fontSize: 'var(--fs-subhead)', lineHeight: 1.5, background: 'var(--soft)', borderRadius: 'var(--r-sm)', padding: '12px 14px' }}>
-        <b>What you sign:</b> {wd ? 'one withdraw. URM or USDC comes back to your wallet.' : 'one approval for URM, then one deposit. fURM comes back to your wallet.'} Nothing else.
+        <b>What you sign:</b> {wd ? 'one withdraw. $URM or USDC comes back to your wallet.' : 'one approval for $URM, then one deposit. fURM comes back to your wallet.'} Nothing else.
       </p>
       <div style={{ marginTop: 'var(--s-3)' }}>
         {isConnected

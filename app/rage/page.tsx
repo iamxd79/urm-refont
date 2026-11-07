@@ -31,7 +31,7 @@ export default async function Rage() {
     ['ULTRAROUND pod', C.pCircle, `${num(v.activeCircle)} ULTRAROUND in backing`, `https://peapods.finance/pod/8453/${C.pCircle}`, 'Peapods'],
   ];
   return (
-    <div className="page has-bg" data-theme="rage">
+    <div data-dim="1" className="page has-bg" data-theme="rage">
       <PageBg img="/hero/rage.jpg" color="#270630" pos="85% 40%" mpos="72% 30%" />
       <AutoRefresh />
       <Hero img="/hero/rage.jpg" bg="#270630" pos="100% 40%" mpos="70% 30%">
@@ -91,7 +91,7 @@ export default async function Rage() {
           </article>
           <article className="card glass-rim" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s-3)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--s-2)' }}><h3 className="h3">Rage OTC</h3><span className="badge">Limited supply</span></div>
-            <p style={{ margin: 0, lineHeight: 1.5 }}>Trade HESTIA, ULTRAROUND or URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
+            <p style={{ margin: 0, lineHeight: 1.5 }}>Trade HESTIA, ULTRAROUND or $URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
             <ul style={{ margin: 0, paddingLeft: 20, lineHeight: 1.8, color: 'var(--sub)' }}><li>The bonus grows over time</li><li>The supply doesn&apos;t</li><li>Pay with tokens you already hold</li></ul>
             <Link className="btn btn-primary btn-lg btn-block" style={{ marginTop: 'auto' }} href="/rage/otc">Open Rage OTC</Link>
           </article>
@@ -115,7 +115,7 @@ export default async function Rage() {
         <div className="card glass-rim">
           <h2 className="h2" style={{ fontSize: 'clamp(30px,3.4vw,44px)' }}>The full stack.</h2>
           <p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>Liquidity without selling.</p>
-          <div className="row" style={{ marginTop: 'var(--s-5)' }}>{['Lock RAGE in the CDP', 'Mint URM', 'Hold or deposit in Fountain'].map((t, i) => <span key={t} className="pill" style={{ background: 'var(--accent2)', color: '#000', fontSize: 'var(--fs-subhead)', padding: '10px 16px' }}>{i + 1}. {t}</span>)}</div>
+          <div className="row" style={{ marginTop: 'var(--s-5)' }}>{['Lock RAGE in the CDP', 'Mint $URM', 'Hold or deposit in Fountain'].map((t, i) => <span key={t} className="pill" style={{ background: 'var(--accent2)', color: '#000', fontSize: 'var(--fs-subhead)', padding: '10px 16px' }}>{i + 1}. {t}</span>)}</div>
           <p style={{ marginTop: 'var(--s-5)', lineHeight: 1.5 }}><b>Know the cost.</b> <span className="muted">Borrowing is {bps(cdp?.currentInterestRate)} a year today, and Fountain targets {bps(o?.fountainState?.config?.yieldRate, 0)}. Use the CDP for liquidity, not as a yield loop.</span></p>
           <Link href="/urm/cdp" className="btn btn-outline">Open the CDP</Link>
         </div>
@@ -127,7 +127,7 @@ export default async function Rage() {
           <p className="muted" style={{ margin: 0 }}>Not live yet. Details may change.</p>
         </div>
         <article className="card glass-rim" style={{ marginTop: 'var(--s-8)', padding: 0, overflow: 'hidden', display: 'flex', flexWrap: 'wrap' }}>
-          <img src="/assets/black-card.png" alt="The URM Black Card, a black metal card with the URM ring logo and a gold chip" style={{ flex: '1 1 300px', minWidth: 0, width: '100%', maxWidth: 640, aspectRatio: '1280/853', objectFit: 'cover', display: 'block' }} />
+          <img src="/assets/black-card.png" alt="The $URM Black Card, a black metal card with the URM ring logo and a gold chip" style={{ flex: '1 1 300px', minWidth: 0, width: '100%', maxWidth: 640, aspectRatio: '1280/853', objectFit: 'cover', display: 'block' }} />
           <div style={{ flex: '1 1 340px', padding: 'var(--s-8)', display: 'flex', flexDirection: 'column', gap: 'var(--s-3)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--s-3)' }}><h3 className="h3">Black Card</h3><span className="badge">In review</span></div>
             <p style={{ margin: 0, fontSize: 'var(--fs-body)', lineHeight: 1.5 }}>The front door. Open to anyone who locks an option, with no extra requirements.</p>

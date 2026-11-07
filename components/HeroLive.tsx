@@ -89,7 +89,7 @@ export function OrbPulse({ price, checkedAt, defense }: { price: number; checked
   const onPeg = known && Math.abs(price - 1) <= 0.01;
   const state = !known ? 'checking…' : onPeg ? 'on peg' : 'off peg';
   return (
-    <div className="orb" role="img" aria-label={known ? `Peg check: URM at ${price.toFixed(3)} dollars, ${state}. Total defense ${defense}.` : 'Peg check: loading live data'}>
+    <div className="orb" role="img" aria-label={known ? `Peg check: $URM at ${price.toFixed(3)} dollars, ${state}. Total defense ${defense}.` : 'Peg check: loading live data'}>
       <span className="orb-ring" aria-hidden="true" />
       <span key={pulse} className={'orb-ping' + (pulse ? ' go' : '')} aria-hidden="true" />
       <div className="readout glass-clear" aria-hidden="true">

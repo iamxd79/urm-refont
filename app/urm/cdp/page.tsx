@@ -1,4 +1,5 @@
 import { seo } from '@/lib/seo';
+import ActionBar from '@/components/ActionBar';
 import PageBg from '@/components/PageBg';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
@@ -12,7 +13,7 @@ import { C } from '@/lib/tokens';
 import { URM_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = seo({ title: 'URM CDP', description: 'Lock RAGE, HESTIA or ULTRAROUND and mint URM against it. Liquidity without selling.', handle: '@URMdollar' });
+export const metadata = seo({ title: 'URM CDP', description: 'Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it. Liquidity without selling.', handle: '@URMdollar' });
 
 export default async function Cdp() {
   const [c, h] = await Promise.all([api('urm/cdp'), api('home/overview')]);
@@ -27,9 +28,9 @@ export default async function Cdp() {
         <div className="split">
           <div className="main">
             <h1 className="h1">URM CDP</h1>
-            <p className="lead">Lock RAGE, HESTIA or ULTRAROUND and mint URM against it. Borrow at a fixed collateral ratio, or leverage in one transaction. Your position is an NFT you can settle, unwind or transfer anytime.</p>
+            <p className="lead">Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it. Borrow at a fixed collateral ratio, or leverage in one transaction. Your position is an NFT you can settle, unwind or transfer anytime.</p>
             <div style={{ marginTop: 'var(--s-8)' }}>
-              <Tiles items={[{ v: bps(c?.currentInterestRate), l: 'yearly interest' }, { v: num(c?.urmBorrowable), l: 'URM available' }, { v: bps(c?.utilization, 0), l: 'utilization' }, { v: num(c?.urmDebt), l: 'URM borrowed' }, { v: num(c?.borrowCapacity), l: 'max capacity' }, { v: num(c?.positionCount), l: 'open positions' }]} />
+              <Tiles items={[{ v: bps(c?.currentInterestRate), l: 'yearly interest' }, { v: num(c?.urmBorrowable), l: '$URM available' }, { v: bps(c?.utilization, 0), l: 'utilization' }, { v: num(c?.urmDebt), l: '$URM borrowed' }, { v: num(c?.borrowCapacity), l: 'max capacity' }, { v: num(c?.positionCount), l: 'open positions' }]} />
             </div>
             <div className="bar" style={{ marginTop: 'var(--s-5)', background: 'var(--panel)' }} role="img" aria-label={`${num(util)}% of borrow capacity in use`}><div style={{ width: `${Math.min(100, util)}%`, background: 'var(--accent)' }} /></div>
             <p className="muted" style={{ fontSize: 'var(--fs-subhead)', marginTop: 'var(--s-2)' }}>{num(util)}% of the borrow capacity is in use.</p>
@@ -37,12 +38,12 @@ export default async function Cdp() {
               <YourPosition items={[{ label: 'Position NFTs', key: 'CDP' }, { label: 'RAGE', key: 'RAGE' }, { label: 'HESTIA', key: 'HESTIA' }, { label: 'ULTRAROUND', key: 'ULTRAROUND' }]} />
             </div>
           </div>
-          <div className="side"><CdpPanel cols={cols} rate={n(c?.currentInterestRate) / 100} app={legacy('/urm/cdp')} /></div>
+          <div className="side" id="act"><CdpPanel cols={cols} rate={n(c?.currentInterestRate) / 100} app={legacy('/urm/cdp')} /></div>
         </div>
       </section>
       <section className="wrap sec grid2">
-        <div className="card glass-rim"><h2 className="h3">Borrow</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>Liquidity without selling.</p><p className="muted" style={{ lineHeight: 1.5 }}>Lock your tokens, mint URM at a fixed ratio, keep your upside. Repay to get your collateral back.</p></div>
-        <div className="card glass-rim"><h2 className="h3">Leverage</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>More exposure, one transaction.</p><p className="muted" style={{ lineHeight: 1.5 }}>The minted URM buys more of your collateral in the same transaction. Bigger upside, bigger downside. Unwind anytime.</p></div>
+        <div className="card glass-rim"><h2 className="h3">Borrow</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>Liquidity without selling.</p><p className="muted" style={{ lineHeight: 1.5 }}>Lock your tokens, mint $URM at a fixed ratio, keep your upside. Repay to get your collateral back.</p></div>
+        <div className="card glass-rim"><h2 className="h3">Leverage</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>More exposure, one transaction.</p><p className="muted" style={{ lineHeight: 1.5 }}>The minted $URM buys more of your collateral in the same transaction. Bigger upside, bigger downside. Unwind anytime.</p></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">See it before you sign.</h2>
@@ -51,9 +52,10 @@ export default async function Cdp() {
       </section>
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>
-        <Steps items={[{ d: 'Pick RAGE, HESTIA or ULTRAROUND and lock it.' }, { d: `Mint URM. Interest builds daily, ${num(c?.urmCdpInterestPerDay, 2)} URM a day across all positions right now.` }, { d: 'Settle, unwind or transfer your NFT whenever you want.' }]} />
+        <Steps items={[{ d: 'Pick RAGE, HESTIA or ULTRAROUND and lock it.' }, { d: `Mint $URM. Interest builds daily, ${num(c?.urmCdpInterestPerDay, 2)} $URM a day across all positions right now.` }, { d: 'Settle, unwind or transfer your NFT whenever you want.' }]} />
       </section>
       <Check links={[{ label: 'CDP audit', href: legacy('/urm/cdp-audit.pdf'), strong: true }, addr('CDP', C.cdp), addr('Position NFT', C.cdpNft, true), addr('RAGE collateral', C.colRage), addr('HESTIA collateral', C.colHestia), addr('ULTRAROUND collateral', C.colCircle)]} />
+      <ActionBar label="Borrow $URM" note="Liquidity without selling" />
       <Footer name="URM" />
     </div>
   );

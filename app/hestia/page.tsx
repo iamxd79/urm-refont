@@ -69,13 +69,13 @@ export default async function Hestia() {
       <section className="wrap sec">
         <h2 className="h2">Where the supply sits.</h2>
         <div className="card glass-rim" style={{ marginTop: 'var(--s-8)' }}>
-          <SupplyBar parts={[{ label: 'Burned', value: n(s.burned), color: '#ff7a2e' }, { label: 'Holders', value: n(s.holders), color: '#ffb627' }, { label: 'Locked in RAGE', value: n(s.rage), color: '#ff3d3d' }, { label: 'Liquidity pools', value: n(s.pools), color: '#e6cfe2' }, { label: 'URM, CDP, Mine and ecosystem', value: other, color: '#d7b067' }]} />
+          <SupplyBar parts={[{ label: 'Burned', value: n(s.burned), color: '#ff7a2e' }, { label: 'Holders', value: n(s.holders), color: '#ffb627' }, { label: 'Locked in RAGE', value: n(s.rage), color: '#ff3d3d' }, { label: 'Liquidity pools', value: n(s.pools), color: '#e6cfe2' }, { label: '$URM, CDP, Mine and ecosystem', value: other, color: '#d7b067' }]} />
         </div>
         <div className="grid2" style={{ marginTop: 'var(--s-5)' }}>
           <article className="cream glass-rim vstack"><h3 className="h3">The Hestia Mine</h3><p style={{ lineHeight: 1.5 }}>Become a mining chief. Stake HESTIA, hire your crew, compound or sell your rewards.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile"><b>{num(m?.state?.hestiaPodsBalance)}</b><span>HESTIA in the mine</span></div><div className="tile"><b>{num(m?.state?.walletCount)}</b><span>mining chiefs</span></div></div>
             <Link className="btn btn-ink btn-block" style={{ marginTop: 'auto' }} href="/hestia/mine">Start mining</Link></article>
-          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock HESTIA as collateral and mint URM against it. Liquidity without selling.</p>
+          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock HESTIA as collateral and mint $URM against it. Liquidity without selling.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile" style={{ background: 'var(--bg)' }}><b>{num(s.urmCdp)}</b><span>HESTIA locked in CDP</span></div><div className="tile" style={{ background: 'var(--bg)' }}><b>{bps(cdp?.currentInterestRate)}</b><span>yearly rate</span></div></div>
             <Link className="btn btn-primary btn-block" style={{ marginTop: 'auto' }} href="/urm/cdp">Open a position</Link></article>
         </div>
@@ -86,12 +86,12 @@ export default async function Hestia() {
         <h2 className="h2">The engine.</h2>
         <p className="punch">Fees fill the tank. The tank feeds the fire.</p>
         <div style={{ marginTop: 'var(--s-8)' }}><HestiaEngine usdc={n(h?.reserve?.usdc)} cap={n(ch.usdcCapacity)} nextSmoke={ch.nextSmokeTime} nextRage={ch.nextRageTime} interval={ch.smokeInterval} burnedPct={n(s.burnedPercent)} /></div>
-        <ul className="list" style={{ marginTop: 'var(--s-5)' }}>
+        <details className="more"><summary>More engine numbers</summary><ul className="list" style={{ marginTop: 'var(--s-5)' }}>
           <li><span className="k">Hestia&apos;s strength</span><strong>{usd(h?.strength?.value)}</strong></li>
           <li><span className="k">Main pool liquidity</span><strong>{usd(h?.liquidity?.mainValue)}</strong></li>
           <li><span className="k">Liquidity to market cap</span><strong>{num(h?.liquidity?.marketCapRatio, 2)}%</strong></li>
-          <li><span className="k">Owned by RAGE / URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
-        </ul>
+          <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
+        </ul></details>
       </section>
 
       <section className="wrap sec">

@@ -395,7 +395,7 @@ td{padding:16px 24px;border-top:1px solid var(--line)}
 .bf-caps{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
 .bf-caps li{display:flex;gap:10px;align-items:flex-start;color:var(--sub);font-size:var(--fs-subhead);line-height:1.45}
 .bf-caps li b{color:var(--text);margin-right:4px}
-.bf-caps li span{flex:none;width:26px;height:26px;border-radius:var(--r-pill);background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:var(--fs-footnote)}
+.bf-caps li span{flex:none;width:26px;height:26px;border-radius:var(--r-pill);background:var(--accent);color:var(--onAccent);display:grid;place-items:center;font-weight:800;font-size:var(--fs-footnote)}
 /* URM peg fortress */
 .pf{display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
 .pf svg{display:block;max-width:520px;margin:0 auto;overflow:visible}
@@ -958,3 +958,35 @@ body{transition:background-color .5s ease}
 .pbg .orb .readout{display:none}
 .peg-m{display:inline-flex;margin-top:var(--s-6)}
 .peg-m{width:fit-content;align-self:flex-start}
+
+/* ===== UI/UX audit fixes ===== */
+/* 1) docs hub on phones: no implicit second column */
+@media (max-width:900px){.dmain.wide{grid-column:auto}}
+/* 2 + 11) diagrams inside docs: framed like everywhere else, and they adapt to the narrow column */
+.doc-diagram{container-type:inline-size}
+.doc-diagram>.yc,.doc-diagram>.pf,.doc-diagram>.pd{padding:var(--s-6);border-radius:var(--r-lg);background:var(--panel);box-shadow:var(--glass-edge)}
+.doc-diagram .yc{grid-template-columns:minmax(0,220px) minmax(0,1fr)}
+.doc-diagram .yc-big{overflow-wrap:normal;white-space:nowrap;font-size:clamp(26px,5cqi,40px)!important}
+@container (max-width:620px){.doc-diagram .yc{grid-template-columns:1fr}.doc-diagram .yc-art{max-width:220px}}
+/* 3) phones: the page's main action, always one tap away */
+.abar{display:none}
+@media (max-width:900px){
+ .abar{display:flex;align-items:center;gap:var(--s-3);position:fixed;z-index:45;left:var(--gutter);right:var(--gutter);bottom:calc(12px + env(safe-area-inset-bottom));padding:8px 8px 8px var(--s-5);border-radius:var(--r-pill);box-shadow:var(--shadow-float);transform:translateY(140%);opacity:0;transition:transform .45s var(--spring),opacity .25s;pointer-events:none}
+ .abar[data-show]{transform:none;opacity:1;pointer-events:auto}
+ .abar .btn{margin-left:auto;min-height:48px;white-space:nowrap}
+ .abar-note{min-width:0;font-weight:700;font-size:var(--fs-subhead);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ #act{scroll-margin-top:96px}
+}
+/* 4) phones: bright photos are dimmed so the text on top stays readable */
+@media (max-width:900px){[data-dim] .pbg img,[data-dim] .pho img{filter:brightness(.55) saturate(.9)}}
+/* 8) secondary numbers fold away */
+details.more{margin-top:var(--s-5)}
+details.more>summary{display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;padding:0 var(--s-5);border-radius:var(--r-pill);background:var(--panel);color:var(--text);font-weight:700;cursor:pointer;list-style:none;box-shadow:var(--glass-edge)}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::after{content:'+';font-size:20px;line-height:1;color:var(--accent)}
+details.more[open]>summary::after{content:'−'}
+details.more>.list{margin-top:var(--s-4)!important}
+/* 10) skip link */
+.skip{position:fixed;left:16px;top:-80px;z-index:200;padding:12px 18px;border-radius:var(--r-pill);background:var(--accent);color:var(--onAccent);font-weight:800;text-decoration:none;transition:top .2s}
+.skip:focus{top:12px}
+main:focus{outline:none}

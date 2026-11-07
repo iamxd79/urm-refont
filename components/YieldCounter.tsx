@@ -103,7 +103,7 @@ export default function YieldCounter({ toAssets, interestPerDay, totalShares, yi
           <span className="muted">Worth right now</span>
           <b className="yc-big" aria-live="off">
             {live ? <><span ref={big}>{f(shares * toAssets, 6).slice(0, -4)}</span><span ref={tail} className="acc">{f(shares * toAssets, 6).slice(-4)}</span></> : '—'}
-            <small> URM</small>
+            <small> $URM</small>
           </b>
           <span className="muted yc-note">ticking up, live</span>
         </div>
@@ -112,7 +112,7 @@ export default function YieldCounter({ toAssets, interestPerDay, totalShares, yi
           <div className="tile"><span>At today&apos;s pace, a year</span><b>{live ? '+' + f(yearPace, 2) : '—'}</b></div>
         </div>
         <p className="muted" style={{ fontSize: 'var(--fs-footnote)', margin: '14px 0 0' }}>
-          The Fortress pays {f(interestPerDay, 2)} URM a day across {f(totalShares, 0)} fURM. Target {f(yieldRate, 0)}% a year, not a promise.
+          The Fortress pays {f(interestPerDay, 2)} $URM a day across {f(totalShares, 0)} fURM. Target {f(yieldRate, 0)}% a year, not a promise.
         </p>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import PageBg from './PageBg';
+import ActionBar from './ActionBar';
 import Footer from './Footer';
 import AutoRefresh from './AutoRefresh';
 import Check, { type Link as L } from './Check';
@@ -22,7 +23,7 @@ export default function MinePage(c: Cfg) {
   const rows = [...c.rows].sort((a, b) => parseFloat(b[c.shareKey]) - parseFloat(a[c.shareKey]));
   const opened = s.launchTimestamp ? new Date(s.launchTimestamp).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '—';
   return (
-    <div className="page has-bg" data-theme={c.theme}>
+    <div className="page has-bg" data-theme={c.theme} data-dim={c.theme === 'circle' ? '1' : undefined}>
       <PageBg img={c.theme === 'hestia' ? '/hero/hestia-v2.jpg' : '/hero/circle.jpg'} color={c.theme === 'hestia' ? '#2a0527' : '#030303'} pos={c.theme === 'hestia' ? '85% 40%' : '70% 50%'} mpos={c.theme === 'hestia' ? '70% 30%' : '80% 40%'} />
       <AutoRefresh />
       <section className="wrap" style={{ paddingTop: 'var(--s-16)' }}>
@@ -42,7 +43,7 @@ export default function MinePage(c: Cfg) {
               ]} />
             </div>
           </div>
-          <div className="side">
+          <div className="side" id="act">
             <MinerPanel token={c.token} balKey={c.balKey} unit={c.unit} verbs={c.verbs} perOne={n(s[c.perOneKey])} dailyPerOne={n(s.dailyValueOnePercent)} sellLimit={n(s[c.sellLimitKey])} app={c.app} connectLabel={c.connectLabel} />
           </div>
         </div>
@@ -66,6 +67,7 @@ export default function MinePage(c: Cfg) {
         <div className="steps">{c.how.map(([t, d], i) => <div key={t} className="step"><span className="n sm">{i + 1}</span><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}</div>
       </section>
       <Check links={c.links} note={`Opened ${opened} · TVL ${usd(c.tvl)} · liquidity ${usd(c.podLiquidity)} · contract speed ${s[c.roiKey] ?? '—'}`} />
+      <ActionBar label={c.verbs[0]} note={c.title} />
       <Footer name={c.footName} x={c.x} />
     </div>
   );
