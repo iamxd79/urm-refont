@@ -12,7 +12,7 @@ function Amount({ id, label, value, set, unit, bal }: { id: string; label: strin
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <label htmlFor={id} className="label">{label}</label>
-        <span className="muted" style={{ fontSize: 13 }}>Balance: {bal !== undefined ? f(bal, 2) : '—'} {unit}</span>
+        <span className="muted" style={{ fontSize: 'var(--fs-footnote)' }}>Balance: {bal !== undefined ? f(bal, 2) : '—'} {unit}</span>
       </div>
       <div className="field">
         <input id={id} inputMode="decimal" value={value} onChange={(e) => set(e.target.value.replace(/[^0-9.,]/g, ''))} />
@@ -53,8 +53,8 @@ export function OtcPanel({ prices, fmv, bonus, app }: { prices: Record<string, n
   const fair = value / fmv;
   const extra = fair * (bonus / 100);
   return (
-    <div className="cream glass" style={{ padding: 24 }}>
-      <p className="muted" style={{ margin: '0 0 8px 6px', fontSize: 14, fontWeight: 600 }}>Pay with</p>
+    <div className="cream glass-rim" style={{ padding: 24 }}>
+      <p className="muted" style={{ margin: '0 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>Pay with</p>
       <Tabs items={['HESTIA', 'ULTRAROUND', 'URM'] as const as any} value={tok} set={setTok as any} label="Pay with" />
       <Amount id="otc" label="You pay" value={amt} set={setAmt} unit={tok} bal={balances[tok]} />
       <ul className="list" style={{ marginTop: 16 }}>
@@ -79,9 +79,9 @@ export function CdpPanel({ cols, rate, app }: { cols: Col[]; rate: number; app: 
   const value = parse(amt) * (c?.price || 0);
   const key = sym === 'CIRCLE' || sym === 'ULTRAROUND' ? 'ULTRAROUND' : sym;
   return (
-    <div className="cream glass" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 24 }}>
       <Tabs items={['Borrow', 'Leverage'] as any} value={mode} set={setMode as any} label="CDP mode" />
-      <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 14, fontWeight: 600 }}>Collateral</p>
+      <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>Collateral</p>
       <Tabs items={cols.map((x) => x.symbol) as any} value={sym} set={setSym as any} label="Collateral" />
       <Amount id="cdp" label="You lock" value={amt} set={setAmt} unit={sym} bal={balances[key]} />
       <ul className="list" style={{ marginTop: 16 }}>
@@ -90,11 +90,11 @@ export function CdpPanel({ cols, rate, app }: { cols: Col[]; rate: number; app: 
         <li><span className="k">Interest</span><strong>{f(rate, 2)}% a year</strong></li>
         <li><span className="k">You receive</span><strong>{mode === 'Borrow' ? 'URM + a position NFT' : `more ${sym} + a position NFT`}</strong></li>
       </ul>
-      <p style={{ margin: '14px 0 0', fontSize: 14, lineHeight: 1.5, background: 'var(--soft)', borderRadius: 16, padding: '12px 14px' }}>
+      <p style={{ margin: '14px 0 0', fontSize: 'var(--fs-subhead)', lineHeight: 1.5, background: 'var(--soft)', borderRadius: 'var(--r-sm)', padding: '12px 14px' }}>
         <b>Know the cost.</b> Use the CDP for liquidity without selling, not as a yield loop. The exact URM you mint shows in the app before you sign.
       </p>
       <Cta href={app} label={`${mode} in the current app`} connectLabel={`Connect wallet to ${mode.toLowerCase()}`} />
-      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}><a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a> before you borrow.</p>
+      <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: '12px 0 0' }}><a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a> before you borrow.</p>
     </div>
   );
 }
@@ -106,7 +106,7 @@ export function MinerPanel({ token, balKey, unit, verbs, perOne, dailyPerOne, se
   const { balances } = useBalances();
   const share = parse(amt) / perOne;
   return (
-    <div className="cream glass" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 24 }}>
       <Tabs items={verbs as any} value={tab} set={setTab as any} label={`${token} action`} />
       {tab === verbs[0] ? (
         <>
@@ -125,7 +125,7 @@ export function MinerPanel({ token, balKey, unit, verbs, perOne, dailyPerOne, se
         </ul>
       )}
       <Cta href={app} label={`${tab} in the current app`} connectLabel={connectLabel} />
-      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}>Rewards change as more players join. Figures update live. <a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a></p>
+      <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: '12px 0 0' }}>Rewards change as more players join. Figures update live. <a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a></p>
     </div>
   );
 }
@@ -137,9 +137,9 @@ export function SwapPanel({ prices, fee, app }: { prices: Record<string, number>
   const { balances } = useBalances();
   const out = (parse(amt) * (1 - fee / 100)) / (prices[to] || NaN);
   return (
-    <div className="cream glass" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 24 }}>
       <Amount id="swap" label="You pay" value={amt} set={setAmt} unit="USDC" bal={balances.USDC} />
-      <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 14, fontWeight: 600 }}>You receive</p>
+      <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>You receive</p>
       <Tabs items={['URM', 'RAGE', 'HESTIA', 'ULTRAROUND'] as any} value={to} set={setTo as any} label="Receive token" />
       <ul className="list" style={{ marginTop: 16 }}>
         <li><span className="k">Estimated output</span><strong>about {f(out, 2)} {to}</strong></li>
@@ -162,11 +162,11 @@ export function RefLink({ rows }: { rows: { addr: string; invested: string; unpa
   const link = on ? `ultraroundmoney.com/rage?ref=${address}` : 'ultraroundmoney.com/rage?ref=0x…';
   const me = on ? rows.find((r) => r.addr.toLowerCase() === address!.toLowerCase()) : undefined;
   return (
-    <div className="cream glass" style={{ padding: 28 }}>
+    <div className="cream glass-rim" style={{ padding: 28 }}>
       <h2 className="h3">Your referral link</h2>
       <p className="muted" style={{ margin: '6px 0 0' }}>{on ? 'Share it anywhere. Investments through it count for you.' : 'Connect to get your link, then share it anywhere.'}</p>
       <div className="field" style={{ marginTop: 16 }}>
-        <span className="mono" style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 15 }}>{link}</span>
+        <span className="mono" style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 'var(--fs-subhead)' }}>{link}</span>
         <button type="button" className="max" disabled={!on} onClick={() => { navigator.clipboard?.writeText('https://' + link); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>{copied ? 'Copied' : 'Copy'}</button>
       </div>
       <div className="grid" style={{ marginTop: 16, gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 10 }}>
@@ -187,13 +187,13 @@ export function YourPosition({ items }: { items: { label: string; key: string; u
   useEffect(() => setM(true), []);
   const on = m && isConnected;
   return (
-    <div className="card glass">
-      <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>YOUR POSITION</b>
+    <div className="card glass-rim">
+      <b className="eyebrow">YOUR POSITION</b>
       {!on && <p className="muted" style={{ margin: '8px 0 0' }}>Connect your wallet to see your balances here. Read only, nothing moves.</p>}
       <div className="grid" style={{ marginTop: 14, gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 10 }}>
         {items.map((i) => {
           const v = balances[i.key];
-          return <div key={i.label} className="tile" style={{ background: 'var(--bg)' }}><span>{i.label}</span><b>{on && v !== undefined ? f(v * (i.mult ?? 1), 2) : '—'}{i.unit ? <small style={{ fontSize: 15, marginLeft: 6 }}>{i.unit}</small> : null}</b></div>;
+          return <div key={i.label} className="tile" style={{ background: 'var(--bg)' }}><span>{i.label}</span><b>{on && v !== undefined ? f(v * (i.mult ?? 1), 2) : '—'}{i.unit ? <small style={{ fontSize: 'var(--fs-subhead)', marginLeft: 6 }}>{i.unit}</small> : null}</b></div>;
         })}
       </div>
       {!on && <div style={{ marginTop: 14 }}><ConnectButton /></div>}

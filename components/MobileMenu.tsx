@@ -26,14 +26,14 @@ export default function MobileMenu({ items, active, docs }: { items: { href: str
         </svg>
       </button>
       {open && createPortal(
-        <div id="mm-panel" className="mm-panel" style={{ top }} data-theme={typeof document !== 'undefined' ? document.querySelector('.page')?.getAttribute('data-theme') ?? undefined : undefined}>
+        <div id="mm-panel" className="mm-panel glass-solid" style={{ top }} data-theme={typeof document !== 'undefined' ? document.querySelector('.page')?.getAttribute('data-theme') ?? undefined : undefined}>
           <nav aria-label="Mobile">
             {items.map((i) => <Link key={i.key} href={i.href} aria-current={active === i.key ? 'page' : undefined}>{i.key !== 'earn' && <ProductLogo id={i.key} size={28} />}{i.label}</Link>)}
             <a href={docs}>Docs</a>
             <Link href="/risks">Risks</Link>
           </nav>
           <ConnectButton block className="btn btn-primary btn-lg" />
-          <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: 0 }}>All contracts on Base. Connecting never moves funds.</p>
+          <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: 0 }}>All contracts on Base. Connecting never moves funds.</p>
         </div>,
         document.body
       )}

@@ -33,7 +33,7 @@ export default async function Fountain() {
             <div style={{ marginTop: 32 }}>
               <Tiles items={[{ v: bps(cfg.yieldRate), l: 'target yield' }, { v: bps(s.effectiveRate), l: 'effective yield' }, { v: num(toAssets, 4), l: 'URM per fURM' }, { v: num(s.totalAssets), l: 'URM staked' }, { v: num(s.totalShares), l: 'fURM supply' }, { v: num(s.yieldCapacity), l: 'URM capacity left' }]} />
             </div>
-            <p className="muted" style={{ fontSize: 14, marginTop: 14 }}>Effective yield is what the vault paid over its life so far. Target is the rate the Fortress aims for.</p>
+            <p className="muted" style={{ fontSize: 'var(--fs-subhead)', marginTop: 14 }}>Effective yield is what the vault paid over its life so far. Target is the rate the Fortress aims for.</p>
             <div style={{ marginTop: 28 }}>
               <YourPosition items={[{ label: 'Your fURM', key: 'fURM' }, { label: 'Worth today', key: 'fURM', unit: 'URM', mult: toAssets }, { label: 'URM in wallet', key: 'URM' }]} />
             </div>
@@ -50,10 +50,10 @@ export default async function Fountain() {
         <div className="stat"><b>{bps(cfg.depositFee, 0)} / {bps(cfg.withdrawFee)}</b><span>deposit / withdraw fee</span></div>
       </div></section>
       <section className="wrap sec">
-        <div className="card glass" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 }}>
+        <div className="card glass-rim" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 }}>
           <h2 className="h2" style={{ fontSize: 'clamp(32px,4vw,48px)' }}>Your URM works<br /><span className="acc">the night shift.</span></h2>
-          <p className="muted" style={{ fontSize: 18, lineHeight: 1.55, margin: 0 }}>No claiming, no rebasing, nothing to babysit. The Fortress pays into the vault around the clock, so each fURM is worth a little more URM every morning.</p>
-          <p style={{ margin: 0, fontSize: 17 }}><b className="acc" style={{ fontSize: 28 }}>{num(s.interestPerDay, 2)} URM</b> <span className="muted">paid to depositors every day right now</span></p>
+          <p className="muted" style={{ fontSize: 'var(--fs-body)', lineHeight: 1.55, margin: 0 }}>No claiming, no rebasing, nothing to babysit. The Fortress pays into the vault around the clock, so each fURM is worth a little more URM every morning.</p>
+          <p style={{ margin: 0, fontSize: 'var(--fs-body)' }}><b className="acc" style={{ fontSize: 'var(--fs-title2)' }}>{num(s.interestPerDay, 2)} URM</b> <span className="muted">paid to depositors every day right now</span></p>
         </div>
       </section>
       <section className="wrap sec">

@@ -38,10 +38,10 @@ export default async function Referral() {
       </section>
       <section className="wrap sec">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}><h2 className="h2">Referrers</h2><span className="muted">{rows.length} registered</span></div>
-        <div className="tbl glass" style={{ marginTop: 24 }}>
+        <div className="tbl glass-rim" style={{ marginTop: 24 }}>
           <table>
             <thead><tr><th>Referrer</th><th>Invested through them</th><th>Unpaid</th><th>Paid</th><th>Last</th></tr></thead>
-            <tbody>{rows.map((x) => <tr key={x.addr}><td className="tcell-title"><b>{x.name || 'anon'}</b> <span className="mono muted" style={{ fontSize: 13 }}>{short(x.addr)}</span></td><td data-label="Invested through them">${x.invested} · {x.count} invest{x.count === 1 ? '' : 's'}</td><td data-label="Unpaid">${x.unpaid}</td><td data-label="Paid">${x.paid}</td><td data-label="Last" className="muted">{x.inv > 0 ? ago(x.last) : '—'}</td></tr>)}</tbody>
+            <tbody>{rows.map((x) => <tr key={x.addr}><td className="tcell-title"><b>{x.name || 'anon'}</b> <span className="mono muted" style={{ fontSize: 'var(--fs-footnote)' }}>{short(x.addr)}</span></td><td data-label="Invested through them">${x.invested} · {x.count} invest{x.count === 1 ? '' : 's'}</td><td data-label="Unpaid">${x.unpaid}</td><td data-label="Paid">${x.paid}</td><td data-label="Last" className="muted">{x.inv > 0 ? ago(x.last) : '—'}</td></tr>)}</tbody>
           </table>
         </div>
       </section>

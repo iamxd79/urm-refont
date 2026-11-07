@@ -35,9 +35,9 @@ export default async function Circle() {
               <Link className="btn btn-outline btn-lg" href="/circle/temple">Enter the Temple</Link>
             </div>
           </div>
-          <div className="side card glass">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}><b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>BURNED FOREVER</b><span className="pill" style={{ background: 'var(--accent)', color: 'var(--onAccent)' }}>Live</span></div>
-            <p style={{ margin: '10px 0 0', fontSize: 56, fontWeight: 800 }} className="acc">{num(s.burnedPercent, 2)}%</p>
+          <div className="side card glass-rim">
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}><b className="eyebrow">BURNED FOREVER</b><span className="pill" style={{ background: 'var(--accent)', color: 'var(--onAccent)' }}>Live</span></div>
+            <p style={{ margin: '10px 0 0', fontSize: 'var(--fs-display)', fontWeight: 800 }} className="acc">{num(s.burnedPercent, 2)}%</p>
             <p className="muted" style={{ margin: 0 }}>{num(s.burned)} of 1,000,000 ULTRAROUND</p>
             <ul className="list" style={{ marginTop: 16, background: 'var(--bg)' }}>
               <li><span className="k">Burns per day</span><strong>{num(ch.burnPerDay)}</strong></li>
@@ -56,14 +56,14 @@ export default async function Circle() {
       </section>
       <section className="wrap sec">
         <h2 className="h2">Where the supply sits.</h2>
-        <div className="card glass" style={{ marginTop: 28 }}>
+        <div className="card glass-rim" style={{ marginTop: 28 }}>
           <SupplyBar parts={[{ label: 'Holders', value: n(s.holders), color: '#dfe9fb' }, { label: 'Liquidity pools', value: n(s.pools), color: '#5d93f0' }, { label: 'Burned', value: n(s.burned), color: '#ff7a2e' }, { label: 'Locked in RAGE', value: n(s.rage), color: '#ff3d3d' }, { label: 'URM, CDP, Temple and ecosystem', value: other, color: '#d7b067' }]} />
         </div>
         <div className="grid2" style={{ marginTop: 20 }}>
-          <article className="cream glass" style={{ padding: 28 }}><h3 className="h3">Ultraround Temple</h3><p style={{ lineHeight: 1.5 }}>Become a cult leader. Stake ULTRAROUND, summon templars, compound or claim your rewards.</p>
+          <article className="cream glass-rim" style={{ padding: 28 }}><h3 className="h3">Ultraround Temple</h3><p style={{ lineHeight: 1.5 }}>Become a cult leader. Stake ULTRAROUND, summon templars, compound or claim your rewards.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 10 }}><div className="tile"><b>{num(t?.state?.circlePodsBalance)}</b><span>ULTRAROUND in the temple</span></div><div className="tile"><b>{num(t?.state?.walletCount)}</b><span>cult leaders</span></div></div>
             <Link className="btn btn-ink btn-block" style={{ marginTop: 16 }} href="/circle/temple">Start praying</Link></article>
-          <article className="card glass"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint URM against it. Liquidity without selling.</p>
+          <article className="card glass-rim"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint URM against it. Liquidity without selling.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 10 }}><div className="tile" style={{ background: 'var(--bg)' }}><b>{num(s.urmCdp)}</b><span>ULTRAROUND in CDP</span></div><div className="tile" style={{ background: 'var(--bg)' }}><b>{bps(cdp?.currentInterestRate)}</b><span>yearly rate</span></div></div>
             <Link className="btn btn-primary btn-block" style={{ marginTop: 16 }} href="/urm/cdp">Open a position</Link></article>
         </div>

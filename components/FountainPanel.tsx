@@ -15,14 +15,14 @@ export default function FountainPanel(p: P) {
   const a = Number(amt.replace(/,/g, '')) || 0;
   const bal = wd ? balances.fURM : balances.URM;
   return (
-    <div className="cream glass" style={{ padding: 24 }}>
+    <div className="cream glass-rim" style={{ padding: 24 }}>
       <div className="seg" role="tablist" aria-label="Fountain action">
         <button role="tab" aria-selected={!wd} onClick={() => setWd(false)}>Deposit</button>
         <button role="tab" aria-selected={wd} onClick={() => setWd(true)}>Withdraw</button>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <label htmlFor="famt" className="label">{wd ? 'You withdraw' : 'You deposit'}</label>
-        <span className="muted" style={{ fontSize: 13 }}>Balance: {isConnected && bal !== undefined ? f(bal, 2) : '—'} {wd ? 'fURM' : 'URM'}</span>
+        <span className="muted" style={{ fontSize: 'var(--fs-footnote)' }}>Balance: {isConnected && bal !== undefined ? f(bal, 2) : '—'} {wd ? 'fURM' : 'URM'}</span>
       </div>
       <div className="field">
         <input id="famt" inputMode="decimal" value={amt} onChange={(e) => setAmt(e.target.value.replace(/[^0-9.,]/g, ''))} />
@@ -51,7 +51,7 @@ export default function FountainPanel(p: P) {
           <li><span className="k">Worth today</span><strong>{f((balances.fURM || 0) * p.toAssets, 2)} URM</strong></li>
         </ul>
       )}
-      <p style={{ margin: '14px 0 0', fontSize: 14, lineHeight: 1.5, background: 'var(--soft)', borderRadius: 16, padding: '12px 14px' }}>
+      <p style={{ margin: '14px 0 0', fontSize: 'var(--fs-subhead)', lineHeight: 1.5, background: 'var(--soft)', borderRadius: 'var(--r-sm)', padding: '12px 14px' }}>
         <b>What you sign:</b> {wd ? 'one withdraw. URM or USDC comes back to your wallet.' : 'one approval for URM, then one deposit. fURM comes back to your wallet.'} Nothing else.
       </p>
       <div style={{ marginTop: 14 }}>
@@ -59,7 +59,7 @@ export default function FountainPanel(p: P) {
           ? <a className="btn btn-ink btn-lg btn-block" href={p.app} target="_blank" rel="noreferrer">{wd ? 'Withdraw' : 'Deposit'} in the current app</a>
           : <ConnectButton block className="btn btn-ink btn-lg" label={wd ? 'Connect wallet to withdraw' : 'Connect wallet to deposit'} />}
       </div>
-      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}>Target rate, not a promise. <a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a></p>
+      <p className="muted" style={{ fontSize: 'var(--fs-footnote)', textAlign: 'center', margin: '12px 0 0' }}>Target rate, not a promise. <a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a></p>
     </div>
   );
 }

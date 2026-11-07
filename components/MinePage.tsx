@@ -50,7 +50,7 @@ export default function MinePage(c: Cfg) {
       </section>
       <section className="wrap sec">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}><h2 className="h2">Leaderboard</h2><span className="muted">Live, refreshed every minute</span></div>
-        <div className="tbl glass" style={{ marginTop: 24 }}>
+        <div className="tbl glass-rim" style={{ marginTop: 24 }}>
           <table>
             <thead><tr><th>{c.leader}</th><th>Share of {c.unit}</th><th>Daily rewards</th><th>Sold so far</th><th>Last move</th></tr></thead>
             <tbody>{rows.slice(0, 25).map((r) => <tr key={r.wallet}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>

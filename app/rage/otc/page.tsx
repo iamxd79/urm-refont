@@ -41,8 +41,8 @@ export default async function Otc() {
               <div className="tile"><span>Bonus range</span><b>{num(o?.config?.bonusMin)}% to {num(o?.config?.bonusMax)}%</b></div>
             </div>
             {!active && (
-              <div className="cream glass" style={{ marginTop: 24, padding: 28 }}>
-                <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>THIS ROUND IS EMPTY</b>
+              <div className="cream glass-rim" style={{ marginTop: 24, padding: 28 }}>
+                <b className="eyebrow">THIS ROUND IS EMPTY</b>
                 <h2 className="h3" style={{ marginTop: 8 }}>All sold out.{nextDate ? ` Next drop ${nextDate}.` : ''}</h2>
                 <p className="muted" style={{ margin: '8px 0 0' }}>{nextDate ? <>Next drop in <b style={{ color: 'var(--ink)' }}><Countdown to={next} done="any moment now" /></b>. </> : 'Next drop is coming soon. '}Drops get announced on X first.</p>
                 <a className="btn btn-ink" style={{ marginTop: 16 }} href="https://x.com/therageprotocol">Follow @therageprotocol</a>

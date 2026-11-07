@@ -84,7 +84,7 @@ export function OrbPulse({ price, checkedAt, defense }: { price: number; checked
     <div className="orb" role="img" aria-label={`Peg check: URM at ${price.toFixed(3)} dollars, ${onPeg ? 'on peg' : 'off peg'}. Total defense ${defense}.`}>
       <span className="orb-ring" aria-hidden="true" />
       <span key={pulse} className={'orb-ping' + (pulse ? ' go' : '')} aria-hidden="true" />
-      <div className="readout" aria-hidden="true">
+      <div className="readout glass-clear" aria-hidden="true">
         <span><b>PEG CHECK</b> ${price.toFixed(3)} · {onPeg ? 'on peg' : 'off peg'}</span>
         <span className="sub">Defense {defense} · re-checked every minute</span>
       </div>

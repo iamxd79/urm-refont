@@ -19,7 +19,7 @@ export default function ProductLogo({ id, size = 24, alt = '' }: { id: string; s
 /** Logo + name + ticker, shown above each product page title. */
 export function Brand({ id, ticker, sub }: { id: string; ticker?: string; sub?: string }) {
   return (
-    <div className="brand-badge">
+    <div className="brand-badge glass-clear">
       <ProductLogo id={id} size={56} />
       <div>
         <b>{NAMES[id] ?? id}</b>

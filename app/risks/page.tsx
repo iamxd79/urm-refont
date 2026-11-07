@@ -31,8 +31,8 @@ export default async function Risks() {
       <section className="wrap sec">
         <div className="grid2">
           {items.map(([tag, t, d]) => (
-            <article key={t} className="card glass">
-              <span className="acc" style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1.5 }}>{tag.toUpperCase()}</span>
+            <article key={t} className="card glass-rim">
+              <span className="acc" style={{ fontSize: 'var(--fs-footnote)', fontWeight: 700, letterSpacing: 1.5 }}>{tag.toUpperCase()}</span>
               <h2 className="h3" style={{ marginTop: 8 }}>{t}</h2>
               <p className="muted" style={{ lineHeight: 1.6, marginBottom: 0 }}>{d}</p>
             </article>
@@ -40,9 +40,9 @@ export default async function Risks() {
         </div>
       </section>
       <section className="wrap sec">
-        <div className="cream glass" style={{ padding: 36 }}>
+        <div className="cream glass-rim" style={{ padding: 36 }}>
           <h2 className="h3">What we do about it</h2>
-          <ul style={{ lineHeight: 1.9, fontSize: 17, paddingLeft: 22 }}>
+          <ul style={{ lineHeight: 1.9, fontSize: 'var(--fs-body)', paddingLeft: 22 }}>
             <li>Audits for URM, Fountain, the CDP, RAGE, HESTIA and the Hestia Mine</li>
             <li>Every contract verified on Basescan, every number on this site read live from the chain</li>
             <li>Connecting a wallet only reads balances. It never moves funds.</li>

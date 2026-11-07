@@ -15,7 +15,7 @@ export function Steps({ items }: { items: { t?: string; d: string }[] }) {
   return (
     <div className="steps">
       {items.map((s, i) => (
-        <div key={i} className="step"><span className="n">{i + 1}</span>{s.t && <h3>{s.t}</h3>}<p style={s.t ? undefined : { color: 'var(--text)', marginTop: 14, fontSize: 17 }}>{s.d}</p></div>
+        <div key={i} className="step"><span className="n">{i + 1}</span>{s.t && <h3>{s.t}</h3>}<p style={s.t ? undefined : { color: 'var(--text)', marginTop: 14, fontSize: 'var(--fs-body)' }}>{s.d}</p></div>
       ))}
     </div>
   );

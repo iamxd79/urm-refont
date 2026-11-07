@@ -43,3 +43,21 @@ npm run mock       # offline, uses the fixtures in /mock
 - `app/globals.css` design tokens per product (`data-theme="rage|hestia|circle"`)
 
 Design rules: solid colours only, no gradients, glass only on borders, no dashed lines. Space Grotesk for punch lines, Inter for everything else.
+
+## Design system
+
+Everything lives in `app/globals.css`, in this order: tokens, base, type, layout, glass, components, navigation, heroes, motion.
+
+- **Type scale:** `--fs-caption` 12 · `--fs-footnote` 13 · `--fs-subhead` 15 · `--fs-callout` 16 · `--fs-body` 17 · `--fs-title3` · `--fs-title2` · `--fs-title1` · `--fs-display`, plus fluid `--fs-h1/h2/h3`. In components use `fontSize: 'var(--fs-…)'`, never a raw number.
+- **Hierarchy:** `.eyebrow` (caps label) → `.h1`/`.h2` → `.punch` (Space Grotesk) → `.lead` → body → `.muted` footnotes. One `h1` per page, `h2` per section, `h3` per card.
+- **Space:** 4pt grid, `--s-1` (4) to `--s-22` (88). `--gutter` and `--section` shrink on phones.
+- **Radius (concentric):** `--r-xs` 12 · `--r-sm` 16 · `--r-md` 20 · `--r-lg` 28 · `--r-xl` 32 · `--r-pill`. An inner shape uses the outer radius minus its padding.
+- **Glass effect** (mirrors SwiftUI `.glassEffect()`):
+  - `.glass-regular`: floating chrome (nav, tabs)
+  - `.glass-clear`: small chips on photos (brand badge, peg readout)
+  - `.glass-solid`: menus over content
+  - `.glass-interactive`: add to a glass control for the spring press
+  - `.glass-rim`: solid card with a `--glass-rim` (3px) refracting edge
+
+  Tints come from `--glass-tint*` per product theme, and everything falls back to solid with *Reduce transparency*.
+- **Breakpoints:** 400 (small phones), 720 (phones), 860 (tables stack), 900 (mobile nav and heroes), 1100 (nav compacts).

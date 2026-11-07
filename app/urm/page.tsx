@@ -47,16 +47,16 @@ export default async function Urm() {
               <a className="btn btn-outline btn-lg" href="https://app.uniswap.org/swap?chain=base&outputCurrency=0xf0e3349f00972475a5d16721796091aa3b997837">Buy URM</a>
             </div>
           </div>
-          <div className="side cream glass" style={{ padding: 28 }}>
-            <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>PEG CHECK</b>
+          <div className="side cream glass-rim" style={{ padding: 28 }}>
+            <b className="eyebrow">PEG CHECK</b>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14 }}>
               <span className="pill" style={{ background: onPeg ? '#2e7d50' : '#b3261e', color: '#fff' }}>{onPeg ? 'On peg' : 'Off peg'}</span>
-              <b style={{ fontSize: 40 }}>${num(price, 3)}</b><span className="muted">URM price</span>
+              <b style={{ fontSize: 'var(--fs-title1)' }}>${num(price, 3)}</b><span className="muted">URM price</span>
             </div>
             <p className="muted" style={{ margin: '20px 0 0', fontWeight: 600 }}>Total defense</p>
-            <p style={{ margin: '2px 0 12px', fontSize: 40, fontWeight: 800 }}>{usd(ov.totalDefense)}</p>
+            <p style={{ margin: '2px 0 12px', fontSize: 'var(--fs-title1)', fontWeight: 800 }}>{usd(ov.totalDefense)}</p>
             <SupplyBar parts={defense} />
-            <p className="muted" style={{ fontSize: 14, margin: '16px 0 0' }}>The keeper checks the peg every 1.5 to 2 hours. Last time it had to step in: {pegDate(fs.state?.lastPegDefense)}.</p>
+            <p className="muted" style={{ fontSize: 'var(--fs-subhead)', margin: '16px 0 0' }}>The keeper checks the peg every 1.5 to 2 hours. Last time it had to step in: {pegDate(fs.state?.lastPegDefense)}.</p>
           </div>
         </div>
       </Hero>
@@ -71,8 +71,8 @@ export default async function Urm() {
       </section>
 
       <section className="wrap sec grid2">
-        <article className="cream glass" style={{ padding: 32 }}>
-          <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>EARN</b>
+        <article className="cream glass-rim" style={{ padding: 32 }}>
+          <b className="eyebrow">EARN</b>
           <h3 className="h3" style={{ marginTop: 8 }}>Fountain URM</h3>
           <p style={{ lineHeight: 1.5 }}>Deposit URM, get fURM. Each fURM is worth more URM every day. Withdraw anytime, to URM or USDC.</p>
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(96px,1fr))', gap: 10 }}>
@@ -82,8 +82,8 @@ export default async function Urm() {
           </div>
           <Link href="/urm/fountain" className="btn btn-ink btn-lg btn-block" style={{ marginTop: 20 }}>Open Fountain</Link>
         </article>
-        <article className="card glass" style={{ padding: 32 }}>
-          <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>BORROW</b>
+        <article className="card glass-rim" style={{ padding: 32 }}>
+          <b className="eyebrow">BORROW</b>
           <h3 className="h3" style={{ marginTop: 8 }}>URM CDP</h3>
           <p style={{ lineHeight: 1.5 }}>Lock RAGE, HESTIA or ULTRAROUND and mint URM against it. Your position is an NFT you can settle, unwind or transfer anytime.</p>
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(96px,1fr))', gap: 10 }}>
@@ -99,13 +99,13 @@ export default async function Urm() {
         <h2 className="h2">Dashboard.</h2>
         <p className="punch">Every number, live from the contracts.</p>
         <div className="grid" style={{ marginTop: 32, gridTemplateColumns: 'repeat(auto-fit,minmax(min(340px,100%),1fr))', gap: 20 }}>
-          <div><h3 className="h3" style={{ fontSize: 21, marginBottom: 12 }}>Where the supply sits</h3><ul className="list">
+          <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 12 }}>Where the supply sits</h3><ul className="list">
             {[['Circulating', sup.circulating], ['Fortress', sup.fortress], ['Flanking pool', sup.flankingPool], ['Towers', sup.tower], ['Holders', sup.holders], ['Main pool', sup.mainPool], ['RAGE pool', sup.ragePool], ['Initial supply', sup.initial]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong>{num(v)}</strong></li>)}
           </ul></div>
-          <div><h3 className="h3" style={{ fontSize: 21, marginBottom: 12 }}>Defense</h3><ul className="list">
+          <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 12 }}>Defense</h3><ul className="list">
             {[['Soft defense', usd(ov.softDefense)], ['Hard defense', usd(ov.hardDefense)], ['Defense surplus', usd(ov.totalDefenseSurplus)], ['Counter defense', usd(ov.counterDefense)], ['Below-peg room', usd(fs.pegDefenseRoom?.usdcLeft)], ['Above-peg room', num(fs.pegDefenseRoom?.urmLeft) + ' URM'], ['Liquidity to market cap', num(o?.liquidity?.marketCapRatio, 2) + '%']].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong>{v}</strong></li>)}
           </ul></div>
-          <div><h3 className="h3" style={{ fontSize: 21, marginBottom: 12 }}>Fountain and CDP</h3><ul className="list">
+          <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 12 }}>Fountain and CDP</h3><ul className="list">
             {[['Fountain staked', num(fo.totalAssets)], ['Fountain interest per day', num(fo.interestPerDay, 2)], ['Fountain idle supply', num(fo.urmIdle)], ['CDP borrowed', num(cdp?.urmDebt)], ['CDP interest per day', num(cdp?.urmCdpInterestPerDay, 2)], ['CDP paid to the Fortress', num(cdp?.urmCdpPaidToFortress)]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong>{v}</strong></li>)}
           </ul></div>
         </div>

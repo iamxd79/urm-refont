@@ -17,7 +17,7 @@ export type Tab = { href: string; label: string };
 export default function Nav({ active, tabs, current, overlay }: { active?: string; tabs?: Tab[]; current?: string; overlay?: boolean }) {
   return (
     <header className={'nav' + (overlay ? ' nav-over' : '')}>
-      <nav className="navbar lg" aria-label="Main">
+      <nav className="navbar glass-regular" aria-label="Main">
         <Link href="/" className="brand" aria-label="URM home">
           <Logo /><span>URM</span>
         </Link>
@@ -33,7 +33,7 @@ export default function Nav({ active, tabs, current, overlay }: { active?: strin
       </nav>
       {tabs && (
         <div className="wrap navtabs">
-          <div className="seg lg" role="navigation" aria-label="Section">
+          <div className="seg glass-regular" role="navigation" aria-label="Section">
             {tabs.map((t) => <Link key={t.href} href={t.href} aria-current={current === t.href ? 'page' : undefined}>{t.label}</Link>)}
           </div>
         </div>
