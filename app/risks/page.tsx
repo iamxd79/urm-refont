@@ -46,7 +46,7 @@ export default async function Risks() {
             <li>Every contract verified on Basescan, every number on this site read live from the chain</li>
             <li>Connecting a wallet only reads balances. It never moves funds.</li>
           </ul>
-          <div className="row" style={{ marginTop: 'var(--s-2)' }}><Link className="chip chip-ink" href="/#trust">Audits and contracts</Link><a className="chip chip-line" href="https://ultraroundmoney.gitbook.io/ultraroundmoney/">Read the docs</a></div>
+          <div className="row" style={{ marginTop: 'var(--s-2)' }}><Link className="chip chip-ink" href="/#trust">Audits and contracts</Link><Link className="chip chip-line" href="/docs">Read the docs</Link></div>
         </div>
       </section>
       <Footer />

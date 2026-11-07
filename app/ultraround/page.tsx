@@ -27,10 +27,10 @@ export default async function Circle() {
         <div className="split">
           <div className="main">
             <h1 className="h1">Burns on<br /><span className="acc">every sell.</span></h1>
-            <p className="lead">ULTRAROUND ($CIRCLE) is an autonomous, deflationary ETH proxy on Base. Its Chaos Engine burns supply with pool fees, with no transaction tax.</p>
+            <p className="lead">ULTRAROUND is an autonomous, deflationary ETH proxy on Base. Its Chaos Engine burns supply with pool fees, with no transaction tax.</p>
             <div className="row" style={{ marginTop: 'var(--s-8)' }}>
               <a className="btn btn-primary btn-lg" href={`https://app.uniswap.org/swap?chain=base&outputCurrency=${C.circle}`}>Buy ULTRAROUND</a>
-              <Link className="btn btn-outline btn-lg" href="/circle/temple">Enter the Temple</Link>
+              <Link className="btn btn-outline btn-lg" href="/ultraround/temple">Enter the Temple</Link>
             </div>
           </div>
           <div className="side card glass-rim">
@@ -60,7 +60,7 @@ export default async function Circle() {
         <div className="grid2" style={{ marginTop: 'var(--s-5)' }}>
           <article className="cream glass-rim vstack"><h3 className="h3">Ultraround Temple</h3><p style={{ lineHeight: 1.5 }}>Become a cult leader. Stake ULTRAROUND, summon templars, compound or claim your rewards.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile"><b>{num(t?.state?.circlePodsBalance)}</b><span>ULTRAROUND in the temple</span></div><div className="tile"><b>{num(t?.state?.walletCount)}</b><span>cult leaders</span></div></div>
-            <Link className="btn btn-ink btn-block" style={{ marginTop: 'auto' }} href="/circle/temple">Start praying</Link></article>
+            <Link className="btn btn-ink btn-block" style={{ marginTop: 'auto' }} href="/ultraround/temple">Start praying</Link></article>
           <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint URM against it. Liquidity without selling.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile" style={{ background: 'var(--bg)' }}><b>{num(s.urmCdp)}</b><span>ULTRAROUND in CDP</span></div><div className="tile" style={{ background: 'var(--bg)' }}><b>{bps(cdp?.currentInterestRate)}</b><span>yearly rate</span></div></div>
             <Link className="btn btn-primary btn-block" style={{ marginTop: 'auto' }} href="/urm/cdp">Open a position</Link></article>
@@ -82,7 +82,7 @@ export default async function Circle() {
         <h2 className="h2">Questions.</h2>
         <Faq items={[
           ['What is the Ultraround Chaos Engine?', 'A controller contract that runs the deflation. It collects pool fees, swaps the WETH back and forth, and burns ULTRAROUND, with no tax on your trades.'],
-          ['How does RAGE make ULTRAROUND stronger?', '20% of every RAGE investment buys ULTRAROUND, wraps it into pCircle on Peapods and locks it as backing.'],
+          ['How does RAGE make ULTRAROUND stronger?', '20% of every RAGE investment buys ULTRAROUND, wraps it into a Peapods pod and locks it as backing.'],
           ['What is the Ultraround Temple?', 'A staking contract inspired by BNBMiner, with a Peapods integration. Buy templars with ULTRAROUND, then compound or sell your rewards.'],
           ['Why Base?', 'The engine trades constantly. Base keeps those fees tiny, so the burn stays profitable.'],
         ]} />

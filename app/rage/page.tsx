@@ -28,7 +28,7 @@ export default async function Rage() {
     ['Chaos Engine', C.rageChaos, 'Protocol operations', `https://basescan.org/address/${C.rageChaos}`, 'Basescan'],
     ['Rage OTC', C.rageOtc, 'Ecosystem supply auction', `https://basescan.org/address/${C.rageOtc}`, 'Basescan'],
     ['pHestia pod', C.pHestia, `${num(v.activeHestia)} HESTIA in backing`, `https://peapods.finance/pod/8453/${C.pHestia}`, 'Peapods'],
-    ['pCircle pod', C.pCircle, `${num(v.activeCircle)} ULTRAROUND in backing`, `https://peapods.finance/pod/8453/${C.pCircle}`, 'Peapods'],
+    ['ULTRAROUND pod', C.pCircle, `${num(v.activeCircle)} ULTRAROUND in backing`, `https://peapods.finance/pod/8453/${C.pCircle}`, 'Peapods'],
   ];
   return (
     <div className="page has-bg" data-theme="rage">

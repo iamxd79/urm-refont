@@ -8,15 +8,15 @@ export const PRODUCTS: Product[] = [
   { key: 'urm', base: '/urm', name: '$URM', tabs: URM_TABS, cta: { label: 'Deposit', href: '/urm/fountain' }, stat: 'peg' },
   { key: 'rage', base: '/rage', name: 'RAGE', theme: 'rage', tabs: RAGE_TABS, cta: { label: 'Invest', href: '/rage#invest' }, stat: 'price' },
   { key: 'hestia', base: '/hestia', name: 'HESTIA', theme: 'hestia', tabs: HESTIA_TABS, cta: { label: 'Mine', href: '/hestia/mine' }, stat: 'burned' },
-  { key: 'circle', base: '/circle', name: 'ULTRAROUND', theme: 'circle', tabs: CIRCLE_TABS, cta: { label: 'Temple', href: '/circle/temple' }, stat: 'burned' },
+  { key: 'circle', base: '/ultraround', name: 'ULTRAROUND', theme: 'circle', tabs: CIRCLE_TABS, cta: { label: 'Temple', href: '/ultraround/temple' }, stat: 'burned' },
 ];
 export const GLOBAL = [
   { href: '/urm', label: '$URM', key: 'urm' },
   { href: '/rage', label: 'RAGE', key: 'rage' },
   { href: '/hestia', label: 'HESTIA', key: 'hestia' },
-  { href: '/circle', label: 'ULTRAROUND', key: 'circle' },
+  { href: '/ultraround', label: 'ULTRAROUND', key: 'circle' },
   { href: '/earn', label: 'Earn', key: 'earn' },
 ];
-export const DOCS = 'https://ultraroundmoney.gitbook.io/ultraroundmoney/';
+export const DOCS = '/docs';
 export const productFor = (path: string) => PRODUCTS.find((p) => path === p.base || path.startsWith(p.base + '/'));
 export type Stats = Record<'urm' | 'rage' | 'hestia' | 'circle', { label: string; value: string } | null>;

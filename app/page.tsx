@@ -21,14 +21,14 @@ export default async function Home() {
   const words = [
     `$${num(price, 3)}`, Math.abs(price - 1) <= 0.01 ? 'PEG OK' : '', `DEFENSE ${usd(ov.totalDefense)}`, `fURM ${num(fs.toAssets, 4)}`, `APY ${pct(yieldPct, 0)}`,
     `RAGE FMV $${num(rb?.rbpView?.fmv, 2)}`, `BACKING ${num(rb?.rbpView?.backingPerShare, 3)}`, `TREASURY ${usd(rb?.rbpView?.activeAssetsUsdcValue)}`,
-    `HESTIA BURNED ${pct(h?.supply?.burnedPercent)}`, `CIRCLE BURNED ${pct(c?.supply?.burnedPercent)}`, `MCAP ${usd(u?.marketCap)}`, 'BASE',
+    `HESTIA BURNED ${pct(h?.supply?.burnedPercent)}`, `ULTRAROUND BURNED ${pct(c?.supply?.burnedPercent)}`, `MCAP ${usd(u?.marketCap)}`, 'BASE',
   ].filter((w) => w && !w.includes('—'));
   const checkedAt = Date.now();
   const cards = [
     { id: 'urm', href: '/urm', theme: 'cream', name: '$URM', tag: 'The ecosystem stablecoin', text: 'A dollar built like a fortress, defended onchain. Earn on it in Fountain, or mint it against your tokens in the CDP.', big: pct(yieldPct, 0), small: 'target APY in Fountain', cta: 'Open URM', logo: null },
     { id: 'rage', href: '/rage', theme: 'rage', name: 'RAGE', tag: 'Volatility harvesting', text: 'Backed by a treasury of HESTIA and ULTRAROUND. When RAGE trades above fair value, the premium goes back into the backing.', big: num(rb?.rbpView?.backingPerShare, 3), small: 'backing per share', cta: 'Open RAGE', logo: '/assets/rage.png' },
     { id: 'hestia', href: '/hestia', theme: 'hestia', name: 'HESTIA', tag: 'Deflationary store of value', text: 'Paired to USDC on Base. The Chaos Engine builds a reserve from fees, then buys HESTIA and burns it.', big: pct(h?.supply?.burnedPercent), small: 'of supply burned', cta: 'Open HESTIA', logo: '/assets/hestia.png' },
-    { id: 'circle', href: '/circle', theme: 'circle', name: 'ULTRAROUND', tag: '$CIRCLE, burns on every sell', text: 'No transaction tax. Pool fees fuel the burn, so supply only goes one way.', big: num(c?.supply?.burned), small: 'CIRCLE burned', cta: 'Open ULTRAROUND', logo: '/assets/ultraround.png' },
+    { id: 'circle', href: '/ultraround', theme: 'circle', name: 'ULTRAROUND', tag: 'Burns on every sell', text: 'No transaction tax. Pool fees fuel the burn, so supply only goes one way.', big: num(c?.supply?.burned), small: 'ULTRAROUND burned', cta: 'Open ULTRAROUND', logo: '/assets/ultraround.png' },
   ];
   return (
     <div className="page has-bg">
@@ -53,7 +53,7 @@ export default async function Home() {
         <div className="stat"><b style={{ color: '#d7b067' }}><CountUp text={num(fs.toAssets, 4)} /></b><span>fURM share price</span></div>
         <div className="stat"><b style={{ color: '#ff3d3d' }}><CountUp text={num(rb?.rbpView?.backingPerShare, 3)} /></b><span>RAGE backing per share</span></div>
         <div className="stat"><b style={{ color: '#ff7a2e' }}><CountUp text={pct(h?.supply?.burnedPercent)} /></b><span>of HESTIA burned</span></div>
-        <div className="stat"><b style={{ color: '#5d93f0' }}><CountUp text={pct(c?.supply?.burnedPercent)} /></b><span>of CIRCLE burned</span></div>
+        <div className="stat"><b style={{ color: '#5d93f0' }}><CountUp text={pct(c?.supply?.burnedPercent)} /></b><span>of ULTRAROUND burned</span></div>
       </div></section>
       <section className="wrap sec">
         <div className="split">

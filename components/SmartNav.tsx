@@ -95,7 +95,7 @@ export default function SmartNav({ stats }: { stats: Stats }) {
             {GLOBAL.map((i) => (
               <Link key={i.key} href={i.href} aria-current={path.startsWith(i.href) ? 'page' : undefined}>{i.key !== 'earn' && <ProductLogo id={i.key} size={20} />}{i.label}</Link>
             ))}
-            <a href={DOCS}>Docs</a>
+            <Link href={DOCS} aria-current={path?.startsWith("/docs") ? "page" : undefined}>Docs</Link>
           </div>
         )}
 
@@ -121,7 +121,7 @@ export default function SmartNav({ stats }: { stats: Stats }) {
                     </Link>
                   ))}
                   <Link href="/earn" role="menuitem">Earn</Link>
-                  <a href={DOCS} role="menuitem">Docs</a>
+                  <Link href={DOCS} role="menuitem">Docs</Link>
                   <Link href="/risks" role="menuitem">Risks</Link>
                 </div>
               )}

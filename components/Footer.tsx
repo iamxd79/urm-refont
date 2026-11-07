@@ -20,8 +20,8 @@ export default function Footer({ name = 'URM ecosystem', x = 'URMdollar' }: { na
             <b className="flogo" style={{ fontSize: 'var(--fs-body)' }}><ProductLogo id={({ RAGE: 'rage', HESTIA: 'hestia', ULTRAROUND: 'circle', URM: 'urm' } as Record<string, string>)[name] ?? 'eco'} size={36} />{name}</b>
             <p className="muted" style={{ margin: '10px 0 0', maxWidth: 300 }}>{name === 'URM ecosystem' ? 'A community-driven ecosystem that builds stores of value on Base.' : 'Part of the URM ecosystem, built on Base.'}</p>
           </div>
-          {col('PRODUCTS', [['URM', '/urm', 'urm'], ['Fountain', '/urm/fountain'], ['CDP', '/urm/cdp'], ['RAGE', '/rage', 'rage'], ['HESTIA', '/hestia', 'hestia'], ['ULTRAROUND', '/circle', 'circle'], ['Earn', '/earn']])}
-          {col('SECURITY', [['Risks', '/risks'], ['URM audit', legacy('/urm/audit.pdf')], ['Contracts', '/#trust'], ['Docs', 'https://ultraroundmoney.gitbook.io/ultraroundmoney/']])}
+          {col('PRODUCTS', [['URM', '/urm', 'urm'], ['Fountain', '/urm/fountain'], ['CDP', '/urm/cdp'], ['RAGE', '/rage', 'rage'], ['HESTIA', '/hestia', 'hestia'], ['ULTRAROUND', '/ultraround', 'circle'], ['Earn', '/earn']])}
+          {col('SECURITY', [['Risks', '/risks'], ['URM audit', legacy('/urm/audit.pdf')], ['Contracts', '/#trust'], ['Docs', '/docs']])}
           {col('FOLLOW', follow.map((h) => [`@${h}`, `https://x.com/${h}`] as [string, string]))}
           {col('COMMUNITY', [['Telegram', 'https://t.me/urm_ecosystem'], ['Discord', 'https://discord.gg/J3U8wNmKQa'], ['GitHub', 'https://github.com/ultraroundMoney']])}
           {col('DATA', [['Dune', 'https://dune.com/ultraround_money'], ['DefiLlama', 'https://defillama.com/protocol/urm'], ['Email', 'mailto:info@ultraroundmoney.com']])}
