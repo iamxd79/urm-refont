@@ -961,3 +961,18 @@ main:focus{outline:none}
 .dside-scroll::-webkit-scrollbar-thumb{background:transparent}
 .dside:hover .dside-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);background-clip:padding-box}
 .dside{max-height:calc(100dvh - 180px)}
+/* diagrams inside the narrow docs column respond to the column, not the screen */
+@container (max-width:900px){
+ .pf{grid-template-columns:1fr;justify-items:center}
+ .pf svg{max-width:440px}
+ .pf-copy{width:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-5)}
+ .cdps-ctrl{grid-template-columns:1fr;gap:var(--s-4)}
+ .cdps-ctrl .seg{justify-self:start}
+ .cdps-range{width:100%}
+}
+@container (max-width:560px){
+ .pf-copy{grid-template-columns:1fr}
+ .cdps-ctrl .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:100%}
+ .cdps-stage{gap:var(--s-2)}.cdps-mid svg,.cdps-rail{width:52px}.cdps-bar{height:180px}.cdps-col>b{font-size:var(--fs-title3)}
+}
+@media (max-width:900px){.dside{display:none}}
