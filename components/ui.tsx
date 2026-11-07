@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
+import CountUp from './motion/CountUp';
+import InView from './motion/InView';
 
 /** Photo hero: full-bleed image, copy on its empty side, iOS-style progressive blur at the bottom edge.
  *  On phones the image sits on top and the copy follows on the page colour. */
@@ -20,17 +22,18 @@ export function Steps({ items }: { items: { t?: string; d: string }[] }) {
     </div>
   );
 }
+const cu = (v: ReactNode) => (typeof v === 'string' && /\d/.test(v) ? <CountUp text={v} /> : v);
 export function Stats({ items }: { items: { v: ReactNode; l: string; c?: string }[] }) {
   return (
     <section className="band"><div className="wrap stats">
-      {items.map((s) => <div key={s.l} className="stat"><b style={s.c ? { color: s.c } : undefined}>{s.v}</b><span>{s.l}</span></div>)}
+      {items.map((s) => <div key={s.l} className="stat"><b style={s.c ? { color: s.c } : undefined}>{cu(s.v)}</b><span>{s.l}</span></div>)}
     </div></section>
   );
 }
 export function Tiles({ items }: { items: { v: ReactNode; l: string }[] }) {
   return (
     <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit,minmax(min(170px,100%),1fr))', gap: 'var(--s-3)' }}>
-      {items.map((s) => <div key={s.l} className="tile"><b>{s.v}</b><span>{s.l}</span></div>)}
+      {items.map((s) => <div key={s.l} className="tile"><b>{cu(s.v)}</b><span>{s.l}</span></div>)}
     </div>
   );
 }
@@ -38,12 +41,12 @@ export function Tiles({ items }: { items: { v: ReactNode; l: string }[] }) {
 export function SupplyBar({ parts }: { parts: { label: string; value: number; color: string }[] }) {
   const total = parts.reduce((a, p) => a + (isFinite(p.value) ? p.value : 0), 0) || 1;
   return (
-    <>
+    <InView>
       <div className="bar" role="img" aria-label={parts.map((p) => `${p.label} ${Math.round(p.value).toLocaleString('en-US')}`).join(', ')} style={{ height: 22, gap: 3 }}>
         {parts.map((p) => <div key={p.label} style={{ width: `${(p.value / total) * 100}%`, background: p.color }} />)}
       </div>
       <div className="legend">{parts.map((p) => <span key={p.label}><i style={{ background: p.color }} />{p.label} <b>{Math.round(p.value).toLocaleString('en-US')}</b></span>)}</div>
-    </>
+    </InView>
   );
 }
 export function Faq({ items }: { items: [string, string][] }) {

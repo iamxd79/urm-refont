@@ -6,6 +6,7 @@ import Countdown from '@/components/Countdown';
 import Check, { addr } from '@/components/Check';
 import { OtcPanel } from '@/components/Panels';
 import { Steps } from '@/components/ui';
+import OtcMeter from '@/components/OtcMeter';
 import { api } from '@/lib/api';
 import { num, n, legacy, ago } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
@@ -58,6 +59,7 @@ export default async function Otc() {
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>
         <p className="punch">A reverse Dutch auction.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}><OtcMeter active={active} bonus={n(o?.bonusCurrent)} min={n(o?.config?.bonusMin) || 1} max={n(o?.config?.bonusMax) || 20} last={n(o?.lastTx?.bonus) || 0} next={isFinite(next) ? next : null} /></div>
         <Steps items={[{ d: 'The ecosystem puts RAGE up for sale at fair value.' }, { d: 'The bonus on top grows every moment nobody buys.' }, { d: 'Wait for a bigger bonus, or buy before someone else does.' }]} />
       </section>
       <Check links={[{ label: 'RAGE audit', href: legacy('/rage/audit.pdf'), strong: true }, addr('Rage OTC', C.rageOtc), addr('Rage Depot', C.rageDepot), addr('RAGE token', C.rage, true), { label: 'Whitepaper', href: legacy('/rage/whitepaper.pdf') }]} />

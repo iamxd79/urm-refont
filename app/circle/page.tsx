@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
 import { YourPosition } from '@/components/Panels';
+import CircleBurnLoop from '@/components/CircleBurnLoop';
 import { Hero, Stats, SupplyBar, Faq } from '@/components/ui';
 import { api } from '@/lib/api';
 import { num, usd, bps, n, legacy, ago } from '@/lib/fmt';
@@ -68,11 +69,12 @@ export default async function Circle() {
       </section>
       <section className="wrap sec">
         <h2 className="h2">The engine.</h2>
-        <ul className="list" style={{ marginTop: 'var(--s-8)' }}>
+        <p className="punch">Every turn of the engine feeds the fire.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}><CircleBurnLoop burnedPct={n(s.burnedPercent)} burned={num(s.burned)} weth={num(c?.cctp?.weth, 4)} perDay={num(ch.burnPerDay)} last={ago(ch.lastBurn)} /></div>
+        <ul className="list" style={{ marginTop: 'var(--s-5)' }}>
           <li><span className="k">Main pool liquidity</span><strong>{usd(c?.liquidity?.mainValue)}</strong></li>
           <li><span className="k">Total liquidity</span><strong>{usd(c?.liquidity?.value)}</strong></li>
           <li><span className="k">Main liquidity to market cap</span><strong>{num(c?.liquidity?.mainMarketCapRatio, 2)}%</strong></li>
-          <li><span className="k">WETH waiting in the engine</span><strong>{num(c?.cctp?.weth, 4)}</strong></li>
           <li><span className="k">Owned by RAGE / URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul>
       </section>

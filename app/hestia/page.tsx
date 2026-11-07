@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import BurnFire from '@/components/BurnFire';
+import HestiaEngine from '@/components/HestiaEngine';
 import Countdown from '@/components/Countdown';
 import Check, { addr } from '@/components/Check';
 import { YourPosition } from '@/components/Panels';
@@ -83,13 +84,13 @@ export default async function Hestia() {
 
       <section className="wrap sec">
         <h2 className="h2">The engine.</h2>
-        <ul className="list" style={{ marginTop: 'var(--s-8)' }}>
+        <p className="punch">Fees fill the tank. The tank feeds the fire.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}><HestiaEngine usdc={n(h?.reserve?.usdc)} cap={n(ch.usdcCapacity)} nextSmoke={ch.nextSmokeTime} nextRage={ch.nextRageTime} interval={ch.smokeInterval} burnedPct={n(s.burnedPercent)} /></div>
+        <ul className="list" style={{ marginTop: 'var(--s-5)' }}>
           <li><span className="k">Hestia&apos;s strength</span><strong>{usd(h?.strength?.value)}</strong></li>
-          <li><span className="k">USDC reserve</span><strong>{usd(h?.reserve?.usdc)} of {usd(ch.usdcCapacity)}</strong></li>
           <li><span className="k">Main pool liquidity</span><strong>{usd(h?.liquidity?.mainValue)}</strong></li>
           <li><span className="k">Liquidity to market cap</span><strong>{num(h?.liquidity?.marketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
-          <li><span className="k">Smoke Fees run every</span><strong>{ch.smokeInterval || '—'}</strong></li>
         </ul>
       </section>
 

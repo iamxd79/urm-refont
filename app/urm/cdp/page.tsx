@@ -5,6 +5,7 @@ import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
 import { CdpPanel, YourPosition } from '@/components/Panels';
 import { Steps, Tiles } from '@/components/ui';
+import CdpSlider from '@/components/CdpSlider';
 import { api } from '@/lib/api';
 import { num, bps, n, legacy } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
@@ -42,6 +43,11 @@ export default async function Cdp() {
       <section className="wrap sec grid2">
         <div className="card glass-rim"><h2 className="h3">Borrow</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>Liquidity without selling.</p><p className="muted" style={{ lineHeight: 1.5 }}>Lock your tokens, mint URM at a fixed ratio, keep your upside. Repay to get your collateral back.</p></div>
         <div className="card glass-rim"><h2 className="h3">Leverage</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>More exposure, one transaction.</p><p className="muted" style={{ lineHeight: 1.5 }}>The minted URM buys more of your collateral in the same transaction. Bigger upside, bigger downside. Unwind anytime.</p></div>
+      </section>
+      <section className="wrap sec">
+        <h2 className="h2">See it before you sign.</h2>
+        <p className="punch">Slide to see what you lock and what you can mint.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}><CdpSlider cols={cols} /></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>

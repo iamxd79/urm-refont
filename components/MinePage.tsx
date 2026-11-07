@@ -4,6 +4,7 @@ import AutoRefresh from './AutoRefresh';
 import Check, { type Link as L } from './Check';
 import { MinerPanel } from './Panels';
 import ShowAll from './ShowAll';
+import ShareWheel from './ShareWheel';
 import { Tiles } from './ui';
 import { num, usd, ago, short, n } from '@/lib/fmt';
 import type { Tab } from '@/lib/nav';
@@ -47,11 +48,12 @@ export default function MinePage(c: Cfg) {
       </section>
       <section className="wrap sec">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 'var(--s-2)' }}><h2 className="h2">Leaderboard</h2><span className="muted">Live, refreshed every minute</span></div>
+        {rows.length > 0 && <ShareWheel table={c.theme} unit={c.unit} rows={rows.map((r) => ({ wallet: r.wallet, share: parseFloat(r[c.shareKey]) || 0, label: short(r.wallet) }))} />}
         <ShowAll total={rows.length} label={c.leaders}>
-        <div className="tbl glass-rim" style={{ marginTop: 'var(--s-6)' }}>
+        <div className="tbl glass-rim" data-sharetable={c.theme} style={{ marginTop: 'var(--s-6)' }}>
           <table>
             <thead><tr><th>{c.leader}</th><th>Share of {c.unit}</th><th>Daily rewards</th><th>Sold so far</th><th>Last move</th></tr></thead>
-            <tbody>{rows.map((r, i) => <tr key={r.wallet} className={i >= 10 ? 'more' : undefined}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>
+            <tbody>{rows.map((r, i) => <tr key={r.wallet} data-wallet={r.wallet} className={i >= 10 ? 'more' : undefined}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>
           </table>
           {rows.length === 0 && <p className="muted" style={{ padding: 'var(--s-4)', margin: 0 }}>No {c.leaders} yet.</p>}
         </div>

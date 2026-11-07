@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import ConnectButton from '@/components/ConnectButton';
 import { SwapPanel } from '@/components/Panels';
+import PhoneDemo from '@/components/PhoneDemo';
 import { Hero } from '@/components/ui';
 import { api } from '@/lib/api';
 import { usd, bps, n, legacy } from '@/lib/fmt';
@@ -29,6 +30,11 @@ export default async function Earn() {
         <p className="lead">No seed phrase, no hardware wallet, no address to copy. Buy USDC with a card, then swap, invest or deposit in one place.</p>
         </div></div>
       </Hero>
+      <section className="wrap sec">
+        <h2 className="h2">Four taps.</h2>
+        <p className="punch">Here&apos;s how it feels on your phone.</p>
+        <PhoneDemo apy={bps(f?.fountainState?.config?.yieldRate, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: 'Into Fountain. Withdraw anytime.' }]} />
+      </section>
       <section className="wrap sec grid2">
         <div className="vstack swapcol">
           <div style={{ marginBottom: 'var(--s-4)' }}>{step(1, 'Fund your wallet')}</div>

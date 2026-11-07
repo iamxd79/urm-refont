@@ -5,6 +5,8 @@ import { api } from '@/lib/api';
 import { C, TOKENS } from '@/lib/tokens';
 import { DataRain, OrbPulse } from '@/components/HeroLive';
 import PageBg from '@/components/PageBg';
+import CountUp from '@/components/motion/CountUp';
+import PhoneDemo from '@/components/PhoneDemo';
 import { num, usd, pct, bps, short, n, legacy } from '@/lib/fmt';
 
 export const revalidate = 60;
@@ -48,10 +50,10 @@ export default async function Home() {
         </div>
       </section>
       <section className="band"><div className="wrap stats">
-        <div className="stat"><b style={{ color: '#d7b067' }}>{num(fs.toAssets, 4)}</b><span>fURM share price</span></div>
-        <div className="stat"><b style={{ color: '#ff3d3d' }}>{num(rb?.rbpView?.backingPerShare, 3)}</b><span>RAGE backing per share</span></div>
-        <div className="stat"><b style={{ color: '#ff7a2e' }}>{pct(h?.supply?.burnedPercent)}</b><span>of HESTIA burned</span></div>
-        <div className="stat"><b style={{ color: '#5d93f0' }}>{pct(c?.supply?.burnedPercent)}</b><span>of CIRCLE burned</span></div>
+        <div className="stat"><b style={{ color: '#d7b067' }}><CountUp text={num(fs.toAssets, 4)} /></b><span>fURM share price</span></div>
+        <div className="stat"><b style={{ color: '#ff3d3d' }}><CountUp text={num(rb?.rbpView?.backingPerShare, 3)} /></b><span>RAGE backing per share</span></div>
+        <div className="stat"><b style={{ color: '#ff7a2e' }}><CountUp text={pct(h?.supply?.burnedPercent)} /></b><span>of HESTIA burned</span></div>
+        <div className="stat"><b style={{ color: '#5d93f0' }}><CountUp text={pct(c?.supply?.burnedPercent)} /></b><span>of CIRCLE burned</span></div>
       </div></section>
       <section className="wrap sec">
         <div className="split">
@@ -135,9 +137,7 @@ export default async function Home() {
           <div><h2 className="h2">New to crypto?</h2><p className="punch">From your card to onchain yield in four taps.</p></div>
           <Link className="btn btn-primary btn-lg" href="/earn">Start with Earn</Link>
         </div>
-        <div className="steps">
-          {[['Passkey wallet', 'Face ID or a fingerprint. No seed phrase to write down.'], ['Buy USDC', 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.'], ['Swap to URM', 'One tap on Base. Gas is covered for you.'], ['Deposit', `Into Fountain, at a ${pct(yieldPct, 0)} target APY. Withdraw anytime.`]].map(([t, d], i) => <div key={t} className="step"><span className="n">{i + 1}</span><h3>{t}</h3><p>{d}</p></div>)}
-        </div>
+        <PhoneDemo apy={pct(yieldPct, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: `Into Fountain, at a ${pct(yieldPct, 0)} target APY. Withdraw anytime.` }]} />
       </section>
       <Footer />
     </div>

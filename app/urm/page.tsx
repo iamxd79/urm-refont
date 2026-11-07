@@ -6,6 +6,7 @@ import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
 import PegFortress from '@/components/PegFortress';
 import { Hero, Stats, SupplyBar } from '@/components/ui';
+import CountUp from '@/components/motion/CountUp';
 import { api } from '@/lib/api';
 import { num, usd, bps, ago, n, legacy } from '@/lib/fmt';
 import { C, TOKENS } from '@/lib/tokens';
@@ -97,15 +98,19 @@ export default async function Urm() {
       <section className="wrap sec">
         <h2 className="h2">Dashboard.</h2>
         <p className="punch">Every number, live from the contracts.</p>
+        <div className="card glass-rim" style={{ marginTop: 'var(--s-8)' }}>
+          <b className="eyebrow" style={{ marginBottom: 'var(--s-4)' }}>Circulating URM, {num(sup.circulating)}</b>
+          <SupplyBar parts={[{ label: 'Fortress', value: n(sup.fortress), color: '#d7b067' }, { label: 'Towers', value: n(sup.tower), color: '#b0bfd6' }, { label: 'Liquidity pools', value: n(sup.pools), color: '#5d93f0' }, { label: 'Holders', value: n(sup.holders), color: '#f3f0e7' }, { label: 'Ecosystem', value: n(sup.ecosystem), color: '#ff7a2e' }]} />
+        </div>
         <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(340px,100%),1fr))', gap: 'var(--s-5)' }}>
           <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 'var(--s-3)' }}>Where the supply sits</h3><ul className="list">
-            {[['Circulating', sup.circulating], ['Fortress', sup.fortress], ['Flanking pool', sup.flankingPool], ['Towers', sup.tower], ['Holders', sup.holders], ['Main pool', sup.mainPool], ['RAGE pool', sup.ragePool], ['Initial supply', sup.initial]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong>{num(v)}</strong></li>)}
+            {[['Circulating', sup.circulating], ['Fortress', sup.fortress], ['Flanking pool', sup.flankingPool], ['Towers', sup.tower], ['Holders', sup.holders], ['Main pool', sup.mainPool], ['RAGE pool', sup.ragePool], ['Initial supply', sup.initial]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={num(v)} /></strong></li>)}
           </ul></div>
           <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 'var(--s-3)' }}>Defense</h3><ul className="list">
-            {[['Soft defense', usd(ov.softDefense)], ['Hard defense', usd(ov.hardDefense)], ['Defense surplus', usd(ov.totalDefenseSurplus)], ['Counter defense', usd(ov.counterDefense)], ['Below-peg room', usd(fs.pegDefenseRoom?.usdcLeft)], ['Above-peg room', num(fs.pegDefenseRoom?.urmLeft) + ' URM'], ['Liquidity to market cap', num(o?.liquidity?.marketCapRatio, 2) + '%']].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong>{v}</strong></li>)}
+            {[['Soft defense', usd(ov.softDefense)], ['Hard defense', usd(ov.hardDefense)], ['Defense surplus', usd(ov.totalDefenseSurplus)], ['Counter defense', usd(ov.counterDefense)], ['Below-peg room', usd(fs.pegDefenseRoom?.usdcLeft)], ['Above-peg room', num(fs.pegDefenseRoom?.urmLeft) + ' URM'], ['Liquidity to market cap', num(o?.liquidity?.marketCapRatio, 2) + '%']].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={String(v)} /></strong></li>)}
           </ul></div>
           <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 'var(--s-3)' }}>Fountain and CDP</h3><ul className="list">
-            {[['Fountain staked', num(fo.totalAssets)], ['Fountain interest per day', num(fo.interestPerDay, 2)], ['Fountain idle supply', num(fo.urmIdle)], ['CDP borrowed', num(cdp?.urmDebt)], ['CDP interest per day', num(cdp?.urmCdpInterestPerDay, 2)], ['CDP paid to the Fortress', num(cdp?.urmCdpPaidToFortress)]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong>{v}</strong></li>)}
+            {[['Fountain staked', num(fo.totalAssets)], ['Fountain interest per day', num(fo.interestPerDay, 2)], ['Fountain idle supply', num(fo.urmIdle)], ['CDP borrowed', num(cdp?.urmDebt)], ['CDP interest per day', num(cdp?.urmCdpInterestPerDay, 2)], ['CDP paid to the Fortress', num(cdp?.urmCdpPaidToFortress)]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={String(v)} /></strong></li>)}
           </ul></div>
         </div>
       </section>
