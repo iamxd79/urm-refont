@@ -1,4 +1,3 @@
-import { Brand } from './ProductLogo';
 import Nav from './Nav';
 import PageBg from './PageBg';
 import Footer from './Footer';
@@ -29,7 +28,6 @@ export default function MinePage(c: Cfg) {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
-            <Brand id={c.theme} ticker={c.theme === 'hestia' ? '$HESTIA' : '$CIRCLE'} sub={c.title} />
             <h1 className="h1">{c.title}</h1>
             <p className="lead">{c.lead}</p>
             <p className="punch">{c.punch}</p>

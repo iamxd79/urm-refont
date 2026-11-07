@@ -1,4 +1,3 @@
-import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -24,7 +23,6 @@ export default async function Referral() {
       <section className="wrap" style={{ paddingTop: 56 }}>
         <div className="split">
           <div className="main">
-            <Brand id="rage" ticker="$RAGE" sub="Referral program" />
             <h1 className="h1">Bring investors.<br /><span className="acc">Earn {pc}%.</span></h1>
             <p className="lead">Share your link. When someone invests USDC in RAGE through it, you earn {pc}% of what they invest, paid every month in RAGE.</p>
             <ul className="list" style={{ marginTop: 32 }}>

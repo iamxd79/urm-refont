@@ -1,4 +1,3 @@
-import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
@@ -27,7 +26,6 @@ export default async function Circle() {
       <Hero img="/hero/circle.jpg" bg="#030303" pos="70% 50%" mpos="80% 60%">
         <div className="split">
           <div className="main">
-            <Brand id="circle" ticker="$CIRCLE" sub="Burns on every sell" />
             <h1 className="h1">Burns on<br /><span className="acc">every sell.</span></h1>
             <p className="lead">ULTRAROUND ($CIRCLE) is an autonomous, deflationary ETH proxy on Base. Its Chaos Engine burns supply with pool fees, with no transaction tax.</p>
             <div className="row" style={{ marginTop: 32 }}>

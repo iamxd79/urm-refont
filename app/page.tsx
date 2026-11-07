@@ -1,4 +1,3 @@
-import { Brand } from '@/components/ProductLogo';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -40,7 +39,6 @@ export default async function Home() {
       </PageBg>
       <section className="phero" aria-labelledby="hero-h">
         <div className="wrap phero-copy">
-          <Brand id="eco" />
           <h1 id="hero-h" className="h1">Onchain money that works while <span className="acc">you sleep.</span></h1>
           <p className="lead">URM is a community-driven ecosystem that builds stores of value on Base: the $URM stablecoin, a treasury that harvests volatility, and two tokens that only get scarcer.</p>
           <div className="row" style={{ marginTop: 32, gap: 12 }}>

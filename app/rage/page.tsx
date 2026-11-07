@@ -1,4 +1,3 @@
-import { Brand } from '@/components/ProductLogo';
 import PageBg from '@/components/PageBg';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
@@ -39,7 +38,6 @@ export default async function Rage() {
       <Hero img="/hero/rage.jpg" bg="#270630" pos="100% 40%" mpos="70% 30%">
         <div className="split">
           <div className="main">
-            <Brand id="rage" ticker="$RAGE" sub="Volatility harvesting" />
             <h1 className="h1">Volatility in.<br /><span className="acc">Backing up.</span></h1>
             <p className="lead">A token backed by a treasury of HESTIA and ULTRAROUND. When RAGE trades above fair value, the premium goes back into the backing.</p>
             <div className="row" style={{ marginTop: 32 }}>
