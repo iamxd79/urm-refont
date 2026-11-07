@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: { siteName: 'URM ecosystem', type: 'website' },
   twitter: { card: 'summary_large_image', site: '@URMdollar' },
   title: { default: 'URM ecosystem', template: '%s | URM ecosystem' },
-  description: 'A stablecoin built like a fortress, a treasury that harvests volatility, and two tokens that only get scarcer. On Base.',
+  description: 'URM (Ultra Round Money) is a community-driven ecosystem that builds stores of value on Base: the $URM stablecoin, RAGE, HESTIA and ULTRAROUND.',
   robots: process.env.NEXT_PUBLIC_PREVIEW_BANNER === '0' ? undefined : { index: false, follow: false },
 };
 

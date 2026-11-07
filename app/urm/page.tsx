@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Check, { addr } from '@/components/Check';
+import PegFortress from '@/components/PegFortress';
 import { Hero, Stats, SupplyBar } from '@/components/ui';
 import { api } from '@/lib/api';
 import { num, usd, bps, ago, n, legacy } from '@/lib/fmt';
@@ -66,8 +67,8 @@ export default async function Urm() {
       <section className="wrap sec">
         <h2 className="h2">How the peg holds.</h2>
         <p className="punch">One contract owns the liquidity and defends both sides.</p>
-        <div className="steps">
-          {[['The Fortress', 'One protocol-owned contract issues URM, owns the liquidity and stays within an onchain backing limit.'], ['Peg defense', 'An automated keeper reads the price and defends the peg in both directions.'], ['Towers', `Up to 9 towers plug into the Fortress to extend backing and share yield. ${fs.towers?.length ?? 6} are live.`], ['Real yield', 'Paid from pool fees and protocol profit. Never from printing new tokens.']].map(([t, d]) => <div key={t} className="step"><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}
+        <div className="card glass-rim" style={{ marginTop: 32 }}>
+          <PegFortress price={price} towers={n(fs.towers?.length ?? 6)} usdcRoom={usd(fs.pegDefenseRoom?.usdcLeft)} urmRoom={num(fs.pegDefenseRoom?.urmLeft) + ' URM'} defense={usd(ov.totalDefense)} lastStep={pegDate(fs.state?.lastPegDefense)} />
         </div>
       </section>
 
@@ -113,7 +114,7 @@ export default async function Urm() {
       </section>
 
       <Check links={[{ label: 'Whitepaper', href: legacy('/urm/whitepaper.pdf'), strong: true }, { label: 'Audit', href: legacy('/urm/audit.pdf'), strong: true }, addr('URM token', TOKENS.URM, true), addr('Fortress', C.fortress), { label: 'DefiLlama', href: 'https://defillama.com/protocol/urm' }, { label: 'Dextools', href: 'https://www.dextools.io/app/base/pair-explorer/0x63b531588398cd17297d571e17688d31cc182075' }]} />
-      <Footer />
+      <Footer name="URM" />
     </div>
   );
 }

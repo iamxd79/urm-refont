@@ -51,7 +51,7 @@ export default async function Cdp() {
         <Steps items={[{ d: 'Pick RAGE, HESTIA or ULTRAROUND and lock it.' }, { d: `Mint URM. Interest builds daily, ${num(c?.urmCdpInterestPerDay, 2)} URM a day across all positions right now.` }, { d: 'Settle, unwind or transfer your NFT whenever you want.' }]} />
       </section>
       <Check links={[{ label: 'CDP audit', href: legacy('/urm/cdp-audit.pdf'), strong: true }, addr('CDP', C.cdp), addr('Position NFT', C.cdpNft, true), addr('RAGE collateral', C.colRage), addr('HESTIA collateral', C.colHestia), addr('ULTRAROUND collateral', C.colCircle)]} />
-      <Footer />
+      <Footer name="URM" />
     </div>
   );
 }

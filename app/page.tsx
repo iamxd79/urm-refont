@@ -1,3 +1,4 @@
+import { Brand } from '@/components/ProductLogo';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -24,7 +25,7 @@ export default async function Home() {
   ].filter((w) => w && !w.includes('—'));
   const checkedAt = Date.now();
   const cards = [
-    { id: 'urm', href: '/urm/fountain', theme: 'cream', name: 'URM Fountain', tag: 'Stablecoin yield', text: 'Deposit URM, get fURM. Your fURM count stays the same while each one is worth more URM every day.', big: pct(yieldPct, 0), small: 'target APY', cta: 'Open Fountain', logo: null },
+    { id: 'urm', href: '/urm', theme: 'cream', name: '$URM', tag: 'The ecosystem stablecoin', text: 'A dollar built like a fortress, defended onchain. Earn on it in Fountain, or mint it against your tokens in the CDP.', big: pct(yieldPct, 0), small: 'target APY in Fountain', cta: 'Open URM', logo: null },
     { id: 'rage', href: '/rage', theme: 'rage', name: 'RAGE', tag: 'Volatility harvesting', text: 'Backed by a treasury of HESTIA and ULTRAROUND. When RAGE trades above fair value, the premium goes back into the backing.', big: num(rb?.rbpView?.backingPerShare, 3), small: 'backing per share', cta: 'Open RAGE', logo: '/assets/rage.png' },
     { id: 'hestia', href: '/hestia', theme: 'hestia', name: 'HESTIA', tag: 'Deflationary store of value', text: 'Paired to USDC on Base. The Chaos Engine builds a reserve from fees, then buys HESTIA and burns it.', big: pct(h?.supply?.burnedPercent), small: 'of supply burned', cta: 'Open HESTIA', logo: '/assets/hestia.png' },
     { id: 'circle', href: '/circle', theme: 'circle', name: 'ULTRAROUND', tag: '$CIRCLE, burns on every sell', text: 'No transaction tax. Pool fees fuel the burn, so supply only goes one way.', big: num(c?.supply?.burned), small: 'CIRCLE burned', cta: 'Open ULTRAROUND', logo: '/assets/ultraround.png' },
@@ -39,8 +40,9 @@ export default async function Home() {
       </PageBg>
       <section className="phero" aria-labelledby="hero-h">
         <div className="wrap phero-copy">
+          <Brand id="eco" />
           <h1 id="hero-h" className="h1">Onchain money that works while <span className="acc">you sleep.</span></h1>
-          <p className="lead">A stablecoin built like a fortress, a treasury that harvests volatility, and two tokens that only get scarcer. All on Base.</p>
+          <p className="lead">URM is a community-driven ecosystem that builds stores of value on Base: the $URM stablecoin, a treasury that harvests volatility, and two tokens that only get scarcer.</p>
           <div className="row" style={{ marginTop: 32, gap: 12 }}>
             <Link className="btn btn-sun btn-lg" href="/urm/fountain">Start with Fountain</Link>
             <a className="btn btn-outline btn-lg" href="#trust">Read the audit</a>
@@ -90,14 +92,14 @@ export default async function Home() {
         </div>
       </section>
       <section className="wrap sec">
-        <h2 className="h2">Four engines.</h2>
-        <p className="punch">One ecosystem feeding itself.</p>
+        <h2 className="h2">One ecosystem. Four engines.</h2>
+        <p className="punch">Each one feeds the others.</p>
         <div className="grid" style={{ marginTop: 40, gridTemplateColumns: 'repeat(auto-fit,minmax(min(260px,100%),1fr))', gap: 20 }}>
           {cards.map((k) => (
             <article key={k.id} data-theme={k.theme === 'cream' ? undefined : k.theme} className={k.theme === 'cream' ? 'cream' : 'card'} style={{ background: k.theme === 'cream' ? undefined : 'var(--bg)', boxShadow: k.theme === 'circle' ? 'inset 0 0 0 1px var(--line)' : undefined, borderRadius: 'var(--r-lg)', padding: 32, display: 'flex', flexDirection: 'column', gap: 18 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                {k.logo ? <img src={k.logo} alt="" width={60} height={60} /> : <span style={{ width: 60, height: 60, borderRadius: 999, background: 'var(--ink)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46.4" fill="none" stroke="#b0bfd6" strokeWidth="7.2" /><circle cx="50" cy="50" r="27.8" fill="none" stroke="#b0bfd6" strokeWidth="7.65" /><circle cx="50" cy="50" r="16.5" fill="#f1ebdd" /></svg></span>}
-                <div><h3 className="h3">{k.name}</h3><span className="muted" style={{ fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>{k.tag}</span></div>
+                {k.logo ? <img src={k.logo} alt="" width={52} height={52} /> : <span style={{ width: 52, height: 52, flex: 'none', borderRadius: 999, background: 'var(--ink)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="44" height="44" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46.4" fill="none" stroke="#b0bfd6" strokeWidth="7.2" /><circle cx="50" cy="50" r="27.8" fill="none" stroke="#b0bfd6" strokeWidth="7.65" /><circle cx="50" cy="50" r="16.5" fill="#f1ebdd" /></svg></span>}
+                <div style={{ minWidth: 0 }}><h3 className="h3" style={{ fontSize: 'var(--fs-title2)' }}>{k.name}</h3><span className="muted" style={{ fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>{k.tag}</span></div>
               </div>
               <p style={{ margin: 0, fontSize: 'var(--fs-body)', lineHeight: 1.5 }}>{k.text}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '2px 10px' }}><span style={{ fontSize: 'var(--fs-display)', fontWeight: 800, color: k.theme === 'cream' ? undefined : 'var(--accent)' }}>{k.big}</span><span className="muted" style={{ fontWeight: 600 }}>{k.small}</span></div>

@@ -357,3 +357,79 @@ td{padding:16px 24px;border-top:1px solid var(--line)}
 .step,.tile,.list,.card:not(.glass-rim),.news a{box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
 .cream .tile,.cream .list{box-shadow:none}
 .pbg-art .rain{left:auto;right:0;width:min(40vw,800px)}
+/* ===== diagrams ===== */
+/* Fountain yield counter */
+.yc{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
+.yc-art{width:100%;max-width:320px;aspect-ratio:320/340;margin:0 auto}
+.yc-row{display:grid;grid-template-columns:1fr;gap:2px;margin-top:18px}
+.yc-row b{font-size:var(--fs-title1);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.yc-big{font-size:clamp(30px,4.4vw,52px)!important;overflow-wrap:anywhere}
+.yc-big small{font-size:var(--fs-title3);color:var(--sub)}
+.yc-note{font-size:var(--fs-footnote)}
+.ycchip{min-height:40px;padding:0 14px;border-radius:var(--r-pill);border:0;background:var(--bg);color:var(--sub);font:600 var(--fs-subhead) var(--font-inter),sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.ycchip[aria-pressed=true]{background:var(--cream);color:var(--ink);box-shadow:var(--glass-edge)}
+.yc-drop{animation:ycdrop 1.6s cubic-bezier(.55,0,1,.45) infinite}
+.yc-drop.d2{animation-delay:-.55s}.yc-drop.d3{animation-delay:-1.1s}
+@keyframes ycdrop{0%{transform:translateY(-6px);visibility:visible}80%{transform:translateY(62px)}81%,100%{transform:translateY(62px);visibility:hidden}}
+.yc-wave{animation:ycwave 5s linear infinite}.yc-wave.w2{animation-duration:8s;animation-direction:reverse}
+@keyframes ycwave{to{transform:translateX(-100px)}}
+.yc-coin{animation:yccoin 4s ease-in-out infinite}
+@keyframes yccoin{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media (max-width:760px){.yc{grid-template-columns:1fr}.yc-art{max-width:240px}}
+/* RAGE backing flow */
+.bf-tall{display:none}
+@media (max-width:760px){.bf-wide{display:none}.bf-tall{display:block;max-width:440px;margin:0 auto}}
+.bf svg{display:block;overflow:visible}
+.bf-t{font:700 20px var(--font-inter),sans-serif;fill:#f3e6f1}.bf-t.gold{fill:#e8ba67;font-size:17px}.bf-t.red{fill:#ff6b6b}
+.bf-usd{font:800 40px var(--font-inter),sans-serif;fill:#fff}
+.bf-eye{font:700 15px var(--font-inter),sans-serif;letter-spacing:2px;fill:#e6cfe2}
+.bf-big{font:800 30px var(--font-inter),sans-serif;fill:#fff}
+.bf-big2{font:800 40px var(--font-inter),sans-serif;fill:#fff}
+.bf-small{font:600 15px var(--font-inter),sans-serif;fill:#fff}
+.bf-n{font:800 16px var(--font-inter),sans-serif;fill:#fff}
+.bf-spark{animation:bfspark 1.8s ease-in-out infinite}
+@keyframes bfspark{0%,100%{transform:scale(.6)}50%{transform:scale(1.3)}}
+.bf-spark{transform-box:fill-box;transform-origin:center}
+.bf-fill{animation:bffill 6s ease-in-out infinite}
+@keyframes bffill{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.bf-caps{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.bf-caps li{display:flex;gap:10px;align-items:flex-start;color:var(--sub);font-size:var(--fs-subhead);line-height:1.45}
+.bf-caps li b{color:var(--text);margin-right:4px}
+.bf-caps li span{flex:none;width:26px;height:26px;border-radius:var(--r-pill);background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:var(--fs-footnote)}
+/* URM peg fortress */
+.pf{display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
+.pf svg{display:block;max-width:520px;margin:0 auto;overflow:visible}
+.pf-s{font:600 15px var(--font-inter),sans-serif;fill:#b0bfd6}
+.pf-b{font:800 22px var(--font-inter),sans-serif;fill:#f3f0e7}
+.pf-orbit{animation:pforbit 14s linear infinite}
+@keyframes pforbit{to{transform:rotate(360deg)}}
+.pf-ping{animation:pfping 4.2s ease-out infinite}
+@keyframes pfping{0%{transform:scale(1);visibility:visible}60%{transform:scale(1.42);visibility:visible}61%,100%{transform:scale(1.42);visibility:hidden}}
+.pf-needle{transition:transform 1.2s var(--spring)}
+.pf-copy{display:grid;gap:18px}
+.pf-item{display:flex;gap:14px;align-items:flex-start}
+.pf-item b{font-size:var(--fs-title3);font-weight:800}
+.pf-item p{margin:4px 0 0;color:var(--sub);line-height:1.5}
+.pf-item strong{color:var(--text)}
+.pf-dot{flex:none;width:14px;height:14px;border-radius:var(--r-pill);margin-top:8px;box-shadow:0 0 0 4px rgba(255,255,255,.06)}
+@media (max-width:900px){.pf{grid-template-columns:1fr}}
+.bf-t.sm{font-size:18px}
+@media (max-width:600px){.pf-s{font-size:24px}.pf-b{font-size:30px}.bf-caps{grid-template-columns:1fr}}
+/* stats strip: keeps the page gutter, equal columns, centred, hairline dividers; 2x2 on tablets and phones */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding-top:var(--s-10);padding-bottom:var(--s-10);padding-left:var(--gutter);padding-right:var(--gutter)}
+.stat{padding:var(--s-1) var(--s-5);text-align:center;min-width:0}
+.stat+.stat{box-shadow:-1px 0 0 rgba(255,255,255,.12)}
+.stat b{overflow-wrap:anywhere}
+@media (max-width:900px){
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--s-6);padding-top:var(--s-8);padding-bottom:var(--s-8)}
+ .stat:nth-child(odd){box-shadow:none}
+ .stat{padding:var(--s-1) var(--s-3)}
+}
+.stat b{overflow-wrap:normal;white-space:nowrap;font-size:clamp(22px,6.6vw,40px)}
+@media (min-width:901px){.stat b{font-size:var(--fs-title1)}}
+/* ecosystem brand (URM = Ultra Round Money). $URM ring = the stablecoin only */
+.brand em{font-style:normal;font-weight:500;color:var(--sub)}
+.plogo-eco{box-shadow:0 0 0 1.5px rgba(255,255,255,.28)}
+@media (max-width:1240px) and (min-width:901px){.brand em{display:none}}
+@media (max-width:380px){.brand em{display:none}}
+.pbg-blur{z-index:3}

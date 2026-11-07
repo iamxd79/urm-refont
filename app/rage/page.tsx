@@ -5,8 +5,9 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
 import Sparkline from '@/components/Sparkline';
+import BackingFlow from '@/components/BackingFlow';
 import { YourPosition } from '@/components/Panels';
-import { Hero, Stats, Steps } from '@/components/ui';
+import { Hero, Stats } from '@/components/ui';
 import { api } from '@/lib/api';
 import { num, usd, bps, n, legacy, short } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
@@ -66,12 +67,15 @@ export default async function Rage() {
       <section className="wrap sec" id="how">
         <h2 className="h2">How the backing grows.</h2>
         <p className="punch">Every action adds to it.</p>
-        <Steps items={[
-          { t: 'Invest', d: `${num(cfg.hestiaPercent ?? 80)}% buys HESTIA, ${100 - n(cfg.hestiaPercent ?? 80)}% buys ULTRAROUND. Both get wrapped into pHestia and pCircle on Peapods and locked.` },
-          { t: 'Harvest premiums', d: 'Only the Rage protocol mints at fair value. When RAGE trades above it, the premium goes into the backing.' },
-          { t: 'Earn yield', d: 'pToken yield from Peapods flows into the treasury automatically, around the clock.' },
-          { t: 'Reward the ones who stay', d: `Every claim pays a ${num(cfg.claimFee)}% fee that stays in the protocol. The ones who leave pay the ones who stay.` },
-        ]} />
+        <div className="card glass-rim" style={{ marginTop: 32 }}>
+          <BackingFlow hestiaPct={n(cfg.hestiaPercent ?? 80)} treasury={usd(v.activeAssetsUsdcValue)} backing={num(v.backingPerShare, 3)} premium={prem} claimFee={n(cfg.claimFee)} />
+          <ol className="bf-caps">
+            <li><span>1</span><b>Invest</b> {num(cfg.hestiaPercent ?? 80)}/{100 - n(cfg.hestiaPercent ?? 80)} into HESTIA and ULTRAROUND, locked on Peapods</li>
+            <li><span>2</span><b>Premiums</b> only the protocol mints at fair value, so any premium lands in the treasury</li>
+            <li><span>3</span><b>Yield</b> pToken yield from Peapods, around the clock</li>
+            <li><span>4</span><b>Exits</b> {num(cfg.claimFee)}% of every claim stays for the holders</li>
+          </ol>
+        </div>
         <div className="card glass-rim" style={{ marginTop: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}><b>Backing per share</b><span className="muted">since launch · now {num(v.backingPerShare, 4)}</span></div>
           <div style={{ marginTop: 14 }}><Sparkline values={bps30} label="RAGE backing per share over time" height={220} /></div>

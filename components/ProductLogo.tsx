@@ -1,6 +1,6 @@
 /** The real project logos. URM is drawn as SVG so it stays crisp at any size. */
-const SRC: Record<string, string> = { rage: '/assets/rage.png', hestia: '/assets/hestia.png', circle: '/assets/ultraround.png' };
-export const NAMES: Record<string, string> = { urm: 'URM', rage: 'RAGE', hestia: 'HESTIA', circle: 'ULTRAROUND' };
+const SRC: Record<string, string> = { rage: '/assets/rage.png', hestia: '/assets/hestia.png', circle: '/assets/ultraround.png', eco: '/assets/urm-eco.png' };
+export const NAMES: Record<string, string> = { eco: 'URM ecosystem', urm: '$URM stablecoin', rage: 'RAGE', hestia: 'HESTIA', circle: 'ULTRAROUND' };
 
 export default function ProductLogo({ id, size = 24, alt = '' }: { id: string; size?: number; alt?: string }) {
   if (id === 'urm' || id === 'earn') {
@@ -13,7 +13,7 @@ export default function ProductLogo({ id, size = 24, alt = '' }: { id: string; s
       </svg>
     );
   }
-  return <img className="plogo" src={SRC[id]} alt={alt} width={size} height={size} />;
+  return <img className={'plogo' + (id === 'eco' ? ' plogo-eco' : '')} src={SRC[id]} alt={alt} width={size} height={size} />;
 }
 
 /** Product logo as a floating glass medallion: no text, real depth.

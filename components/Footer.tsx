@@ -4,8 +4,8 @@ import { legacy } from '@/lib/fmt';
 
 const X: Record<string, string> = { URMdollar: 'URM', therageprotocol: 'RAGE', HestiaOnBase: 'HESTIA', UltraRoundMoney: 'ULTRAROUND' };
 
-export default function Footer({ name = 'URM', x = 'URMdollar' }: { name?: string; x?: string }) {
-  const follow = name === 'URM' ? Object.keys(X) : [x, ...(x !== 'URMdollar' ? ['URMdollar'] : [])];
+export default function Footer({ name = 'URM ecosystem', x = 'URMdollar' }: { name?: string; x?: string }) {
+  const follow = name === 'URM ecosystem' ? Object.keys(X) : [x, ...(x !== 'URMdollar' ? ['URMdollar'] : [])];
   const col = (title: string, links: ([string, string] | [string, string, string])[]) => (
     <div className="fcol">
       <b>{title}</b>
@@ -17,8 +17,8 @@ export default function Footer({ name = 'URM', x = 'URMdollar' }: { name?: strin
       <footer className="foot" style={{ marginTop: 112 }}>
         <div className="wrap fgrid">
           <div style={{ flex: '1 1 240px' }}>
-            <b className="flogo" style={{ fontSize: 'var(--fs-body)' }}><ProductLogo id={({ RAGE: 'rage', HESTIA: 'hestia', ULTRAROUND: 'circle' } as Record<string, string>)[name] ?? 'urm'} size={36} />{name}</b>
-            <p className="muted" style={{ margin: '10px 0 0', maxWidth: 300 }}>Onchain money that works while you sleep. Part of the URM ecosystem, built on Base.</p>
+            <b className="flogo" style={{ fontSize: 'var(--fs-body)' }}><ProductLogo id={({ RAGE: 'rage', HESTIA: 'hestia', ULTRAROUND: 'circle', URM: 'urm' } as Record<string, string>)[name] ?? 'eco'} size={36} />{name}</b>
+            <p className="muted" style={{ margin: '10px 0 0', maxWidth: 300 }}>{name === 'URM ecosystem' ? 'A community-driven ecosystem that builds stores of value on Base.' : 'Part of the URM ecosystem, built on Base.'}</p>
           </div>
           {col('PRODUCTS', [['URM', '/urm', 'urm'], ['Fountain', '/urm/fountain'], ['CDP', '/urm/cdp'], ['RAGE', '/rage', 'rage'], ['HESTIA', '/hestia', 'hestia'], ['ULTRAROUND', '/circle', 'circle'], ['Earn', '/earn']])}
           {col('SECURITY', [['Risks', '/risks'], ['URM audit', legacy('/urm/audit.pdf')], ['Contracts', '/#trust'], ['Docs', 'https://ultraroundmoney.gitbook.io/ultraroundmoney/']])}

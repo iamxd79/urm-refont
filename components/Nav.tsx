@@ -1,11 +1,10 @@
 import ProductLogo from './ProductLogo';
 import Link from 'next/link';
-import Logo from './Logo';
 import ConnectButton from './ConnectButton';
 import MobileMenu from './MobileMenu';
 
 export const ITEMS = [
-  { href: '/urm', label: 'URM', key: 'urm' },
+  { href: '/urm', label: '$URM', key: 'urm' },
   { href: '/rage', label: 'RAGE', key: 'rage' },
   { href: '/hestia', label: 'HESTIA', key: 'hestia' },
   { href: '/circle', label: 'ULTRAROUND', key: 'circle' },
@@ -18,8 +17,8 @@ export default function Nav({ active, tabs, current, overlay }: { active?: strin
   return (
     <header className={'nav' + (overlay ? ' nav-over' : '')}>
       <nav className="navbar glass-regular" aria-label="Main">
-        <Link href="/" className="brand" aria-label="URM home">
-          <Logo /><span>URM</span>
+        <Link href="/" className="brand" aria-label="URM ecosystem home">
+          <ProductLogo id="eco" size={38} /><span>URM<em> ecosystem</em></span>
         </Link>
         <div className="navlinks">
           {ITEMS.map((i) => (

@@ -7,6 +7,7 @@ import Check, { addr } from '@/components/Check';
 import FountainPanel from '@/components/FountainPanel';
 import { YourPosition } from '@/components/Panels';
 import { Steps, Tiles } from '@/components/ui';
+import YieldCounter from '@/components/YieldCounter';
 import { api } from '@/lib/api';
 import { num, bps, n, legacy } from '@/lib/fmt';
 import { C, TOKENS } from '@/lib/tokens';
@@ -50,10 +51,10 @@ export default async function Fountain() {
         <div className="stat"><b>{bps(cfg.depositFee, 0)} / {bps(cfg.withdrawFee)}</b><span>deposit / withdraw fee</span></div>
       </div></section>
       <section className="wrap sec">
-        <div className="card glass-rim" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14 }}>
-          <h2 className="h2" style={{ fontSize: 'clamp(32px,4vw,48px)' }}>Your URM works<br /><span className="acc">the night shift.</span></h2>
-          <p className="muted" style={{ fontSize: 'var(--fs-body)', lineHeight: 1.55, margin: 0 }}>No claiming, no rebasing, nothing to babysit. The Fortress pays into the vault around the clock, so each fURM is worth a little more URM every morning.</p>
-          <p style={{ margin: 0, fontSize: 'var(--fs-body)' }}><b className="acc" style={{ fontSize: 'var(--fs-title2)' }}>{num(s.interestPerDay, 2)} URM</b> <span className="muted">paid to depositors every day right now</span></p>
+        <h2 className="h2">Your URM works<br /><span className="acc">the night shift.</span></h2>
+        <p className="punch">No claiming. No rebasing. It just grows.</p>
+        <div className="card glass-rim" style={{ marginTop: 32 }}>
+          <YieldCounter toAssets={toAssets} interestPerDay={n(s.interestPerDay)} totalShares={n(s.totalShares)} yieldRate={n(cfg.yieldRate) / 100} />
         </div>
       </section>
       <section className="wrap sec">
@@ -61,7 +62,7 @@ export default async function Fountain() {
         <Steps items={[{ t: 'Deposit URM', d: 'No deposit fee. You get fURM, a share of the vault.' }, { t: 'The Fortress pays the yield', d: 'From pool fees and protocol profit. The share price climbs. No claiming, no rebasing.' }, { t: 'Withdraw anytime', d: `To URM or USDC, with a ${bps(cfg.withdrawFee)} fee, up to what's withdrawable right now.` }]} />
       </section>
       <Check links={[{ label: 'Fountain audit', href: legacy('/urm/fountain-audit.pdf'), strong: true }, addr('Fountain', C.fountain), addr('Fortress', C.fortress), addr('URM token', TOKENS.URM, true), { label: 'DefiLlama pool', href: 'https://defillama.com/yields/pool/cab80e81-b20e-53eb-8f92-b20c89ebb4a5' }]} />
-      <Footer />
+      <Footer name="URM" />
     </div>
   );
 }
