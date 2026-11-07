@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import Countdown from './Countdown';
-import { useInView, useReducedMotion } from './motion/useInView';
+import { useInView, useReducedMotion, useMedia } from './motion/useInView';
 
 /**
  * HESTIA's Chaos Engine, visualised: pool fees fill the USDC reserve (Smoke Fees),
@@ -15,7 +15,7 @@ const TALL: L = { w: 420, h: 820, pool: [210, 90], tank: [120, 260, 180, 230], f
 
 function Art({ L, k, id, motion }: { L: L; k: number; id: string; motion: boolean }) {
   const [tx, ty, tw, th] = L.tank;
-  const level = ty + th - th * k;
+  const level = Math.max(ty + 22, ty + th - th * k);
   return (
     <svg viewBox={`0 0 ${L.w} ${L.h}`} width="100%" aria-hidden="true">
       <path d={L.p1} stroke="#5a1a52" strokeWidth="14" strokeLinecap="round" fill="none" />
@@ -50,7 +50,7 @@ function Art({ L, k, id, motion }: { L: L; k: number; id: string; motion: boolea
       </g>
       {/* flow */}
       {motion && <g className="he-flow">
-        {[0, 0.7, 1.4].map((b) => <circle key={'a' + b} r="8" fill="#5fa8ff"><animateMotion dur="2.1s" begin={`${b}s`} repeatCount="indefinite" path={L.p1} /></circle>)}
+        {[0, 1.05].map((b) => <circle key={'a' + b} r="8" fill="#5fa8ff"><animateMotion dur="2.1s" begin={`${b}s`} repeatCount="indefinite" path={L.p1} /></circle>)}
         {[0.3, 1.3].map((b) => <circle key={'b' + b} r="8" fill="#ffb627"><animateMotion dur="2s" begin={`${b}s`} repeatCount="indefinite" path={L.p2} /></circle>)}
       </g>}
       {L.lab.map(([x, y, s, a]) => <text key={s} x={x} y={y} textAnchor={(a as any) || 'middle'} className="he-t">{s}</text>)}
@@ -63,13 +63,14 @@ export default function HestiaEngine({ usdc, cap, nextSmoke, nextRage, interval,
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref);
   const motion = !useReducedMotion() && seen;
+  const wide = useMedia('(min-width: 701px)');
   const k = cap > 0 && isFinite(usdc) ? Math.min(1, Math.max(0, usdc / cap)) : 0;
   const money = (v: number) => '$' + (isFinite(v) ? v.toLocaleString('en-US', { maximumFractionDigits: 0 }) : '—');
   return (
     <div ref={ref} className="he card glass-rim" data-in={seen ? '1' : undefined}>
       <div role="img" aria-label={`Pool fees fill a USDC reserve, now ${money(usdc)} of ${money(cap)}. The reserve buys HESTIA and burns it. ${burnedPct.toFixed(2)}% of supply burned so far.`}>
-        <div className="he-wide"><Art L={WIDE} k={k} id="hew" motion={motion} /></div>
-        <div className="he-tall"><Art L={TALL} k={k} id="het" motion={motion} /></div>
+        {wide !== false && <div className="he-wide"><Art L={WIDE} k={k} id="hew" motion={motion && wide === true} /></div>}
+        {wide !== true && <div className="he-tall"><Art L={TALL} k={k} id="het" motion={motion && wide === false} /></div>}
       </div>
       <ol className="he-chips">
         <li><i>1</i><span>Smoke Fees{interval ? `, every ${interval}` : ''}</span><b><Countdown to={nextSmoke} /></b></li>

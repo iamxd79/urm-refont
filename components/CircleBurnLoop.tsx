@@ -43,7 +43,7 @@ export default function CircleBurnLoop({ burnedPct, burned, weth, perDay, last }
           <figcaption><b>Cause Chaos</b><span>WETH ⇄ ULTRAROUND, fees in</span></figcaption>
         </figure>
 
-        <div className="cbl-link" aria-hidden="true"><span /><span /><span /></div>
+        <div className="cbl-link" aria-hidden="true"><i /><span /><span /><span /></div>
 
         <figure className="cbl-cell" aria-label={`${burnedPct.toFixed(2)}% of the 1,000,000 ULTRAROUND supply burned`}>
           <svg viewBox="0 0 320 320" width="100%" aria-hidden="true">

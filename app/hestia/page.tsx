@@ -4,7 +4,7 @@ import HestiaFlame from '@/components/HestiaFlame';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import AutoRefresh from '@/components/AutoRefresh';
-import BurnFire from '@/components/BurnFire';
+import HestiaRing from '@/components/HestiaRing';
 import HestiaEngine from '@/components/HestiaEngine';
 import Countdown from '@/components/Countdown';
 import Check, { addr } from '@/components/Check';
@@ -62,7 +62,7 @@ export default async function Hestia() {
               {[["Hestia's rage", 'Burns part of her sell-side liquidity while adding the same buying pressure. Can switch to regenerative mode.'], ['Smoke Fees', "Pool fees grow her USDC reserve, or fund ULTRAROUND's Chaos Engine."], ['AI agent', 'In a later phase, an AI agent will own the Chaos Engine and talk with the community.'], ['Community', 'Fair launch, no team allocation. 100% funded and built by the community.']].map(([t, d]) => <div key={t} className="step"><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}
             </div>
           </div>
-          <div className="side"><BurnFire burned={n(s.burned)} /><p className="muted" style={{ textAlign: 'center', fontSize: 'var(--fs-subhead)' }}>The fire flares every time the burned total goes up.</p></div>
+          <div className="side"><HestiaRing burned={n(s.burned)} pct={n(s.burnedPercent)} /><p className="muted" style={{ textAlign: 'center', fontSize: 'var(--fs-subhead)' }}>The ring grows, and its tip flares, every time the burned total goes up.</p></div>
         </div>
       </section>
 

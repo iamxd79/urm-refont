@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useMedia } from './motion/useInView';
 
 /**
  * RAGE, visualised: USDC splits into HESTIA and ULTRAROUND (real config split), both feed the treasury,
@@ -16,7 +17,7 @@ const WIDE: L = {
   pIn: 'M136 220 H250', pH: 'M250 220 C330 220 360 110 450 110', pC: 'M250 220 C330 220 360 330 450 330',
   pHV: 'M590 110 C660 110 670 180 720 180', pCV: 'M590 330 C660 330 670 260 720 260',
   prem: 'M810 18 V100', exit: 'M900 300 C940 300 950 330 990 330', loop: 'M960 322 C980 390 900 400 880 340',
-  lab: { usdc: [90, 296, 'middle'], h: [520, 34, 'middle'], c: [520, 420, 'middle'], prem: [790, 74, 'end'], exit: [992, 316, 'end'], loop: [930, 420, 'middle'] },
+  lab: { usdc: [90, 296, 'middle'], h: [520, 34, 'middle'], c: [520, 420, 'middle'], prem: [790, 74, 'end'], exit: [952, 292, 'middle'], loop: [930, 420, 'middle'] },
   marks: [[250, 180], [840, 60], [612, 150], [968, 372]],
 };
 const TALL: L = {
@@ -54,6 +55,18 @@ function Diagram({ L, p, motion, id }: { L: L; p: P; motion: boolean; id: string
       <path d={L.prem} fill="none" stroke="#e8ba67" strokeWidth="4" strokeLinecap="round" />
       <path d={L.exit} fill="none" stroke="#7a2b6f" strokeWidth="6" strokeLinecap="round" />
       <path d={L.loop} fill="none" stroke="#ff3d3d" strokeWidth="4" strokeLinecap="round" />
+      {/* moving value */}
+      {motion && (
+        <g>
+          {[0, 1.2].map((b) => <g key={'h' + b}>{coin(joinPaths(L.pIn, L.pH), '#ff7a2e', b)}</g>)}
+          {coin(joinPaths(L.pIn, L.pC), '#5d93f0', 0.3)}
+          {coin(L.pHV, '#e8ba67', 0.2, 1.8, 7)}
+          {coin(L.pCV, '#e8ba67', 0.9, 1.8, 7)}
+          {p.premium > 0 && coin(L.prem, '#e8ba67', 0, 1.6, 6)}
+          {coin(L.exit, '#e6cfe2', 0.5, 2, 6)}
+          {coin(L.loop, '#ff3d3d', 1.5, 2, 5)}
+        </g>
+      )}
       {/* USDC */}
       <circle cx={L.usdc[0]} cy={L.usdc[1]} r="46" fill="#2775ca" />
       <circle cx={L.usdc[0]} cy={L.usdc[1]} r="36" fill="none" stroke="#fff" strokeWidth="3" />
@@ -81,18 +94,6 @@ function Diagram({ L, p, motion, id }: { L: L; p: P; motion: boolean; id: string
       {L.marks.map(([x, y], i) => (
         <g key={i}><circle cx={x} cy={y} r="15" fill="#ff3d3d" /><text x={x} y={y + 6} textAnchor="middle" className="bf-n">{i + 1}</text></g>
       ))}
-      {/* moving value */}
-      {motion && (
-        <g>
-          {[0, 0.6, 1.2, 1.8].map((b) => <g key={'h' + b}>{coin(joinPaths(L.pIn, L.pH), '#ff7a2e', b)}</g>)}
-          {coin(joinPaths(L.pIn, L.pC), '#5d93f0', 0.3)}
-          {[0.2, 1.4].map((b) => <g key={'v' + b}>{coin(L.pHV, '#e8ba67', b, 1.8, 7)}</g>)}
-          {coin(L.pCV, '#e8ba67', 0.9, 1.8, 7)}
-          {p.premium > 0 && coin(L.prem, '#e8ba67', 0, 1.6, 6)}
-          {coin(L.exit, '#e6cfe2', 0.5, 2, 6)}
-          {coin(L.loop, '#ff3d3d', 1.5, 2, 5)}
-        </g>
-      )}
     </svg>
   );
 }
@@ -104,11 +105,12 @@ function joinPaths(a: string, b: string) {
 
 export default function BackingFlow(p: P) {
   const [motion, setMotion] = useState(false);
+  const wide = useMedia('(min-width: 761px)');
   useEffect(() => { setMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches); }, []);
   return (
     <div className="bf">
-      <div className="bf-wide"><Diagram L={WIDE} p={p} motion={motion} id="bfw" /></div>
-      <div className="bf-tall"><Diagram L={TALL} p={p} motion={motion} id="bft" /></div>
+      {wide !== false && <div className="bf-wide"><Diagram L={WIDE} p={p} motion={motion && wide === true} id="bfw" /></div>}
+      {wide !== true && <div className="bf-tall"><Diagram L={TALL} p={p} motion={motion && wide === false} id="bft" /></div>}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * URM peg, visualised: the Fortress (URM ring) at the centre, 9 tower slots around it (live ones lit),
+ * URM peg, visualised: the Fortress (URM ring) at the centre, the live towers around it,
  * a keeper orbiting and pulsing on each check, and a price gauge with the live needle.
  */
 type P = { price: number; towers: number; slots?: number; usdcRoom: string; urmRoom: string; defense: string; lastStep: string };
@@ -11,7 +11,8 @@ const C = 300, CY = 230, R = 172;
 const lo = 0.98, hi = 1.02, gx0 = 90, gx1 = 510, gy = 488;
 const gx = (v: number) => gx0 + ((Math.min(hi, Math.max(lo, v)) - lo) / (hi - lo)) * (gx1 - gx0);
 
-export default function PegFortress({ price, towers, slots = 9, usdcRoom, urmRoom, defense, lastStep }: P) {
+export default function PegFortress({ price, towers, slots: slotsIn, usdcRoom, urmRoom, defense, lastStep }: P) {
+  const slots = slotsIn ?? (towers > 0 ? towers : 6);
   const [motion, setMotion] = useState(false);
   useEffect(() => { setMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches); }, []);
   const known = Number.isFinite(price);
@@ -19,7 +20,7 @@ export default function PegFortress({ price, towers, slots = 9, usdcRoom, urmRoo
   const nx = known ? gx(price) : gx(1);
   return (
     <div className="pf">
-      <svg viewBox="0 0 600 560" width="100%" role="img" aria-label={`URM peg defense. Price ${known ? '$' + price.toFixed(3) : 'loading'}, ${onPeg ? 'inside' : 'outside'} the 1% band. ${towers} of ${slots} towers live. Total defense ${defense}.`}>
+      <svg viewBox="0 0 600 560" width="100%" role="img" aria-label={`URM peg defense. Price ${known ? '$' + price.toFixed(3) : 'loading'}, ${onPeg ? 'inside' : 'outside'} the 1% band. ${towers} towers live. Total defense ${defense}.`}>
         {/* orbit + keeper */}
         <circle cx={C} cy={CY} r="128" fill="none" stroke="#23385c" strokeWidth="2" />
         <g className={motion ? 'pf-orbit' : undefined} style={{ transformOrigin: `${C}px ${CY}px` }}>
@@ -63,7 +64,7 @@ export default function PegFortress({ price, towers, slots = 9, usdcRoom, urmRoo
         <div className="pf-item"><span className="pf-dot" style={{ background: '#5fd39a' }} /><div><b>Keeper on patrol</b><p>Reads the price every 1.5 to 2 hours. Last time it had to step in: {lastStep}.</p></div></div>
         <div className="pf-item"><span className="pf-dot" style={{ background: '#2e7d50' }} /><div><b>Below the peg, it buys</b><p>The Fortress spends USDC to buy URM back. Room right now: <strong>{usdcRoom}</strong>.</p></div></div>
         <div className="pf-item"><span className="pf-dot" style={{ background: '#ff6b6b' }} /><div><b>Above the peg, it sells</b><p>The Fortress sells URM into demand. Room right now: <strong>{urmRoom}</strong>.</p></div></div>
-        <div className="pf-item"><span className="pf-dot" style={{ background: '#d7b067' }} /><div><b>{towers} of {slots} towers live</b><p>Each tower extends the backing and shares the yield. Total defense: <strong>{defense}</strong>.</p></div></div>
+        <div className="pf-item"><span className="pf-dot" style={{ background: '#d7b067' }} /><div><b>{towers} towers live</b><p>Each tower extends the backing and shares the yield. Total defense: <strong>{defense}</strong>.</p></div></div>
       </div>
     </div>
   );

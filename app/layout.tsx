@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import MotionGovernor from '@/components/motion/MotionGovernor';
 import localFont from 'next/font/local';
 import './globals.css';
 import Providers from '@/components/Providers';
@@ -38,7 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         {preview && <div className="preview" role="note">Preview of the new ultraroundmoney.com · live data from the contracts</div>}
         {!live && <div className="datawarn" role="status">Live data is catching up. Numbers will fill in on the next refresh, usually within a minute.</div>}
-        <Providers>
+        <Providers><MotionGovernor />
           <SmartNav stats={stats} />
           {children}
         </Providers>

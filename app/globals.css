@@ -894,3 +894,63 @@ body{transition:background-color .5s ease}
 @media (max-width:900px){.dmain.wide .dhub-products{grid-template-columns:1fr}}
 .docs{background:transparent}
 .he-chips li:has(>i){padding-right:46px}
+
+/* ===== animation audit fixes ===== */
+/* 1) everything off screen holds still */
+[data-off],[data-off] *{animation-play-state:paused!important}
+/* 6) labels stay readable when value flows past */
+.bf-t,.bf-eye,.he-t,.ml-t{paint-order:stroke fill;stroke:var(--bg);stroke-width:7px;stroke-linejoin:round}
+/* 7) CDP: chevrons slide (compositor only) + legend for the URM column */
+.cdps-rail{position:relative;display:block;width:110px;height:14px;overflow:hidden}
+.cdps-rail i{position:absolute;top:0;left:0;width:14px;height:14px;border-top:4px solid var(--accent);border-right:4px solid var(--accent);border-radius:2px;transform:translateX(-20px) rotate(45deg);opacity:0;animation:cdpsChev 1.8s linear infinite}
+.cdps-rail i:nth-child(2){animation-delay:.6s}.cdps-rail i:nth-child(3){animation-delay:1.2s}
+@keyframes cdpsChev{0%{transform:translateX(-10px) rotate(45deg);opacity:0}15%,85%{opacity:1}100%{transform:translateX(100px) rotate(45deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.cdps-rail i{opacity:1}.cdps-rail i:nth-child(1){transform:translateX(20px) rotate(45deg)}.cdps-rail i:nth-child(2){transform:translateX(48px) rotate(45deg)}.cdps-rail i:nth-child(3){transform:translateX(76px) rotate(45deg)}}
+.cdps-key{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;margin-top:var(--s-2);font-size:var(--fs-footnote);color:var(--sub)}
+.cdps-key i{display:inline-block;width:12px;height:12px;border-radius:4px}
+.cdps-key .k1{background:#b0bfd6}.cdps-key .k2{background:color-mix(in srgb,var(--text) 22%,var(--bg))}
+@media (max-width:820px){.cdps-rail{width:52px}.cdps-rail i{animation-name:cdpsChevS}}
+@keyframes cdpsChevS{0%{transform:translateX(-10px) rotate(45deg);opacity:0}15%,85%{opacity:1}100%{transform:translateX(44px) rotate(45deg);opacity:0}}
+/* 9) OTC demo: opacity-only phases, and a meaningful still frame for reduced motion */
+.otcm-phases span{position:relative;border-top:0;opacity:.55}
+.otcm-phases span::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;border-radius:2px;background:var(--line)}
+.otcm-phases span::after{content:'';position:absolute;left:0;right:0;top:0;height:3px;border-radius:2px;background:var(--accent);opacity:0}
+.otcm[data-in] .otcm-phases .ph1{animation:otcO1 7s step-end infinite}.otcm[data-in] .otcm-phases .ph1::after{animation:otcO1b 7s step-end infinite}
+.otcm[data-in] .otcm-phases .ph2{animation:otcO2 7s step-end infinite}.otcm[data-in] .otcm-phases .ph2::after{animation:otcO2b 7s step-end infinite}
+.otcm[data-in] .otcm-phases .ph3{animation:otcO3 7s step-end infinite}.otcm[data-in] .otcm-phases .ph3::after{animation:otcO3b 7s step-end infinite}
+@keyframes otcO1{0%{opacity:1}68%{opacity:.55}}@keyframes otcO1b{0%{opacity:1}68%{opacity:0}}
+@keyframes otcO2{0%{opacity:.55}68%{opacity:1}84%{opacity:.55}}@keyframes otcO2b{0%{opacity:0}68%{opacity:1}84%{opacity:0}}
+@keyframes otcO3{0%{opacity:.55}84%{opacity:1}}@keyframes otcO3b{0%{opacity:0}84%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+ .otcm .otcm-fill.loop{transform:scaleX(.72)!important}.otcm .otcm-knobrail.loop{transform:translateX(72%)!important}
+ .otcm .otcm-buy{opacity:1!important;transform:translate(-50%,0)!important}
+ .otcm .otcm-phases .ph2{opacity:1!important}.otcm .otcm-phases .ph2::after{opacity:1!important}
+}
+/* 11) ULTRAROUND: a rail from the engine to the ring, embers riding it */
+.cbl-link{position:relative;display:block;height:14px;width:100%;gap:0}
+.cbl-link i{position:absolute;left:0;right:0;top:4px;height:6px;border-radius:999px;background:#1d2433}
+.cbl-link span{position:absolute;top:0;left:0;width:14px;height:14px;border-radius:999px;background:#ff7a2e;opacity:0;animation:cblRide 2.1s linear infinite}
+.cbl-link span:nth-child(3){animation-delay:.7s;background:#ffb627}.cbl-link span:nth-child(4){animation-delay:1.4s}
+@keyframes cblRide{0%{transform:translateX(0) scale(.6);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateX(min(106px,8vw)) scale(1);opacity:0}}
+@media (max-width:700px){.cbl-link{width:56px;height:14px;margin:var(--s-2) auto;transform:rotate(90deg)}@keyframes cblRide{0%{transform:translateX(0) scale(.6);opacity:0}15%,85%{opacity:1}100%{transform:translateX(42px) scale(1);opacity:0}}}
+@media (prefers-reduced-motion:reduce){.cbl-link span{opacity:1}.cbl-link span:nth-child(2){transform:translateX(10px)}.cbl-link span:nth-child(3){transform:translateX(46px)}.cbl-link span:nth-child(4){transform:translateX(82px)}}
+/* 12) Fountain: the vault art gets real size */
+.yc{grid-template-columns:minmax(0,420px) minmax(0,1fr)}
+.yc-art{max-width:420px}
+@media (max-width:900px){.yc{grid-template-columns:1fr}.yc-art{max-width:300px}}
+/* 3) HESTIA ring (replaces the hand-drawn fire) */
+.hring{display:flex;flex-direction:column;align-items:center;gap:var(--s-4);padding:var(--s-8)}
+.hring svg{max-width:300px}
+.hring-arc{stroke-dashoffset:var(--c);transition:stroke-dashoffset 1.6s cubic-bezier(.22,1,.36,1) .2s}
+.hring[data-in] .hring-arc{stroke-dashoffset:0}
+.hring-tip{transform-box:view-box;opacity:0;transition:opacity .4s 1.6s}
+.hring[data-in] .hring-tip{opacity:1}
+.hring-tip.flare{animation:hFlare 1s var(--spring)}
+@keyframes hFlare{40%{transform:scale(1.9)}}
+.hring[data-in] .hring-tip:not(.flare){animation:hBreath 2.4s ease-in-out 1.8s infinite}
+@keyframes hBreath{50%{transform:scale(1.25)}}
+.hring-copy{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.hring-copy b{font-family:var(--font-grotesk),sans-serif;font-size:var(--fs-display);line-height:1}
+.hring-copy span{color:var(--sub);font-size:var(--fs-subhead)}
+.cdps-key>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.cbl-link i{background:#26385e}

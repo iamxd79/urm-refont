@@ -16,21 +16,23 @@ export function DataRain({ words }: { words: string[] }) {
     if (!ctx) return;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const COLORS = ['#ffffff', '#ffffff', '#b9c8ff'];
-    const pool = (words.length ? words : ['$1.00']).join('  ');
+    const pool = (words.length ? words : ['$1.00']).filter((x) => x && x.trim());
     let w = 0, h = 0, fs = 13, cols: { x: number; y: number; speed: number; len: number; text: string; color: string; on: boolean; off: number }[] = [];
-    const pick = () => { const i = Math.floor(Math.random() * pool.length); return (pool + pool).slice(i, i + 26); };
+    // one whole value per column, never a slice of one
+    const pick = () => pool[Math.floor(Math.random() * pool.length)].replace(/\s+/g, ' ');
     const setup = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = cv.clientWidth; h = cv.clientHeight;
       cv.width = w * dpr; cv.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       fs = w < 700 ? 11 : 13;
-      const n = Math.floor(w / (fs * 1.6));
+      const n = Math.floor(w / (fs * 2.4));
       cols = Array.from({ length: n }, (_, i) => ({
-        x: i * fs * 1.6 + 4, y: Math.random() * h, speed: 0.25 + Math.random() * 0.6,
-        len: 6 + Math.floor(Math.random() * 14), text: pick(), color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        on: Math.random() < (w < 700 ? 0.16 : 0.2), off: Math.floor(Math.random() * 26),
+        x: i * fs * 2.4 + 4, y: Math.random() * h, speed: 0.25 + Math.random() * 0.5,
+        len: 0, text: '', color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        on: Math.random() < (w < 700 ? 0.14 : 0.22), off: 0,
       }));
+      cols.forEach((c) => { c.text = pick(); c.len = c.text.length; });
     };
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
@@ -40,11 +42,11 @@ export function DataRain({ words }: { words: string[] }) {
         if (!c.on) continue;
         const head = Math.floor(c.y / fs);
         for (let k = 0; k < c.len; k++) {
-          const row = head - k;
+          const row = head - (c.len - 1 - k);
           if (row < 0) continue;
-          const ch = c.text[(row + c.off) % c.text.length];
+          const ch = c.text[k];
           if (!ch || ch === ' ') continue;
-          ctx.fillStyle = k === 0 ? '#ff5a2e' : c.color;
+          ctx.fillStyle = k === c.len - 1 ? '#ff5a2e' : c.color;
           ctx.fillText(ch, c.x, row * fs);
         }
       }
@@ -57,17 +59,21 @@ export function DataRain({ words }: { words: string[] }) {
       for (const c of cols) {
         if (!c.on) continue;
         c.y += c.speed * fs * 0.35;
-        if (c.y - c.len * fs > h) { c.y = -Math.random() * h * 0.5; c.text = pick(); c.len = 6 + Math.floor(Math.random() * 14); }
+        if (c.y - c.len * fs > h) { c.y = -Math.random() * h * 0.5; c.text = pick(); c.len = c.text.length; }
       }
       draw();
     };
     setup(); draw();
     const ro = new ResizeObserver(() => { setup(); draw(); });
     ro.observe(cv);
-    const vis = () => { cancelAnimationFrame(raf); if (!document.hidden && !still) raf = requestAnimationFrame(tick); };
+    // only run while the hero is actually on screen
+    let shown = true;
+    const vis = () => { cancelAnimationFrame(raf); if (!document.hidden && !still && shown) raf = requestAnimationFrame(tick); };
+    const onScroll = () => { const s2 = window.scrollY < window.innerHeight * 0.9; if (s2 !== shown) { shown = s2; vis(); } };
     document.addEventListener('visibilitychange', vis);
+    window.addEventListener('scroll', onScroll, { passive: true });
     vis();
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('visibilitychange', vis); };
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('visibilitychange', vis); window.removeEventListener('scroll', onScroll); };
   }, [words]);
   return <canvas ref={ref} className="rain" aria-hidden="true" />;
 }

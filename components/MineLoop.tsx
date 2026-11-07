@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import { useInView, useReducedMotion } from './motion/useInView';
+import { useInView, useReducedMotion, useMedia } from './motion/useInView';
 
 /**
  * Mine / Temple, visualised. Markers 1–6 match the cards below:
@@ -109,11 +109,11 @@ function Art({ L, p, motion, id }: { L: L; p: P; motion: boolean; id: string }) 
       {motion && (
         <g>
           {coin(L.dep, '#f3f0e7', 0, 2.2, 8)}
-          {[0, 0.8, 1.6, 2.4].map((b) => <g key={b}>{coin(L.rew, acc, b, 3.2, 8)}</g>)}
+          {[0, 1.6].map((b) => <g key={b}>{coin(L.rew, acc, b, 3.2, 8)}</g>)}
           {coin(L.comp, '#e8ba67', 0.4, 2.4, 8)}
           {coin(L.sell, '#e6cfe2', 1.2, 2.4, 7)}
           {coin(L.podIn, '#7fe0a8', 0.2, 1.4, 7)}
-          {[0, 0.9].map((b) => <g key={b}>{coin(L.dripIn, '#d7b067', b, 1.8, 7)}</g>)}
+          {coin(L.dripIn, '#d7b067', 0, 1.8, 7)}
           {coin(L.ref, '#5fd39a', 1, 2.6, 7)}
         </g>
       )}
@@ -129,11 +129,12 @@ export default function MineLoop(p: P) {
   const seen = useInView(ref);
   const reduced = useReducedMotion();
   const motion = seen && !reduced;
+  const wide = useMedia('(min-width: 701px)');
   return (
     <div ref={ref} className="ml card glass-rim" data-in={seen ? '1' : undefined} role="img"
       aria-label={`You deposit ${p.token} to hire ${p.crew}; the deposit stays locked. Your ${p.crew} earn a share of the contract balance (${p.balance} ${p.token}) every second. Compound rewards into more ${p.crew}, or sell them up to the sell limit of ${p.sellLimit} ${p.token}. Peapods yield and a multisig drip refill the balance, and referrals bring new players.`}>
-      <div className="ml-wide"><Art L={WIDE} p={p} motion={motion} id="mlw" /></div>
-      <div className="ml-tall"><Art L={TALL} p={p} motion={motion} id="mlt" /></div>
+      {wide !== false && <div className="ml-wide"><Art L={WIDE} p={p} motion={motion && wide === true} id="mlw" /></div>}
+      {wide !== true && <div className="ml-tall"><Art L={TALL} p={p} motion={motion && wide === false} id="mlt" /></div>}
     </div>
   );
 }

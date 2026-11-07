@@ -46,7 +46,7 @@ export default function CdpSlider({ cols }: { cols: Col[] }) {
           <b>${f(tall)}</b><span>{lev ? `${sym} exposure` : `${sym} locked`}</span>
         </div>
         <div className="cdps-mid" aria-hidden="true">
-          <svg viewBox="0 0 120 60" width="120"><path className="cdps-flow" d="M6 30 H104" stroke="var(--accent)" strokeWidth="5" strokeLinecap="round" fill="none" /><path d="M94 18 L108 30 L94 42" stroke="var(--accent)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>
+          <span className="cdps-rail"><i /><i /><i /></span>
           <span>{c.min}x to {c.max}x</span>
           {lev && <svg className="cdps-loop" viewBox="0 0 120 60" width="120"><path d="M104 14 C104 54 16 54 16 22" stroke="#e8ba67" strokeWidth="4" strokeLinecap="round" fill="none" /><path d="M8 30 L16 18 L24 30" stroke="#e8ba67" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>}
         </div>
@@ -56,6 +56,7 @@ export default function CdpSlider({ cols }: { cols: Col[] }) {
             <i className="cdps-blk urm" style={{ transform: `scaleY(${sc(lo)})` }} />
           </div>
           <b>{f(lo)} to {f(hi)}</b><span>URM you can mint</span>
+          <span className="cdps-key"><span><i className="k1" />at {c.max}x</span><span><i className="k2" />up to, at {c.min}x</span></span>
         </div>
       </div>
       <p className="muted cdps-note">{lev ? `Leverage: the minted URM buys more ${sym} in the same transaction, up to about $${f(extra)} more exposure before fees. Bigger upside, bigger downside.` : `Borrow: keep your ${sym}, take URM to use now. Repay to unlock.`} Estimate only. The app shows the exact amount before you sign.</p>

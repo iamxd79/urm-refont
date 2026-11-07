@@ -26,3 +26,15 @@ export function useReducedMotion() {
   }, []);
   return r;
 }
+
+/** Matches a media query after mount (undefined during SSR, so both layouts can render until we know). */
+export function useMedia(q: string) {
+  const [m, setM] = useState<boolean | undefined>(undefined);
+  useEffect(() => {
+    const mq = window.matchMedia(q); setM(mq.matches);
+    const on = () => setM(mq.matches);
+    mq.addEventListener?.('change', on);
+    return () => mq.removeEventListener?.('change', on);
+  }, [q]);
+  return m;
+}

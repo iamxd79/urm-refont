@@ -16,7 +16,7 @@ export default function ShareWheel({ rows, unit, table }: { rows: Row[]; unit: s
   const [hl, setHl] = useState<string | null>(null);
   const top = rows.filter((r) => r.share > 0).slice(0, 6);
   const rest = Math.max(0, 100 - top.reduce((a, r) => a + r.share, 0));
-  const parts = [...top.map((r, i) => ({ ...r, color: COLORS[i % COLORS.length] })), ...(rest > 0.05 ? [{ wallet: 'others', share: rest, label: 'Everyone else', color: '#3a3f4f' }] : [])];
+  const parts = [...top.map((r, i) => ({ ...r, color: COLORS[i % COLORS.length] })), ...(rest > 0.05 ? [{ wallet: 'others', share: rest, label: 'Everyone else', color: '#8a90a6' }] : [])];
   let acc = 0;
   const segs = parts.map((p, i) => { const s = { ...p, from: acc, i }; acc += p.share; return s; });
 
