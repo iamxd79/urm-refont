@@ -802,3 +802,25 @@ h3.doc-h{margin:var(--s-8) 0 var(--s-3);font-size:var(--fs-title3)}
 }
 .dside .dsearch-res{width:100%;right:0}
 .dside .dsearch{position:sticky;top:0;z-index:5;padding-bottom:var(--s-2);margin-bottom:var(--s-4);background:var(--bg)}
+
+/* Mine / Temple loop */
+.ml{padding:var(--s-6);margin-top:var(--s-8)}
+.ml-tall{display:none}
+@media (max-width:700px){.ml-wide{display:none}.ml-tall{display:block;max-width:440px;margin:0 auto}}
+.ml-t{fill:var(--text);font:700 22px var(--font-inter,Inter),sans-serif}
+.ml-t.big{font-size:26px}
+.ml-n{fill:#0b0b12;font:800 18px var(--font-inter,Inter),sans-serif}
+.ml-num{fill:#fff;font:800 30px var(--font-grotesk,'Space Grotesk'),sans-serif}
+.ml-sub{fill:#fff;font:700 16px var(--font-inter,Inter),sans-serif;opacity:.85}
+.ml-liquid{transform-box:view-box}
+.ml-join{transform-box:fill-box;transform-origin:50% 100%;opacity:0;transform:scale(.4)}
+.ml[data-in] .ml-join{animation:mlJoin 7.2s var(--spring) infinite}
+.ml[data-in] .ml-join.j2{animation-delay:.8s}.ml[data-in] .ml-join.j3{animation-delay:1.6s}
+@keyframes mlJoin{0%,20%{opacity:0;transform:scale(.4)}30%,85%{opacity:1;transform:scale(1)}95%,100%{opacity:0;transform:scale(.4)}}
+.ml[data-in] .ml-fresh{transform-box:fill-box;transform-origin:center;animation:mlPulse 2.6s ease-in-out infinite}
+@keyframes mlPulse{50%{transform:scale(1.08)}}
+.ml-pea{transform-box:fill-box;transform-origin:center}
+.ml[data-in] .ml-pea{animation:mlPea 1.4s ease-in-out infinite}
+.ml[data-in] .ml-pea.p2{animation-delay:.2s}.ml[data-in] .ml-pea.p3{animation-delay:.4s}
+@keyframes mlPea{50%{transform:translateY(-4px)}}
+.steps .step>.n.sm{width:28px;height:28px;font-size:var(--fs-footnote);margin-bottom:var(--s-3)}

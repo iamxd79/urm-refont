@@ -5,6 +5,7 @@ import Check, { type Link as L } from './Check';
 import { MinerPanel } from './Panels';
 import ShowAll from './ShowAll';
 import ShareWheel from './ShareWheel';
+import MineLoop from './MineLoop';
 import { Tiles } from './ui';
 import { num, usd, ago, short, n } from '@/lib/fmt';
 import type { Tab } from '@/lib/nav';
@@ -61,7 +62,8 @@ export default function MinePage(c: Cfg) {
       </section>
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>
-        <div className="steps">{c.how.map(([t, d]) => <div key={t} className="step"><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}</div>
+        <MineLoop theme={c.theme === 'hestia' ? 'hestia' : 'circle'} token={c.token} crew={c.unit} balance={num(s[c.token === 'HESTIA' ? 'hestiaPodsBalance' : 'circlePodsBalance'])} sellLimit={num(s[c.sellLimitKey])} />
+        <div className="steps">{c.how.map(([t, d], i) => <div key={t} className="step"><span className="n sm">{i + 1}</span><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}</div>
       </section>
       <Check links={c.links} note={`Opened ${opened} · TVL ${usd(c.tvl)} · liquidity ${usd(c.podLiquidity)} · contract speed ${s[c.roiKey] ?? '—'}`} />
       <Footer name={c.footName} x={c.x} />
