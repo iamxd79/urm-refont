@@ -94,6 +94,7 @@ export function CdpPanel({ cols, rate, app }: { cols: Col[]; rate: number; app: 
         <b>Know the cost.</b> Use the CDP for liquidity without selling, not as a yield loop. The exact URM you mint shows in the app before you sign.
       </p>
       <Cta href={app} label={`${mode} in the current app`} connectLabel={`Connect wallet to ${mode.toLowerCase()}`} />
+      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}><a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a> before you borrow.</p>
     </div>
   );
 }
@@ -124,7 +125,7 @@ export function MinerPanel({ token, balKey, unit, verbs, perOne, dailyPerOne, se
         </ul>
       )}
       <Cta href={app} label={`${tab} in the current app`} connectLabel={connectLabel} />
-      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}>Rewards change as more players join. Figures update live.</p>
+      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}>Rewards change as more players join. Figures update live. <a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a></p>
     </div>
   );
 }

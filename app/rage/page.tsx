@@ -84,6 +84,7 @@ export default async function Rage() {
             <p style={{ margin: 0, fontWeight: 700 }}>Right now, investing is {num(r?.investProfitability, 2)}% better than buying on the market.</p>
             <ul style={{ margin: 0, paddingLeft: 20, lineHeight: 1.8 }}><li>{num(cfg.investorBonus)}% bonus on the underlying tokens</li><li>Asset Decline Protection caps the downside at {100 - n(cfg.adpPercent)}%</li><li>Mint after a {days(cfg.mintDelay)}-day wait</li></ul>
             <a className="btn btn-ink btn-lg btn-block" style={{ marginTop: 'auto' }} href={legacy('/rage')} target="_blank" rel="noreferrer">Invest with USDC</a>
+            <Link href="/risks" style={{ color: 'var(--ink)', textAlign: 'center', fontSize: 14, textDecoration: 'underline' }}>Read the risks</Link>
           </article>
           <article className="card glass" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}><h3 className="h3">Rage OTC</h3><span className="badge">Limited supply</span></div>

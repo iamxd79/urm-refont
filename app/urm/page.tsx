@@ -12,6 +12,8 @@ import { URM_TABS } from '@/lib/tabs';
 export const revalidate = 60;
 export const metadata = { title: 'URM stablecoin' };
 
+const pegDate = (d: any) => { const t = Date.parse(d); return isFinite(t) ? new Date(t).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) : '—'; };
+
 export default async function Urm() {
   const [o, f, cdp, home] = await Promise.all([api('urm/overview'), api('urm/fortress'), api('urm/cdp'), api('home/overview')]);
   const fs = f?.fortressState || {}, ov = fs.overview || {}, fo = f?.fountainState || {};
@@ -50,7 +52,7 @@ export default async function Urm() {
             <p className="muted" style={{ margin: '20px 0 0', fontWeight: 600 }}>Total defense</p>
             <p style={{ margin: '2px 0 12px', fontSize: 40, fontWeight: 800 }}>{usd(ov.totalDefense)}</p>
             <SupplyBar parts={defense} />
-            <p className="muted" style={{ fontSize: 14, margin: '16px 0 0' }}>The keeper checks the peg every 1.5 to 2 hours. Last defense: {ago(fs.state?.lastPegDefense)}.</p>
+            <p className="muted" style={{ fontSize: 14, margin: '16px 0 0' }}>The keeper checks the peg every 1.5 to 2 hours. Last time it had to step in: {pegDate(fs.state?.lastPegDefense)}.</p>
           </div>
         </div>
       </Hero>

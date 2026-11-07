@@ -1,6 +1,16 @@
 import Link from 'next/link';
+import { legacy } from '@/lib/fmt';
+
+const X: Record<string, string> = { URMdollar: 'URM', therageprotocol: 'RAGE', HestiaOnBase: 'HESTIA', UltraRoundMoney: 'ULTRAROUND' };
 
 export default function Footer({ name = 'URM', x = 'URMdollar' }: { name?: string; x?: string }) {
+  const follow = name === 'URM' ? Object.keys(X) : [x, ...(x !== 'URMdollar' ? ['URMdollar'] : [])];
+  const col = (title: string, links: [string, string][]) => (
+    <div className="fcol">
+      <b>{title}</b>
+      {links.map(([l, h]) => (h.startsWith('/') && !h.endsWith('.pdf') ? <Link key={l} href={h}>{l}</Link> : <a key={l} href={h}>{l}</a>))}
+    </div>
+  );
   return (
     <>
       <div className="strip" style={{ marginTop: 112 }}>
@@ -10,29 +20,18 @@ export default function Footer({ name = 'URM', x = 'URMdollar' }: { name?: strin
         <Link href="/circle"><img src="/assets/ultraround_temple.svg" alt="ULTRAROUND" /></Link>
       </div>
       <footer className="foot">
-        <div className="wrap" style={{ padding: '48px 24px', display: 'flex', flexWrap: 'wrap', gap: '24px 48px', fontSize: 15 }}>
+        <div className="wrap fgrid">
           <div style={{ flex: '1 1 240px' }}>
             <b style={{ fontSize: 18 }}>{name}</b>
-            <p className="muted" style={{ margin: '10px 0 0', maxWidth: 300 }}>Part of the URM ecosystem. Built on Base.</p>
+            <p className="muted" style={{ margin: '10px 0 0', maxWidth: 300 }}>Onchain money that works while you sleep. Part of the URM ecosystem, built on Base.</p>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>FOLLOW</b>
-            <a href={`https://x.com/${x}`} style={{ color: 'var(--text)' }}>@{x}</a>
-            {x !== 'URMdollar' && <a href="https://x.com/URMdollar" style={{ color: 'var(--text)' }}>@URMdollar</a>}
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>COMMUNITY</b>
-            <a href="https://t.me/urm_ecosystem" style={{ color: 'var(--text)' }}>Telegram</a>
-            <a href="https://discord.gg/J3U8wNmKQa" style={{ color: 'var(--text)' }}>Discord</a>
-            <a href="https://github.com/ultraroundMoney" style={{ color: 'var(--text)' }}>GitHub</a>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <b className="muted" style={{ fontSize: 13, letterSpacing: 1.5 }}>DATA</b>
-            <a href="https://dune.com/ultraround_money" style={{ color: 'var(--text)' }}>Dune</a>
-            <a href="https://ultraroundmoney.gitbook.io/ultraroundmoney/" style={{ color: 'var(--text)' }}>Docs</a>
-            <a href="mailto:info@ultraroundmoney.com" style={{ color: 'var(--text)' }}>Email</a>
-          </div>
+          {col('PRODUCTS', [['URM', '/urm'], ['Fountain', '/urm/fountain'], ['CDP', '/urm/cdp'], ['RAGE', '/rage'], ['HESTIA', '/hestia'], ['ULTRAROUND', '/circle'], ['Earn', '/earn']])}
+          {col('SECURITY', [['Risks', '/risks'], ['URM audit', legacy('/urm/audit.pdf')], ['Contracts', '/#trust'], ['Docs', 'https://ultraroundmoney.gitbook.io/ultraroundmoney/']])}
+          {col('FOLLOW', follow.map((h) => [`@${h}`, `https://x.com/${h}`] as [string, string]))}
+          {col('COMMUNITY', [['Telegram', 'https://t.me/urm_ecosystem'], ['Discord', 'https://discord.gg/J3U8wNmKQa'], ['GitHub', 'https://github.com/ultraroundMoney']])}
+          {col('DATA', [['Dune', 'https://dune.com/ultraround_money'], ['DefiLlama', 'https://defillama.com/protocol/urm'], ['Email', 'mailto:info@ultraroundmoney.com']])}
         </div>
+        <div className="wrap" style={{ paddingBottom: 32 }}><p className="muted" style={{ margin: 0, fontSize: 13 }}>Nothing here is financial advice. Yields are targets, not promises. Crypto can lose value.</p></div>
       </footer>
     </>
   );

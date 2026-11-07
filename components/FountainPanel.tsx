@@ -51,12 +51,15 @@ export default function FountainPanel(p: P) {
           <li><span className="k">Worth today</span><strong>{f((balances.fURM || 0) * p.toAssets, 2)} URM</strong></li>
         </ul>
       )}
-      <div style={{ marginTop: 18 }}>
+      <p style={{ margin: '14px 0 0', fontSize: 14, lineHeight: 1.5, background: 'var(--soft)', borderRadius: 16, padding: '12px 14px' }}>
+        <b>What you sign:</b> {wd ? 'one withdraw. URM or USDC comes back to your wallet.' : 'one approval for URM, then one deposit. fURM comes back to your wallet.'} Nothing else.
+      </p>
+      <div style={{ marginTop: 14 }}>
         {isConnected
           ? <a className="btn btn-ink btn-lg btn-block" href={p.app} target="_blank" rel="noreferrer">{wd ? 'Withdraw' : 'Deposit'} in the current app</a>
           : <ConnectButton block className="btn btn-ink btn-lg" label={wd ? 'Connect wallet to withdraw' : 'Connect wallet to deposit'} />}
       </div>
-      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}>Target rate, not a promise. You sign in the current Fountain app for now.</p>
+      <p className="muted" style={{ fontSize: 13, textAlign: 'center', margin: '12px 0 0' }}>Target rate, not a promise. <a href="/risks" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>Read the risks</a></p>
     </div>
   );
 }

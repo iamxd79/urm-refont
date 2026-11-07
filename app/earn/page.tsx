@@ -22,6 +22,7 @@ export default async function Earn() {
       <section className="wrap" style={{ paddingTop: 72 }}>
         <h1 className="h1">From your card<br />to <span className="acc">onchain yield.</span></h1>
         <p className="punch">No keys. No gas. Just tap and go.</p>
+        <p className="lead">No seed phrase, no hardware wallet, no address to copy. Buy USDC with a card, then swap, invest or deposit in one place.</p>
       </section>
       <section className="wrap sec grid2">
         <div className="card glass">
@@ -35,6 +36,7 @@ export default async function Earn() {
           <div className="row" style={{ marginTop: 12 }}>
             <ConnectButton label="Create a passkey wallet" />
             <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Buy USDC with a card</a>
+            <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Pay with your Coinbase account</a>
           </div>
         </div>
         <div>
@@ -53,7 +55,7 @@ export default async function Earn() {
       </section>
       <section className="wrap sec">
         <h2 className="h2">Then put it to work.</h2>
-        <div className="grid" style={{ marginTop: 32 }}>
+        <div className="grid" style={{ marginTop: 32, gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
           {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on URM. Withdraw anytime.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/circle/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
             <Link key={t} href={href!} data-theme={th} className="card glass" style={{ background: 'var(--panel)', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 8 }}>
               <span className="acc" style={{ fontSize: 13, fontWeight: 700, letterSpacing: 1.5 }}>{k}</span><b style={{ fontSize: 22 }}>{t}</b><span className="muted">{d}</span>

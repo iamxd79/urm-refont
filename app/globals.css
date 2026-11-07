@@ -112,3 +112,65 @@ details>summary{list-style:none;cursor:pointer}details>summary::-webkit-details-
 .legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (max-width:720px){.stats{grid-template-columns:1fr 1fr;gap:20px}.stat b{font-size:26px}}
+/* nav */
+.nav{border-bottom:1px solid var(--line);background:var(--bg);position:relative;z-index:40}
+.nav-over{position:absolute;left:0;right:0;background:transparent;border-bottom:0}
+.navbar{display:flex;align-items:center;gap:16px 28px;padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text)}.brand span{font-weight:800;font-size:22px}
+.navlinks{display:flex;flex-wrap:wrap;gap:6px 26px;flex:1 1 auto;font-size:15px;font-weight:500}
+.navlinks a{color:var(--text);min-height:44px;display:inline-flex;align-items:center}
+.navlinks a[aria-current=page]{color:var(--accent);font-weight:700;box-shadow:inset 0 -2px 0 var(--accent)}
+.basechip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;border-radius:999px;background:var(--panel);font-size:13px;font-weight:700;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+.mm{display:none}
+.mm-btn{width:48px;height:48px;border-radius:999px;border:0;background:var(--panel);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.18),inset 0 1px 0 rgba(255,255,255,.3)}
+.mm-panel{position:absolute;top:calc(100% + 8px);left:12px;right:12px;z-index:80;background:var(--panel);border-radius:28px;padding:18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 0 6px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.4),0 24px 60px #000}
+.mm-panel nav{display:flex;flex-direction:column}
+.mm-panel nav a{min-height:52px;display:flex;align-items:center;padding:0 10px;font-size:20px;font-weight:700;color:var(--text);border-radius:14px}
+.mm-panel nav a+a{border-top:1px solid var(--line)}
+.mm-panel nav a[aria-current=page]{color:var(--accent)}
+@media (max-width:900px){.navlinks,.basechip,.navcta{display:none}.mm{display:block;margin-left:auto}}
+@media (max-width:1100px){.basechip{display:none}}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+/* photo hero: statue reaching for the sun. Image is anchored right, its left edge extended seamlessly. */
+.phero{position:relative;height:clamp(600px,88vh,860px);background:#022596;overflow:hidden;isolation:isolate;color:#fff}
+.phero-art{position:absolute;right:0;bottom:0;height:100%;aspect-ratio:2400/675;z-index:-2}
+.phero-art img{object-fit:cover}
+.phero .orb{position:absolute;left:90.04%;top:14.76%;width:2.5%;aspect-ratio:1;transform:translate(-50%,-50%)}
+.orb-ring{position:absolute;inset:-22%;border-radius:999px;box-shadow:0 0 0 2px #ff5a2e;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.orb-ping{position:absolute;inset:0;border-radius:999px;visibility:hidden}
+.orb-ping.go{visibility:visible;box-shadow:0 0 0 3px #ffffff;animation:oping 1.8s ease-out forwards}
+@keyframes oping{0%{transform:scale(1)}92%{transform:scale(2.6)}100%{transform:scale(2.6);visibility:hidden}}
+.phero .readout{position:absolute;right:calc(100% + 36px);top:50%;transform:translateY(-50%);white-space:nowrap}
+.readout{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:#0d1b33;color:#f3f0e7;border-radius:16px;padding:10px 14px;font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.3)}
+.readout b{color:#ff5a2e;margin-right:6px}.readout .sub{color:#b0bfd6;font-size:11px}
+.rain{position:absolute;left:48%;right:0;top:0;height:40%;width:52%;z-index:-1;pointer-events:none}
+.phero-copy{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1280px}
+.phero-copy .h1{color:#fff;font-size:clamp(44px,6vw,86px);max-width:12ch}
+.phero-copy .h1 .acc{color:#ff5a2e}
+.phero-copy .lead{color:#dfe7ff;max-width:520px}
+.phero .btn-outline{color:#fff}
+.phero .btn-sun{background:#ff5a2e;color:#0d1b33}.phero .btn-sun:hover{color:#0d1b33;filter:brightness(1.05)}
+.phero-m{display:none}
+@media (max-width:900px){
+ .phero{height:auto;padding-bottom:0}
+ .phero-art,.rain{display:none}
+ .phero-copy{padding-top:48px;padding-bottom:24px}
+ .phero-m{display:block;position:relative;aspect-ratio:4/5;overflow:hidden}
+ .phero-m img{object-fit:cover;object-position:76% 0}
+ .phero-m .orb{left:85%;top:14.8%;width:11.1%}
+ .phero-m .readout{position:absolute;left:auto;right:calc(100% + 16px);top:50%;transform:translateY(-50%);font-size:12px;white-space:nowrap}
+ .phero-m .readout .sub{display:none}
+}
+@media (prefers-reduced-motion:reduce){.orb-ring,.orb-ping.go{animation:none}}
+/* home blocks */
+.news{display:grid;gap:12px}
+.news a{display:flex;gap:18px;align-items:center;min-height:64px;padding:16px 20px;background:var(--panel);border-radius:20px;color:var(--text);box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.news a:hover{color:var(--text);box-shadow:0 0 0 2px var(--accent)}
+.news time{flex:none;width:64px;font-weight:800;color:var(--accent)}
+.ctable{width:100%}.ctable td{border-top:1px solid #ece6da;padding:12px 14px}.ctable tr:first-child td{border-top:0}
+.fgrid{padding-top:48px;padding-bottom:28px;display:flex;flex-wrap:wrap;gap:28px 48px;font-size:15px}
+.fcol{display:flex;flex-direction:column;gap:4px}
+.fcol b{font-size:13px;letter-spacing:1.5px;color:var(--sub);margin-bottom:6px}
+.fcol a{color:var(--text);min-height:32px;display:inline-flex;align-items:center}
+.fcol a:hover{color:var(--accent)}

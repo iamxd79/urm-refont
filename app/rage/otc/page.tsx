@@ -18,7 +18,6 @@ export default async function Otc() {
   const fmv = n(r?.rbpView?.fmv);
   const active = !!o?.active;
   const raw = n(o?.dateNext);
-  // Never show a drop date that already passed.
   const next = isFinite(raw) && raw * 1000 > Date.now() ? raw : NaN;
   const nextDate = isFinite(next) ? new Date(next * 1000).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' }) : null;
   return (
@@ -60,7 +59,7 @@ export default async function Otc() {
         <p className="punch">A reverse Dutch auction.</p>
         <Steps items={[{ d: 'The ecosystem puts RAGE up for sale at fair value.' }, { d: 'The bonus on top grows every moment nobody buys.' }, { d: 'Wait for a bigger bonus, or buy before someone else does.' }]} />
       </section>
-      <Check links={[{ label: 'RAGE audit', href: legacy('/rage/audit.pdf'), strong: true }, addr('Rage OTC', C.rageOtc), addr('Rage Depot', C.rageDepot), addr('RAGE token', C.rage, true)]} />
+      <Check links={[{ label: 'RAGE audit', href: legacy('/rage/audit.pdf'), strong: true }, addr('Rage OTC', C.rageOtc), addr('Rage Depot', C.rageDepot), addr('RAGE token', C.rage, true), { label: 'Whitepaper', href: legacy('/rage/whitepaper.pdf') }]} />
       <Footer name="RAGE" x="therageprotocol" />
     </div>
   );
