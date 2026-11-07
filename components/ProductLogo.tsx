@@ -16,15 +16,6 @@ export default function ProductLogo({ id, size = 24, alt = '' }: { id: string; s
   return <img className="plogo" src={SRC[id]} alt={alt} width={size} height={size} />;
 }
 
-/** Logo + name + ticker, shown above each product page title. */
-export function Brand({ id, ticker, sub }: { id: string; ticker?: string; sub?: string }) {
-  return (
-    <div className="brand-badge glass-clear">
-      <ProductLogo id={id} size={56} />
-      <div>
-        <b>{NAMES[id] ?? id}</b>
-        {(ticker || sub) && <span>{ticker && <em>{ticker}</em>}{sub}</span>}
-      </div>
-    </div>
-  );
-}
+/** Product logo as a floating glass medallion: no text, real depth.
+ *  The name stays available to screen readers; the page title says the rest. */
+export { default as Brand } from './LogoOrb';

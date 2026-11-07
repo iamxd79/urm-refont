@@ -35,7 +35,7 @@ export default async function Urm() {
       <PageBg img="/hero/statue-wide.jpg" color="#022596" wide />
       <AutoRefresh />
       <Nav active="urm" tabs={URM_TABS} current="/urm" />
-      <Hero img="/hero/statue-wide.jpg" bg="#022596" pos="100% 50%" mpos="84% 50%">
+      <Hero img="/hero/statue-wide.jpg" bg="#022596" pos="100% 50%" mpos="84% 50%" row>
         <div className="split">
           <div className="main">
             <Brand id="urm" ticker="$URM" sub="Stablecoin on Base" />
