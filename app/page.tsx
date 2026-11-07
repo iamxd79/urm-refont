@@ -45,7 +45,7 @@ export default async function Home() {
             <Link className="btn btn-sun btn-lg" href="/urm/fountain">Start with Fountain</Link>
             <a className="btn btn-outline btn-lg" href="#trust">Read the audit</a>
           </div>
-          <p className="readout peg-m glass-clear"><span><b>PEG CHECK</b> {Number.isFinite(price) ? `$${num(price, 3)} · ${Math.abs(price - 1) <= 0.01 ? 'on peg' : 'off peg'}` : 'checking…'}</span></p>
+          <p className="readout peg-m glass-clear"><span><b>PEG CHECK</b> {Number.isFinite(price) ? `$${num(price, 3)} · ${Math.abs(price - 1) <= 0.01 ? 'on peg' : 'off peg'}` : 'checking…'}</span><span className="sub">Defense {usd(ov.totalDefense)} · re-checked every minute</span></p>
           <p className="sr">URM peg check: ${num(price, 3)}. Total defense {usd(ov.totalDefense)}.</p>
         </div>
       </section>

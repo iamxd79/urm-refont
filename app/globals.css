@@ -954,3 +954,7 @@ body{transition:background-color .5s ease}
 .hring-copy span{color:var(--sub);font-size:var(--fs-subhead)}
 .cdps-key>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .cbl-link i{background:#26385e}
+/* the live peg readout lives under the hero buttons, not jammed against the nav beside the orb */
+.pbg .orb .readout{display:none}
+.peg-m{display:inline-flex;margin-top:var(--s-6)}
+.peg-m{width:fit-content;align-self:flex-start}
