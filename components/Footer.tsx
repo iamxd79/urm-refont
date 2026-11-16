@@ -24,7 +24,7 @@ export default function Footer({ name = 'URM ecosystem', x = 'URMdollar' }: { na
           {col('SECURITY', [['Risks', '/risks'], ['URM audit', legacy('/urm/audit.pdf')], ['Contracts', '/#trust'], ['Docs', '/docs']])}
           {col('FOLLOW', follow.map((h) => [`@${h}`, `https://x.com/${h}`] as [string, string]))}
           {col('COMMUNITY', [['Telegram', 'https://t.me/urm_ecosystem'], ['Discord', 'https://discord.gg/J3U8wNmKQa'], ['GitHub', 'https://github.com/ultraroundMoney']])}
-          {col('DATA', [['Dune', 'https://dune.com/ultraround_money'], ['DefiLlama', 'https://defillama.com/protocol/urm'], ['Email', 'mailto:info@ultraroundmoney.com']])}
+          {col('DATA', [['Dashboard', '/dashboard'], ['Dune', 'https://dune.com/ultraround_money'], ['DefiLlama', 'https://defillama.com/protocol/urm'], ['Email', 'mailto:info@ultraroundmoney.com']])}
         </div>
         <div className="wrap" style={{ paddingBottom: 'var(--s-8)' }}><p className="muted" style={{ margin: 0, fontSize: 'var(--fs-footnote)' }}>Nothing here is financial advice. Yields are targets, not promises. Crypto can lose value.</p></div>
       </footer>

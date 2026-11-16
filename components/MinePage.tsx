@@ -31,14 +31,12 @@ export default function MinePage(c: Cfg) {
           <div className="main">
             <h1 className="h1">{c.title}</h1>
             <p className="lead">{c.lead}</p>
-            <p className="punch">{c.punch}</p>
             <div style={{ marginTop: 'var(--s-8)' }}>
               <Tiles items={[
                 { v: num(s[c.token === 'HESTIA' ? 'hestiaPodsBalance' : 'circlePodsBalance']), l: `${c.token} in the ${c.token === 'HESTIA' ? 'mine' : 'temple'}` },
                 { v: num(s.dailyValueOnePercent, 2), l: `daily ${c.token} per 1% of ${c.unit}` },
                 { v: num(s[c.perOneKey], 2), l: `${c.token} to own 1%` },
                 { v: num(s.totalBurn), l: `${c.token} burned so far` },
-                { v: num(s.pTknRate, 3), l: `${c.pTok} per ${c.token}` },
                 { v: num(s.walletCount), l: c.leaders },
               ]} />
             </div>
@@ -66,7 +64,7 @@ export default function MinePage(c: Cfg) {
         <MineLoop theme={c.theme === 'hestia' ? 'hestia' : 'circle'} token={c.token} crew={c.unit} balance={num(s[c.token === 'HESTIA' ? 'hestiaPodsBalance' : 'circlePodsBalance'])} sellLimit={num(s[c.sellLimitKey])} />
         <div className="steps">{c.how.map(([t, d], i) => <div key={t} className="step"><span className="n sm">{i + 1}</span><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}</div>
       </section>
-      <Check links={c.links} note={`Opened ${opened} · TVL ${usd(c.tvl)} · liquidity ${usd(c.podLiquidity)} · contract speed ${s[c.roiKey] ?? '—'}`} />
+      <Check links={c.links} note={`Opened ${opened} · TVL ${usd(c.tvl)} · liquidity ${usd(c.podLiquidity)}`} />
       <ActionBar label={c.verbs[0]} note={c.title} />
       <Footer name={c.footName} x={c.x} />
     </div>

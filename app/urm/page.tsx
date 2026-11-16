@@ -57,7 +57,7 @@ export default async function Urm() {
             <p className="muted" style={{ margin: '20px 0 0', fontWeight: 600 }}>Total defense</p>
             <p style={{ margin: '2px 0 12px', fontSize: 'var(--fs-title1)', fontWeight: 800 }}>{usd(ov.totalDefense)}</p>
             <SupplyBar parts={defense} />
-            <p className="muted" style={{ fontSize: 'var(--fs-subhead)', margin: '16px 0 0' }}>The keeper checks the peg every 1.5 to 2 hours. Last time it had to step in: {pegDate(fs.state?.lastPegDefense)}.</p>
+            
           </div>
         </div>
       </Hero>
@@ -109,11 +109,8 @@ export default async function Urm() {
           <SupplyBar parts={[{ label: 'Fortress', value: n(sup.fortress), color: '#d7b067' }, { label: 'Towers', value: n(sup.tower), color: '#b0bfd6' }, { label: 'Liquidity pools', value: n(sup.pools), color: '#5d93f0' }, { label: 'Holders', value: n(sup.holders), color: '#f3f0e7' }, { label: 'Ecosystem', value: n(sup.ecosystem), color: '#ff7a2e' }]} />
         </div>
         <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(340px,100%),1fr))', gap: 'var(--s-5)' }}>
-          <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 'var(--s-3)' }}>Where the supply sits</h3><ul className="list">
-            {[['Circulating', sup.circulating], ['Fortress', sup.fortress], ['Flanking pool', sup.flankingPool], ['Towers', sup.tower], ['Holders', sup.holders], ['Main pool', sup.mainPool], ['RAGE pool', sup.ragePool], ['Initial supply', sup.initial]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={num(v)} /></strong></li>)}
-          </ul></div>
           <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 'var(--s-3)' }}>Defense</h3><ul className="list">
-            {[['Soft defense', usd(ov.softDefense)], ['Hard defense', usd(ov.hardDefense)], ['Defense surplus', usd(ov.totalDefenseSurplus)], ['Counter defense', usd(ov.counterDefense)], ['Below-peg room', usd(fs.pegDefenseRoom?.usdcLeft)], ['Above-peg room', num(fs.pegDefenseRoom?.urmLeft) + ' $URM'], ['Liquidity to market cap', num(o?.liquidity?.marketCapRatio, 2) + '%']].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={String(v)} /></strong></li>)}
+            {[['Total defense', usd(ov.totalDefense)], ['Defense surplus', usd(ov.totalDefenseSurplus)], ['Below-peg room', usd(fs.pegDefenseRoom?.usdcLeft)], ['Above-peg room', num(fs.pegDefenseRoom?.urmLeft) + ' $URM'], ['Liquidity to market cap', num(o?.liquidity?.marketCapRatio, 2) + '%']].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={String(v)} /></strong></li>)}
           </ul></div>
           <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)', marginBottom: 'var(--s-3)' }}>Fountain and CDP</h3><ul className="list">
             {[['Fountain staked', num(fo.totalAssets)], ['Fountain interest per day', num(fo.interestPerDay, 2)], ['Fountain idle supply', num(fo.urmIdle)], ['CDP borrowed', num(cdp?.urmDebt)], ['CDP interest per day', num(cdp?.urmCdpInterestPerDay, 2)], ['CDP paid to the Fortress', num(cdp?.urmCdpPaidToFortress)]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={String(v)} /></strong></li>)}

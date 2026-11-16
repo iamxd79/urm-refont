@@ -32,7 +32,7 @@ export default function MobileMenu({ items, active, docs, product, theme }: { it
       {open && createPortal(
         <div id="mm-panel" className="mm-panel glass-solid" style={{ top }} data-theme={theme}>
           <nav aria-label="Mobile">
-            {items.map((i) => <Link key={i.key} href={i.href} aria-current={active === i.key ? 'page' : undefined}>{i.key !== 'earn' && <ProductLogo id={i.key} size={28} />}{i.label}</Link>)}
+            {items.map((i) => <Link key={i.key} href={i.href} aria-current={active === i.key ? 'page' : undefined}>{['urm','rage','hestia','circle'].includes(i.key) && <ProductLogo id={i.key} size={28} />}{i.label}</Link>)}
             <a href={docs}>Docs</a>
             <Link href="/risks">Risks</Link>
           </nav>

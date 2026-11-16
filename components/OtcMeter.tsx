@@ -1,6 +1,5 @@
 'use client';
 import { useRef } from 'react';
-import Countdown from './Countdown';
 import { useInView } from './motion/useInView';
 
 /**
@@ -28,7 +27,6 @@ export default function OtcMeter({ active, bonus, min, max, last, next }: P) {
         <div className="otcm-knobrail" style={{ ['--k' as any]: live }}><span className="otcm-knob" /></div>
       </div>
       <div className="otcm-ticks" aria-hidden="true">{ticks.map((t) => <span key={t} style={{ left: `${at(t) * 100}%` }}>{t}%</span>)}</div>
-      {!active && <p className="muted otcm-note">Next drop {next ? <>in <b style={{ color: 'var(--text)' }}><Countdown to={next} done="any moment now" /></b></> : 'soon'}. Announced on X first.</p>}
 
       <div className="otcm-demo" aria-hidden="true">
         <span className="eyebrow otcm-demolabel">How a round plays out</span>

@@ -57,12 +57,11 @@ export default async function Hestia() {
         <div className="split" style={{ alignItems: 'center' }}>
           <div className="main">
             <h2 className="h2">The fire and the tech.</h2>
-            <p className="punch">Where DeFi meets meme.</p>
             <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(260px,100%),1fr))' }}>
               {[["Hestia's rage", 'Burns part of her sell-side liquidity while adding the same buying pressure. Can switch to regenerative mode.'], ['Smoke Fees', "Pool fees grow her USDC reserve, or fund ULTRAROUND's Chaos Engine."], ['AI agent', 'In a later phase, an AI agent will own the Chaos Engine and talk with the community.'], ['Community', 'Fair launch, no team allocation. 100% funded and built by the community.']].map(([t, d]) => <div key={t} className="step"><h3 style={{ marginTop: 0 }}>{t}</h3><p>{d}</p></div>)}
             </div>
           </div>
-          <div className="side"><HestiaRing burned={n(s.burned)} pct={n(s.burnedPercent)} /><p className="muted" style={{ textAlign: 'center', fontSize: 'var(--fs-subhead)' }}>The ring grows, and its tip flares, every time the burned total goes up.</p></div>
+          <div className="side"><HestiaRing burned={n(s.burned)} pct={n(s.burnedPercent)} /></div>
         </div>
       </section>
 
@@ -75,7 +74,7 @@ export default async function Hestia() {
           <article className="cream glass-rim vstack"><h3 className="h3">The Hestia Mine</h3><p style={{ lineHeight: 1.5 }}>Become a mining chief. Stake HESTIA, hire your crew, compound or sell your rewards.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile"><b>{num(m?.state?.hestiaPodsBalance)}</b><span>HESTIA in the mine</span></div><div className="tile"><b>{num(m?.state?.walletCount)}</b><span>mining chiefs</span></div></div>
             <Link className="btn btn-ink btn-block" style={{ marginTop: 'auto' }} href="/hestia/mine">Start mining</Link></article>
-          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock HESTIA as collateral and mint $URM against it. Liquidity without selling.</p>
+          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock HESTIA as collateral and mint $URM against it.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile" style={{ background: 'var(--bg)' }}><b>{num(s.urmCdp)}</b><span>HESTIA locked in CDP</span></div><div className="tile" style={{ background: 'var(--bg)' }}><b>{bps(cdp?.currentInterestRate)}</b><span>yearly rate</span></div></div>
             <Link className="btn btn-primary btn-block" style={{ marginTop: 'auto' }} href="/urm/cdp">Open a position</Link></article>
         </div>
@@ -87,7 +86,6 @@ export default async function Hestia() {
         <p className="punch">Fees fill the tank. The tank feeds the fire.</p>
         <div style={{ marginTop: 'var(--s-8)' }}><HestiaEngine usdc={n(h?.reserve?.usdc)} cap={n(ch.usdcCapacity)} nextSmoke={ch.nextSmokeTime} nextRage={ch.nextRageTime} interval={ch.smokeInterval} burnedPct={n(s.burnedPercent)} /></div>
         <details className="more"><summary>More engine numbers</summary><ul className="list" style={{ marginTop: 'var(--s-5)' }}>
-          <li><span className="k">Hestia&apos;s strength</span><strong>{usd(h?.strength?.value)}</strong></li>
           <li><span className="k">Main pool liquidity</span><strong>{usd(h?.liquidity?.mainValue)}</strong></li>
           <li><span className="k">Liquidity to market cap</span><strong>{num(h?.liquidity?.marketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
@@ -99,10 +97,8 @@ export default async function Hestia() {
         <Faq items={[
           ['What is the Hestia Chaos Engine?', "A controller contract that sets her burn rate. It grows a USDC reserve from trading fees and by pulling liquidity from the main pool, then uses it to buy and burn HESTIA. It's the buyer of last resort."],
           ['How does RAGE make HESTIA stronger?', '80% of every RAGE investment buys HESTIA, wraps it into pHestia on Peapods and locks it as backing.'],
-          ['What is the Hestia Mine?', 'A staking contract inspired by BNBMiner, with a Peapods integration. Buy miners with HESTIA, then compound or sell your rewards.'],
           ['Why Base?', 'The engine runs on fees. On mainnet, gas would eat the profit. On Base it stays tiny, which is also why HESTIA has no transaction tax.'],
           ['How does HESTIA help ULTRAROUND?', "Smoke Fees can fund ULTRAROUND's Chaos Engine, pushing its burn rate up when its own volume is low."],
-          ['Will HESTIA become an AI agent?', "That's the plan for a later phase: an AI agent owns the Chaos Engine and engages with the community."],
         ]} />
       </section>
       <Check links={[{ label: 'Audit', href: legacy('/hestia/audit.pdf'), strong: true }, { label: 'Whitepaper', href: legacy('/hestia/whitepaper.pdf'), strong: true }, addr('HESTIA', C.hestia, true), addr('Chaos Engine', C.hestiaChaos), { label: 'Dune', href: 'https://dune.com/ultraround_money/hestia' }, { label: 'CoinGecko', href: 'https://www.coingecko.com/en/coins/hestia' }]} />

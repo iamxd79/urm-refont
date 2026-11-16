@@ -37,19 +37,15 @@ export default async function Circle() {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}><b className="eyebrow">BURNED FOREVER</b><span className="pill" style={{ background: 'var(--accent)', color: 'var(--onAccent)' }}>Live</span></div>
             <p style={{ margin: '10px 0 0', fontSize: 'var(--fs-display)', fontWeight: 800 }} className="acc">{num(s.burnedPercent, 2)}%</p>
             <p className="muted" style={{ margin: 0 }}>{num(s.burned)} of 1,000,000 ULTRAROUND</p>
-            <ul className="list" style={{ marginTop: 'var(--s-4)', background: 'var(--bg)' }}>
-              <li><span className="k">Burns per day</span><strong>{num(ch.burnPerDay)}</strong></li>
-              <li><span className="k">Last Cause Chaos</span><strong>{ago(ch.lastBurn)}</strong></li>
-            </ul>
           </div>
         </div>
       </Hero>
       <Stats items={[{ v: '$' + num(c?.price, 2), l: 'price' }, { v: usd(c?.marketCap), l: 'market cap' }, { v: num(c?.liquidity?.marketCapRatio, 2) + '%', l: 'liquidity to market cap' }, { v: num(c?.holders), l: 'holders' }]} />
       <section className="wrap sec">
-        <h2 className="h2">The fire and the tech.</h2>
-        <p className="punch">The highest liquidity ratio on Base, with no tax.</p>
+        <h2 className="h2">How it burns.</h2>
+        <p className="punch">Deep liquidity, no tax.</p>
         <div className="steps">
-          {[['Cause Chaos', 'The Chaos Engine collects pool fees, swaps the WETH back and forth, and burns ULTRAROUND.'], ['High liquidity', 'Thanks to the engine, ULTRAROUND holds one of the highest liquidity ratios for a coin its size.'], ['Chaos Automator', 'A back-end service that runs the engine onchain, on schedule.'], ['Community funded', "Marketing and development are paid for by the community through URM's multisig."]].map(([a, b]) => <div key={a} className="step"><h3 style={{ marginTop: 0 }}>{a}</h3><p>{b}</p></div>)}
+          {[['Cause Chaos', 'The Chaos Engine collects pool fees, swaps the WETH back and forth, and burns ULTRAROUND.'], ['High liquidity', `Thanks to the engine, liquidity is ${num(c?.liquidity?.marketCapRatio, 2)}% of market cap, with no tax on your trades.`], ['Community funded', "Marketing and development are paid for by the community through URM's multisig."]].map(([a, b]) => <div key={a} className="step"><h3 style={{ marginTop: 0 }}>{a}</h3><p>{b}</p></div>)}
         </div>
       </section>
       <section className="wrap sec">
@@ -61,7 +57,7 @@ export default async function Circle() {
           <article className="cream glass-rim vstack"><h3 className="h3">Ultraround Temple</h3><p style={{ lineHeight: 1.5 }}>Become a cult leader. Stake ULTRAROUND, summon templars, compound or claim your rewards.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile"><b>{num(t?.state?.circlePodsBalance)}</b><span>ULTRAROUND in the temple</span></div><div className="tile"><b>{num(t?.state?.walletCount)}</b><span>cult leaders</span></div></div>
             <Link className="btn btn-ink btn-block" style={{ marginTop: 'auto' }} href="/ultraround/temple">Start praying</Link></article>
-          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint $URM against it. Liquidity without selling.</p>
+          <article className="card glass-rim vstack"><h3 className="h3">URM CDP</h3><p style={{ lineHeight: 1.5 }}>Lock ULTRAROUND as collateral and mint $URM against it.</p>
             <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--s-3)' }}><div className="tile" style={{ background: 'var(--bg)' }}><b>{num(s.urmCdp)}</b><span>ULTRAROUND in CDP</span></div><div className="tile" style={{ background: 'var(--bg)' }}><b>{bps(cdp?.currentInterestRate)}</b><span>yearly rate</span></div></div>
             <Link className="btn btn-primary btn-block" style={{ marginTop: 'auto' }} href="/urm/cdp">Open a position</Link></article>
         </div>
@@ -81,7 +77,6 @@ export default async function Circle() {
       <section className="wrap sec">
         <h2 className="h2">Questions.</h2>
         <Faq items={[
-          ['What is the Ultraround Chaos Engine?', 'A controller contract that runs the deflation. It collects pool fees, swaps the WETH back and forth, and burns ULTRAROUND, with no tax on your trades.'],
           ['How does RAGE make ULTRAROUND stronger?', '20% of every RAGE investment buys ULTRAROUND, wraps it into a Peapods pod and locks it as backing.'],
           ['What is the Ultraround Temple?', 'A staking contract inspired by BNBMiner, with a Peapods integration. Buy templars with ULTRAROUND, then compound or sell your rewards.'],
           ['Why Base?', 'The engine trades constantly. Base keeps those fees tiny, so the burn stays profitable.'],

@@ -22,12 +22,12 @@ export default function FountainPanel(p: P) {
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <label htmlFor="famt" className="label">{wd ? 'You withdraw' : 'You deposit'}</label>
-        <span className="muted" style={{ fontSize: 'var(--fs-footnote)' }}>Balance: {isConnected && bal !== undefined ? f(bal, 2) : '—'} {wd ? 'fURM' : 'URM'}</span>
+        <span className="muted" style={{ fontSize: 'var(--fs-footnote)' }}>Balance: {isConnected && bal !== undefined ? f(bal, 2) : '—'} {wd ? 'fURM' : '$URM'}</span>
       </div>
       <div className="field">
         <input id="famt" inputMode="decimal" value={amt} onChange={(e) => setAmt(e.target.value.replace(/[^0-9.,]/g, ''))} />
         {isConnected && bal !== undefined && <button type="button" onClick={() => setAmt(String(Math.floor(bal * 100) / 100))} style={{ minHeight: 36, padding: '0 12px', border: 0, borderRadius: 999, background: 'var(--soft)', font: '700 13px var(--font-inter)', cursor: 'pointer' }}>MAX</button>}
-        <span className="unit">{wd ? 'fURM' : 'URM'}</span>
+        <span className="unit">{wd ? 'fURM' : '$URM'}</span>
       </div>
       <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
         {!wd ? (

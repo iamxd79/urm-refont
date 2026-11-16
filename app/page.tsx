@@ -56,7 +56,7 @@ export default async function Home() {
         <div className="stat"><b style={{ color: '#ff3d3d' }}><CountUp text={num(rb?.rbpView?.backingPerShare, 3)} /></b><span>RAGE backing per share</span></div>
         <div className="stat"><b style={{ color: '#ff7a2e' }}><CountUp text={pct(h?.supply?.burnedPercent)} /></b><span>of HESTIA burned</span></div>
         <div className="stat"><b style={{ color: '#5d93f0' }}><CountUp text={pct(c?.supply?.burnedPercent)} /></b><span>of ULTRAROUND burned</span></div>
-      </div></section>
+      </div><div className="wrap band-more"><a href="/dashboard">See every number on the dashboard →</a></div></section>
       <section className="wrap sec">
         <div className="split">
           <div className="main">
@@ -68,7 +68,7 @@ export default async function Home() {
               {[
                 { href: '/urm/fountain', when: 'Oct 12', status: 'Live', logo: 'urm', t: 'Fountain URM is live', d: 'Deposit $URM, get fURM, earn a yield paid by the Fortress.' },
                 { href: '/urm/cdp', when: 'Aug 27', status: 'Live', logo: 'urm', t: 'The URM CDP is live', d: 'Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it.' },
-                { href: '/rage#next', when: 'Next', status: 'Soon', logo: 'rage', t: 'Black Card is in review', d: 'Lock an option, harvest the premium. Details on the RAGE page.' },
+                { href: '/rage#next', when: 'Next', status: 'Soon', logo: 'rage', t: 'Black Card is in review', d: 'Lock an option, harvest the premium.' },
               ].map((n) => (
                 <li key={n.t}>
                   <Link href={n.href} className="latest-row">
@@ -116,7 +116,6 @@ export default async function Home() {
           <div className="grid" style={{ marginTop: 'var(--s-8)', gap: 'var(--s-8)' }}>
             <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Read before you sign</h3><p className="muted" style={{ lineHeight: 1.5 }}>Connecting only reads your address and balances. It never moves funds.</p></div>
             <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Audited and verified</h3><p className="muted" style={{ lineHeight: 1.5 }}>Audit reports, verified code on Basescan, Fountain listed on DefiLlama.</p></div>
-            <div><h3 className="h3" style={{ fontSize: 'var(--fs-title3)' }}>Leave anytime</h3><p className="muted" style={{ lineHeight: 1.5 }}>Withdraw from Fountain whenever you want, to $URM or USDC. {bps(fs.config?.withdrawFee)} withdraw fee.</p></div>
           </div>
           <div className="grid2" style={{ marginTop: 'var(--s-8)' }}>
             <div className="white" style={{ overflowX: 'auto' }}>
@@ -140,7 +139,7 @@ export default async function Home() {
           <div><h2 className="h2">New to crypto?</h2><p className="punch">From your card to onchain yield in four taps.</p></div>
           <Link className="btn btn-primary btn-lg" href="/earn">Start with Earn</Link>
         </div>
-        <PhoneDemo apy={pct(yieldPct, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to $URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: `Into Fountain, at a ${pct(yieldPct, 0)} target APY. Withdraw anytime.` }]} />
+        <PhoneDemo apy={pct(yieldPct, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to $URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: `Into Fountain, at a ${pct(yieldPct, 0)} target APY.` }]} />
       </section>
       <Footer />
     </div>

@@ -111,9 +111,6 @@ export default function YieldCounter({ toAssets, interestPerDay, totalShares, yi
           <div className="tile"><span>Earned today, so far</span><b className="acc" ref={today}>—</b></div>
           <div className="tile"><span>At today&apos;s pace, a year</span><b>{live ? '+' + f(yearPace, 2) : '—'}</b></div>
         </div>
-        <p className="muted" style={{ fontSize: 'var(--fs-footnote)', margin: '14px 0 0' }}>
-          The Fortress pays {f(interestPerDay, 2)} $URM a day across {f(totalShares, 0)} fURM. Target {f(yieldRate, 0)}% a year, not a promise.
-        </p>
       </div>
     </div>
   );

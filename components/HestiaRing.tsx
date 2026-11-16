@@ -31,7 +31,7 @@ export default function HestiaRing({ burned, pct }: { burned: number; pct: numbe
       </svg>
       <div className="hring-copy">
         <b className="acc"><CountUp text={pct.toFixed(2) + '%'} /></b>
-        <span>{Math.round(burned).toLocaleString('en-US')} of 1,000,000 HESTIA burned forever</span>
+        <span>of HESTIA burned forever</span>
       </div>
     </div>
   );

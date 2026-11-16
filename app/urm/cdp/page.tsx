@@ -28,22 +28,18 @@ export default async function Cdp() {
         <div className="split">
           <div className="main">
             <h1 className="h1">URM CDP</h1>
-            <p className="lead">Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it. Borrow at a fixed collateral ratio, or leverage in one transaction. Your position is an NFT you can settle, unwind or transfer anytime.</p>
+            <p className="lead">Lock RAGE, HESTIA or ULTRAROUND and mint $URM against it.</p>
+            <p className="punch">Liquidity without selling.</p>
             <div style={{ marginTop: 'var(--s-8)' }}>
               <Tiles items={[{ v: bps(c?.currentInterestRate), l: 'yearly interest' }, { v: num(c?.urmBorrowable), l: '$URM available' }, { v: bps(c?.utilization, 0), l: 'utilization' }, { v: num(c?.urmDebt), l: '$URM borrowed' }, { v: num(c?.borrowCapacity), l: 'max capacity' }, { v: num(c?.positionCount), l: 'open positions' }]} />
             </div>
             <div className="bar" style={{ marginTop: 'var(--s-5)', background: 'var(--panel)' }} role="img" aria-label={`${num(util)}% of borrow capacity in use`}><div style={{ width: `${Math.min(100, util)}%`, background: 'var(--accent)' }} /></div>
-            <p className="muted" style={{ fontSize: 'var(--fs-subhead)', marginTop: 'var(--s-2)' }}>{num(util)}% of the borrow capacity is in use.</p>
             <div style={{ marginTop: 'var(--s-8)' }}>
               <YourPosition items={[{ label: 'Position NFTs', key: 'CDP' }, { label: 'RAGE', key: 'RAGE' }, { label: 'HESTIA', key: 'HESTIA' }, { label: 'ULTRAROUND', key: 'ULTRAROUND' }]} />
             </div>
           </div>
           <div className="side" id="act"><CdpPanel cols={cols} rate={n(c?.currentInterestRate) / 100} app={legacy('/urm/cdp')} /></div>
         </div>
-      </section>
-      <section className="wrap sec grid2">
-        <div className="card glass-rim"><h2 className="h3">Borrow</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>Liquidity without selling.</p><p className="muted" style={{ lineHeight: 1.5 }}>Lock your tokens, mint $URM at a fixed ratio, keep your upside. Repay to get your collateral back.</p></div>
-        <div className="card glass-rim"><h2 className="h3">Leverage</h2><p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>More exposure, one transaction.</p><p className="muted" style={{ lineHeight: 1.5 }}>The minted $URM buys more of your collateral in the same transaction. Bigger upside, bigger downside. Unwind anytime.</p></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">See it before you sign.</h2>

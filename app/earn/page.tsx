@@ -34,17 +34,13 @@ export default async function Earn() {
       <section className="wrap sec">
         <h2 className="h2">Four taps.</h2>
         <p className="punch">Here&apos;s how it feels on your phone.</p>
-        <PhoneDemo apy={bps(f?.fountainState?.config?.yieldRate, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint. No seed phrase to write down.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to $URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: 'Into Fountain. Withdraw anytime.' }]} />
+        <PhoneDemo apy={bps(f?.fountainState?.config?.yieldRate, 0)} steps={[{ t: 'Passkey wallet', d: 'Face ID or a fingerprint.' }, { t: 'Buy USDC', d: 'With a card or Apple Pay. 0.2% gateway fee, shown before you confirm.' }, { t: 'Swap to $URM', d: 'One tap on Base. Gas is covered for you.' }, { t: 'Deposit', d: 'Into Fountain. Withdraw anytime.' }]} />
       </section>
       <section className="wrap sec grid2" id="act">
         <div className="vstack swapcol">
           <div style={{ marginBottom: 'var(--s-4)' }}>{step(1, 'Fund your wallet')}</div>
           <div className="card glass-rim vstack fundcard">
-            <ol className="fundsteps">
-              <li><b>Create a passkey wallet</b><span>In seconds, with Face ID or a fingerprint. No seed phrase.</span></li>
-              <li><b>Buy USDC on Base</b><span>With a bank card or Apple Pay. 0.2% gateway fee, shown before you confirm.</span></li>
-              <li><b>Deposit</b><span>Gas is covered for you.</span></li>
-            </ol>
+            <p style={{ margin: 0, lineHeight: 1.5 }}>Create a wallet, then add USDC with a card, Apple Pay or Coinbase.</p>
             <div className="row" style={{ marginTop: 'auto', paddingTop: 'var(--s-6)' }}>
               <ConnectButton label="Create a passkey wallet" />
               <a className="btn btn-outline" href={legacy('/earn')} target="_blank" rel="noreferrer">Buy USDC with a card</a>
@@ -61,7 +57,7 @@ export default async function Earn() {
         <div className="cream glass-rim" style={{ padding: 'var(--s-8)', display: 'flex', flexWrap: 'wrap', gap: 'var(--s-6)', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ flex: '1 1 420px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s-3)' }}><span style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 999, background: 'var(--ink)', color: 'var(--accent)', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 'var(--fs-body)' }}>3</span><h2 className="h3">Invest: RAGE Options</h2></div>
-            <p style={{ lineHeight: 1.5, margin: '14px 0 0' }}>Buy with USDC anytime. Your gateway to locked products, with a {r?.config?.investorBonus ?? 3}% bonus on the underlying tokens.</p>
+            <p style={{ lineHeight: 1.5, margin: '14px 0 0' }}>Buy with USDC anytime and get a {r?.config?.investorBonus ?? 3}% bonus on the underlying tokens.</p>
           </div>
           <a className="btn btn-ink btn-lg" href={legacy('/rage')} target="_blank" rel="noreferrer">Invest with USDC</a>
         </div>
@@ -69,7 +65,7 @@ export default async function Earn() {
       <section className="wrap sec">
         <h2 className="h2">Then put it to work.</h2>
         <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))' }}>
-          {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on $URM. Withdraw anytime.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/ultraround/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow $URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
+          {[['EARN', 'Fountain URM', `${bps(f?.fountainState?.config?.yieldRate, 0)} target APY on $URM.`, '/urm/fountain', undefined], ['MINE', 'Hestia Mine', 'Stake HESTIA, hire a crew, earn daily.', '/hestia/mine', 'hestia'], ['MINE', 'Ultraround Temple', 'Stake ULTRAROUND, summon templars.', '/ultraround/temple', 'circle'], ['LIVE', 'URM CDP', 'Borrow $URM against RAGE, HESTIA or ULTRAROUND.', '/urm/cdp', undefined]].map(([k, t, d, href, th]) => (
             <Link key={t} href={href!} data-theme={th} className="card glass-rim" style={{ background: 'var(--panel)', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 'var(--s-2)' }}>
               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}><span className="acc" style={{ fontSize: 'var(--fs-footnote)', fontWeight: 700, letterSpacing: 1.5 }}>{k}</span><ProductLogo id={th || 'urm'} size={36} /></span><b style={{ fontSize: 'var(--fs-title3)' }}>{t}</b><span className="muted">{d}</span>
             </Link>

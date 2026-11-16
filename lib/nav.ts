@@ -16,6 +16,7 @@ export const GLOBAL = [
   { href: '/hestia', label: 'HESTIA', key: 'hestia' },
   { href: '/ultraround', label: 'ULTRAROUND', key: 'circle' },
   { href: '/earn', label: 'Earn', key: 'earn' },
+  { href: '/dashboard', label: 'Dashboard', key: 'dashboard' },
 ];
 export const DOCS = '/docs';
 export const productFor = (path: string) => PRODUCTS.find((p) => path === p.base || path.startsWith(p.base + '/'));

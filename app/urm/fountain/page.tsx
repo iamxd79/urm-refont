@@ -30,7 +30,7 @@ export default async function Fountain() {
             <h1 className="h1">Fountain URM</h1>
             <p className="lead">Deposit $URM, get fURM. Your fURM count stays the same while each one is worth more $URM every day.</p>
             <div style={{ marginTop: 'var(--s-8)' }}>
-              <Tiles items={[{ v: bps(cfg.yieldRate), l: 'target yield' }, { v: bps(s.effectiveRate), l: 'effective yield' }, { v: num(toAssets, 4), l: '$URM per fURM' }, { v: num(s.totalAssets), l: '$URM staked' }, { v: num(s.totalShares), l: 'fURM supply' }, { v: num(s.yieldCapacity), l: '$URM capacity left' }]} />
+              <Tiles items={[{ v: bps(cfg.yieldRate), l: 'target yield' }, { v: bps(s.effectiveRate), l: 'effective yield' }, { v: num(toAssets, 4), l: '$URM per fURM' }, { v: num(s.totalAssets), l: '$URM staked' }, { v: num(s.interestPerDay, 2), l: '$URM paid out per day' }, { v: num(s.windowRemaining), l: '$URM withdrawable now' }]} />
             </div>
             <p className="muted" style={{ fontSize: 'var(--fs-subhead)', marginTop: 'var(--s-3)' }}>Effective yield is what the vault paid over its life so far. Target is the rate the Fortress aims for.</p>
             <div style={{ marginTop: 'var(--s-8)' }}>
@@ -42,12 +42,6 @@ export default async function Fountain() {
           </div>
         </div>
       </section>
-      <section className="band" style={{ marginTop: 'var(--s-16)' }}><div className="wrap stats">
-        <div className="stat"><b>{num(s.interestPerDay, 2)} $URM</b><span>paid out per day</span></div>
-        <div className="stat"><b>{num(s.state?.totalInterest, 2)} $URM</b><span>yield paid so far</span></div>
-        <div className="stat"><b>{num(s.windowRemaining)} $URM</b><span>withdrawable right now</span></div>
-        <div className="stat"><b>{bps(cfg.depositFee, 0)} / {bps(cfg.withdrawFee)}</b><span>deposit / withdraw fee</span></div>
-      </div></section>
       <section className="wrap sec">
         <h2 className="h2">Your $URM works<br /><span className="acc">the night shift.</span></h2>
         <p className="punch">No claiming. No rebasing. It just grows.</p>
@@ -57,7 +51,7 @@ export default async function Fountain() {
       </section>
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>
-        <Steps items={[{ t: 'Deposit URM', d: 'No deposit fee. You get fURM, a share of the vault.' }, { t: 'The Fortress pays the yield', d: 'From pool fees and protocol profit. The share price climbs. No claiming, no rebasing.' }, { t: 'Withdraw anytime', d: `To $URM or USDC, with a ${bps(cfg.withdrawFee)} fee, up to what's withdrawable right now.` }]} />
+        <Steps items={[{ t: 'Deposit $URM', d: 'No deposit fee. You get fURM, a share of the vault.' }, { t: 'The Fortress pays the yield', d: 'From pool fees and protocol profit. The share price climbs.' }, { t: 'Withdraw anytime', d: `To $URM or USDC, with a ${bps(cfg.withdrawFee)} fee, up to what's withdrawable right now.` }]} />
       </section>
       <Check links={[{ label: 'Fountain audit', href: legacy('/urm/fountain-audit.pdf'), strong: true }, addr('Fountain', C.fountain), addr('Fortress', C.fortress), addr('$URM token', TOKENS.URM, true), { label: 'DefiLlama pool', href: 'https://defillama.com/yields/pool/cab80e81-b20e-53eb-8f92-b20c89ebb4a5' }]} />
       <ActionBar label="Deposit $URM" note="Earn on $URM" />

@@ -88,7 +88,7 @@ export function CdpPanel({ cols, rate, app }: { cols: Col[]; rate: number; app: 
         <li><span className="k">Collateral value</span><strong>${f(value, 2)}</strong></li>
         <li><span className="k">Collateral ratio</span><strong>{c ? `${c.min}x to ${c.max}x` : '—'}</strong></li>
         <li><span className="k">Interest</span><strong>{f(rate, 2)}% a year</strong></li>
-        <li><span className="k">You receive</span><strong>{mode === 'Borrow' ? 'URM + a position NFT' : `more ${sym} + a position NFT`}</strong></li>
+        <li><span className="k">You receive</span><strong>{mode === 'Borrow' ? '$URM + a position NFT' : `more ${sym} + a position NFT`}</strong></li>
       </ul>
       <p style={{ margin: '14px 0 0', fontSize: 'var(--fs-subhead)', lineHeight: 1.5, background: 'var(--soft)', borderRadius: 'var(--r-sm)', padding: '12px 14px' }}>
         <b>Know the cost.</b> Use the CDP for liquidity without selling, not as a yield loop. The exact $URM you mint shows in the app before you sign.
@@ -142,8 +142,8 @@ export function SwapPanel({ prices, fee, app }: { prices: Record<string, number>
       <p className="muted" style={{ margin: '18px 0 8px 6px', fontSize: 'var(--fs-subhead)', fontWeight: 600 }}>You receive</p>
       <Tabs items={['URM', 'RAGE', 'HESTIA', 'ULTRAROUND'] as any} value={to} set={setTo as any} label="Receive token" />
       <ul className="list" style={{ marginTop: 'var(--s-4)' }}>
-        <li><span className="k">Estimated output</span><strong>about {f(out, 2)} {to}</strong></li>
-        <li><span className="k">Route</span><strong>USDC → Gateway → {to}</strong></li>
+        <li><span className="k">Estimated output</span><strong>about {f(out, 2)} {to === 'URM' ? '$URM' : to}</strong></li>
+        <li><span className="k">Route</span><strong>USDC → Gateway → {to === 'URM' ? '$URM' : to}</strong></li>
         <li><span className="k">Gateway fee</span><strong>{fee}%</strong></li>
         <li><span className="k">Network</span><strong>Base</strong></li>
       </ul>
@@ -189,7 +189,7 @@ export function YourPosition({ items }: { items: { label: string; key: string; u
   return (
     <div className="card glass-rim">
       <b className="eyebrow">YOUR POSITION</b>
-      {!on && <p className="muted" style={{ margin: '8px 0 0' }}>Connect your wallet to see your balances here. Read only, nothing moves.</p>}
+      {!on && <p className="muted" style={{ margin: '8px 0 0' }}>Connect to see your balances.</p>}
       <div className="grid" style={{ marginTop: 'var(--s-3)', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', gap: 'var(--s-3)' }}>
         {items.map((i) => {
           const v = balances[i.key];

@@ -105,25 +105,18 @@ export default async function Rage() {
         <div style={{ marginTop: 'var(--s-6)' }}><YourPosition items={[{ label: 'RAGE in wallet', key: 'RAGE' }, { label: 'Worth at FMV', key: 'RAGE', unit: 'USD', mult: n(v.fmv) }, { label: 'USDC ready to invest', key: 'USDC' }]} /></div>
       </section>
 
-      <section className="wrap sec grid2">
+      <section className="wrap sec">
         <div className="card glass-rim">
           <h2 className="h2" style={{ fontSize: 'clamp(30px,3.4vw,44px)' }}>Leaving? Here&apos;s how.</h2>
           <p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>The ones who leave pay the ones who stay.</p>
           <ol style={{ margin: '20px 0 0', paddingLeft: 22, lineHeight: 2, fontSize: 'var(--fs-body)' }}><li>Reserve a claim and lock in your payout</li><li>Wait {days(cfg.claimDelay)} days</li><li>Redeem for HESTIA and ULTRAROUND</li></ol>
           <p className="muted">A {num(cfg.claimFee)}% claim fee stays in the protocol and raises backing per share.</p>
         </div>
-        <div className="card glass-rim">
-          <h2 className="h2" style={{ fontSize: 'clamp(30px,3.4vw,44px)' }}>The full stack.</h2>
-          <p className="punch" style={{ fontSize: 'var(--fs-title2)' }}>Liquidity without selling.</p>
-          <div className="row" style={{ marginTop: 'var(--s-5)' }}>{['Lock RAGE in the CDP', 'Mint $URM', 'Hold or deposit in Fountain'].map((t, i) => <span key={t} className="pill" style={{ background: 'var(--accent2)', color: '#000', fontSize: 'var(--fs-subhead)', padding: '10px 16px' }}>{i + 1}. {t}</span>)}</div>
-          <p style={{ marginTop: 'var(--s-5)', lineHeight: 1.5 }}><b>Know the cost.</b> <span className="muted">Borrowing is {bps(cdp?.currentInterestRate)} a year today, and Fountain targets {bps(o?.fountainState?.config?.yieldRate, 0)}. Use the CDP for liquidity, not as a yield loop.</span></p>
-          <Link href="/urm/cdp" className="btn btn-outline">Open the CDP</Link>
-        </div>
       </section>
 
       <section className="wrap sec" id="next">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 'var(--s-3)' }}>
-          <div><h2 className="h2">Coming next.</h2><p className="punch">Lock more. Float less. Harvest more.</p></div>
+          <div><h2 className="h2">Coming next.</h2></div>
           <p className="muted" style={{ margin: 0 }}>Not live yet. Details may change.</p>
         </div>
         <article className="card glass-rim" style={{ marginTop: 'var(--s-8)', padding: 0, overflow: 'hidden', display: 'flex', flexWrap: 'wrap' }}>
@@ -131,12 +124,12 @@ export default async function Rage() {
           <div style={{ flex: '1 1 340px', padding: 'var(--s-8)', display: 'flex', flexDirection: 'column', gap: 'var(--s-3)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 'var(--s-3)' }}><h3 className="h3">Black Card</h3><span className="badge">In review</span></div>
             <p style={{ margin: 0, fontSize: 'var(--fs-body)', lineHeight: 1.5 }}>The front door. Open to anyone who locks an option, with no extra requirements.</p>
-            <ul style={{ margin: 0, paddingLeft: 20, lineHeight: 1.9, color: 'var(--sub)' }}><li>Harvests the premium when demand shows up</li><li>Auto Saver keeps it compounding</li><li>Every new option buys reserves for the treasury</li></ul>
+            <p className="muted" style={{ margin: 0 }}>Every new option buys reserves for the treasury.</p>
           </div>
         </article>
         <div className="grid2" style={{ marginTop: 'var(--s-5)' }}>
           <article className="card glass-rim"><div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h3 className="h3">The line</h3><span className="badge">In review</span></div><p style={{ lineHeight: 1.5 }}>The Priority Vault. Lock spot RAGE before Black Card launches to hold your place for the 0% loan.</p><p className="muted" style={{ margin: 0 }}>First in line, first loans turned on. You can leave before launch.</p></article>
-          <article className="card glass-rim"><div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h3 className="h3">Confluence</h3><span className="badge">In review</span></div><p style={{ lineHeight: 1.5 }}>Add liquidity and earn Tributaries points. When rewards go live, they count back to the day you started.</p><p className="muted" style={{ margin: 0 }}>Waiting means earning less.</p></article>
+          <article className="card glass-rim"><div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><h3 className="h3">Confluence</h3><span className="badge">In review</span></div><p style={{ lineHeight: 1.5 }}>Add liquidity and earn points. When rewards go live, they count back to the day you started.</p></article>
         </div>
         <p className="muted" style={{ marginTop: 'var(--s-5)' }}>Launch dates drop first on <a href="https://x.com/therageprotocol">@therageprotocol</a>.</p>
       </section>

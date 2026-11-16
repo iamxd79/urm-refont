@@ -34,15 +34,15 @@ export default async function Otc() {
             <p className="lead">Trade HESTIA, ULTRAROUND or $URM for RAGE from ecosystem supply, at a fair price plus a bonus.</p>
             <p className="punch">The bonus grows. The supply doesn&apos;t.</p>
             <div className="grid" style={{ marginTop: 'var(--s-8)', gridTemplateColumns: 'repeat(auto-fit,minmax(min(200px,100%),1fr))', gap: 'var(--s-3)' }}>
-              {active ? <div className="tile"><span>Bonus right now</span><b className="acc">{num(o?.bonusCurrent, 2)}%</b></div> : <div className="tile"><span>Next round in</span><b className="acc">{isFinite(next) ? <Countdown to={next} done="any moment now" /> : 'soon'}</b></div>}
+              {active ? <div className="tile"><span>Bonus right now</span><b className="acc">{num(o?.bonusCurrent, 2)}%</b></div> : null}
               <div className="tile"><span>{active ? 'RAGE left in this round' : 'Round status'}</span><b>{active ? num(o?.rageBalance) : 'Sold out'}</b></div>
               <div className="tile"><span>Fair market value</span><b>${num(fmv, 2)}</b></div>
               <div className="tile"><span>Bonus range</span><b>{num(o?.config?.bonusMin)}% to {num(o?.config?.bonusMax)}%</b></div>
             </div>
             {!active && (
               <div className="cream glass-rim" style={{ marginTop: 'var(--s-6)', padding: 'var(--s-8)' }}>
-                <b className="eyebrow">THIS ROUND IS EMPTY</b>
-                <h2 className="h3" style={{ marginTop: 'var(--s-2)' }}>All sold out.{nextDate ? ` Next drop ${nextDate}.` : ''}</h2>
+                
+                <h2 className="h3">All sold out.{nextDate ? ` Next drop ${nextDate}.` : ''}</h2>
                 <p className="muted" style={{ margin: '8px 0 0' }}>{nextDate ? <>Next drop in <b style={{ color: 'var(--ink)' }}><Countdown to={next} done="any moment now" /></b>. </> : 'Next drop is coming soon. '}Drops get announced on X first.</p>
                 <a className="btn btn-ink" style={{ marginTop: 'var(--s-4)' }} href="https://x.com/therageprotocol">Follow @therageprotocol</a>
               </div>

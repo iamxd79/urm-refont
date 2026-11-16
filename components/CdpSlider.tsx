@@ -59,7 +59,7 @@ export default function CdpSlider({ cols }: { cols: Col[] }) {
           <span className="cdps-key"><span><i className="k1" />at {c.max}x</span><span><i className="k2" />up to, at {c.min}x</span></span>
         </div>
       </div>
-      <p className="muted cdps-note">{lev ? `Leverage: the minted $URM buys more ${sym} in the same transaction, up to about $${f(extra)} more exposure before fees. Bigger upside, bigger downside.` : `Borrow: keep your ${sym}, take $URM to use now. Repay to unlock.`} Estimate only. The app shows the exact amount before you sign.</p>
+      <p className="muted cdps-note">{lev ? `Leverage: the minted $URM buys more ${sym} in the same transaction, up to about $${f(extra)} more exposure before fees. Bigger upside, bigger downside.` : `Borrow: keep your ${sym}, take $URM to use now.`} Estimate only. The app shows the exact amount before you sign.</p>
     </div>
   );
 }
