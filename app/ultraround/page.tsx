@@ -75,7 +75,7 @@ export default async function Circle() {
           <li><span className="k">Main liquidity to market cap</span><strong>{num(c?.liquidity?.mainMarketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul></details>
-        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="ULTRAROUND" all={`https://basescan.org/address/${C.circleChaos}#tokentxns`} /></div>
+        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="ULTRAROUND" all={`https://basescan.org/token/${C.circle}?a=0x0000000000000000000000000000000000000000`} /></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">Questions.</h2>

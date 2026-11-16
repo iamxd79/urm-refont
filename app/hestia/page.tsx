@@ -92,7 +92,7 @@ export default async function Hestia() {
           <li><span className="k">Liquidity to market cap</span><strong>{num(h?.liquidity?.marketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul></details>
-        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="HESTIA" all={`https://basescan.org/address/${C.hestiaChaos}#events`} /></div>
+        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="HESTIA" all={`https://basescan.org/token/${C.hestia}?a=0x0000000000000000000000000000000000000000`} /></div>
       </section>
 
       <section className="wrap sec">
