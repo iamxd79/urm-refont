@@ -11,7 +11,7 @@ import Check, { addr } from '@/components/Check';
 import { YourPosition } from '@/components/Panels';
 import { Hero, Stats, SupplyBar, Faq } from '@/components/ui';
 import { api } from '@/lib/api';
-import { recentBurns, mineConfig } from '@/lib/chain';
+import { mineConfig } from '@/lib/chain';
 import BurnFeed from '@/components/BurnFeed';
 import { num, usd, bps, n, legacy } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
@@ -21,7 +21,7 @@ export const revalidate = 60;
 export const metadata = seo({ title: 'HESTIA', description: 'Become ultra rare. A deflationary store of value on Base: the Chaos Engine burns supply and acts as the buyer of last resort.', handle: '@HestiaOnBase' });
 
 export default async function Hestia() {
-  const [h, m, cdp, burns, mc] = await Promise.all([api('hestia/overview'), api('hestia/mine'), api('urm/cdp'), recentBurns('HESTIA'), mineConfig('mine')]);
+  const [h, m, cdp, mc] = await Promise.all([api('hestia/overview'), api('hestia/mine'), api('urm/cdp'), mineConfig('mine')]);
   const s = h?.supply || {}, ch = h?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.mine) + n(s.ecosystem);
   return (
@@ -92,7 +92,7 @@ export default async function Hestia() {
           <li><span className="k">Liquidity to market cap</span><strong>{num(h?.liquidity?.marketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul></details>
-        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="HESTIA" burns={burns} all={`https://basescan.org/address/${C.hestiaChaos}#events`} /></div>
+        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="HESTIA" all={`https://basescan.org/address/${C.hestiaChaos}#events`} /></div>
       </section>
 
       <section className="wrap sec">

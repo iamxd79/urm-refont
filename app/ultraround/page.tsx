@@ -8,7 +8,7 @@ import { YourPosition } from '@/components/Panels';
 import CircleBurnLoop from '@/components/CircleBurnLoop';
 import { Hero, Stats, SupplyBar, Faq } from '@/components/ui';
 import { api } from '@/lib/api';
-import { recentBurns, mineConfig } from '@/lib/chain';
+import { mineConfig } from '@/lib/chain';
 import BurnFeed from '@/components/BurnFeed';
 import { num, usd, bps, n, legacy, ago } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
@@ -18,7 +18,7 @@ export const revalidate = 60;
 export const metadata = seo({ title: 'ULTRAROUND', description: 'Burns on every sell. An autonomous, deflationary ETH proxy on Base with no transaction tax.', handle: '@URMdollar' });
 
 export default async function Circle() {
-  const [c, t, cdp, burns, tc] = await Promise.all([api('circle/overview'), api('circle/temple'), api('urm/cdp'), recentBurns('ULTRAROUND'), mineConfig('temple')]);
+  const [c, t, cdp, tc] = await Promise.all([api('circle/overview'), api('circle/temple'), api('urm/cdp'), mineConfig('temple')]);
   const s = c?.supply || {}, ch = c?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.temple) + n(s.ecosystem);
   return (
@@ -75,7 +75,7 @@ export default async function Circle() {
           <li><span className="k">Main liquidity to market cap</span><strong>{num(c?.liquidity?.mainMarketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul></details>
-        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="ULTRAROUND" burns={burns} all={`https://basescan.org/address/${C.circleChaos}#tokentxns`} /></div>
+        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="ULTRAROUND" all={`https://basescan.org/address/${C.circleChaos}#tokentxns`} /></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">Questions.</h2>
