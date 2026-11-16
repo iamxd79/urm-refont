@@ -102,8 +102,8 @@ export default async function Urm() {
         <div style={{ marginTop: 'var(--s-8)' }}><UrmCharts rows={f?.charts || []} /></div>
       </section>
       <section className="wrap sec">
-        <h2 className="h2">Dashboard.</h2>
-        <p className="punch">Every number, live from the contracts.</p>
+        <h2 className="h2">Under the hood.</h2>
+        <p className="punch">Where every $URM sits, and what defends it.</p>
         <div className="card glass-rim" style={{ marginTop: 'var(--s-8)' }}>
           <b className="eyebrow" style={{ marginBottom: 'var(--s-4)' }}>Circulating $URM, {num(sup.circulating)}</b>
           <SupplyBar parts={[{ label: 'Fortress', value: n(sup.fortress), color: '#d7b067' }, { label: 'Towers', value: n(sup.tower), color: '#b0bfd6' }, { label: 'Liquidity pools', value: n(sup.pools), color: '#5d93f0' }, { label: 'Holders', value: n(sup.holders), color: '#f3f0e7' }, { label: 'Ecosystem', value: n(sup.ecosystem), color: '#ff7a2e' }]} />
@@ -116,6 +116,7 @@ export default async function Urm() {
             {[['Fountain staked', num(fo.totalAssets)], ['Fountain interest per day', num(fo.interestPerDay, 2)], ['Fountain idle supply', num(fo.urmIdle)], ['CDP borrowed', num(cdp?.urmDebt)], ['CDP interest per day', num(cdp?.urmCdpInterestPerDay, 2)], ['CDP paid to the Fortress', num(cdp?.urmCdpPaidToFortress)]].map(([k, v]) => <li key={k}><span className="k">{k}</span><strong><CountUp text={String(v)} /></strong></li>)}
           </ul></div>
         </div>
+        <div className="band-more"><Link href="/dashboard">Full ecosystem dashboard →</Link></div>
       </section>
 
       <Check links={[{ label: 'Whitepaper', href: legacy('/urm/whitepaper.pdf'), strong: true }, { label: 'Audit', href: legacy('/urm/audit.pdf'), strong: true }, addr('$URM token', TOKENS.URM, true), addr('Fortress', C.fortress), { label: 'DefiLlama', href: 'https://defillama.com/protocol/urm' }, { label: 'Dextools', href: 'https://www.dextools.io/app/base/pair-explorer/0x63b531588398cd17297d571e17688d31cc182075' }]} />
