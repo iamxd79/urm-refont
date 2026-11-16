@@ -1,5 +1,6 @@
 import { api } from './api';
 import { num, usd, bps, n } from './fmt';
+import { mineConfig } from './chain';
 
 /** Live values the docs can quote with {{key}}. Refreshed with the page (60s). */
 export async function docsVars(): Promise<Record<string, string>> {
@@ -7,6 +8,7 @@ export async function docsVars(): Promise<Record<string, string>> {
     api('home/overview'), api('urm/overview'), api('urm/fortress'), api('urm/cdp'), api('rage/buying-protocol'), api('rage/otc'),
     api('hestia/overview'), api('circle/overview'), api('hestia/mine'), api('circle/temple'),
   ]);
+  const mc = await mineConfig('mine');
   const fs = fort?.fortressState || {}, fo = fs.fountainState || fort?.fountainState || {}, cfg = rbp?.config || {};
   const days = (s: any) => num(n(s) / 86400);
   const col = (sym: string) => (cdp?.tokens || []).find((t: any) => t.symbol === sym) || {};
@@ -49,6 +51,6 @@ export async function docsVars(): Promise<Record<string, string>> {
     'hestia.reserve': usd(hes?.reserve?.usdc), 'hestia.cap': usd(hes?.chaosAutomator?.usdcCapacity), 'hestia.smoke': hes?.chaosAutomator?.smokeInterval || '—',
     'circle.burned': num(cir?.supply?.burned), 'circle.burnedPct': num(cir?.supply?.burnedPercent, 2) + '%',
     'circle.liqRatio': num(cir?.liquidity?.marketCapRatio, 2) + '%', 'circle.weth': num(cir?.cctp?.weth, 4),
-    'mine.sellLimit': num(mine?.state?.hestiaSellLimit, 2), 'temple.sellLimit': num(temple?.state?.circleSellLimit, 2),
+    'mine.sellLimit': num(mine?.state?.hestiaSellLimit, 2), 'mine.tax': mc.burnTax + '%', 'mine.penalty': mc.sellPenalty + '%', 'mine.bonus': mc.buyBonus + '%', 'mine.referral': mc.referral + '%', 'temple.sellLimit': num(temple?.state?.circleSellLimit, 2),
   };
 }

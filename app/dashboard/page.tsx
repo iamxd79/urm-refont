@@ -7,7 +7,7 @@ import { api } from '@/lib/api';
 import { num, usd, bps, n } from '@/lib/fmt';
 
 export const revalidate = 60;
-export const metadata = seo({ title: 'URM live', description: 'The URM ecosystem at a glance: the $URM peg and what defends it, Fountain, the CDP, RAGE and the HESTIA and ULTRAROUND burns. Live from the chain.', handle: '@URMdollar' });
+export const metadata = seo({ title: 'URM live', description: 'The URM ecosystem at a glance: prices of $URM, RAGE, HESTIA and ULTRAROUND, the $URM peg and what defends it, Fountain, the CDP and the burns. Live from the chain.', handle: '@URMdollar' });
 
 /* ---------- small SVG pieces (geometric, solid colours, no gradients) ---------- */
 function Spark({ series, w = 520, h = 120, colors }: { series: number[][]; w?: number; h?: number; colors: string[] }) {
@@ -88,7 +88,6 @@ export default async function Live() {
   const defSeries = fc.map((r) => n(r[4])), supSeries = fc.map((r) => n(r[5]));
   const fmvSeries = rc.map((r) => n(r[0])), pxSeries = rc.map((r) => n(r[4]));
   const sgn = (x: number, d = 2) => (isFinite(x) ? `${x >= 0 ? '+' : '−'}${num(Math.abs(x), d)}%` : '—');
-  const now = new Date().toISOString().slice(11, 16);
 
   return (
     <div className="page">
@@ -96,8 +95,12 @@ export default async function Live() {
       <section className="wrap lv-wrap">
         <div className="lv-top">
           <div>
-            <p className="lv-kicker"><span className="lv-dot" />Live from the chain · {now} UTC</p>
             <h1 className="lv-h1">URM, by the numbers.</h1>
+            <div className="lv-prices">
+              {([['urm', '$URM', home?.urm ?? price, 4], ['rage', 'RAGE', ragePrice, 2], ['hestia', 'HESTIA', home?.hestia ?? hes?.price, 2], ['circle', 'ULTRAROUND', home?.circle ?? cir?.price, 2]] as [string, string, any, number][]).map(([id, l, v, d]) => (
+                <span key={id} className="lv-price"><ProductLogo id={id} size={22} /><span className="lv-price-l">{l}</span><b>{isFinite(n(v)) ? '$' + num(v, d) : '—'}</b></span>
+              ))}
+            </div>
           </div>
           <img className="lv-eco" src="/assets/urm-eco.png" alt="URM ecosystem" width={56} height={56} />
         </div>
@@ -185,7 +188,6 @@ export default async function Live() {
             </div>
           </Card>
         </div>
-        <p className="lv-foot">ultraroundmoney.com/dashboard · refreshes every minute</p>
       </section>
       <Footer />
     </div>

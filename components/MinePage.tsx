@@ -3,7 +3,8 @@ import ActionBar from './ActionBar';
 import Footer from './Footer';
 import AutoRefresh from './AutoRefresh';
 import Check, { type Link as L } from './Check';
-import { MinerPanel } from './Panels';
+import { MinerPanel, MineRef, CopyRef } from './Panels';
+import type { MineConfig } from '@/lib/chain';
 import ShowAll from './ShowAll';
 import ShareWheel from './ShareWheel';
 import MineLoop from './MineLoop';
@@ -16,6 +17,7 @@ type Cfg = {
   token: string; balKey: string; unit: string; unitOne: string; verbs: [string, string, string]; leader: string; leaders: string; pTok: string;
   st: any; tvl: any; podLiquidity: any; rows: any[]; shareKey: string; app: string; connectLabel: string;
   how: [string, string][]; links: L[]; footName: string; x: string; sellLimitKey: string; perOneKey: string; roiKey: string;
+  cfg: MineConfig;
 };
 
 export default function MinePage(c: Cfg) {
@@ -52,12 +54,27 @@ export default function MinePage(c: Cfg) {
         <ShowAll total={rows.length} label={c.leaders}>
         <div className="tbl glass-rim" data-sharetable={c.theme} style={{ marginTop: 'var(--s-6)' }}>
           <table>
-            <thead><tr><th>{c.leader}</th><th>Share of {c.unit}</th><th>Daily rewards</th><th>Sold so far</th><th>Last move</th></tr></thead>
-            <tbody>{rows.map((r, i) => <tr key={r.wallet} data-wallet={r.wallet} className={i >= 10 ? 'more' : undefined}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td></tr>)}</tbody>
+            <thead><tr><th>{c.leader}</th><th>Share of {c.unit}</th><th>Daily rewards</th><th>Sold so far</th><th>Last move</th><th>Referral</th></tr></thead>
+            <tbody>{rows.map((r, i) => <tr key={r.wallet} data-wallet={r.wallet} className={i >= 10 ? 'more' : undefined}><td className="mono tcell-title">{short(r.wallet)}</td><td data-label={`Share of ${c.unit}`}><b>{r[c.shareKey]}</b></td><td data-label="Daily rewards">{num(r.estimatedDailyValue, 2)}</td><td data-label="Sold so far">{num(r.sellTotal, 2)}</td><td data-label="Last move" className="muted">{ago(r.lastTx)}</td><td data-label="Referral"><CopyRef base={c.app} wallet={r.wallet} /></td></tr>)}</tbody>
           </table>
           {rows.length === 0 && <p className="muted" style={{ padding: 'var(--s-4)', margin: 0 }}>No {c.leaders} yet.</p>}
         </div>
         </ShowAll>
+        <p className="muted" style={{ marginTop: 'var(--s-4)' }}>Joining? Copy any {c.leader.toLowerCase()}&apos;s link to buy through it. They earn {c.cfg.referral}% extra {c.unit}, and you keep your {c.cfg.buyBonus}% buy bonus.</p>
+      </section>
+      <section className="wrap sec">
+        <h2 className="h2">Bonuses and fees.</h2>
+        <p className="punch">Read from the contract, so they stay current.</p>
+        <div style={{ marginTop: 'var(--s-8)' }}>
+          <Tiles items={[
+            { v: `+${c.cfg.buyBonus}%`, l: `bonus ${c.unit} on every buy` },
+            { v: `${c.cfg.referral}%`, l: `extra ${c.unit} to the referrer` },
+            { v: `${c.cfg.burnTax}%`, l: `sell tax, burned for good` },
+            { v: `up to ${c.cfg.sellPenalty}%`, l: `of your ${c.unit} taken when you sell close to the limit` },
+            { v: `${c.cfg.sellLimit}%`, l: `of the contract balance is the most one sale can take` },
+          ]} />
+        </div>
+        <div style={{ marginTop: 'var(--s-5)' }}><MineRef base={c.app} bonus={c.cfg.buyBonus} referral={c.cfg.referral} leader={c.leader.toLowerCase()} unit={c.unit} /></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">How it works.</h2>

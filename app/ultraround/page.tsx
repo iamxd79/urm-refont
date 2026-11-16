@@ -8,15 +8,17 @@ import { YourPosition } from '@/components/Panels';
 import CircleBurnLoop from '@/components/CircleBurnLoop';
 import { Hero, Stats, SupplyBar, Faq } from '@/components/ui';
 import { api } from '@/lib/api';
+import { recentBurns, mineConfig } from '@/lib/chain';
+import BurnFeed from '@/components/BurnFeed';
 import { num, usd, bps, n, legacy, ago } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
 import { CIRCLE_TABS } from '@/lib/tabs';
 
 export const revalidate = 60;
-export const metadata = seo({ title: 'ULTRAROUND', description: 'Burns on every sell. An autonomous, deflationary ETH proxy on Base with no transaction tax.', handle: '@UltraRoundMoney' });
+export const metadata = seo({ title: 'ULTRAROUND', description: 'Burns on every sell. An autonomous, deflationary ETH proxy on Base with no transaction tax.', handle: '@URMdollar' });
 
 export default async function Circle() {
-  const [c, t, cdp] = await Promise.all([api('circle/overview'), api('circle/temple'), api('urm/cdp')]);
+  const [c, t, cdp, burns, tc] = await Promise.all([api('circle/overview'), api('circle/temple'), api('urm/cdp'), recentBurns('ULTRAROUND'), mineConfig('temple')]);
   const s = c?.supply || {}, ch = c?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.temple) + n(s.ecosystem);
   return (
@@ -73,17 +75,19 @@ export default async function Circle() {
           <li><span className="k">Main liquidity to market cap</span><strong>{num(c?.liquidity?.mainMarketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul></details>
+        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="ULTRAROUND" burns={burns} all={`https://basescan.org/address/${C.circleChaos}#tokentxns`} /></div>
       </section>
       <section className="wrap sec">
         <h2 className="h2">Questions.</h2>
         <Faq items={[
           ['How does RAGE make ULTRAROUND stronger?', '20% of every RAGE investment buys ULTRAROUND, wraps it into a Peapods pod and locks it as backing.'],
-          ['What is the Ultraround Temple?', 'A staking contract inspired by BNBMiner, with a Peapods integration. Buy templars with ULTRAROUND, then compound or sell your rewards.'],
+          ['What is the Ultraround Temple?', `A staking contract inspired by BNBMiner, with a Peapods integration. Buy templars with ULTRAROUND, then compound or sell your rewards. Every buy gets a ${tc.buyBonus}% templar bonus, and the leader whose link you used earns ${tc.referral}% extra. Each sale pays a ${tc.burnTax}% tax that is burned, plus a templar penalty of up to ${tc.sellPenalty}%.`],
+          ['Does ULTRAROUND help defend the $URM peg?', 'Yes. The Fortress holds ULTRAROUND as part of the defense behind $URM, next to USDC, RAGE and HESTIA. ULTRAROUND is also accepted as CDP collateral to mint $URM.'],
           ['Why Base?', 'The engine trades constantly. Base keeps those fees tiny, so the burn stays profitable.'],
         ]} />
       </section>
       <Check links={[{ label: 'Whitepaper', href: legacy('/circle/whitepaper.pdf'), strong: true }, { label: 'Game theory', href: legacy('/circle/gametheory.pdf'), strong: true }, addr('ULTRAROUND', C.circle, true), addr('Chaos Engine', C.circleChaos), { label: 'Dune', href: 'https://dune.com/ultraround_money/circle' }, { label: 'CoinMarketCap', href: 'https://coinmarketcap.com/currencies/ultraround-money' }]} />
-      <Footer name="ULTRAROUND" x="UltraRoundMoney" />
+      <Footer name="ULTRAROUND" />
     </div>
   );
 }

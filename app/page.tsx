@@ -83,7 +83,7 @@ export default async function Home() {
             <div className="latest-follow">
               <span className="eyebrow">Follow the engines</span>
               <div className="latest-handles">
-                {[['urm', 'URMdollar'], ['rage', 'therageprotocol'], ['hestia', 'HestiaOnBase'], ['circle', 'UltraRoundMoney']].map(([id, h]) => (
+                {[['urm', 'URMdollar'], ['rage', 'therageprotocol'], ['hestia', 'HestiaOnBase']].map(([id, h]) => (
                   <a key={h} href={`https://x.com/${h}`} className="latest-handle"><ProductLogo id={id} size={24} />@{h}</a>
                 ))}
               </div>

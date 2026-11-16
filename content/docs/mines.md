@@ -31,8 +31,13 @@ The Mine and Temple deposit into Peapods Finance instead and hold Peapods pods (
 ## Selling rules
 
 - Each sale is capped by the sell limit, a share of the contract's balance.
-- Every withdrawal pays a 5% tax.
-- A miner penalty scales with the size of the sale: up to 1% at the full sell limit, 0.5% at half of it.
+- Every sale pays a {{mine.tax}} tax, and that part is burned.
+- A miner penalty scales with the size of the sale: up to {{mine.penalty}} of your miners at the full sell limit, about half that at half of it.
+
+## Bonuses
+
+- Every buy gets a {{mine.bonus}} bonus in miners or templars.
+- Buy through someone's referral link and they earn {{mine.referral}} extra on your buy. You keep your own bonus. Copy any player's link from the leaderboard on the [Mine](/hestia/mine) or [Temple](/ultraround/temple) page.
 
 Smaller, more frequent sells cost less and keep selling pressure smooth.
 

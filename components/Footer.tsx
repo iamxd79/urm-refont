@@ -2,7 +2,7 @@ import ProductLogo from './ProductLogo';
 import Link from 'next/link';
 import { legacy } from '@/lib/fmt';
 
-const X: Record<string, string> = { URMdollar: 'URM', therageprotocol: 'RAGE', HestiaOnBase: 'HESTIA', UltraRoundMoney: 'ULTRAROUND' };
+const X: Record<string, string> = { URMdollar: 'URM', therageprotocol: 'RAGE', HestiaOnBase: 'HESTIA' };
 
 export default function Footer({ name = 'URM ecosystem', x = 'URMdollar' }: { name?: string; x?: string }) {
   const follow = name === 'URM ecosystem' ? Object.keys(X) : [x, ...(x !== 'URMdollar' ? ['URMdollar'] : [])];

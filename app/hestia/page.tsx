@@ -11,6 +11,8 @@ import Check, { addr } from '@/components/Check';
 import { YourPosition } from '@/components/Panels';
 import { Hero, Stats, SupplyBar, Faq } from '@/components/ui';
 import { api } from '@/lib/api';
+import { recentBurns, mineConfig } from '@/lib/chain';
+import BurnFeed from '@/components/BurnFeed';
 import { num, usd, bps, n, legacy } from '@/lib/fmt';
 import { C } from '@/lib/tokens';
 import { HESTIA_TABS } from '@/lib/tabs';
@@ -19,7 +21,7 @@ export const revalidate = 60;
 export const metadata = seo({ title: 'HESTIA', description: 'Become ultra rare. A deflationary store of value on Base: the Chaos Engine burns supply and acts as the buyer of last resort.', handle: '@HestiaOnBase' });
 
 export default async function Hestia() {
-  const [h, m, cdp] = await Promise.all([api('hestia/overview'), api('hestia/mine'), api('urm/cdp')]);
+  const [h, m, cdp, burns, mc] = await Promise.all([api('hestia/overview'), api('hestia/mine'), api('urm/cdp'), recentBurns('HESTIA'), mineConfig('mine')]);
   const s = h?.supply || {}, ch = h?.chaosAutomator || {};
   const other = n(s.urm) + n(s.urmCdp) + n(s.mine) + n(s.ecosystem);
   return (
@@ -90,6 +92,7 @@ export default async function Hestia() {
           <li><span className="k">Liquidity to market cap</span><strong>{num(h?.liquidity?.marketCapRatio, 2)}%</strong></li>
           <li><span className="k">Owned by RAGE / $URM</span><strong>{num(s.ragePercent, 2)}% / {num(s.urmPercent, 2)}%</strong></li>
         </ul></details>
+        <div style={{ marginTop: 'var(--s-6)' }}><BurnFeed token="HESTIA" burns={burns} all={`https://basescan.org/address/${C.hestiaChaos}#events`} /></div>
       </section>
 
       <section className="wrap sec">
@@ -98,6 +101,9 @@ export default async function Hestia() {
           ['What is the Hestia Chaos Engine?', "A controller contract that sets her burn rate. It grows a USDC reserve from trading fees and by pulling liquidity from the main pool, then uses it to buy and burn HESTIA. It's the buyer of last resort."],
           ['How does RAGE make HESTIA stronger?', '80% of every RAGE investment buys HESTIA, wraps it into pHestia on Peapods and locks it as backing.'],
           ['Why Base?', 'The engine runs on fees. On mainnet, gas would eat the profit. On Base it stays tiny, which is also why HESTIA has no transaction tax.'],
+          ['Does HESTIA help defend the $URM peg?', 'Yes. The Fortress holds HESTIA as part of the defense behind $URM, next to USDC, RAGE and ULTRAROUND. HESTIA is also accepted as CDP collateral to mint $URM.'],
+          ['What do I get in the Hestia Mine?', `Buy miners with HESTIA and earn a share of the daily rewards. Every buy gets a ${mc.buyBonus}% miner bonus, and the chief whose link you used earns ${mc.referral}% extra. Each sale pays a ${mc.burnTax}% tax that is burned, plus a miner penalty of up to ${mc.sellPenalty}%.`],
+          ['Can I withdraw my HESTIA from the Mine?', 'No. Deposits buy miners and stay in the Mine for good. You take profit by selling rewards, up to the sell limit.'],
           ['How does HESTIA help ULTRAROUND?', "Smoke Fees can fund ULTRAROUND's Chaos Engine, pushing its burn rate up when its own volume is low."],
         ]} />
       </section>

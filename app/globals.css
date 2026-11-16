@@ -1129,3 +1129,20 @@ button.dtree-h span{flex:1}
 @media (max-width:640px){.lv-card.span-4{grid-column:span 12}.lv-card{padding:18px 16px}.lv-eco{width:44px;height:44px}}
 
 .band-more{text-align:center;margin-top:18px}.band-more a{font-size:15px;font-weight:600;color:#d7b067;text-decoration:none}.band-more a:hover{text-decoration:underline}
+
+/* dashboard price strip */
+.lv-prices{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.lv-price{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(20,36,66,.7);box-shadow:inset 0 0 0 1px rgba(176,191,214,.18);font-size:14px}
+.lv-price-l{color:#aebbd4;font-weight:600;letter-spacing:.02em}
+.lv-price b{color:#fff;font-family:var(--font-grotesk,'Space Grotesk'),sans-serif;font-weight:700;font-variant-numeric:tabular-nums}
+/* mine referral copy */
+.ref-copy{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:var(--panel);color:var(--text);font-weight:700;font-size:var(--fs-footnote);cursor:pointer;box-shadow:var(--glass-edge);white-space:nowrap}
+.ref-copy:hover{filter:brightness(1.15)}
+/* burn feed */
+.burn-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:var(--s-4)}
+.burn-feed .list li{min-height:48px}
+.burn-amt{color:inherit;text-decoration:none;display:inline-flex;gap:6px;align-items:baseline}
+.burn-amt:hover strong{text-decoration:underline}
+.burn-all{display:inline-block;margin-top:var(--s-4);font-weight:600;color:var(--text);text-decoration:none}
+.burn-all:hover{text-decoration:underline}
+.tile b span{font-size:inherit;color:inherit;margin-top:0}

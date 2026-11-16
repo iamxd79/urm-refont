@@ -200,3 +200,32 @@ export function YourPosition({ items }: { items: { label: string; key: string; u
     </div>
   );
 }
+
+/* ---------- Mine / Temple referral: copy any chief's link, or your own ---------- */
+export function CopyRef({ base, wallet, label = 'Copy link' }: { base: string; wallet: string; label?: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button type="button" className="ref-copy" onClick={() => { navigator.clipboard?.writeText(`${base}?ref=${wallet}`); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>
+      {copied ? 'Copied' : label}
+    </button>
+  );
+}
+export function MineRef({ base, bonus, referral, leader, unit }: { base: string; bonus: number; referral: number; leader: string; unit: string }) {
+  const { address, isConnected } = useAccount();
+  const [m, setM] = useState(false);
+  const [copied, setCopied] = useState(false);
+  useEffect(() => setM(true), []);
+  const on = m && isConnected && address;
+  const link = (on ? `${base}?ref=${address}` : `${base}?ref=0x…`).replace(/^https?:\/\//, '');
+  return (
+    <div className="card glass-rim">
+      <b className="eyebrow">YOUR REFERRAL LINK</b>
+      <p className="muted" style={{ margin: '8px 0 0' }}>Bring new {leader}s. You earn {referral}% extra {unit} on every buy made through your link, and they still get their {bonus}% buy bonus. Your link works once you own {unit}.</p>
+      <div className="field" style={{ marginTop: 'var(--s-4)' }}>
+        <span className="mono" style={{ flex: 1, minWidth: 0, wordBreak: 'break-all', lineHeight: 1.4, fontSize: 'var(--fs-subhead)' }}>{link}</span>
+        <button type="button" className="max" style={{ minHeight: 44, flex: 'none' }} disabled={!on} onClick={() => { navigator.clipboard?.writeText(`${base}?ref=${address}`); setCopied(true); setTimeout(() => setCopied(false), 1500); }}>{copied ? 'Copied' : 'Copy'}</button>
+      </div>
+      {!on && <div style={{ marginTop: 'var(--s-3)' }}><ConnectButton label="Connect to get your link" /></div>}
+    </div>
+  );
+}
